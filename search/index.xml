@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>搜索 on 艾倫的開發心路歷程</title>
-    <link>/search/</link>
+    <link>https://allen-hsieh1992.github.io/search/</link>
     <description>Recent content in 搜索 on 艾倫的開發心路歷程</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright><atom:link href="/search/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright><atom:link href="https://allen-hsieh1992.github.io/search/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

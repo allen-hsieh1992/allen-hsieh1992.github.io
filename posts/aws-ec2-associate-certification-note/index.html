@@ -3,30 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AWS EC2 Associate Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/images/favicons/manifest.json">
-<link rel="icon" href="/images/favicons/favicon.ico">
+    <title>AWS EC2 Associate Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allen-hsieh1992.github.io/images/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="https://allen-hsieh1992.github.io/images/favicons/manifest.json">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
 <meta name="description" content="AWS EC2 Associate Certification 學習筆記" /><meta itemprop="name" content="AWS EC2 Associate Certification Note">
 <meta itemprop="description" content="AWS EC2 Associate Certification 學習筆記"><meta itemprop="datePublished" content="2021-09-03T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-03T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2166"><meta itemprop="image" content="/images/aws.jpeg">
+<meta itemprop="wordCount" content="2166"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/aws.jpeg">
 <meta itemprop="keywords" content="AWS,EC2," /><meta property="og:title" content="AWS EC2 Associate Certification Note" />
 <meta property="og:description" content="AWS EC2 Associate Certification 學習筆記" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/aws-ec2-associate-certification-note/" /><meta property="og:image" content="/images/aws.jpeg" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-09-03T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/images/aws.jpeg"/>
+<meta name="twitter:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg"/>
 
 <meta name="twitter:title" content="AWS EC2 Associate Certification Note"/>
 <meta name="twitter:description" content="AWS EC2 Associate Certification 學習筆記"/>
-<meta data-name="palette" content="blue"><link rel="preload" href="/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="/js/bundle.min.c1f375b2927c1425992c97d2e0d77350d6a32f4b606112a681e902467dc51b0a.js" integrity="sha256-wfN1spJ8FCWZLJfS4NdzUNajL0tgYRKmgekCRn3FGwo=" crossorigin="anonymous"></script>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allen-hsieh1992.github.io/js/bundle.min.c1f375b2927c1425992c97d2e0d77350d6a32f4b606112a681e902467dc51b0a.js" integrity="sha256-wfN1spJ8FCWZLJfS4NdzUNajL0tgYRKmgekCRn3FGwo=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -40,33 +40,33 @@ if (!doNotTrack) {
 
 </head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      <img class="logo" alt="Logo" src="/images/logo.webp"
+    <a class="navbar-brand" href="https://allen-hsieh1992.github.io/">
+      <img class="logo" alt="Logo" src="https://allen-hsieh1992.github.io/images/logo.webp"
    width="136" height="69" loading="lazy" />
 艾倫的開發心路歷程</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="/search">
+      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allen-hsieh1992.github.io/search">
   <div class="input-group input-group-sm">
     <button class="btn btn-search disabled position-absolute left-0" type="submit" aria-label="submit"><i class="fas fa-fw fa-search"></i></button>
     <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
   </div>
 </form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
-          <a class="nav-link" href="/archives/">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/archives/">
             <i class="fas fa-fw fa-file-archive"></i>歸檔
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="/categories/">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/categories/">
             <i class="fas fa-fw fa-folder"></i>分類
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="/tags/">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/tags/">
             <i class="fas fa-fw fa-tags"></i>標籤
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="/series/">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/series/">
             <i class="fas fa-fw fa-columns"></i>專欄
           </a>
         </li><li class="nav-item">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="/">主頁</a></li><li class="breadcrumb-item"><a href="/posts/">文章</a></li><li class="breadcrumb-item active">AWS EC2 Associate Certification Note</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/">主頁</a></li><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/posts/">文章</a></li><li class="breadcrumb-item active">AWS EC2 Associate Certification Note</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -168,7 +168,7 @@ if (!doNotTrack) {
     <i class="fas fa-fw fa-calendar-alt"></i>Sep 3, 2021
   </span><span class="post-reading-time me-2">
     <i class="fas fa-fw fa-coffee"></i>5 分鐘閱讀
-  </span><span class="post-taxonomies"><a href="/categories/aws/" class="post-taxonomy">AWS</a><a href="/tags/aws/" class="post-taxonomy">AWS</a><a href="/tags/ec2/" class="post-taxonomy">EC2</a></span>
+  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy">EC2</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -180,40 +180,29 @@ if (!doNotTrack) {
   <div class="offcanvas-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#ec2-purchase-option">EC2 Purchase Option</a>
-      <ul>
-        <li><a href="#on-demand-instances">On-Demand Instances</a></li>
-        <li><a href="#reserved-instances">Reserved Instances</a></li>
-        <li><a href="#spot-instance">Spot Instance</a></li>
-        <li><a href="#dedicated-hosts--instance">Dedicated Hosts &amp; Instance</a></li>
-        <li><a href="#capacity-reservations">Capacity Reservations</a></li>
-        <li><a href="#saving-plan">Saving Plan</a></li>
-        <li><a href="#spot-feet">Spot Feet</a></li>
-      </ul>
-    </li>
-    <li><a href="#instance-type">Instance Type</a></li>
-    <li><a href="#instance-lifecycle">Instance Lifecycle</a></li>
-    <li><a href="#placement-group">Placement Group</a></li>
-    <li><a href="#storage">Storage</a></li>
-    <li><a href="#monitor">Monitor</a></li>
-    <li><a href="#others">Others</a></li>
-    <li><a href="#troubleshooting">Troubleshooting</a>
-      <ul>
-        <li><a href="#不能啟用新的ec2">不能啟用新的EC2</a></li>
-        <li><a href="#不能-ssh-到-ec2">不能 SSH 到 EC2</a></li>
-      </ul>
-    </li>
+    <li><a href="#on-demand-instances">On-Demand Instances</a></li>
+    <li><a href="#reserved-instances">Reserved Instances</a></li>
+    <li><a href="#spot-instance">Spot Instance</a></li>
+    <li><a href="#dedicated-hosts--instance">Dedicated Hosts &amp; Instance</a></li>
+    <li><a href="#capacity-reservations">Capacity Reservations</a></li>
+    <li><a href="#saving-plan">Saving Plan</a></li>
+    <li><a href="#spot-feet">Spot Feet</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#不能啟用新的ec2">不能啟用新的EC2</a></li>
+    <li><a href="#不能-ssh-到-ec2">不能 SSH 到 EC2</a></li>
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><h2 id="ec2-purchase-option">EC2 Purchase Option</h2>
+</div><div class="post-content mb-3"><h1 id="ec2-purchase-option">EC2 Purchase Option</h1>
 <hr>
-<h3 id="on-demand-instances">On-Demand Instances</h3>
+<h2 id="on-demand-instances">On-Demand Instances</h2>
 <ul>
 <li>用多少付多少，不需要提前預付也也不需要合約，根據秒來計費</li>
 <li>不同 Region 有不同的 Instance &amp; CPU 限制數量，可以透過 AWS Support Center 提高上限</li>
 </ul>
-<h3 id="reserved-instances">Reserved Instances</h3>
+<h2 id="reserved-instances">Reserved Instances</h2>
 <ul>
 <li>需要一年或三年的合約 ，以小時計費</li>
 <li>付款選項
@@ -262,7 +251,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h3 id="spot-instance">Spot Instance</h3>
+<h2 id="spot-instance">Spot Instance</h2>
 <ul>
 <li>競價模式: 請求時會自定義一個每小時最高可接受的價格(Spot Price)，而 Spot Price 會隨著市場而變動，當最高價格高於 Spot price ，就有機會獲得 Instance。當然當 Spot Price 低於最高價格， AWS 會隨時終止你的 Instance，所以跑在 Spot Instance 上的服務，需要設計可以隨時可以被終止
 <ul>
@@ -296,7 +285,7 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>curl : http://169.254.169.254/lasest/meta-data/spot/instance-action
 </code></pre></div></li>
 </ul>
-<h3 id="dedicated-hosts--instance">Dedicated Hosts &amp; Instance</h3>
+<h2 id="dedicated-hosts--instance">Dedicated Hosts &amp; Instance</h2>
 <p>Dedicated Hosts &amp; Dedicated Instance 都是只在實體機上執行你的程式，但兩者有點小小的差別</p>
 <ul>
 <li>Dedicated Hosts 是固定一台 EC2 給你使用，而 Dedicated Instance 只保證這台 EC2 上面的程式不會有其他人的，所以當你重啟 EC2 時，有可能是另一台 EC2。</li>
@@ -308,9 +297,9 @@ if (!doNotTrack) {
 <li>Dedicated Hosts 如果購買 On-Demand 是已小時計算</li>
 <li>Dedicate Hosts 比 Dedicate Instance 貴</li>
 </ul>
-<h3 id="capacity-reservations">Capacity Reservations</h3>
+<h2 id="capacity-reservations">Capacity Reservations</h2>
 <p>因為 AWS 在 AZ 裡面的實體硬體是有限的，所以是有可能當你啟動 EC2 Instance 時是有可能沒有足夠資源的，這時候只能等待其他人釋放 Instance 或者 選擇不同類型的 Instance。Capacity Reservations 可以讓你先提前先預付某些資源，這樣就不用擔心要啟用 EC2 Instance時沒有資源。在啟用新的 EC2 Instance 時可以直接選擇從 Capacity Reservations 裡面直接扣除，就不需要額外再付費了。但要注意，在 Capacity Reservations 的狀態是啟用時，就已經產生收費。</p>
-<h3 id="saving-plan">Saving Plan</h3>
+<h2 id="saving-plan">Saving Plan</h2>
 <ul>
 <li>Compute Savings Plans
 <ul>
@@ -326,7 +315,7 @@ if (!doNotTrack) {
 </li>
 <li>可以和 Capacity Reservations 混著使用。</li>
 </ul>
-<h3 id="spot-feet">Spot Feet</h3>
+<h2 id="spot-feet">Spot Feet</h2>
 <ul>
 <li>Spot Feet 會根據設定 (launch pools) 嘗試要到足夠的 Spot Instance ，剩餘的會使用 On-Demand Instance 補齊。</li>
 <li>可以選擇的策略
@@ -337,7 +326,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="instance-type">Instance Type</h2>
+<h1 id="instance-type">Instance Type</h1>
 <hr>
 <table>
 <thead>
@@ -380,9 +369,9 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="instance-lifecycle">Instance Lifecycle</h2>
+<h1 id="instance-lifecycle">Instance Lifecycle</h1>
 <hr>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="/images/post/aws-ec2-associate-certification-note/ec2_instance_lifecycle.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/aws-ec2-associate-certification-note/ec2_instance_lifecycle.png"
    width="699" height="295" loading="lazy" />
 
 </p>
@@ -420,7 +409,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="/images/post/aws-ec2-associate-certification-note/hibernation-flow.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/aws-ec2-associate-certification-note/hibernation-flow.png"
    width="800" height="221" loading="lazy" />
 
 </p>
@@ -472,14 +461,14 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<h2 id="placement-group">Placement Group</h2>
+<h1 id="placement-group">Placement Group</h1>
 <hr>
 <ul>
 <li>Cluster : 所有的 Instance 放在同一個 AZ ，以提供更快的網路速度</li>
 <li>Spread : 將所有的 Instance 放在不同的實體硬體，一個 AZ 最多七個 Instance</li>
 <li>Partitioned : 將 Ec2 Instance 按照自己的邏輯分開(partition) ，每個 AZ 上限七個 partition 。</li>
 </ul>
-<h2 id="storage">Storage</h2>
+<h1 id="storage">Storage</h1>
 <table>
 <thead>
 <tr>
@@ -511,7 +500,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<h2 id="monitor">Monitor</h2>
+<h1 id="monitor">Monitor</h1>
 <ul>
 <li>AWS 提供的 Metrics
 <ul>
@@ -547,7 +536,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="others">Others</h2>
+<h1 id="others">Others</h1>
 <hr>
 <ul>
 <li>Elastic IP address : 固定 IPv4 Address, 一個 Region 限制五個</li>
@@ -562,9 +551,9 @@ if (!doNotTrack) {
 </li>
 <li>Elastic Fabric Adapter : 高效能運算使用</li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h1 id="troubleshooting">Troubleshooting</h1>
 <hr>
-<h3 id="不能啟用新的ec2">不能啟用新的EC2</h3>
+<h2 id="不能啟用新的ec2">不能啟用新的EC2</h2>
 <ul>
 <li>InstanceLimitedExceeded Error : 每一個帳號在每一個 Region 都有一些限制，此錯誤代表達到上限，可以跟 AWS 提出將上限提高</li>
 <li>InsufficientInstanceCapacity Error : 代表現在 AWS 在這個 AZ 沒有足夠的資源提供，可以等一段時間或者換其他AZ 嘗試。</li>
@@ -577,7 +566,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h3 id="不能-ssh-到-ec2">不能 SSH 到 EC2</h3>
+<h2 id="不能-ssh-到-ec2">不能 SSH 到 EC2</h2>
 <ul>
 <li>&ldquo;Unprotected private key file&rdquo; error : ssh key 需要是400 權限</li>
 <li>&ldquo;Too many authentication failures&rdquo; 有可能是 Username 不對</li>
@@ -601,33 +590,33 @@ if (!doNotTrack) {
 </script></div></div>
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container"><section class="profile surface row text-center">
-  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="/images/icon.gif"
+  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allen-hsieh1992.github.io/images/icon.gif"
    width="154" height="153" loading="lazy" />
 </div>
   <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">Backend Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Yahoo!</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
 </section>
   <section class="featured-posts row surface">
     <h4>精選文章</h4>
-    <ul><li><a href="/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+    <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
 </a></li></ul>
   </section><section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
-        <a href="/categories">分類</a>
+        <a href="https://allen-hsieh1992.github.io/categories">分類</a>
       </h4>
-      <div><a href="/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+      <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">1</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
-        <a href="/tags">標籤</a>
+        <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
       </h4>
-      <div><a href="/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+      <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">1</span>
-        </a><a href="/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
+        </a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
