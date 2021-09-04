@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS on 艾倫</title>
+    <link>/categories/aws/</link>
+    <description>Recent content in AWS on 艾倫</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
+    <lastBuildDate>Fri, 03 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS EC2 Associate Certification Note</title>
+      <link>/posts/aws-ec2-associate-certification-note/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/aws-ec2-associate-certification-note/</guid>
+      <description>EC2 Purchase Option On-Demand Instances 用多少付多少，不需要提前預付也也不需要合約，根據秒來計費 不同 Region 有不同的 Instance &amp;amp; CPU 限制數量，可以透過 AWS Support Center 提高上限 Reserved Instances 需要一年或三年的合</description>
+    </item>
+    
+  </channel>
+</rss>
