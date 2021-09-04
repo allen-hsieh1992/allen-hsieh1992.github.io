@@ -17,5 +17,41 @@
       <description>EC2 Purchase Option On-Demand Instances 用多少付多少，不需要提前預付也也不需要合約，根據秒來計費 不同 Region 有不同的 Instance &amp;amp; CPU 限制數量，可以透過 AWS Support Center 提高上限 Reserved Instances 需要一年或三年的合</description>
     </item>
     
+    <item>
+      <title>使用 AWS Cognito CLI 建立 User Pool</title>
+      <link>https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/</guid>
+      <description>個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己</description>
+    </item>
+    
+    <item>
+      <title>Build AWS Lambda Hello World Function By SAM</title>
+      <link>https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/</link>
+      <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/</guid>
+      <description>以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless</description>
+    </item>
+    
+    <item>
+      <title>Java Jersey Client 取得每個 Request Duration</title>
+      <link>https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/</link>
+      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/</guid>
+      <description>這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency</description>
+    </item>
+    
+    <item>
+      <title>Java Optional 基本 &amp; 心得分享</title>
+      <link>https://allen-hsieh1992.github.io/posts/java-optional-basic/</link>
+      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/java-optional-basic/</guid>
+      <description>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning</description>
+    </item>
+    
   </channel>
 </rss>

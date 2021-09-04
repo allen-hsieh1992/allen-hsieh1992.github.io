@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Java Optional 基本 & 心得分享 - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allen-hsieh1992.github.io/images/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="https://allen-hsieh1992.github.io/images/favicons/manifest.json">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon.ico">
+<meta name="keywords" content="" />
+<meta name="description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" /><meta itemprop="name" content="Java Optional 基本 &amp; 心得分享">
+<meta itemprop="description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。"><meta itemprop="datePublished" content="2021-06-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-06-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2226"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/java.jpeg">
+<meta itemprop="keywords" content="JAVA,OPTIONAL," /><meta property="og:title" content="Java Optional 基本 &amp; 心得分享" />
+<meta property="og:description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/java-optional-basic/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/java.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-06-27T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://allen-hsieh1992.github.io/images/java.jpeg"/>
+
+<meta name="twitter:title" content="Java Optional 基本 &amp; 心得分享"/>
+<meta name="twitter:description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。"/>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allen-hsieh1992.github.io/js/bundle.min.2da34b4efd951e2e552e9e3a1c4800ac1fee799aeb56a3e35a5599337cb94372.js" integrity="sha256-LaNLTv2VHi5VLp46HEgArB/ueZrrVqPjWlWZM3y5Q3I=" crossorigin="anonymous"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LKLFC990BM', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/custom.css" crossorigin="anonymous"></head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="https://allen-hsieh1992.github.io/">
+      <img class="logo" alt="Logo" src="https://allen-hsieh1992.github.io/images/logo.webp"
+   width="136" height="69" loading="lazy" />
+艾倫的開發心路歷程</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allen-hsieh1992.github.io/search">
+  <div class="input-group input-group-sm">
+    <button class="btn btn-search disabled position-absolute left-0" type="submit" aria-label="submit"><i class="fas fa-fw fa-search"></i></button>
+    <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
+  </div>
+</form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>歸檔
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/categories/">
+            <i class="fas fa-fw fa-folder"></i>分類
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/tags/">
+            <i class="fas fa-fw fa-tags"></i>標籤
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/series/">
+            <i class="fas fa-fw fa-columns"></i>專欄
+          </a>
+        </li><li class="nav-item">
+  <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSettings" role="button"
+    aria-controls="offcanvasSettings">
+    <i class="fas fa-fw fa-sliders-h"></i> 設置
+  </a>
+</li>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings"
+  aria-labelledby="offcanvasSettingsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" w id="offcanvasSettingsLabel"><i class="fas fa-fw fa-sliders-h"></i> 設置</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+<section class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</section>
+
+<section class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <span id="btnPalette" class="btn btn-sm"><i class="fas fa-eye-dropper"></i></span>
+    </div>
+  </form>
+  <div class="container mt-2 visually-hidden" id="palettePicker">
+    <div class="btn-group"><button type="button" id="palette-blue" title="藍色" 
+          class="btn btn-sm palette bg-blue d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-blue-gray" title="藍灰色" 
+          class="btn btn-sm palette bg-blue-gray d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-brown" title="棕色" 
+          class="btn btn-sm palette bg-brown d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-cyan" title="青色" 
+          class="btn btn-sm palette bg-cyan d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-green" title="綠色" 
+          class="btn btn-sm palette bg-green d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-indigo" title="靛青色" 
+          class="btn btn-sm palette bg-indigo d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-orange" title="橙色" 
+          class="btn btn-sm palette bg-orange d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-pink" title="粉色" 
+          class="btn btn-sm palette bg-pink d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-purple" title="紫色" 
+          class="btn btn-sm palette bg-purple d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-red" title="紅色" 
+          class="btn btn-sm palette bg-red d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-teal" title="藍綠色" 
+          class="btn btn-sm palette bg-teal d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-yellow" title="黃色" 
+          class="btn btn-sm palette bg-yellow d-flex align-items-center justify-content-center">
+        </button></button>
+    </div>
+  </div>
+</section></div>
+</div></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main role="main" class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row" aria-label="breadcrumb">
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/">主頁</a></li><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/posts/">文章</a></li><li class="breadcrumb-item active">Java Optional 基本 &amp; 心得分享</li></ol>
+</nav><article class="post row surface"><div class="post-panel-wrapper">
+  <div class="post-panel d-flex flex-column">
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
+  <i class="fas fa-fw fa-expand-alt fa-rotate-45"></i>
+</a>
+  
+    
+
+    
+    <a class="action" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="bottom"
+  data-bs-trigger="focus" tabindex="0"
+  data-bs-content="&lt;a target=&#34;_blank&#34; rel=&#34;license noopener noreferrer&#34; href=&#34;https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW&#34;&gt;CC BY-NC-ND 4.0 &lt;i class=&#34;fab fa-fw fa-creative-commons&#34;&gt;&lt;/i&gt;&lt;i class=&#34;fab fa-fw fa-creative-commons-by&#34;&gt;&lt;/i&gt;&lt;i class=&#34;fab fa-fw fa-creative-commons-nc&#34;&gt;&lt;/i&gt;&lt;i class=&#34;fab fa-fw fa-creative-commons-nd&#34;&gt;&lt;/i&gt;&lt;/a&gt;
+">
+  <i class="fas fa-fw fa-copyright"></i>
+</a>
+    <a id="btnTOC" class="fas fa-fw fa-list-alt" data-bs-toggle="offcanvas" href="#offcanvasTOC" aria-controls="offcanvasTOC" role="button">
+</a>
+  </div>
+</div>
+<h1 class="post-title my-3">Java Optional 基本 &amp; 心得分享
+</h1><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jun 27, 2021
+  </span><span class="post-reading-time me-2">
+    <i class="fas fa-fw fa-coffee"></i>5 分鐘閱讀
+  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy">JAVA</a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy">OPTIONAL</a></span>
+</div>
+<div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTOCLabel">目錄</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#建立optional-物件">建立Optional 物件</a></li>
+    <li><a href="#optional-安全取得value">Optional 安全取得Value</a></li>
+    <li><a href="#optional-安全執行特定函式">Optional 安全執行特定函式</a></li>
+    <li><a href="#optional-進階函式">Optional 進階函式</a></li>
+    <li><a href="#class-field-是否使用-optional">Class Field 是否使用 Optional</a></li>
+    <li><a href="#總結">總結</a></li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content mb-3"><p>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。這邊要特別注意，如果沒有正確的使用 Optional 的話，還是有可能會造成 Null Pointer Exception 喔！</p>
+<blockquote>
+<p>Null Reference is the Billion Dollar Mistake - Tony Hoare</p>
+</blockquote>
+<h2 id="建立optional-物件">建立Optional 物件</h2>
+<hr>
+<p>大家認為下面的Example1 運行的結果會是什麼樣的呢？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example1</span> <span class="o">{</span>
+<span class="ln">4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln">6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">8</span>    <span class="o">}</span>
+<span class="ln">9</span><span class="o">}</span>
+</code></pre></div><p>執行結果會是 “I am Optional String”，這邊可以看到 line 6 透過 of() method 建立了 一個 Optional 的物件。但如果 sentence 是 null 的時候，會怎麼樣呢？結果會是 Null Pointer Exception! 因為 of() method 這邊所帶入的 Value 必須是 non-null的，所以建議大家在使用 Optional 時，應該避開使用 of() method，而是使用 ofNullable() method。</p>
+<p>現在我們將 Example1 中的 sentence 改成 null 並且使用 ofNullAble() method 來運行，這時大家覺得結果是怎樣呢？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example2</span> <span class="o">{</span>
+<span class="ln">4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">8</span>    <span class="o">}</span>
+<span class="ln">9</span><span class="o">}</span>
+</code></pre></div><p>大家是否會認為跟 Example1 一樣，會列印出””I am Optional String”？但實際執行的結果會是 NoSuchElementException : No value present，因為在 call get() method 時內部檢查 Value 是否存在，所以這邊建議在實際使用中，不要使用 get() method，除非你能確認 Value 一定不等於 null。
+這邊要順便介紹 Optional 中特別的物件: Optional.empty() ，這邊要特別注意 Optional empty 還是 Optional 物件，只是裡面的 value 是 null，所以 Optional empty 跟 null 是不同的東西。</p>
+<h2 id="optional-安全取得value">Optional 安全取得Value</h2>
+<hr>
+<p>這邊一開始要介紹Optional 中的 isPresent()，透過 isPresent 我們可以安全地確認 Value 是否存在</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example3</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="k">if</span> <span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln"> 8</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln"> 9</span>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln">10</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;value is empty&#34;</span><span class="o">);</span>
+<span class="ln">11</span>        <span class="o">}</span>
+<span class="ln">12</span>    <span class="o">}</span>
+<span class="ln">13</span><span class="o">}</span>
+</code></pre></div><p>Example3 因為我們確認了 Value 已經存在 Optional 中了，所以會正常運行，但是否會覺得這樣寫法跟我們以前自己檢查一些值是否是 null 是一樣的呢？
+這邊要介紹 orElse()</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example4</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">String</span> <span class="n">defaultValue</span> <span class="o">=</span> <span class="s">&#34;value is empty&#34;</span><span class="o">;</span>
+<span class="ln"> 8</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="n">defaultValue</span><span class="o">));</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span><span class="o">}</span>
+</code></pre></div><p>大家可以看到 orElse() 當 Optional 物件的 value 是空的時候，會返回 defaultValue，這樣我們就可以不用寫 if else 了。
+但有的人想 return 的 defaultValue 比較複雜怎麼辦? 我們也可以使用 orElseGet() 執行一個函示取得想要的預設值。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example5</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(()-&gt;</span> <span class="n">getDefaultValue</span><span class="o">()));</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getDefaultValue</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="k">return</span> <span class="s">&#34;I am default value&#34;</span><span class="o">;</span>
+<span class="ln">11</span>    <span class="o">}</span>
+<span class="ln">12</span><span class="o">}</span>
+</code></pre></div><p>大家以前也一定會經常做一些必要的欄位檢查，如果都些值是 Null 就要丟特定的 Exception，這邊可以使用 orElseThrow()</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example6</span> <span class="o">{</span>
+<span class="ln">4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<span class="ln">5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln">6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()-&gt;</span> <span class="k">new</span> <span class="n">myCustomException</span><span class="o">()));</span>
+<span class="ln">8</span>    <span class="o">}</span>
+<span class="ln">9</span><span class="o">}</span>
+</code></pre></div><h2 id="optional-安全執行特定函式">Optional 安全執行特定函式</h2>
+<hr>
+<p>在之前的Example當中，我們只是單純的想要正確的執行 System.out.println，這邊介紹ifPresent()。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example7</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="o">{</span>
+<span class="ln"> 8</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+<span class="ln"> 9</span>        <span class="o">});</span>
+<span class="ln">10</span>    <span class="o">}</span>
+<span class="ln">11</span><span class="o">}</span>
+</code></pre></div><p>這邊想稍微提一下 eta-conversion 的概念，但細節大家可以參考這篇 <a href="https://read01.com/zh-tw/BJaAPOg.html#.YTMyBtMzZhF" target="_blank" rel="noopener noreferrer">如何理解並使用Java中雙冒號(::)運算操作符</a>
+
+根據eta-conversion 可以寫成以下code</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example8</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="c1">//原本
+</span><span class="ln"> 8</span><span class="c1"></span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="o">{</span>
+<span class="ln"> 9</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+<span class="ln">10</span>        <span class="o">});</span>
+<span class="ln">11</span>        <span class="c1">//因為只執行一個函式，所以可以將 {} 拿掉
+</span><span class="ln">12</span><span class="c1"></span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">value</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">));</span>
+<span class="ln">13</span>        <span class="c1">//因為只有的函式只有一個參數，透過 eta-conversion 可以寫成
+</span><span class="ln">14</span><span class="c1"></span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="ln">15</span>    <span class="o">}</span>
+<span class="ln">16</span><span class="o">}</span>
+</code></pre></div><p>ifPresent() 只能在 Optional 有 value 時執行，有時候我們也希望如果 Optional 有 value時執行 函式A，沒有值時 執行函式 B，這時我們就可以透過 ifPresentOrElse()</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example9</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresentOrElse</span><span class="o">(</span><span class="n">Example9</span><span class="o">::</span><span class="n">methodA</span><span class="o">,</span> <span class="n">Example9</span><span class="o">::</span><span class="n">methodB</span><span class="o">);</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">methodA</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">11</span>        <span class="c1">//do something with value
+</span><span class="ln">12</span><span class="c1"></span>    <span class="o">}</span>
+<span class="ln">13</span>
+<span class="ln">14</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">methodB</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">15</span>        <span class="c1">//do something without value
+</span><span class="ln">16</span><span class="c1"></span>    <span class="o">}</span>
+<span class="ln">17</span><span class="o">}</span>
+</code></pre></div><h2 id="optional-進階函式">Optional 進階函式</h2>
+<hr>
+<p>Filter : 如果 isContainOptional return false，filter 的結果會是 Optional empty</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Locale</span><span class="o">;</span>
+<span class="ln"> 2</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example10</span> <span class="o">{</span>
+<span class="ln"> 5</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 6</span>        <span class="n">String</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">&#34;I am Optional String&#34;</span><span class="o">;</span>
+<span class="ln"> 7</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalSentence</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">sentence</span><span class="o">);</span>
+<span class="ln"> 8</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">Example10</span><span class="o">::</span><span class="n">isContainOptional</span><span class="o">));</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isContainOptional</span><span class="o">(</span><span class="n">String</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>        <span class="k">return</span> <span class="n">input</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">ENGLISH</span><span class="o">).</span><span class="na">contains</span><span class="o">(</span><span class="s">&#34;optional&#34;</span><span class="o">);</span>
+<span class="ln">13</span>    <span class="o">}</span>
+<span class="ln">14</span><span class="o">}</span>
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cm">/* output
+</span><span class="ln">17</span><span class="cm">Optional[I am Optional String]
+</span><span class="ln">18</span><span class="cm">*/</span>
+</code></pre></div><p>Map: 如果 Optional 的 Value 有值，這邊才會執行你所定義的 Mapping Function，如果沒有就直接返回 Optional Empty。 我在工作中，經常需要將DTO 轉換成 Response 物件，會使用 Map 來使用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="ln">2</span><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="nd">@AllArgsConstructor</span>
+<span class="ln">5</span><span class="nd">@Getter</span>
+<span class="ln">6</span><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+<span class="ln">7</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+<span class="ln">8</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+<span class="ln">9</span><span class="o">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="ln"> 2</span><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">lombok.ToString</span><span class="o">;</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="nd">@AllArgsConstructor</span>
+<span class="ln"> 6</span><span class="nd">@Getter</span>
+<span class="ln"> 7</span><span class="nd">@ToString</span>
+<span class="ln"> 8</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FullNamePerson</span> <span class="o">{</span>
+<span class="ln"> 9</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">fullName</span><span class="o">;</span>
+<span class="ln">10</span><span class="o">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example11</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;allen&#34;</span><span class="o">,</span> <span class="s">&#34;hsieh&#34;</span><span class="o">));</span>
+<span class="ln"> 6</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">FullNamePerson</span><span class="o">&gt;</span> <span class="n">fullNamePerson</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Example11</span><span class="o">::</span><span class="n">convert</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">fullNamePerson</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">FullNamePerson</span> <span class="nf">convert</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">11</span>        <span class="k">return</span> <span class="k">new</span> <span class="n">FullNamePerson</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="na">getLastName</span><span class="o">());</span>
+<span class="ln">12</span>    <span class="o">}</span>
+<span class="ln">13</span><span class="o">}</span>
+<span class="ln">14</span>
+<span class="ln">15</span><span class="cm">/* output
+</span><span class="ln">16</span><span class="cm">FullNamePerson(fullName=allen hsieh)
+</span><span class="ln">17</span><span class="cm">*/</span>
+</code></pre></div><p>flatMap: 這邊我比較常用在取得 Optional 物件中的 Optional</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="ln"> 2</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="nd">@AllArgsConstructor</span>
+<span class="ln"> 5</span><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+<span class="ln"> 6</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+<span class="ln"> 7</span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="k">return</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">firstName</span><span class="o">);</span>
+<span class="ln">11</span>    <span class="o">}</span>
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">14</span>        <span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+<span class="ln">15</span>    <span class="o">}</span>
+<span class="ln">16</span><span class="o">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example12</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;allen&#34;</span><span class="o">,</span> <span class="s">&#34;hsieh&#34;</span><span class="o">));</span>
+<span class="ln"> 6</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getFirstName</span><span class="o">));</span>
+<span class="ln"> 7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getLastName</span><span class="o">));</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span><span class="o">}</span>
+<span class="ln">10</span>
+<span class="ln">11</span><span class="cm">/* output
+</span><span class="ln">12</span><span class="cm">Optional[allen]
+</span><span class="ln">13</span><span class="cm">Optional[hsieh]
+</span><span class="ln">14</span><span class="cm">*/</span>
+</code></pre></div><h2 id="class-field-是否使用-optional">Class Field 是否使用 Optional</h2>
+<p>一開始我正在嘗試使用 Optional 時，由於Lombok 的 Getter 不可以設定將正常的 Object 返回 Optional，那時我曾經有在考慮是否要將 Class Field 直接需告成 Optional。最後在研究了一番以後，我發現 class field 不應該須告成 Optional ，以下兩個原因</p>
+<ol>
+<li>Optional is not Serializable，這邊有 <a href="https://stackoverflow.com/questions/24547673/why-java-util-optional-is-not-serializable-how-to-serialize-the-object-with-suc" target="_blank" rel="noopener noreferrer">Stack Overflow</a>
+ 的討論，大家可以參考</li>
+<li>你不能避免別人將 Instance variable set 成 null ，還是有可能造成 Null Pointer Exception</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
+<span class="ln"> 2</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="nd">@Data</span>
+<span class="ln"> 5</span><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+<span class="ln"> 6</span>    <span class="kd">private</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">name</span><span class="o">;</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>    <span class="n">Person</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span><span class="o">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example13</span> <span class="o">{</span>
+<span class="ln"> 4</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 5</span>        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+<span class="ln"> 6</span>        <span class="n">person</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>        <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">optionalName</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="ln"> 9</span>        <span class="n">optionalName</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="ln">10</span>    <span class="o">}</span>
+<span class="ln">11</span><span class="o">}</span>
+</code></pre></div><p>這邊由於 getName return 的 Optional 是由外面帶入的，並不能控制返回的物件一定是 Optional，所以在 Line 8 的 optionalName 會是 null。當 Line 9 的 ifPresent() 執行時，會造成 Null Pointer Exception。 Optional 的使用是為了減少 null 的情況，所以好的設計是在拿到 Optional 物件時，不需要在檢查是否是 null。這也同時表示函示的參數，不應該有 Optional 帶入，因為有可能會是 Null 的情況</p>
+<h2 id="總結">總結</h2>
+<hr>
+<p>這邊小小的總結一下我目前使用 Optional 的規則</p>
+<ol>
+<li>避免使用 of() &amp; get() 以免造成 null pointer exception</li>
+<li>函式返回的物件，有可能是 null 的情況，選擇使用 Optional 物件返回</li>
+<li>Class Field 不使用 Optional</li>
+<li>函式參數不已 Optional 物件帶入</li>
+</ol>
+</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+  <div class="post-nav w-50"></div>
+  <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
+      <a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a>
+    </div></div>
+</div></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
+  repo="allen-hsieh1992/allen-hsieh1992.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container"><section class="profile surface row text-center">
+  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allen-hsieh1992.github.io/images/icon.gif"
+   width="154" height="153" loading="lazy" />
+</div>
+  <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">Backend Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Yahoo!</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+</section>
+  <section class="featured-posts row surface">
+    <h4>精選文章</h4>
+    <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
+</a></li></ul>
+  </section><section class="recent-posts row surface">
+  <h4>最近文章</h4>
+  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
+</a></li></ul>
+</section><section class="taxonomy-categories row surface">
+      <h4>
+        <a href="https://allen-hsieh1992.github.io/categories">分類</a>
+      </h4>
+      <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">3</span>
+        </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+          JAVA <span class="badge rounded-pill">2</span>
+        </a></div>
+    </section><section class="taxonomy-tags row surface">
+      <h4>
+        <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
+      </h4>
+      <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">3</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+          JAVA <span class="badge rounded-pill">2</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
+          COGNITO <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
+          EC2 <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LAMBDA">
+          LAMBDA <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
+          OPTIONAL <span class="badge rounded-pill">1</span>
+        </a></div>
+    </section></div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"></nav>
+<div class="copyright mb-2">
+  Copyright © 2021-2021 Allen Hsieh. All Rights Reserved.
+</div>
+</footer>
+<a id="btnScrollToTop" class="btn-scroll-to-top">
+  <i class="fas fa-fw fa-chevron-circle-up fa-2x"></i>
+</a>
+</body>
+</html>
