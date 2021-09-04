@@ -38,7 +38,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-</head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
+<link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/custom.css" crossorigin="anonymous"></head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
   <div class="container">
     <a class="navbar-brand" href="https://allen-hsieh1992.github.io/">
       <img class="logo" alt="Logo" src="https://allen-hsieh1992.github.io/images/logo.webp"
@@ -180,29 +180,40 @@ if (!doNotTrack) {
   <div class="offcanvas-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#on-demand-instances">On-Demand Instances</a></li>
-    <li><a href="#reserved-instances">Reserved Instances</a></li>
-    <li><a href="#spot-instance">Spot Instance</a></li>
-    <li><a href="#dedicated-hosts--instance">Dedicated Hosts &amp; Instance</a></li>
-    <li><a href="#capacity-reservations">Capacity Reservations</a></li>
-    <li><a href="#saving-plan">Saving Plan</a></li>
-    <li><a href="#spot-feet">Spot Feet</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#不能啟用新的ec2">不能啟用新的EC2</a></li>
-    <li><a href="#不能-ssh-到-ec2">不能 SSH 到 EC2</a></li>
+    <li><a href="#ec2-purchase-option">EC2 Purchase Option</a>
+      <ul>
+        <li><a href="#on-demand-instances">On-Demand Instances</a></li>
+        <li><a href="#reserved-instances">Reserved Instances</a></li>
+        <li><a href="#spot-instance">Spot Instance</a></li>
+        <li><a href="#dedicated-hosts--instance">Dedicated Hosts &amp; Instance</a></li>
+        <li><a href="#capacity-reservations">Capacity Reservations</a></li>
+        <li><a href="#saving-plan">Saving Plan</a></li>
+        <li><a href="#spot-feet">Spot Feet</a></li>
+      </ul>
+    </li>
+    <li><a href="#instance-type">Instance Type</a></li>
+    <li><a href="#instance-lifecycle">Instance Lifecycle</a></li>
+    <li><a href="#placement-group">Placement Group</a></li>
+    <li><a href="#storage">Storage</a></li>
+    <li><a href="#monitor">Monitor</a></li>
+    <li><a href="#others">Others</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#不能啟用新的ec2">不能啟用新的EC2</a></li>
+        <li><a href="#不能-ssh-到-ec2">不能 SSH 到 EC2</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><h1 id="ec2-purchase-option">EC2 Purchase Option</h1>
+</div><div class="post-content mb-3"><h2 id="ec2-purchase-option">EC2 Purchase Option</h2>
 <hr>
-<h2 id="on-demand-instances">On-Demand Instances</h2>
+<h3 id="on-demand-instances">On-Demand Instances</h3>
 <ul>
 <li>用多少付多少，不需要提前預付也也不需要合約，根據秒來計費</li>
 <li>不同 Region 有不同的 Instance &amp; CPU 限制數量，可以透過 AWS Support Center 提高上限</li>
 </ul>
-<h2 id="reserved-instances">Reserved Instances</h2>
+<h3 id="reserved-instances">Reserved Instances</h3>
 <ul>
 <li>需要一年或三年的合約 ，以小時計費</li>
 <li>付款選項
@@ -251,7 +262,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="spot-instance">Spot Instance</h2>
+<h3 id="spot-instance">Spot Instance</h3>
 <ul>
 <li>競價模式: 請求時會自定義一個每小時最高可接受的價格(Spot Price)，而 Spot Price 會隨著市場而變動，當最高價格高於 Spot price ，就有機會獲得 Instance。當然當 Spot Price 低於最高價格， AWS 會隨時終止你的 Instance，所以跑在 Spot Instance 上的服務，需要設計可以隨時可以被終止
 <ul>
@@ -285,7 +296,7 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>curl : http://169.254.169.254/lasest/meta-data/spot/instance-action
 </code></pre></div></li>
 </ul>
-<h2 id="dedicated-hosts--instance">Dedicated Hosts &amp; Instance</h2>
+<h3 id="dedicated-hosts--instance">Dedicated Hosts &amp; Instance</h3>
 <p>Dedicated Hosts &amp; Dedicated Instance 都是只在實體機上執行你的程式，但兩者有點小小的差別</p>
 <ul>
 <li>Dedicated Hosts 是固定一台 EC2 給你使用，而 Dedicated Instance 只保證這台 EC2 上面的程式不會有其他人的，所以當你重啟 EC2 時，有可能是另一台 EC2。</li>
@@ -297,9 +308,9 @@ if (!doNotTrack) {
 <li>Dedicated Hosts 如果購買 On-Demand 是已小時計算</li>
 <li>Dedicate Hosts 比 Dedicate Instance 貴</li>
 </ul>
-<h2 id="capacity-reservations">Capacity Reservations</h2>
+<h3 id="capacity-reservations">Capacity Reservations</h3>
 <p>因為 AWS 在 AZ 裡面的實體硬體是有限的，所以是有可能當你啟動 EC2 Instance 時是有可能沒有足夠資源的，這時候只能等待其他人釋放 Instance 或者 選擇不同類型的 Instance。Capacity Reservations 可以讓你先提前先預付某些資源，這樣就不用擔心要啟用 EC2 Instance時沒有資源。在啟用新的 EC2 Instance 時可以直接選擇從 Capacity Reservations 裡面直接扣除，就不需要額外再付費了。但要注意，在 Capacity Reservations 的狀態是啟用時，就已經產生收費。</p>
-<h2 id="saving-plan">Saving Plan</h2>
+<h3 id="saving-plan">Saving Plan</h3>
 <ul>
 <li>Compute Savings Plans
 <ul>
@@ -315,7 +326,7 @@ if (!doNotTrack) {
 </li>
 <li>可以和 Capacity Reservations 混著使用。</li>
 </ul>
-<h2 id="spot-feet">Spot Feet</h2>
+<h3 id="spot-feet">Spot Feet</h3>
 <ul>
 <li>Spot Feet 會根據設定 (launch pools) 嘗試要到足夠的 Spot Instance ，剩餘的會使用 On-Demand Instance 補齊。</li>
 <li>可以選擇的策略
@@ -326,7 +337,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h1 id="instance-type">Instance Type</h1>
+<h2 id="instance-type">Instance Type</h2>
 <hr>
 <table>
 <thead>
@@ -369,7 +380,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h1 id="instance-lifecycle">Instance Lifecycle</h1>
+<h2 id="instance-lifecycle">Instance Lifecycle</h2>
 <hr>
 <p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/aws-ec2-associate-certification-note/ec2_instance_lifecycle.png"
    width="699" height="295" loading="lazy" />
@@ -461,14 +472,14 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<h1 id="placement-group">Placement Group</h1>
+<h2 id="placement-group">Placement Group</h2>
 <hr>
 <ul>
 <li>Cluster : 所有的 Instance 放在同一個 AZ ，以提供更快的網路速度</li>
 <li>Spread : 將所有的 Instance 放在不同的實體硬體，一個 AZ 最多七個 Instance</li>
 <li>Partitioned : 將 Ec2 Instance 按照自己的邏輯分開(partition) ，每個 AZ 上限七個 partition 。</li>
 </ul>
-<h1 id="storage">Storage</h1>
+<h2 id="storage">Storage</h2>
 <table>
 <thead>
 <tr>
@@ -500,7 +511,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<h1 id="monitor">Monitor</h1>
+<h2 id="monitor">Monitor</h2>
 <ul>
 <li>AWS 提供的 Metrics
 <ul>
@@ -536,7 +547,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h1 id="others">Others</h1>
+<h2 id="others">Others</h2>
 <hr>
 <ul>
 <li>Elastic IP address : 固定 IPv4 Address, 一個 Region 限制五個</li>
@@ -551,9 +562,9 @@ if (!doNotTrack) {
 </li>
 <li>Elastic Fabric Adapter : 高效能運算使用</li>
 </ul>
-<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <hr>
-<h2 id="不能啟用新的ec2">不能啟用新的EC2</h2>
+<h3 id="不能啟用新的ec2">不能啟用新的EC2</h3>
 <ul>
 <li>InstanceLimitedExceeded Error : 每一個帳號在每一個 Region 都有一些限制，此錯誤代表達到上限，可以跟 AWS 提出將上限提高</li>
 <li>InsufficientInstanceCapacity Error : 代表現在 AWS 在這個 AZ 沒有足夠的資源提供，可以等一段時間或者換其他AZ 嘗試。</li>
@@ -566,7 +577,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<h2 id="不能-ssh-到-ec2">不能 SSH 到 EC2</h2>
+<h3 id="不能-ssh-到-ec2">不能 SSH 到 EC2</h3>
 <ul>
 <li>&ldquo;Unprotected private key file&rdquo; error : ssh key 需要是400 權限</li>
 <li>&ldquo;Too many authentication failures&rdquo; 有可能是 Username 不對</li>
