@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>使用 Lightsail 架設 WordPress 網站 - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allen-hsieh1992.github.io/images/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="https://allen-hsieh1992.github.io/images/favicons/manifest.json">
+<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon.ico">
+<meta name="keywords" content="" />
+<meta name="description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。" /><meta itemprop="name" content="使用 Lightsail 架設 WordPress 網站">
+<meta itemprop="description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。"><meta itemprop="datePublished" content="2021-07-04T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-07-04T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1315"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/aws.jpeg">
+<meta itemprop="keywords" content="AWS,LIGHTSAIL," /><meta property="og:title" content="使用 Lightsail 架設 WordPress 網站" />
+<meta property="og:description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-04T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg"/>
+
+<meta name="twitter:title" content="使用 Lightsail 架設 WordPress 網站"/>
+<meta name="twitter:description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。"/>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allen-hsieh1992.github.io/js/bundle.min.2da34b4efd951e2e552e9e3a1c4800ac1fee799aeb56a3e35a5599337cb94372.js" integrity="sha256-LaNLTv2VHi5VLp46HEgArB/ueZrrVqPjWlWZM3y5Q3I=" crossorigin="anonymous"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LKLFC990BM', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/custom.css" crossorigin="anonymous"></head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="https://allen-hsieh1992.github.io/">
+      <img class="logo" alt="Logo" src="https://allen-hsieh1992.github.io/images/logo.webp"
+   width="136" height="69" loading="lazy" />
+艾倫的開發心路歷程</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allen-hsieh1992.github.io/search">
+  <div class="input-group input-group-sm">
+    <button class="btn btn-search disabled position-absolute left-0" type="submit" aria-label="submit"><i class="fas fa-fw fa-search"></i></button>
+    <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
+  </div>
+</form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>歸檔
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/categories/">
+            <i class="fas fa-fw fa-folder"></i>分類
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/tags/">
+            <i class="fas fa-fw fa-tags"></i>標籤
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allen-hsieh1992.github.io/series/">
+            <i class="fas fa-fw fa-columns"></i>專欄
+          </a>
+        </li><li class="nav-item">
+  <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSettings" role="button"
+    aria-controls="offcanvasSettings">
+    <i class="fas fa-fw fa-sliders-h"></i> 設置
+  </a>
+</li>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings"
+  aria-labelledby="offcanvasSettingsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" w id="offcanvasSettingsLabel"><i class="fas fa-fw fa-sliders-h"></i> 設置</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+<section class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</section>
+
+<section class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <span id="btnPalette" class="btn btn-sm"><i class="fas fa-eye-dropper"></i></span>
+    </div>
+  </form>
+  <div class="container mt-2 visually-hidden" id="palettePicker">
+    <div class="btn-group"><button type="button" id="palette-blue" title="藍色" 
+          class="btn btn-sm palette bg-blue d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-blue-gray" title="藍灰色" 
+          class="btn btn-sm palette bg-blue-gray d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-brown" title="棕色" 
+          class="btn btn-sm palette bg-brown d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-cyan" title="青色" 
+          class="btn btn-sm palette bg-cyan d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-green" title="綠色" 
+          class="btn btn-sm palette bg-green d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-indigo" title="靛青色" 
+          class="btn btn-sm palette bg-indigo d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-orange" title="橙色" 
+          class="btn btn-sm palette bg-orange d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-pink" title="粉色" 
+          class="btn btn-sm palette bg-pink d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-purple" title="紫色" 
+          class="btn btn-sm palette bg-purple d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-red" title="紅色" 
+          class="btn btn-sm palette bg-red d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-teal" title="藍綠色" 
+          class="btn btn-sm palette bg-teal d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-yellow" title="黃色" 
+          class="btn btn-sm palette bg-yellow d-flex align-items-center justify-content-center">
+        </button></button>
+    </div>
+  </div>
+</section></div>
+</div></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main role="main" class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row" aria-label="breadcrumb">
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/">主頁</a></li><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/posts/">文章</a></li><li class="breadcrumb-item active">使用 Lightsail 架設 WordPress 網站</li></ol>
+</nav><article class="post row surface"><div class="post-panel-wrapper">
+  <div class="post-panel d-flex flex-column">
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
+  <i class="fas fa-fw fa-expand-alt fa-rotate-45"></i>
+</a>
+  
+    
+
+    
+    
+    <a id="btnTOC" class="fas fa-fw fa-list-alt" data-bs-toggle="offcanvas" href="#offcanvasTOC" aria-controls="offcanvasTOC" role="button">
+</a>
+  </div>
+</div>
+<h1 class="post-title my-3">使用 Lightsail 架設 WordPress 網站
+</h1><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jul 4, 2021
+  </span><span class="post-reading-time me-2">
+    <i class="fas fa-fw fa-coffee"></i>3 分鐘閱讀
+  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/lightsail/" class="post-taxonomy">LIGHTSAIL</a></span>
+</div>
+<div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTOCLabel">目錄</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lightsail-架設-wordpress-server">Lightsail 架設 WordPress Server</a>
+      <ul>
+        <li><a href="#step1-進入-lightstail-服務點下-create-instance">Step1 進入 Lightstail 服務，點下 Create instance</a></li>
+        <li><a href="#step-2-選擇-地區服務和方案">Step 2 選擇 地區、服務和方案。</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用-bncert-建立-https">使用 bncert 建立 HTTPS</a></li>
+    <li><a href="#router-53-購買域名">Router 53 購買域名</a></li>
+    <li><a href="#建立新的-index-到-google-search">建立新的 index 到 Google Search</a></li>
+    <li><a href="#google-search-console-驗證網域">Google Search Console 驗證網域</a>
+      <ul>
+        <li><a href="#step1-輸入要驗證的網域">Step1 輸入要驗證的網域</a></li>
+        <li><a href="#step2-複製-google-提供的-txt-record-設定資訊">Step2 複製 Google 提供的 TXT Record 設定資訊</a></li>
+        <li><a href="#step3-在-router-53-建立-txt-record">Step3 在 Router 53 建立 Txt Record</a></li>
+        <li><a href="#step4-回到-step2-頁面點選驗證-">Step4 回到 Step2 頁面點選驗證 ～</a></li>
+      </ul>
+    </li>
+    <li><a href="#上交-sitemap-到-google-search-console">上交 Sitemap 到 Google Search Console</a>
+      <ul>
+        <li><a href="#step1-取得-sitemap-endpoint">Step1 取得 Sitemap endpoint</a></li>
+        <li><a href="#step2-上交-sitemap-到-google-search-console">Step2 上交 Sitemap 到 Google Search Console</a></li>
+      </ul>
+    </li>
+    <li><a href="#總結">總結</a></li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content mb-3"><p>在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。</p>
+<h2 id="lightsail-架設-wordpress-server">Lightsail 架設 WordPress Server</h2>
+<h3 id="step1-進入-lightstail-服務點下-create-instance">Step1 進入 Lightstail 服務，點下 Create instance</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Lightsail1.png"
+   width="1194" height="828" loading="lazy" />
+
+</p>
+<h3 id="step-2-選擇-地區服務和方案">Step 2 選擇 地區、服務和方案。</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Lightsail2.png"
+   width="676" height="901" loading="lazy" />
+
+</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Lightsail3.png"
+   width="823" height="875" loading="lazy" />
+
+</p>
+<p>由於我是新網站，所以這邊選用有一個月免費試用的 3.5 美金一個月的方案。</p>
+<h2 id="使用-bncert-建立-https">使用 bncert 建立 HTTPS</h2>
+<p>透過UI，可以直接連線到 Instance 上</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/ssh_to_lightsail_instance.png"
+   width="465" height="227" loading="lazy" />
+
+</p>
+<p>使用 bncert 安裝憑證，我的機器一開始上面安裝有安裝 bncert。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="c1"># 安裝憑證</span>
+<span class="ln">2</span>sudo /opt/bitnami/bncert-tool
+<span class="ln">3</span><span class="c1"># 如果沒有 bncert-tool 可以執行以下 command</span>
+<span class="ln">4</span>wget -O bncert-linux-x64.run https://downloads.bitnami.com/files/bncert/latest/bncert-linux-x64.run
+<span class="ln">5</span>sudo mkdir /opt/bitnami/bncert
+<span class="ln">6</span>sudo mv bncert-linux-x64.run /opt/bitnami/bncert/
+<span class="ln">7</span>sudo chmod +x /opt/bitnami/bncert/bncert-linux-x64.run
+<span class="ln">8</span>sudo ln -s /opt/bitnami/bncert/bncert-linux-x64.run /opt/bitnami/bncert-tool
+</code></pre></div><p>執行bncert-tool，一開始會詢問 Domain List 和 是否將 Http 近來的頁面全部轉到 Https</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/bncert2.png"
+   width="2206" height="1194" loading="lazy" />
+
+</p>
+<p>之後會確認改動和填寫憑證上面的 mail</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/bncert3.png"
+   width="1974" height="1276" loading="lazy" />
+
+</p>
+<p>執行結果</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/bncert4.png"
+   width="1910" height="1296" loading="lazy" />
+
+</p>
+<h2 id="router-53-購買域名">Router 53 購買域名</h2>
+<hr>
+<p>進入Router53 購買域名頁面，點選 Register Domain</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/router53_1.png"
+   width="1920" height="682" loading="lazy" />
+
+</p>
+<p>這邊可以搜尋你要的 domain，同時 Router 53 也會提供其他建議。</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/router53_2.png"
+   width="1042" height="250" loading="lazy" />
+
+</p>
+<p>確認要購買域名時，需要填寫個人資訊</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/router53_3.png"
+   width="1920" height="862" loading="lazy" />
+
+</p>
+<p>購買完以後就可以在 Rounter 53 上確認自己的 Domain 狀態</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/router53_4.png"
+   width="1711" height="288" loading="lazy" />
+
+</p>
+<p>申請完 Domain 需要一點時間喔～艾倫這邊等了大約兩天才下來。</p>
+<h2 id="建立新的-index-到-google-search">建立新的 index 到 Google Search</h2>
+<hr>
+<p>這邊順便介紹一下，我目前在 Worldpress 使用的 SEO Plugin Yoast SEO ，安裝完以後每一個 Post &amp; Page 下面可以設定一些 keyphrase、Meta description 等等資訊，也會提供每一個 Status 作為參考。</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/seo_example.png"
+   width="495" height="822" loading="lazy" />
+
+</p>
+<p>這邊簡單一個方法可以確認 Google 是否有 index 你的網站，新的網站通常都沒有資訊，在 Google 打上 “site:domainName”</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/google_site_result.png"
+   width="885" height="380" loading="lazy" />
+
+</p>
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>以艾倫的 allenhsieh1992.com ，由於我已經有設定幾天了，所以 Google 有 index 了，反則就會只有一個請使用 Google Search Console 的頁面
+</div>
+
+<h2 id="google-search-console-驗證網域">Google Search Console 驗證網域</h2>
+<hr>
+<p>Google Search Console 是一個 Google 讓我們告訴他現在新的網域方法。目前有兩種驗證方法，這邊建議使用網域的新功能，因為使用網域前置字元，會把 HTTPS 和 HTTP 當作不同的網域處理。</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain.png"
+   width="771" height="620" loading="lazy" />
+
+</p>
+<p>我一開始使用右邊的方式 &ldquo;網址前置字元&rdquo;，但因為我一開始架設網站時，不是先設定HTTPS，所以先驗證了HTTP。由於之後犯蠢登入不同的Gmail，所以以為HTTP 沒驗證成功，又驗證了一次HTTPS。事後發現 HTTP &amp; HTTPS 是可以分開建立成功的，所以這邊會教學並建議使用&quot;網域&quot;的方式，並免大家跟我犯一樣的錯誤</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain1.png"
+   width="315" height="199" loading="lazy" />
+
+
+<img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain2.png"
+   width="387" height="155" loading="lazy" />
+
+</p>
+<h3 id="step1-輸入要驗證的網域">Step1 輸入要驗證的網域</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/add_domain_step1.png"
+   width="769" height="617" loading="lazy" />
+
+</p>
+<h3 id="step2-複製-google-提供的-txt-record-設定資訊">Step2 複製 Google 提供的 TXT Record 設定資訊</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/add_domain_step2.png"
+   width="650" height="568" loading="lazy" />
+
+</p>
+<h3 id="step3-在-router-53-建立-txt-record">Step3 在 Router 53 建立 Txt Record</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/add_domain_step3.png"
+   width="1122" height="523" loading="lazy" />
+
+</p>
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>Record Type 記得選 Txt 和 Value 貼上 Type2 的資訊
+</div>
+
+<h3 id="step4-回到-step2-頁面點選驗證-">Step4 回到 Step2 頁面點選驗證 ～</h3>
+<p>驗證成功就會在 Google Search Console 看到你的 Domain</p>
+<h2 id="上交-sitemap-到-google-search-console">上交 Sitemap 到 Google Search Console</h2>
+<hr>
+<p>Sitemap 主要包含了網站結構資訊，上交 Sitemap 可以讓 Google 更好地瞭解你的網站。這邊的 Sitemap 是由之前所提的 Yoast SEO Plugin 所產生的</p>
+<h3 id="step1-取得-sitemap-endpoint">Step1 取得 Sitemap endpoint</h3>
+<p>在 Yoast 介面的 Features 下面有一個 XML Sitemaps 的設定，點選右邊的問號，在點下 See the xml sitemap，這時候就會直接打開 Sitemap 的頁面</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Sitemap.png"
+   width="498" height="429" loading="lazy" />
+
+</p>
+<p>Sitemap 實際內容就這個網域下所有的網頁，並且最後修改時間</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Sitemap2.png"
+   width="879" height="459" loading="lazy" />
+
+</p>
+<h3 id="step2-上交-sitemap-到-google-search-console">Step2 上交 Sitemap 到 Google Search Console</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/use-lightsail-to-create-wordpress-website/Sitemap3.png"
+   width="921" height="383" loading="lazy" />
+
+</p>
+<p>接著等待幾天後，就可以在 Google 透過 site 找到自己的網站</p>
+<h2 id="總結">總結</h2>
+<hr>
+<p>這次架完以後，挺佩服那些沒有資訊背景又自己一手包辦，從零開始架設WorldPress 網站的人。這次的網站，雖然不如我內心所想要的外觀，無奈前端不熟，如果想要用出自己的外觀，又要花不少時間。所以艾倫我決定先增加這個網站的內容，將來這個網站如果我有動力繼續做下去，再花時間修改外觀。</p>
+</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+  <div class="post-nav w-50"><div class="prev-post btn btn-sm">
+      <a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a>
+    </div></div>
+  <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
+      <a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a>
+    </div></div>
+</div><section class="related-posts">
+    <h3>相關文章</h3>
+    <ul class="related-posts"><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
+</a></li></ul>
+  </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
+  repo="allen-hsieh1992/allen-hsieh1992.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container"><section class="profile surface row text-center">
+  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allen-hsieh1992.github.io/images/icon.gif"
+   width="154" height="153" loading="lazy" />
+</div>
+  <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">Senior Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+</section>
+  <section class="featured-posts row surface">
+    <h4>精選文章</h4>
+    <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li></ul>
+  </section><section class="recent-posts row surface">
+  <h4>最近文章</h4>
+  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li></ul>
+</section><section class="taxonomy-categories row surface">
+      <h4>
+        <a href="https://allen-hsieh1992.github.io/categories">分類</a>
+      </h4>
+      <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">4</span>
+        </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+          JAVA <span class="badge rounded-pill">2</span>
+        </a></div>
+    </section><section class="taxonomy-tags row surface">
+      <h4>
+        <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
+      </h4>
+      <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">4</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+          JAVA <span class="badge rounded-pill">2</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
+          COGNITO <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
+          EC2 <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LAMBDA">
+          LAMBDA <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/lightsail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LIGHTSAIL">
+          LIGHTSAIL <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
+          OPTIONAL <span class="badge rounded-pill">1</span>
+        </a></div>
+    </section></div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"></nav>
+<div class="copyright mb-2">
+  Copyright © 2021-2021 Allen Hsieh. All Rights Reserved.
+</div>
+</footer>
+<a id="btnScrollToTop" class="btn-scroll-to-top">
+  <i class="fas fa-fw fa-chevron-circle-up fa-2x"></i>
+</a>
+</body>
+</html>

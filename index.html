@@ -169,6 +169,22 @@ if (!doNotTrack) {
         個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己的使用者群。這時可以選擇考慮 AWS Cognito，它可以讓你快速的為你的服務建立使用者群，並且可以整合讓使用者擁有權限操作其他 AWS 服務 。由於使用 UI 建立 Cognito User Pool 的文章已經不少，所以這邊文章會介紹使用 AWS CLI cognito-idp 建立一個用戶可以註冊，並且自己透過 Mail 認證通過的 User Pool。
       </div>
     </article><article class="post row surface">
+      <h2 class="post-title mb-4"><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jul 4, 2021
+  </span><span class="post-reading-time me-2">
+    <i class="fas fa-fw fa-coffee"></i>3 分鐘閱讀
+  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/lightsail/" class="post-taxonomy">LIGHTSAIL</a></span>
+</div>
+<div class="post-summary mb-3">
+        
+        <img class="img-fluid" alt="使用 Lightsail 架設 WordPress 網站" src="https://allen-hsieh1992.github.io/images/aws.jpeg"
+   width="640" height="320" loading="lazy" />
+
+        
+        在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。
+      </div>
+    </article><article class="post row surface">
       <h2 class="post-title mb-4"><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></h2><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 3, 2021
@@ -200,23 +216,27 @@ if (!doNotTrack) {
         
         這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “What is P99 latency?“)。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。
       </div>
-    </article><article class="post row surface">
-      <h2 class="post-title mb-4"><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
-</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
-    <i class="fas fa-fw fa-calendar-alt"></i>Jun 27, 2021
-  </span><span class="post-reading-time me-2">
-    <i class="fas fa-fw fa-coffee"></i>5 分鐘閱讀
-  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy">JAVA</a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy">OPTIONAL</a></span>
-</div>
-<div class="post-summary mb-3">
-        
-        <img class="img-fluid" alt="Java Optional 基本 &amp; 心得分享" src="https://allen-hsieh1992.github.io/images/java.jpeg"
-   width="1200" height="800" loading="lazy" />
-
-        
-        最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。
-      </div>
-    </article></div><div class="row table-responsive mb-3"></div>
+    </article></div><div class="row table-responsive mb-3">
+    <ul class="pagination pagination-default">
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul></div>
 </div>
 
 
@@ -231,24 +251,24 @@ if (!doNotTrack) {
     <h4>精選文章</h4>
     <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
 </a></li></ul>
   </section><section class="recent-posts row surface">
   <h4>最近文章</h4>
   <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-optional-basic/">Java Optional 基本 &amp; 心得分享
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allen-hsieh1992.github.io/categories">分類</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">3</span>
+          AWS <span class="badge rounded-pill">4</span>
         </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -257,7 +277,7 @@ if (!doNotTrack) {
         <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">3</span>
+          AWS <span class="badge rounded-pill">4</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
@@ -266,6 +286,8 @@ if (!doNotTrack) {
           EC2 <span class="badge rounded-pill">1</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LAMBDA">
           LAMBDA <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/lightsail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LIGHTSAIL">
+          LIGHTSAIL <span class="badge rounded-pill">1</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
           OPTIONAL <span class="badge rounded-pill">1</span>
         </a></div>
