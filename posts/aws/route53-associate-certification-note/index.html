@@ -186,8 +186,7 @@ if (!doNotTrack) {
 <li>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。</li>
 <li>Route53 也是一個 DNS Register ，可以在上面購買 Domain Name</li>
 <li>TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間。</li>
-<li>主要 Component
-<ul>
+<li>主要 Component</li>
 <li>Hosted Zone
 <ul>
 <li>包含所有 Record 資訊</li>
@@ -196,8 +195,6 @@ if (!doNotTrack) {
 <li>Private hosted Zone :  解析Amazon上內部的 Request
 <ul>
 <li>VPC 需要設定 enableDnsHostnames &amp; enableDnsSupport</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>Name Server
@@ -310,7 +307,7 @@ if (!doNotTrack) {
 <tr>
 <td>GeoLocation Routing Policy</td>
 <td>根據 User IP 地理位置 來決定返回哪個值</td>
-<td></td>
+<td>V</td>
 </tr>
 <tr>
 <td>Geo proximity Routing Policy</td>
@@ -336,7 +333,7 @@ if (!doNotTrack) {
 <li>有 N 次檢查不過 =&gt; Unhealthy Status</li>
 <li>已經有 N 次檢查過 =&gt; healthy Status</li>
 <li>可以產生 Latency 圖</li>
-<li>大約有 15 檢查者（checker) 從不同地方檢查 ，所以 endpoint 不能是 private 的 (如VPC內）</li>
+<li>大約有 15 檢查者（checker) 從不同地方檢查 ，所以 endpoint 不能是 private 的 (如VPC內</li>
 </ul>
 </li>
 <li>calculated health check 根據其他 Health check 來計算</li>
