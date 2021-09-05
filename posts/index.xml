@@ -50,7 +50,7 @@
       <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/</guid>
-      <description>這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency</description>
+      <description>這新專案我選擇使用了之前沒使用過的 Jersey Client ~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99</description>
     </item>
     
     <item>
