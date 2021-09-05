@@ -12,7 +12,7 @@
 <meta name="description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" /><meta itemprop="name" content="Java Optional 基本 &amp; 心得分享">
 <meta itemprop="description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。"><meta itemprop="datePublished" content="2021-06-27T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-06-27T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2226"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/java.jpeg">
+<meta itemprop="wordCount" content="2221"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/java.jpeg">
 <meta itemprop="keywords" content="JAVA,OPTIONAL," /><meta property="og:title" content="Java Optional 基本 &amp; 心得分享" />
 <meta property="og:description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" />
 <meta property="og:type" content="article" />
@@ -184,13 +184,13 @@ if (!doNotTrack) {
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><p>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。這邊要特別注意，如果沒有正確的使用 Optional 的話，還是有可能會造成 Null Pointer Exception 喔！</p>
+</div><div class="post-content mb-3"><p>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 Null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。這邊要特別注意，如果沒有正確的使用 Optional 的話，還是有可能會造成 Null Pointer Exception 喔！</p>
 <blockquote>
 <p>Null Reference is the Billion Dollar Mistake - Tony Hoare</p>
 </blockquote>
 <h2 id="建立optional-物件">建立Optional 物件</h2>
 <hr>
-<p>大家認為下面的Example1 運行的結果會是什麼樣的呢？</p>
+<p>大家認為下面的 Example1 運行的結果會是什麼樣的呢？</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="ln">2</span>
 <span class="ln">3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example1</span> <span class="o">{</span>
@@ -200,7 +200,7 @@ if (!doNotTrack) {
 <span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
 <span class="ln">8</span>    <span class="o">}</span>
 <span class="ln">9</span><span class="o">}</span>
-</code></pre></div><p>執行結果會是 “I am Optional String”，這邊可以看到 line 6 透過 of() method 建立了 一個 Optional 的物件。但如果 sentence 是 null 的時候，會怎麼樣呢？結果會是 Null Pointer Exception! 因為 of() method 這邊所帶入的 Value 必須是 non-null的，所以建議大家在使用 Optional 時，應該避開使用 of() method，而是使用 ofNullable() method。</p>
+</code></pre></div><p>執行結果會是 &ldquo;I am Optional String&rdquo;，這邊可以看到 line 6 透過 of() method 建立了 一個 Optional 的物件。但如果 sentence 是 Null 的時候，會怎麼樣呢？結果會是 Null Pointer Exception! 因為 of() method 這邊所帶入的 Value 必須是 non-null的，所以建議大家在使用 Optional 時，應該避開使用 of() method，而是使用 ofNullable() method。</p>
 <p>現在我們將 Example1 中的 sentence 改成 null 並且使用 ofNullAble() method 來運行，這時大家覺得結果是怎樣呢？</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="ln">2</span>
@@ -211,8 +211,8 @@ if (!doNotTrack) {
 <span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
 <span class="ln">8</span>    <span class="o">}</span>
 <span class="ln">9</span><span class="o">}</span>
-</code></pre></div><p>大家是否會認為跟 Example1 一樣，會列印出””I am Optional String”？但實際執行的結果會是 NoSuchElementException : No value present，因為在 call get() method 時內部檢查 Value 是否存在，所以這邊建議在實際使用中，不要使用 get() method，除非你能確認 Value 一定不等於 null。
-這邊要順便介紹 Optional 中特別的物件: Optional.empty() ，這邊要特別注意 Optional empty 還是 Optional 物件，只是裡面的 value 是 null，所以 Optional empty 跟 null 是不同的東西。</p>
+</code></pre></div><p>大家是否會認為跟 Example1 一樣，會列印出&quot;I am Optional String&quot;？但實際執行的結果會是 NoSuchElementException : No value present，因為在 call get() method 時內部檢查 Value 是否存在，所以這邊建議在實際使用中，不要使用 get() method，除非你能確認 Value 一定不等於 Null。
+這邊要順便介紹 Optional 中特別的物件: Optional.empty() ，這邊要特別注意 Optional empty 還是 Optional 物件，只是裡面的 value 是 null，所以 Optional empty 跟 Null 是不同的東西。</p>
 <h2 id="optional-安全取得value">Optional 安全取得Value</h2>
 <hr>
 <p>這邊一開始要介紹Optional 中的 isPresent()，透過 isPresent 我們可以安全地確認 Value 是否存在</p>
@@ -267,7 +267,7 @@ if (!doNotTrack) {
 <span class="ln">9</span><span class="o">}</span>
 </code></pre></div><h2 id="optional-安全執行特定函式">Optional 安全執行特定函式</h2>
 <hr>
-<p>在之前的Example當中，我們只是單純的想要正確的執行 System.out.println，這邊介紹ifPresent()。</p>
+<p>在之前的例子中，我們只是單純的想要正確的執行 System.out.println，這邊介紹ifPresent()。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example7</span> <span class="o">{</span>
@@ -298,7 +298,7 @@ if (!doNotTrack) {
 </span><span class="ln">14</span><span class="c1"></span>        <span class="n">optionalSentence</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
 <span class="ln">15</span>    <span class="o">}</span>
 <span class="ln">16</span><span class="o">}</span>
-</code></pre></div><p>ifPresent() 只能在 Optional 有 value 時執行，有時候我們也希望如果 Optional 有 value時執行 函式A，沒有值時 執行函式 B，這時我們就可以透過 ifPresentOrElse()</p>
+</code></pre></div><p>ifPresent() 只能在 Optional 有 value 時執行，有時候我們也希望如果 Optional 有 value 時執行 函式 A，沒有值時 執行函式 B，這時我們就可以透過 ifPresentOrElse()</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Example9</span> <span class="o">{</span>
@@ -337,7 +337,7 @@ if (!doNotTrack) {
 <span class="ln">16</span><span class="cm">/* output
 </span><span class="ln">17</span><span class="cm">Optional[I am Optional String]
 </span><span class="ln">18</span><span class="cm">*/</span>
-</code></pre></div><p>Map: 如果 Optional 的 Value 有值，這邊才會執行你所定義的 Mapping Function，如果沒有就直接返回 Optional Empty。 我在工作中，經常需要將DTO 轉換成 Response 物件，會使用 Map 來使用</p>
+</code></pre></div><p>Map: 如果 Optional 的 Value 有值，這邊才會執行你所定義的 Mapping Function，如果沒有就直接返回 Optional Empty。 我在工作中，經常需要將 DTO 轉換成 Response 物件，會使用 Map 來使用</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
 <span class="ln">2</span><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
 <span class="ln">3</span>
