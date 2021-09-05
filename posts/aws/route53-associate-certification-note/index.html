@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Associate Certificate 時的 Route53 筆記" /><meta itemprop="name" content="Route53 Associate Certification Note">
 <meta itemprop="description" content="準備 AWS Associate Certificate 時的 Route53 筆記"><meta itemprop="datePublished" content="2021-09-05T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="620"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/aws.jpeg">
+<meta itemprop="wordCount" content="623"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/aws.jpeg">
 <meta itemprop="keywords" content="AWS,ROUTE53," /><meta property="og:title" content="Route53 Associate Certification Note" />
 <meta property="og:description" content="準備 AWS Associate Certificate 時的 Route53 筆記" />
 <meta property="og:type" content="article" />
@@ -245,7 +245,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>SOA</td>
-<td>主 要 記 錄 網域名稱伺服器的名稱和負責人資訊</td>
+<td>主要記錄網域名稱伺服器的名稱和負責人資訊</td>
 </tr>
 </tbody>
 </table>
@@ -268,7 +268,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>ROOT DOMAIN</td>
-<td>只能是 non root domain <!-- raw HTML omitted --> 不可以 domain.com =&gt; xxx.otherDomain.com</td>
+<td>只能是 non root domain Ex: 不可以是 domain.com =&gt; xxx.otherDomain.com</td>
 <td>non root &amp; root domain 都可以</td>
 </tr>
 </tbody>
@@ -301,7 +301,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>Failover Routing Policy</td>
-<td>有 Primary 和 Secondary<!-- raw HTML omitted -->如果 Primary health check pass 就會返回 Primary 否則返回 Secondary</td>
+<td>有 Primary 和 Secondary，如果 Primary health check pass 就會返回 Primary 否則返回 Secondary</td>
 <td>V</td>
 </tr>
 <tr>
@@ -311,7 +311,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>Geo proximity Routing Policy</td>
-<td>根據 User 地址位置外加 Bias 值 <!-- raw HTML omitted -->  us-west-1 &amp; us-east-1 都在 us ，如果有設定 bias ， bias 高的會有比較多的 request</td>
+<td>根據 User 地址位置外加 Bias 值 Ex:us-west-1 &amp; us-east-1 都在 us ，如果有設定 bias ， bias 高的會有比較多的 request</td>
 <td>V</td>
 </tr>
 <tr>
