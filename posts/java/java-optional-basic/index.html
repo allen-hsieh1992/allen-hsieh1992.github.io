@@ -16,7 +16,7 @@
 <meta itemprop="keywords" content="JAVA,OPTIONAL," /><meta property="og:title" content="Java Optional 基本 &amp; 心得分享" />
 <meta property="og:description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/java-optional-basic/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/java.jpeg" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/java/java-optional-basic/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/java.jpeg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-06-27T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-06-27T00:00:00+00:00" />
 
@@ -184,7 +184,7 @@ if (!doNotTrack) {
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><p>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 Null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。這邊要特別注意，如果沒有正確的使用 Optional 的話，還是有可能會造成 Null Pointer Exception 喔！</p>
+</div><div class="post-content mb-3"><p>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。這邊要特別注意，如果沒有正確的使用 Optional 的話，還是有可能會造成 Null Pointer Exception 喔！</p>
 <blockquote>
 <p>Null Reference is the Billion Dollar Mistake - Tony Hoare</p>
 </blockquote>
@@ -200,7 +200,7 @@ if (!doNotTrack) {
 <span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
 <span class="ln">8</span>    <span class="o">}</span>
 <span class="ln">9</span><span class="o">}</span>
-</code></pre></div><p>執行結果會是 &ldquo;I am Optional String&rdquo;，這邊可以看到 line 6 透過 of() method 建立了 一個 Optional 的物件。但如果 sentence 是 Null 的時候，會怎麼樣呢？結果會是 Null Pointer Exception! 因為 of() method 這邊所帶入的 Value 必須是 non-null的，所以建議大家在使用 Optional 時，應該避開使用 of() method，而是使用 ofNullable() method。</p>
+</code></pre></div><p>執行結果會是 &ldquo;I am Optional String&rdquo;，這邊可以看到 line 6 透過 of() method 建立了 一個 Optional 的物件。但如果 sentence 是 null 的時候，會怎麼樣呢？結果會是 Null Pointer Exception! 因為 of() method 這邊所帶入的 Value 必須是 non-null的，所以建議大家在使用 Optional 時，應該避開使用 of() method，而是使用 ofNullable() method。</p>
 <p>現在我們將 Example1 中的 sentence 改成 null 並且使用 ofNullAble() method 來運行，這時大家覺得結果是怎樣呢？</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
 <span class="ln">2</span>
@@ -211,8 +211,8 @@ if (!doNotTrack) {
 <span class="ln">7</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optionalSentence</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
 <span class="ln">8</span>    <span class="o">}</span>
 <span class="ln">9</span><span class="o">}</span>
-</code></pre></div><p>大家是否會認為跟 Example1 一樣，會列印出&quot;I am Optional String&quot;？但實際執行的結果會是 NoSuchElementException : No value present，因為在 call get() method 時內部檢查 Value 是否存在，所以這邊建議在實際使用中，不要使用 get() method，除非你能確認 Value 一定不等於 Null。
-這邊要順便介紹 Optional 中特別的物件: Optional.empty() ，這邊要特別注意 Optional empty 還是 Optional 物件，只是裡面的 value 是 null，所以 Optional empty 跟 Null 是不同的東西。</p>
+</code></pre></div><p>大家是否會認為跟 Example1 一樣，會列印出&quot;I am Optional String&quot;？但實際執行的結果會是 NoSuchElementException : No value present，因為在 call get() method 時內部檢查 Value 是否存在，所以這邊建議在實際使用中，不要使用 get() method，除非你能確認 Value 一定不等於 null。
+這邊要順便介紹 Optional 中特別的物件: Optional.empty() ，這邊要特別注意 Optional empty 還是 Optional 物件，只是裡面的 value 是 null，所以 Optional empty 跟 null 是不同的東西。</p>
 <h2 id="optional-安全取得value">Optional 安全取得Value</h2>
 <hr>
 <p>這邊一開始要介紹Optional 中的 isPresent()，透過 isPresent 我們可以安全地確認 Value 是否存在</p>
@@ -446,7 +446,7 @@ if (!doNotTrack) {
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"></div>
   <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
-      <a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+      <a href="https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
 </a>
     </div></div>
 </div></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
@@ -466,26 +466,26 @@ if (!doNotTrack) {
 </section>
   <section class="featured-posts row surface">
     <h4>精選文章</h4>
-    <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+    <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li></ul>
   </section><section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws-ec2-associate-certification-note/">AWS EC2 Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/">AWS EC2 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allen-hsieh1992.github.io/categories">分類</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">4</span>
+          AWS <span class="badge rounded-pill">5</span>
         </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -494,9 +494,11 @@ if (!doNotTrack) {
         <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">4</span>
+          AWS <span class="badge rounded-pill">5</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
+          ROUTE53 <span class="badge rounded-pill">2</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
           COGNITO <span class="badge rounded-pill">1</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">

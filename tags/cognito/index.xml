@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/cognito/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用 AWS Cognito CLI 建立 User Pool</title>
-      <link>https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/</link>
+      <link>https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/create-cognito-user-pool-by-aws-cli/</guid>
+      <guid>https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/</guid>
       <description>個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己</description>
     </item>
     

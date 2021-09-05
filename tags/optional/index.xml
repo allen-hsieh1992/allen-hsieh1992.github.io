@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/optional/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java Optional 基本 &amp; 心得分享</title>
-      <link>https://allen-hsieh1992.github.io/posts/java-optional-basic/</link>
+      <link>https://allen-hsieh1992.github.io/posts/java/java-optional-basic/</link>
       <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/java-optional-basic/</guid>
+      <guid>https://allen-hsieh1992.github.io/posts/java/java-optional-basic/</guid>
       <description>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning</description>
     </item>
     
