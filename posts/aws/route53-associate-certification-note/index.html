@@ -186,7 +186,8 @@ if (!doNotTrack) {
 <li>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。</li>
 <li>Route53 也是一個 DNS Register ，可以在上面購買 Domain Name</li>
 <li>TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間。</li>
-<li>主要 Component</li>
+<li>主要 Component
+<ul>
 <li>Hosted Zone
 <ul>
 <li>包含所有 Record 資訊</li>
@@ -195,6 +196,8 @@ if (!doNotTrack) {
 <li>Private hosted Zone :  解析Amazon上內部的 Request
 <ul>
 <li>VPC 需要設定 enableDnsHostnames &amp; enableDnsSupport</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Name Server
