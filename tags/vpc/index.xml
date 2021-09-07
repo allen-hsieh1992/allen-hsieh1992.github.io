@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VPC on 艾倫的開發心路歷程</title>
+    <link>https://allen-hsieh1992.github.io/tags/vpc/</link>
+    <description>Recent content in VPC on 艾倫的開發心路歷程</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
+    <lastBuildDate>Fri, 03 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/vpc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VPC Associate Certification Note</title>
+      <link>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</guid>
+      <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
+    </item>
+    
+  </channel>
+</rss>
