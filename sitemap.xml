@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://allen-hsieh1992.github.io/tags/aws/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allen-hsieh1992.github.io/categories/aws/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/tags/vpc/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/categories/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/posts/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/tags/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allen-hsieh1992.github.io/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allen-hsieh1992.github.io/tags/route53/</loc>
     <lastmod>2021-09-05T00:00:00+00:00</lastmod>
@@ -14,28 +32,10 @@
     <loc>https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/</loc>
     <lastmod>2021-09-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/categories/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allen-hsieh1992.github.io/</loc>
-    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://allen-hsieh1992.github.io/tags/ec2/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/</loc>
-    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/vpc/</loc>
-    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allen-hsieh1992.github.io/tags/cognito/</loc>

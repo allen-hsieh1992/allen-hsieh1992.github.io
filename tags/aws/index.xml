@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 05 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VPC Associate Certification Note</title>
+      <link>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</link>
+      <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</guid>
+      <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
+    </item>
+    
     <item>
       <title>Route53 Associate Certification Note</title>
       <link>https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/</link>
@@ -24,15 +33,6 @@
       
       <guid>https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/</guid>
       <description>EC2 Purchase Option On-Demand Instances 用多少付多少，不需要提前預付也也不需要合約，根據秒來計費 不同 Region 有不同的 Instance &amp;amp; CPU 限制數量，可以透過 AWS Support Center 提高上限 Reserved Instances 需要一年或三年的合</description>
-    </item>
-    
-    <item>
-      <title>VPC Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</link>
-      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</guid>
-      <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
     </item>
     
     <item>
