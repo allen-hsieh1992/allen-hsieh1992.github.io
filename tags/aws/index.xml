@@ -9,65 +9,65 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Beanstalk Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/</link>
+      <title>Beanstalk Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/</guid>
       <description>Beanstalk 是 PAAS 服務，可以透過 Config (.ebextensions) 設定去建立環境，例如基本的 Three Tire Architecture : Client -&amp;gt; Server -&amp;gt; DB，而我們只需要專注在 Application 上的開發 Beanstalk 本身是免費的，只需要付原本底下的資源費</description>
     </item>
     
     <item>
-      <title>CloudFormation Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/</link>
+      <title>CloudFormation Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/</guid>
       <description>實踐 Infrastructure as Code，不需要手動建立資源，而且可以對 Source Code 做 Version Control。 CloudFormation 本身是免費的，只需要付建立的資源費用即可。 可以透過 CloudFormation Designer 產生基本的架</description>
     </item>
     
     <item>
-      <title>S3 Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/</link>
+      <title>S3 Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/s3-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/s3-certification-note/</guid>
       <description>Basic of S3 已 Object 為單位的儲存空間 ，而每個 Object 儲存在 Bucket 每 Object 的大小可以從 0 byptes to 5 TB，但 Bucket 沒有儲存中間上限 每個 S3 都會有獨立的 URL，這個是全球唯一的，所</description>
     </item>
     
     <item>
-      <title>Systems Manager (SSM) Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/</link>
+      <title>Systems Manager (SSM) Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/ssm-certification-note/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/ssm-certification-note/</guid>
       <description>可以用來管理 EC2 或是 On-Prime 的機器 需要安裝 SSM Agent 在機器上 AWS Linux AMI 和部分 Ubuntu AMI 預設已經裝好 Agent 了。 EC2 需要有 IAM Rule 的權限根 SSM 溝通 Patch 自動化 支援 Windows or Linux 可以整合 CloudWatch 和 AWS Config</description>
     </item>
     
     <item>
-      <title>VPC Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</link>
+      <title>VPC Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/vpc-certification-note/</link>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/vpc-certification-note/</guid>
       <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
     </item>
     
     <item>
-      <title>Route53 Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</link>
+      <title>Route53 Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/route53-certification-note/</link>
       <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/route53-certification-note/</guid>
       <description>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。 Route53 也是一個 DNS Register ，可以在上面購買 Domain Name TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間</description>
     </item>
     
     <item>
-      <title>EC2 Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/</link>
+      <title>EC2 Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/ec2-certification-note/</link>
       <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/ec2-certification-note/</guid>
       <description>EC2 Purchase Option On-Demand Instances 用多少付多少，不需要提前預付也也不需要合約，根據秒來計費 不同 Region 有不同的 Instance &amp;amp; CPU 限制數量，可以透過 AWS Support Center 提高上限 Reserved Instances 需要一年或三年的合</description>
     </item>
     

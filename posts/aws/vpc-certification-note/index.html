@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Beanstalk Associate Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+    <title>VPC Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
-<meta name="description" content="準備 AWS Associate Certificate 時 Beanstalk 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="Beanstalk Associate Certification Note">
-<meta itemprop="description" content="準備 AWS Associate Certificate 時 Beanstalk 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-09-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="577"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="AWS,BEANSTALK," /><meta property="og:title" content="Beanstalk Associate Certification Note" />
-<meta property="og:description" content="準備 AWS Associate Certificate 時 Beanstalk 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
+<meta name="description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="VPC Certification Note">
+<meta itemprop="description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-09-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1178"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="keywords" content="AWS,VPC," /><meta property="og:title" content="VPC Certification Note" />
+<meta property="og:description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-09-12T00:00:00+00:00" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/vpc-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-09-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-07T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://allenhsieh1992.com/images/aws.jpeg"/>
 
-<meta name="twitter:title" content="Beanstalk Associate Certification Note"/>
-<meta name="twitter:description" content="準備 AWS Associate Certificate 時 Beanstalk 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
+<meta name="twitter:title" content="VPC Certification Note"/>
+<meta name="twitter:description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
 <meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.5710a4c6e02f45d3c646606e34fa9c8bd1013fbbe58c7c1c77a8f7a5f96f7dbc.js" integrity="sha256-VxCkxuAvRdPGRmBuNPqci9EBP7vljHwcd6j3pflvfbw=" crossorigin="anonymous"></script>
 <script type="application/javascript">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Beanstalk Associate Certification Note</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">VPC Certification Note</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -158,10 +158,10 @@ if (!doNotTrack) {
 </a>
   </div>
 </div>
-<h1 class="post-title my-3">Beanstalk Associate Certification Note
+<h1 class="post-title my-3">VPC Certification Note
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
-    <i class="fas fa-fw fa-calendar-alt"></i>Sep 12, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy">BEANSTALK</a></span>
+    <i class="fas fa-fw fa-calendar-alt"></i>Sep 7, 2021
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/vpc/" class="post-taxonomy">VPC</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -173,136 +173,265 @@ if (!doNotTrack) {
   <div class="offcanvas-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#可控制">可控制</a></li>
-    <li><a href="#basic-of-components">Basic Of Components</a></li>
-    <li><a href="#deployment-policy">Deployment Policy</a></li>
+    <li><a href="#basic-of-vpc">Basic of VPC</a></li>
+    <li><a href="#default-vpc">Default VPC</a></li>
+    <li><a href="#internet-gateway">Internet Gateway</a></li>
+    <li><a href="#nat-gateway-vs-instance">Nat Gateway v.s Instance</a></li>
+    <li><a href="#egree-only-internet-gateway">Egree Only Internet Gateway</a></li>
+    <li><a href="#ncal-vs-security-group">NCAL v.s Security Group</a></li>
+    <li><a href="#vpc-peering">VPC Peering</a></li>
+    <li><a href="#vpc-endpoint">VPC Endpoint</a></li>
+    <li><a href="#flow-log">Flow Log</a></li>
+    <li><a href="#dns-support-in-vpc">DNS support in VPC</a></li>
+    <li><a href="#vpn">VPN</a></li>
+    <li><a href="#direct-connect">Direct Connect</a></li>
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><ul>
-<li>Beanstalk 是 PAAS 服務，可以透過 Config (.ebextensions) 設定去建立環境，例如基本的 Three Tire Architecture : Client -&gt; Server -&gt; DB，而我們只需要專注在 Application 上的開發</li>
-<li>Beanstalk 本身是免費的，只需要付原本底下的資源費用 例如 EC2, ELB 等等</li>
-<li>支援多個 Programming Language ，也支援 Docker</li>
-<li>有 Deployment 策略 和 Rollback 策略</li>
-</ul>
-<h2 id="可控制">可控制</h2>
+</div><div class="post-content mb-3"><h2 id="basic-of-vpc">Basic of VPC</h2>
 <hr>
 <ul>
-<li>instance type</li>
-<li>databases</li>
-<li>Auto Scaling Group</li>
-<li>Elastic Load Balancer (Https)</li>
-</ul>
-<h2 id="basic-of-components">Basic Of Components</h2>
+<li>每個 Region 預設上限五個 VPC</li>
+<li>支援 IPv4 or IPv6</li>
+<li>每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP)</li>
+<li>VPC 是 私有網路，所以只有以下 Range 是允許的
 <ul>
-<li>Application</li>
-<li>Application Version
-<ul>
-<li>Deploy Code 放在 S3，指向特定 S3 Object Version</li>
-<li>Version 有上限，可以透過 Application Life Cycle Policy 去刪除舊的 Version</li>
-</ul>
-</li>
-<li>Environment Tire
-<ul>
-<li>Web Server:</li>
-<li>Worker: 在上面執行一些程式，例如可以是SQS 的 Puller ，將 Queue 裡面資料拉下來處理。有 Auto Scaling Group 可以根據 SQS Queen Number 去做 Auto Scaling</li>
-</ul>
-</li>
-<li>Environment Types
-<ul>
-<li>單一 Instance Environment</li>
-<li>Load-balancing, Autoscaling Environment: for web server
-<ul>
-<li>Autoscaling Only : for worker Tire</li>
-</ul>
+<li>10.0.0.0/8</li>
+<li>172.16.0.0/12</li>
+<li>192.168.0.0/16
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>要注意，VPC CIDR 不能跟其他已存在網住重疊
+</div>
 </li>
 </ul>
 </li>
+<li>AWS 有預留五個 IP
+<ul>
+<li>ex: 10.0.0.0/24 =&gt; 256 個 IP 減去預設五個，實際只有251 個 IP 可使用
+<ul>
+<li>10.0.0.0 : Network Address</li>
+<li>10.0.0.1 : 預設給 VPC Router</li>
+<li>10.0.0.2 : 預設給 DNS</li>
+<li>10.0.0.3 : 先預留，暫時無使用</li>
+<li>10.0.0.255 : Network broadcast address，但 AWS 不支援
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>如果你需要 29 IP， Submask不可以選 /27 ， /27 雖然有 32 個 IP ，但扣除五個預留的以後，只剩下 27 個 IP
+</div>
+</li>
 </ul>
-<h2 id="deployment-policy">Deployment Policy</h2>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="default-vpc">Default VPC</h2>
 <hr>
+<ul>
+<li>新帳號每個 Region 都會有 Default VPC，IP Range 172.31.0.0/16</li>
+<li>Default Subnet 的 Subnet Mask 是 /20</li>
+<li>Default VPC 已經有 Main Route Table 而且設定好 Internet Gateway</li>
+<li>在 Default VPC 啟用的 EC2 會自動 assign Public IPv4 IP</li>
+<li>Default Network Access List =&gt; Allow all inbound/outbound Traffic</li>
+<li>有預設 DHCP</li>
+</ul>
+<h2 id="internet-gateway">Internet Gateway</h2>
+<hr>
+<ul>
+<li>一個 VPC 只能連結一個 Internet Gateway</li>
+<li>Internet Gateway 同時也是 Network Address Translation (NAT)，有 IPv4 地址</li>
+<li>支援 IPv4 &amp; IPv6</li>
+</ul>
+<h2 id="nat-gateway-vs-instance">Nat Gateway v.s Instance</h2>
+<hr>
+<ul>
+<li>NAT 主要轉換 Private IP to Public IP，讓 Private Subnet EC2 可以單向連上網路
+<ul>
+<li>Private Subnet EC2 &ndash;&gt; NAT &ndash;&gt; IGW &ndash;&gt; Internet</li>
+</ul>
+</li>
+<li>都必須在 Public Subset</li>
+<li>只支援 IPv4</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>Policy</th>
-<th>描述</th>
-<th>推失敗影響</th>
-<th>推機速度</th>
-<th>推幾時是否有 Downtime</th>
-<th>是否需要修改 DNS Record</th>
-<th>Rollback 方式</th>
+<th>功能</th>
+<th>NAT  Gateway</th>
+<th>NAT Instance</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>All at once</td>
-<td>一次全部機器直接推機</td>
-<td>Downtime</td>
-<td>最快</td>
-<td>有</td>
-<td>否</td>
-<td>需重新推舊的Version</td>
+<td>Available</td>
+<td>AWS 託管服務，建立在一個 AZ，有 HA，但如果只有一個NAT gateway ，有可能因為一整個 AZ 掛掉而沒有網路</td>
+<td>自己需要管控 Failover，如果只有一台壞掉就沒有網路</td>
 </tr>
 <tr>
-<td>Rolling</td>
-<td>一次下掉幾台線上機器，裝好新的code 在重新上線。</td>
-<td>只有正在推的那幾台會壞掉，線上有可能會部分機器是新的 Code ，部分機器是舊的 Code</td>
-<td>比 All at once 慢</td>
-<td>無</td>
-<td>否</td>
-<td>需重新推舊的Version</td>
+<td>頻寬</td>
+<td>從 5Gbps 到最高 45 Gbps.</td>
+<td>取決於 Instance Type</td>
 </tr>
 <tr>
-<td>Rolling with an additional batch</td>
-<td>跟 Rolling 差不多，差別在於是先建立全新的機器推完機以後，在取代線上的</td>
-<td>除了一開始推壞沒上線已外，其他跟 Rolling Policy 一樣</td>
-<td>比 Rolling 慢</td>
-<td>無</td>
-<td>否</td>
-<td>需重新推舊的Version</td>
+<td>Maintains</td>
+<td>AWS 管理</td>
+<td>需要自己升級內部軟體和操作系統等等</td>
 </tr>
 <tr>
-<td>Immutable</td>
-<td>建立全新的 Auto Scaling Group，然後將流量轉到新的 Auto Scaling Group</td>
-<td>比較沒有，因為可以先測試全新的 Auto Scaling Group 才切換</td>
-<td>慢</td>
-<td>無</td>
-<td>無</td>
-<td>切回流量到舊的 Auto Scaling Group</td>
+<td>Cost.</td>
+<td>取決於用量和頻寬</td>
+<td>取決於 Instance Type</td>
 </tr>
 <tr>
-<td>Traffic Splitting</td>
-<td>根據權重慢慢的將流量切到新的機器上</td>
-<td>取決於流量的權重</td>
-<td>慢</td>
-<td>無</td>
-<td>無</td>
-<td>將權重切回到舊的</td>
+<td>Public IP</td>
+<td>Elastic IP.</td>
+<td>Elastic IP or Public IP</td>
 </tr>
 <tr>
-<td>Blue/Green</td>
-<td>透過 DNS Record 切換流量</td>
-<td>比較小，因為是全新的一組機器 Ready 才切</td>
-<td>慢</td>
-<td>無</td>
-<td>是</td>
-<td>重新設定 DNS Record 指向舊的機器</td>
+<td>Security Group</td>
+<td>X</td>
+<td>V</td>
+</tr>
+<tr>
+<td>EC2 設定</td>
+<td>X</td>
+<td>需要關閉 EC2 的 Source/ Destination Check</td>
 </tr>
 </tbody>
 </table>
+<h2 id="egree-only-internet-gateway">Egree Only Internet Gateway</h2>
+<ul>
+<li>只支援 IPv6</li>
+<li>跟 NAT Gateway 相似，但 NAT Gateway 只支援 IPv4</li>
+</ul>
+<h2 id="ncal-vs-security-group">NCAL v.s Security Group</h2>
+<hr>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th>NCAL</th>
+<th>Security Group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope</td>
+<td>一個 Subnet 一個 NCAL</td>
+<td>一個 Instance 最多五個 Security Group</td>
+</tr>
+<tr>
+<td>特性</td>
+<td>Stateless: inbound &amp; outbound 都需要特別設定</td>
+<td>Stateful: 只驗進出並記錄 request ，讓 response 可以返回</td>
+</tr>
+<tr>
+<td>Default VPC 建立的</td>
+<td>預設允許所有的 inbound &amp; outbound</td>
+<td>X</td>
+</tr>
+<tr>
+<td>手動建立的</td>
+<td>預設不允許任何   inbound &amp; outbound</td>
+<td>預設沒有任何 Allow</td>
+</tr>
+<tr>
+<td>設定</td>
+<td>可以設定 Allow 或 DENY ，另外有 rule 的概念 ，rule range (1-32766) 數字越低越優先，Ex: #100 Allow x, #200 DENY x 最後是 ALLOW</td>
+<td>只能設定 Allow 不能 DENY</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vpc-peering">VPC Peering</h2>
+<hr>
+<ul>
+<li>透過 AWS 私有網路連結兩個 VPC
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>兩個VPC CIDR 不能重疊
+</div>
+</li>
+<li>VPC Peering 不是 transitive
+<ul>
+<li>EX : VPC_A  &lt;&mdash;VPC Peering&mdash;&gt; VPC_B &lt;&mdash;VPC Peering&mdash;&gt; VPC_C</li>
+<li>VPC_A 不能透過 VPC_B 連到 VPC_C ，如果需要連線，就要在 VPC_A &amp; VPC_C 中間再建立一個 VPC Peering 才可以互相連到</li>
+</ul>
+</li>
+<li>VPC Peering 不限制在同一個 Region 也不限制在同一個 AWS 帳號下的 VPC</li>
+<li>VPC Peering 設定完，還需要設定 Route Table 才可以連線</li>
+</ul>
+<h2 id="vpc-endpoint">VPC Endpoint</h2>
+<hr>
+<ul>
+<li>主要解決 VPC 內部的 Instance 可以透過 AWS 私有網路不必透過公有網路連到其他AWS 託管服務 如 S3, DynamoDB 等等</li>
+<li>兩種 Type
+<ul>
+<li>Interface : 透過 AWS PrivateLink 去連到 其他 AWS 服務。
+<ul>
+<li>Endpoint : Server Side 需要使用 Load Balancer</li>
+<li>而 Client Side 需要使用 Elastic Network Ineterface</li>
+<li>中間透過 PrivateLink 去連起來</li>
+</ul>
+</li>
+<li>gateway : 提供特定目標，目前只有 S3, DynamoDB ，自動設定 Route Table 設定</li>
+</ul>
+</li>
+</ul>
+<h2 id="flow-log">Flow Log</h2>
+<hr>
+<ul>
+<li>擷取傳入及傳出 VPC 中網路界面之 IP 流量相關資訊的功能
+<ul>
+<li>VPC Flow log</li>
+<li>Subnet Flow Log</li>
+<li>Elastic Network Interface Flow log</li>
+</ul>
+</li>
+<li>日誌可以存在 S3 (可以整合 Athena 去 Query) / CloudWatch Log</li>
+</ul>
+<h2 id="dns-support-in-vpc">DNS support in VPC</h2>
+<hr>
+<ul>
+<li>enableDnsSupport
+<ul>
+<li>設定預設是 True</li>
+<li>AWS DNS Server (169.254.169.253</li>
+</ul>
+</li>
+<li>enableDnsHostname
+<ul>
+<li>手動建立的預設是 False, Default VPC 預設是 True</li>
+<li>如果 ture 會自動給 EC2 Instance 分派 Hostname 如果有 public ip</li>
+</ul>
+</li>
+<li>如果想使用客製化 Private Route53 DNS Domain ，這兩個設定都必須打開</li>
+</ul>
+<h2 id="vpn">VPN</h2>
+<hr>
+<ul>
+<li>在公司那邊建立  Customer Gateway （可以是軟體，或一個實體裝置）</li>
+<li>在AWS這邊建立 Virtual Private Gateway ，並連結在VPC上</li>
+<li>透過 site to site VPN Connection 將 VPN Gateway &amp; customer gateway 建起連線</li>
+</ul>
+<h2 id="direct-connect">Direct Connect</h2>
+<hr>
+<ul>
+<li>建立專用網路連線到AWS，AWS 在不同地區都有不同的合作夥伴，所以連線方式像是 公司 &ndash;&gt; 合作夥伴 &ndash;&gt; AWS</li>
+<li>專線好處是 : 頻寬高，網路費用比較便宜，並且比較安全</li>
+</ul>
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
-      <a href="https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/">CloudFormation Associate Certification Note
+      <a href="https://allenhsieh1992.com/posts/aws/route53-certification-note/">Route53 Certification Note
 </a>
     </div></div>
-  <div class="post-nav flex-row-reverse"></div>
+  <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
+      <a href="https://allenhsieh1992.com/posts/aws/ssm-certification-note/">Systems Manager (SSM) Certification Note
+</a>
+    </div></div>
 </div><section class="related-posts">
     <h3>相關文章</h3>
-    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/">CloudFormation Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
+    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/route53-certification-note/">Route53 Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li></ul>
   </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
   repo="allen-hsieh1992/allen-hsieh1992.github.io"
@@ -321,11 +450,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/">Beanstalk Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/">CloudFormation Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/">CloudFormation Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-certification-note/">S3 Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-certification-note/">Systems Manager (SSM) Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-certification-note/">VPC Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>

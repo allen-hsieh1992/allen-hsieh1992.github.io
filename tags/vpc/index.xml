@@ -9,11 +9,11 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Tue, 07 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/vpc/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>VPC Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</link>
+      <title>VPC Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/vpc-certification-note/</link>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/vpc-certification-note/</guid>
       <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
     </item>
     

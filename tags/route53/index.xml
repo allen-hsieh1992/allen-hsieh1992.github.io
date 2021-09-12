@@ -9,11 +9,11 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 05 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/route53/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Route53 Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</link>
+      <title>Route53 Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/route53-certification-note/</link>
       <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/route53-certification-note/</guid>
       <description>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。 Route53 也是一個 DNS Register ，可以在上面購買 Domain Name TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間</description>
     </item>
     

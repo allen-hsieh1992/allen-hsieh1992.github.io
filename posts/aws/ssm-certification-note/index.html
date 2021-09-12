@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VPC Associate Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+    <title>Systems Manager (SSM) Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
-<meta name="description" content="準備 AWS Associate Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="VPC Associate Certification Note">
-<meta itemprop="description" content="準備 AWS Associate Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-07T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-09-07T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1178"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="AWS,VPC," /><meta property="og:title" content="VPC Associate Certification Note" />
-<meta property="og:description" content="準備 AWS Associate Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
+<meta name="description" content="準備 AWS Certificate 時 SSM 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="Systems Manager (SSM) Certification Note">
+<meta itemprop="description" content="準備 AWS Certificate 時 SSM 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-09-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1107"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="keywords" content="AWS,SSM," /><meta property="og:title" content="Systems Manager (SSM) Certification Note" />
+<meta property="og:description" content="準備 AWS Certificate 時 SSM 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-09-07T00:00:00+00:00" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/ssm-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-09-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-09T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://allenhsieh1992.com/images/aws.jpeg"/>
 
-<meta name="twitter:title" content="VPC Associate Certification Note"/>
-<meta name="twitter:description" content="準備 AWS Associate Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
+<meta name="twitter:title" content="Systems Manager (SSM) Certification Note"/>
+<meta name="twitter:description" content="準備 AWS Certificate 時 SSM 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
 <meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.5710a4c6e02f45d3c646606e34fa9c8bd1013fbbe58c7c1c77a8f7a5f96f7dbc.js" integrity="sha256-VxCkxuAvRdPGRmBuNPqci9EBP7vljHwcd6j3pflvfbw=" crossorigin="anonymous"></script>
 <script type="application/javascript">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">VPC Associate Certification Note</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Systems Manager (SSM) Certification Note</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -158,10 +158,10 @@ if (!doNotTrack) {
 </a>
   </div>
 </div>
-<h1 class="post-title my-3">VPC Associate Certification Note
+<h1 class="post-title my-3">Systems Manager (SSM) Certification Note
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
-    <i class="fas fa-fw fa-calendar-alt"></i>Sep 7, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/vpc/" class="post-taxonomy">VPC</a></span>
+    <i class="fas fa-fw fa-calendar-alt"></i>Sep 9, 2021
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/ssm/" class="post-taxonomy">SSM</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -173,265 +173,243 @@ if (!doNotTrack) {
   <div class="offcanvas-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#basic-of-vpc">Basic of VPC</a></li>
-    <li><a href="#default-vpc">Default VPC</a></li>
-    <li><a href="#internet-gateway">Internet Gateway</a></li>
-    <li><a href="#nat-gateway-vs-instance">Nat Gateway v.s Instance</a></li>
-    <li><a href="#egree-only-internet-gateway">Egree Only Internet Gateway</a></li>
-    <li><a href="#ncal-vs-security-group">NCAL v.s Security Group</a></li>
-    <li><a href="#vpc-peering">VPC Peering</a></li>
-    <li><a href="#vpc-endpoint">VPC Endpoint</a></li>
-    <li><a href="#flow-log">Flow Log</a></li>
-    <li><a href="#dns-support-in-vpc">DNS support in VPC</a></li>
-    <li><a href="#vpn">VPN</a></li>
-    <li><a href="#direct-connect">Direct Connect</a></li>
+    <li><a href="#resource-group">Resource Group</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="#run-command">Run Command</a></li>
+    <li><a href="#automation">Automation</a></li>
+    <li><a href="#parameter-store">Parameter Store</a></li>
+    <li><a href="#inventory">Inventory</a></li>
+    <li><a href="#state-manager">State Manager</a></li>
+    <li><a href="#patch-manager">Patch Manager</a></li>
+    <li><a href="#maintenance-window">Maintenance Window</a></li>
+    <li><a href="#session-manager">Session Manager</a></li>
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><h2 id="basic-of-vpc">Basic of VPC</h2>
+</div><div class="post-content mb-3"><ul>
+<li>可以用來管理 EC2 或是 On-Prime 的機器
+<ul>
+<li>需要安裝 SSM Agent 在機器上</li>
+<li>AWS Linux AMI 和部分 Ubuntu AMI 預設已經裝好 Agent 了。</li>
+<li>EC2 需要有 IAM Rule 的權限根 SSM 溝通</li>
+</ul>
+</li>
+<li>Patch 自動化</li>
+<li>支援 Windows or Linux</li>
+<li>可以整合 CloudWatch 和 AWS Config</li>
+</ul>
+<h2 id="resource-group">Resource Group</h2>
 <hr>
 <ul>
-<li>每個 Region 預設上限五個 VPC</li>
-<li>支援 IPv4 or IPv6</li>
-<li>每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP)</li>
-<li>VPC 是 私有網路，所以只有以下 Range 是允許的
+<li>不只是適用於 EC2，也可以適用於其他 AWS 服務如 S3, Lambda 等等</li>
+<li>使用 AWS Tag 的功能，根據 Key Value 將 Resource grouping 起來。
 <ul>
-<li>10.0.0.0/8</li>
-<li>172.16.0.0/12</li>
-<li>192.168.0.0/16
-<div class="alert alert-warning" role="alert">
-  <i class="fas fa-fw fa-exclamation-triangle"></i>要注意，VPC CIDR 不能跟其他已存在網住重疊
-</div>
-</li>
+<li>Ex: Environment 的 value 等於 Production 時候</li>
 </ul>
 </li>
-<li>AWS 有預留五個 IP
-<ul>
-<li>ex: 10.0.0.0/24 =&gt; 256 個 IP 減去預設五個，實際只有251 個 IP 可使用
-<ul>
-<li>10.0.0.0 : Network Address</li>
-<li>10.0.0.1 : 預設給 VPC Router</li>
-<li>10.0.0.2 : 預設給 DNS</li>
-<li>10.0.0.3 : 先預留，暫時無使用</li>
-<li>10.0.0.255 : Network broadcast address，但 AWS 不支援
-<div class="alert alert-warning" role="alert">
-  <i class="fas fa-fw fa-exclamation-triangle"></i>如果你需要 29 IP， Submask不可以選 /27 ， /27 雖然有 32 個 IP ，但扣除五個預留的以後，只剩下 27 個 IP
-</div>
-</li>
+<li>也可以根據 CloudFormation Stack 來 Grouping</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="default-vpc">Default VPC</h2>
+<h2 id="documents">Documents</h2>
 <hr>
 <ul>
-<li>新帳號每個 Region 都會有 Default VPC，IP Range 172.31.0.0/16</li>
-<li>Default Subnet 的 Subnet Mask 是 /20</li>
-<li>Default VPC 已經有 Main Route Table 而且設定好 Internet Gateway</li>
-<li>在 Default VPC 啟用的 EC2 會自動 assign Public IPv4 IP</li>
-<li>Default Network Access List =&gt; Allow all inbound/outbound Traffic</li>
-<li>有預設 DHCP</li>
+<li>一個 Documents 定義一些 Parameters &amp; Actions (執行一些 commands)</li>
+<li>Documents 可以是 Json 或 Yaml 格式</li>
+<li>兩種Type Run Command (Script) &amp; Automation (AWS API)</li>
 </ul>
-<h2 id="internet-gateway">Internet Gateway</h2>
+<h2 id="run-command">Run Command</h2>
 <hr>
 <ul>
-<li>一個 VPC 只能連結一個 Internet Gateway</li>
-<li>Internet Gateway 同時也是 Network Address Translation (NAT)，有 IPv4 地址</li>
-<li>支援 IPv4 &amp; IPv6</li>
+<li>Run command 可以配合 Resource Group 一次對多台機器執行 Documents (Script) ，也可以手動指定特定機器執行</li>
+<li>有 Rate 控管可以控管一次同時更新幾台 resource 。也有 Error 控管， 更新過程中失敗多少 resource 就中止。 Resource 可以使用百分比或指定固定數量來定義。</li>
+<li>可以透過 IAM &amp; CloudTail 知道誰執行的</li>
+<li>EC2 是透過 SSM Agent 執行的，EC2 可以不需要 Allow SSH</li>
+<li>執行結果可以在 Console 上看到，或存到 S3 或 CloudWatch Logs</li>
+<li>可以透過 SNS 發送 Status</li>
+<li>可以整合倍 EventBridge Trigger</li>
 </ul>
-<h2 id="nat-gateway-vs-instance">Nat Gateway v.s Instance</h2>
+<h2 id="automation">Automation</h2>
 <hr>
 <ul>
-<li>NAT 主要轉換 Private IP to Public IP，讓 Private Subnet EC2 可以單向連上網路
+<li>主要用於簡化維護和部署 EC2 或 AWS 其他服務</li>
+<li>Automation runbook 就是 Documents 主要執行一些 AWS Resource 的 API ，例如 EC2 的 stop。</li>
+<li>可以被 Trigger 的方式
 <ul>
-<li>Private Subnet EC2 &ndash;&gt; NAT &ndash;&gt; IGW &ndash;&gt; Internet</li>
+<li>AWS Console, Cli or SDK</li>
+<li>EventBridge</li>
+<li>透過 Maintain Windows 排成</li>
+<li>AWS Config Remediation</li>
 </ul>
 </li>
-<li>都必須在 Public Subset</li>
-<li>只支援 IPv4</li>
+</ul>
+<h2 id="parameter-store">Parameter Store</h2>
+<hr>
+<ul>
+<li>可以安全地存取 Configuration &amp; Secrets  ，並且有版本控制</li>
+<li>可以透過 KMS 加密</li>
+<li>透過 IAM 和 Path 控管</li>
+<li>可以整合 CloudFormation</li>
+<li>有 CloudWatch Event</li>
+<li>get-parameters cli 如果有加密資料預設返回的是密文，需另透過 KMS 解密。但也可以透過  &ndash;with-decryption 這個參數直接返回明文，需要有 KMS 權限</li>
+<li>Parameter policy 可以設定 TTL 去 通知 或 delete parameters
+<ul>
+<li>三種 Policy
+<ul>
+<li>Expiration : 指定時間刪除 Parameter</li>
+<li>ExpirationNotification : 可以設定快過期通知</li>
+<li>NoChangeNotification  : 可以設定通知，如果 Parameters 在指定時間內都未更新</li>
+</ul>
+</li>
+<li>Example</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="p">{</span>
+<span class="ln"> 2</span>   <span class="nt">&#34;Type&#34;</span><span class="p">:</span><span class="s2">&#34;Expiration&#34;</span><span class="p">,</span>
+<span class="ln"> 3</span>   <span class="nt">&#34;Version&#34;</span><span class="p">:</span><span class="s2">&#34;1.0&#34;</span><span class="p">,</span>
+<span class="ln"> 4</span>   <span class="nt">&#34;Attributes&#34;</span><span class="p">:{</span>
+<span class="ln"> 5</span>      <span class="nt">&#34;Timestamp&#34;</span><span class="p">:</span><span class="s2">&#34;2018-12-02T21:34:33.000Z&#34;</span>
+<span class="ln"> 6</span>   <span class="p">}</span>
+<span class="ln"> 7</span><span class="p">}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="p">{</span>
+<span class="ln">10</span>   <span class="nt">&#34;Type&#34;</span><span class="p">:</span><span class="s2">&#34;ExpirationNotification&#34;</span><span class="p">,</span>
+<span class="ln">11</span>   <span class="nt">&#34;Version&#34;</span><span class="p">:</span><span class="s2">&#34;1.0&#34;</span><span class="p">,</span>
+<span class="ln">12</span>   <span class="nt">&#34;Attributes&#34;</span><span class="p">:{</span>
+<span class="ln">13</span>      <span class="nt">&#34;Before&#34;</span><span class="p">:</span><span class="s2">&#34;15&#34;</span><span class="p">,</span>
+<span class="ln">14</span>      <span class="nt">&#34;Unit&#34;</span><span class="p">:</span><span class="s2">&#34;Days&#34;</span>
+<span class="ln">15</span>   <span class="p">}</span>
+<span class="ln">16</span><span class="p">}</span>
+<span class="ln">17</span>
+<span class="ln">18</span><span class="p">{</span>
+<span class="ln">19</span>   <span class="nt">&#34;Type&#34;</span><span class="p">:</span><span class="s2">&#34;NoChangeNotification&#34;</span><span class="p">,</span>
+<span class="ln">20</span>   <span class="nt">&#34;Version&#34;</span><span class="p">:</span><span class="s2">&#34;1.0&#34;</span><span class="p">,</span>
+<span class="ln">21</span>   <span class="nt">&#34;Attributes&#34;</span><span class="p">:{</span>
+<span class="ln">22</span>      <span class="nt">&#34;After&#34;</span><span class="p">:</span><span class="s2">&#34;20&#34;</span><span class="p">,</span>
+<span class="ln">23</span>      <span class="nt">&#34;Unit&#34;</span><span class="p">:</span><span class="s2">&#34;Days&#34;</span>
+<span class="ln">24</span>   <span class="p">}</span>
+<span class="ln">25</span><span class="p">}</span>
+</code></pre></div><ul>
+<li>兩種付費模式</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>功能</th>
-<th>NAT  Gateway</th>
-<th>NAT Instance</th>
+<th>功能\模式</th>
+<th>Standard</th>
+<th>Advanced</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Available</td>
-<td>AWS 託管服務，建立在一個 AZ，有 HA，但如果只有一個NAT gateway ，有可能因為一整個 AZ 掛掉而沒有網路</td>
-<td>自己需要管控 Failover，如果只有一台壞掉就沒有網路</td>
+<td>每個 Region parameter 上限</td>
+<td>10,000</td>
+<td>100,000</td>
 </tr>
 <tr>
-<td>頻寬</td>
-<td>從 5Gbps 到最高 45 Gbps.</td>
-<td>取決於 Instance Type</td>
+<td>parameters size 上限</td>
+<td>4k</td>
+<td>8k</td>
 </tr>
 <tr>
-<td>Maintains</td>
-<td>AWS 管理</td>
-<td>需要自己升級內部軟體和操作系統等等</td>
+<td>parameters policy</td>
+<td>x</td>
+<td>v</td>
 </tr>
 <tr>
-<td>Cost.</td>
-<td>取決於用量和頻寬</td>
-<td>取決於 Instance Type</td>
+<td>storage cost</td>
+<td>free</td>
+<td>$0.05 per parameter / mother</td>
 </tr>
 <tr>
-<td>Public IP</td>
-<td>Elastic IP.</td>
-<td>Elastic IP or Public IP</td>
+<td>standard throughput</td>
+<td>free</td>
+<td>$0.05/ 10,000 API</td>
 </tr>
 <tr>
-<td>Security Group</td>
-<td>X</td>
-<td>V</td>
-</tr>
-<tr>
-<td>EC2 設定</td>
-<td>X</td>
-<td>需要關閉 EC2 的 Source/ Destination Check</td>
+<td>high  throughput (1000 api / second)</td>
+<td>$0.05/10,000 API</td>
+<td>$0.05/10,000 API</td>
 </tr>
 </tbody>
 </table>
-<h2 id="egree-only-internet-gateway">Egree Only Internet Gateway</h2>
-<ul>
-<li>只支援 IPv6</li>
-<li>跟 NAT Gateway 相似，但 NAT Gateway 只支援 IPv4</li>
-</ul>
-<h2 id="ncal-vs-security-group">NCAL v.s Security Group</h2>
-<hr>
-<table>
-<thead>
-<tr>
-<th>.</th>
-<th>NCAL</th>
-<th>Security Group</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Scope</td>
-<td>一個 Subnet 一個 NCAL</td>
-<td>一個 Instance 最多五個 Security Group</td>
-</tr>
-<tr>
-<td>特性</td>
-<td>Stateless: inbound &amp; outbound 都需要特別設定</td>
-<td>Stateful: 只驗進出並記錄 request ，讓 response 可以返回</td>
-</tr>
-<tr>
-<td>Default VPC 建立的</td>
-<td>預設允許所有的 inbound &amp; outbound</td>
-<td>X</td>
-</tr>
-<tr>
-<td>手動建立的</td>
-<td>預設不允許任何   inbound &amp; outbound</td>
-<td>預設沒有任何 Allow</td>
-</tr>
-<tr>
-<td>設定</td>
-<td>可以設定 Allow 或 DENY ，另外有 rule 的概念 ，rule range (1-32766) 數字越低越優先，Ex: #100 Allow x, #200 DENY x 最後是 ALLOW</td>
-<td>只能設定 Allow 不能 DENY</td>
-</tr>
-</tbody>
-</table>
-<h2 id="vpc-peering">VPC Peering</h2>
+<h2 id="inventory">Inventory</h2>
 <hr>
 <ul>
-<li>透過 AWS 私有網路連結兩個 VPC
-<div class="alert alert-warning" role="alert">
-  <i class="fas fa-fw fa-exclamation-triangle"></i>兩個VPC CIDR 不能重疊
-</div>
-</li>
-<li>VPC Peering 不是 transitive
-<ul>
-<li>EX : VPC_A  &lt;&mdash;VPC Peering&mdash;&gt; VPC_B &lt;&mdash;VPC Peering&mdash;&gt; VPC_C</li>
-<li>VPC_A 不能透過 VPC_B 連到 VPC_C ，如果需要連線，就要在 VPC_A &amp; VPC_C 中間再建立一個 VPC Peering 才可以互相連到</li>
+<li>收集 EC2 or On-premises 機器上的資訊包含 :已安裝的軟體, OS drivers 和 設定 或 正在執行的 services。並可以透過這些資料做稽核</li>
+<li>可以設定資料更新的時間區間為 分、秒或小時</li>
+<li>可以將資料存在 S3 透過 Athena 來分析</li>
+<li>可以建立客製化 Inventory ，拉特定資訊</li>
 </ul>
-</li>
-<li>VPC Peering 不限制在同一個 Region 也不限制在同一個 AWS 帳號下的 VPC</li>
-<li>VPC Peering 設定完，還需要設定 Route Table 才可以連線</li>
-</ul>
-<h2 id="vpc-endpoint">VPC Endpoint</h2>
+<h2 id="state-manager">State Manager</h2>
 <hr>
 <ul>
-<li>主要解決 VPC 內部的 Instance 可以透過 AWS 私有網路不必透過公有網路連到其他AWS 託管服務 如 S3, DynamoDB 等等</li>
-<li>兩種 Type
+<li>定義一個 State  (Configration)，讓所有指定的機器維持在定義的 State
 <ul>
-<li>Interface : 透過 AWS PrivateLink 去連到 其他 AWS 服務。
-<ul>
-<li>Endpoint : Server Side 需要使用 Load Balancer</li>
-<li>而 Client Side 需要使用 Elastic Network Ineterface</li>
-<li>中間透過 PrivateLink 去連起來</li>
-</ul>
-</li>
-<li>gateway : 提供特定目標，目前只有 S3, DynamoDB ，自動設定 Route Table 設定</li>
+<li>例如 State 可以是 關閉 ssh (port 22)</li>
 </ul>
 </li>
 </ul>
-<h2 id="flow-log">Flow Log</h2>
+<h2 id="patch-manager">Patch Manager</h2>
 <hr>
 <ul>
-<li>擷取傳入及傳出 VPC 中網路界面之 IP 流量相關資訊的功能
+<li>自動更新和修補機器</li>
+<li>可以做 OS 升級，Application 升級，或者一些 Security 相關的升級</li>
+<li>可以是一次性，或者透過 Maintain Windows 來排程。</li>
+<li>可以掃描所有管理的機器並產出 compliance report</li>
+<li>Patch Baseline : 可以定義哪些 patch 應該 或 不應該 裝在機器上</li>
+<li>Patch Group : 將多台機器 Grouping 起來並執行 Patch Baseline
 <ul>
-<li>VPC Flow log</li>
-<li>Subnet Flow Log</li>
-<li>Elastic Network Interface Flow log</li>
+<li>一台機器只能有一個 Patch Group，一個 Patch Group 只能綁定一個 Patch Baseline</li>
+<li>透過 AWS Tag key &ldquo;Patch Group&rdquo; 去 Grouping</li>
 </ul>
 </li>
-<li>日誌可以存在 S3 (可以整合 Athena 去 Query) / CloudWatch Log</li>
 </ul>
-<h2 id="dns-support-in-vpc">DNS support in VPC</h2>
+<h2 id="maintenance-window">Maintenance Window</h2>
 <hr>
 <ul>
-<li>enableDnsSupport
+<li>排程去執行任務 例如 更新 Instance 上的 操作系統、軟體等等</li>
+<li>Maintenance Window 包含了
 <ul>
-<li>設定預設是 True</li>
-<li>AWS DNS Server (169.254.169.253</li>
+<li>排程(Schedule)</li>
+<li>期間(Duration)</li>
+<li>一組機器</li>
+<li>一組要執行的任務</li>
 </ul>
 </li>
-<li>enableDnsHostname
+<li>任務(task) 可以是
 <ul>
-<li>手動建立的預設是 False, Default VPC 預設是 True</li>
-<li>如果 ture 會自動給 EC2 Instance 分派 Hostname 如果有 public ip</li>
+<li>Run Command</li>
+<li>Automation</li>
+<li>Lambda</li>
+<li>Step Function</li>
 </ul>
 </li>
-<li>如果想使用客製化 Private Route53 DNS Domain ，這兩個設定都必須打開</li>
 </ul>
-<h2 id="vpn">VPN</h2>
+<h2 id="session-manager">Session Manager</h2>
 <hr>
 <ul>
-<li>在公司那邊建立  Customer Gateway （可以是軟體，或一個實體裝置）</li>
-<li>在AWS這邊建立 Virtual Private Gateway ，並連結在VPC上</li>
-<li>透過 site to site VPN Connection 將 VPN Gateway &amp; customer gateway 建起連線</li>
-</ul>
-<h2 id="direct-connect">Direct Connect</h2>
-<hr>
-<ul>
-<li>建立專用網路連線到AWS，AWS 在不同地區都有不同的合作夥伴，所以連線方式像是 公司 &ndash;&gt; 合作夥伴 &ndash;&gt; AWS</li>
-<li>專線好處是 : 頻寬高，網路費用比較便宜，並且比較安全</li>
+<li>可以建立安全的 Shell 到 EC2 or On-premises，不需要開始 SSH (port 22)</li>
+<li>會 Log 所有的指令</li>
+<li>支援 Windows 、 Linux 或 MacOS</li>
+<li>Session Log 可以存在 S3 或 CloudWatch</li>
+<li>可以透過IAM 限制哪個 User/Group 可以連到哪個 Instance 或是 Reousrce Tag</li>
 </ul>
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
-      <a href="https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
+      <a href="https://allenhsieh1992.com/posts/aws/vpc-certification-note/">VPC Certification Note
 </a>
     </div></div>
   <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
-      <a href="https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
+      <a href="https://allenhsieh1992.com/posts/aws/s3-certification-note/">S3 Certification Note
 </a>
     </div></div>
 </div><section class="related-posts">
     <h3>相關文章</h3>
-    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/">EC2 Associate Certification Note
+    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/vpc-certification-note/">VPC Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/route53-certification-note/">Route53 Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a></li></ul>
   </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
   repo="allen-hsieh1992/allen-hsieh1992.github.io"
@@ -450,11 +428,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/">Beanstalk Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/">CloudFormation Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/">CloudFormation Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-certification-note/">S3 Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-certification-note/">Systems Manager (SSM) Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-certification-note/">VPC Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
