@@ -9,6 +9,15 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Beanstalk Associate Certification Note</title>
+      <link>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</link>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>S3 Associate Certification Note</title>
       <link>https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
@@ -18,7 +27,7 @@
     </item>
     
     <item>
-      <title>SSM Associate Certification Note</title>
+      <title>Systems Manager (SSM) Associate Certification Note</title>
       <link>https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
