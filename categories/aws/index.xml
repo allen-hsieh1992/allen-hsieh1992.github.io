@@ -19,10 +19,10 @@
     
     <item>
       <title>CloudFormation Associate Certification Note</title>
-      <link>https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/cloudformation-associate-certification-note/</guid>
       <description>實踐 Infrastructure as Code，不需要手動建立資源，而且可以對 Source Code 做 Version Control。 CloudFormation 本身是免費的，只需要付建立的資源費用即可。 可以透過 CloudFormation Designer 產生基本的架</description>
     </item>
     
