@@ -138,6 +138,20 @@ if (!doNotTrack) {
   <div class="container"><nav class="row" aria-label="breadcrumb">
   <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/">主頁</a></li><li class="breadcrumb-item active">文章</li></ol>
 </nav><div class="posts mb-4"><article class="post row surface">
+      <h2 class="post-title mb-4"><a href="https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jul 11, 2021
+  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy">COGNITO</a></span>
+</div>
+<div class="post-summary mb-3">
+        
+        <img class="img-fluid" alt="使用 AWS Cognito CLI 建立 User Pool" src="https://allen-hsieh1992.github.io/images/aws.jpeg"
+   width="640" height="320" loading="lazy" />
+
+        
+        個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己的使用者群。這時可以選擇考慮 AWS Cognito，它可以讓你快速的為你的服務建立使用者群，並且可以整合讓使用者擁有權限操作其他 AWS 服務 。由於使用 UI 建立 Cognito User Pool 的文章已經不少，所以這邊文章會介紹使用 AWS CLI cognito-idp 建立一個用戶可以註冊，並且自己透過 Mail 認證通過的 User Pool。
+      </div>
+    </article><article class="post row surface">
       <h2 class="post-title mb-4"><a href="https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
 </a></h2><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 4, 2021
@@ -226,18 +240,18 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/">SSM Associate Certification Note
+  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
+</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/">SSM Associate Certification Note
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
 </a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/">EC2 Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allen-hsieh1992.github.io/categories">分類</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">7</span>
+          AWS <span class="badge rounded-pill">8</span>
         </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -246,7 +260,7 @@ if (!doNotTrack) {
         <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
       </h4>
       <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">7</span>
+          AWS <span class="badge rounded-pill">8</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
@@ -261,10 +275,10 @@ if (!doNotTrack) {
           LIGHTSAIL <span class="badge rounded-pill">1</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
           OPTIONAL <span class="badge rounded-pill">1</span>
+        </a><a href="https://allen-hsieh1992.github.io/tags/s3/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="S3">
+          S3 <span class="badge rounded-pill">1</span>
         </a><a href="https://allen-hsieh1992.github.io/tags/ssm/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="SSM">
           SSM <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/vpc/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="VPC">
-          VPC <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>
