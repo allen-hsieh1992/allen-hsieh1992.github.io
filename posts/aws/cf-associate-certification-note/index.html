@@ -331,7 +331,7 @@ if (!doNotTrack) {
 </span></code></pre></div><ul>
 <li>Fn::Base64
 <ul>
-<li>可以用在 ec2 pass 整個 script 在 user data</li>
+<li>可以用在 EC2 pass 整個 script 在 user data</li>
 <li>user data script log ⇒ /var/log/cloud-init-output.log</li>
 </ul>
 </li>
@@ -380,7 +380,7 @@ if (!doNotTrack) {
 </span><span class="ln"> 9</span><span class="sd">        yum update -y aws-cfn-bootstrap
 </span><span class="ln">10</span><span class="sd">        # Start cfn-init
 </span><span class="ln">11</span><span class="sd">        /opt/aws/bin/cfn-init -s ${AWS::StackId} -r MyInstance --region ${AWS::Region} || error_exit &#39;Failed to run cfn-init&#39; 
-</span><span class="ln">12</span><span class="sd">        # Start cfn-signal to the wait confition
+</span><span class="ln">12</span><span class="sd">        # Start cfn-signal to the wait condition
 </span><span class="ln">13</span><span class="sd">        /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackId} --resource SampleWaitCondition --region ${AWS::Region}</span><span class="w">        
 </span><span class="ln">14</span><span class="w">
 </span><span class="ln">15</span><span class="w"></span><span class="nt">Metadata</span><span class="p">:</span><span class="w">
@@ -444,13 +444,13 @@ if (!doNotTrack) {
 <ul>
 <li>可以重複使用其他 Stack 當作整個 Stack 一部分</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">Reosurces</span><span class="p">:</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">Resources</span><span class="p">:</span><span class="w">
 </span><span class="ln">2</span><span class="w">  </span><span class="nt">myStack</span><span class="p">:</span><span class="w">
 </span><span class="ln">3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::CloudFormation::Stack</span><span class="w">
 </span><span class="ln">4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
 </span><span class="ln">5</span><span class="w">      </span><span class="nt">TemplateURL</span><span class="p">:</span><span class="w">
 </span><span class="ln">6</span><span class="w">        </span><span class="l">xxx.com/...</span><span class="w">
-</span><span class="ln">7</span><span class="w">      </span><span class="nt">Paramters</span><span class="p">:</span><span class="w">
+</span><span class="ln">7</span><span class="w">      </span><span class="nt">Parameters</span><span class="p">:</span><span class="w">
 </span><span class="ln">8</span><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">value</span><span class="w">
 </span></code></pre></div><h2 id="changeset">ChangeSet</h2>
 <hr>
@@ -463,7 +463,7 @@ if (!doNotTrack) {
 <li>CloudFormation 建立的資源是沒有預防人為手動更新的</li>
 <li>Drift 是用來檢查哪些資源跟當初 CloudFormation 建立的不一樣，並且告訴你哪些不同
 <div class="alert alert-warning" role="alert">
-  <i class="fas fa-fw fa-exclamation-triangle"></i>不是所有的資源 Drfit 都有支援。
+  <i class="fas fa-fw fa-exclamation-triangle"></i>不是所有的資源 Drift 都有支援。
 </div>
 </li>
 </ul>
@@ -495,7 +495,7 @@ if (!doNotTrack) {
 <li>像 Auto Scaling Group 可以需要啟多個 Ec2 Instance，這時 Creation Policy 就可以設定在 Auto Scaling Group，要收時間內收多少個 Signal 才算成功</li>
 <li>UpdatePolicy
 <ul>
-<li>如果直接更新 template 中的 user data，Auto Scaling Group 裡面的 ec2 還會是舊的 user data。</li>
+<li>如果直接更新 template 中的 user data，Auto Scaling Group 裡面的 EC2 還會是舊的 user data。</li>
 <li>UpdatePolicy Attribute 可以使用在三種 AWS Resource
 <ul>
 <li>
@@ -599,7 +599,7 @@ if (!doNotTrack) {
 </span></code></pre></div><h2 id="stack-policy">Stack Policy</h2>
 <hr>
 <ul>
-<li>像是 IM Policy ，可以用來控制 哪些 Resource 可以做什麼，哪些 不能做什麼</li>
+<li>像是 IM Policy ，可以用來控制哪些 Resource 可以做什麼，哪些不能做什麼</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="ln"> 1</span><span class="p">{</span>
 <span class="ln"> 2</span>  <span class="nt">&#34;Statement&#34;</span> <span class="p">:</span> <span class="p">[</span>
