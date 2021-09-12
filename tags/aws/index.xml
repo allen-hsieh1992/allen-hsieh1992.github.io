@@ -14,7 +14,7 @@
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</guid>
-      <description></description>
+      <description>Beanstalk 是 PAAS 服務，可以透過 Config (.ebextensions) 設定去建立環境，例如基本的 Three Tire Architecture : Client -&amp;gt; Server -&amp;gt; DB，而我們只需要專注在 Application 上的開發 Beanstalk 本身是免費的，只需要付原本底下的資源費</description>
     </item>
     
     <item>
