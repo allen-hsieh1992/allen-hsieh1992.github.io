@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Associate Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CloudFormation Associate Certification Note">
 <meta itemprop="description" content="準備 AWS Associate Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-12T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="411"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="1739"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="AWS,CLOUDFORMATION," /><meta property="og:title" content="CloudFormation Associate Certification Note" />
 <meta property="og:description" content="準備 AWS Associate Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -25,8 +25,8 @@
 
 <meta name="twitter:title" content="CloudFormation Associate Certification Note"/>
 <meta name="twitter:description" content="準備 AWS Associate Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
-<meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.2da34b4efd951e2e552e9e3a1c4800ac1fee799aeb56a3e35a5599337cb94372.js" integrity="sha256-LaNLTv2VHi5VLp46HEgArB/ueZrrVqPjWlWZM3y5Q3I=" crossorigin="anonymous"></script>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.5710a4c6e02f45d3c646606e34fa9c8bd1013fbbe58c7c1c77a8f7a5f96f7dbc.js" integrity="sha256-VxCkxuAvRdPGRmBuNPqci9EBP7vljHwcd6j3pflvfbw=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -175,37 +175,51 @@ if (!doNotTrack) {
   <ul>
     <li><a href="#cloudformation-template-section">CloudFormation Template Section</a></li>
     <li><a href="#intrinsic-functions">Intrinsic Functions</a></li>
+    <li><a href="#cfn-init---cfn-signal">cfn-init &amp;  cfn-signal</a></li>
+    <li><a href="#cloudformation-rollback">CloudFormation Rollback</a></li>
+    <li><a href="#nested-stacks">Nested Stacks</a></li>
+    <li><a href="#changeset">ChangeSet</a></li>
+    <li><a href="#drift">Drift</a></li>
+    <li><a href="#deletion-policy">Deletion Policy</a></li>
+    <li><a href="#termination-protection">Termination Protection</a></li>
+    <li><a href="#creation-policy--update-policy">Creation Policy &amp; Update Policy</a></li>
+    <li><a href="#depends-on">Depends ON</a></li>
+    <li><a href="#stack-policy">Stack Policy</a></li>
+    <li><a href="#stacksets">StackSets</a></li>
   </ul>
 </nav>
   </div>
 </div><div class="post-content mb-3"><ul>
-<li>實踐 Infrastructure as Code，不需要手動建立資源，而可以對 Source Code 做 Version Control。</li>
-<li>CloudFormation 本身是免費的，只需要付建立的 Resource 費用即可。</li>
-<li>可以透過 CloudFormation Designer 產生基本的圖</li>
-<li>Template 必須要上傳到 S3</li>
-<li>Stack 是由一個 Template 產生的包含多個資源，透過名字當作識別。另外當 Stack 刪除時，由 Stack 所建立的資源，大部分都會被刪除。</li>
+<li>實踐 Infrastructure as Code，不需要手動建立資源，而且可以對 Source Code 做 Version Control。</li>
+<li>CloudFormation 本身是免費的，只需要付建立的資源費用即可。</li>
+<li>可以透過 CloudFormation Designer 產生基本的架構圖</li>
+<li>Template 必須要上傳到 S3 ，Template 格式可以是 Yaml or Json</li>
+<li>Stack 是由一個 Template 產生的包含多個資源，Stack 名字當作識別。</li>
 </ul>
 <h2 id="cloudformation-template-section">CloudFormation Template Section</h2>
 <hr>
 <ul>
 <li>Parameters : 當要建立 Stack ，可以由外面設定動態參數
-- 可設定資訊
-- Type: String, Number, CommaDelimitedList, List<!-- raw HTML omitted -->, AWS Parameter
-- Description
-- Constraints
-- ConstraintDescription
-- Min/MaxLength
-- Defaults
-- AllowedValues (array)
-- AllowedPattern (regular expression)
-- NoEcho(Boolean)</li>
+<ul>
+<li>可設定資訊</li>
+<li>Type: String, Number, CommaDelimitedList, List<!-- raw HTML omitted -->, AWS Parameter</li>
+<li>Description</li>
+<li>Constraints</li>
+<li>ConstraintDescription</li>
+<li>Min/MaxLength</li>
+<li>Defaults</li>
+<li>AllowedValues (array)</li>
+<li>AllowedPattern (regular expression)</li>
+<li>NoEcho(Boolean)</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">VpcId</span><span class="p">:</span><span class="w"> </span>!<span class="l">Ref MyVPC</span><span class="w">
 </span><span class="ln">2</span><span class="w">
 </span><span class="ln">3</span><span class="w"></span><span class="nt">Parameters</span><span class="p">:</span><span class="w">
-</span><span class="ln">4</span><span class="w">	</span><span class="nt">InstanceType</span><span class="p">:</span><span class="w">
-</span><span class="ln">5</span><span class="w">		</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;AWS::SSM::Paramter::Value&lt;String&gt;&#39;</span><span class="w">
-</span><span class="ln">6</span><span class="w">		</span><span class="nt">Default</span><span class="p">:</span><span class="w"> </span><span class="l">/EC2/InstanceType</span><span class="w">
+</span><span class="ln">4</span><span class="w">  </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w">
+</span><span class="ln">5</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;AWS::SSM::Paramter::Value&lt;String&gt;&#39;</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">Default</span><span class="p">:</span><span class="w"> </span><span class="l">/EC2/InstanceType</span><span class="w">
 </span><span class="ln">7</span><span class="w"></span><span class="c">#there is public SSM parameters by AWS</span><span class="w">
 </span></code></pre></div><ul>
 <li>Conditions : 建立資源的條件
@@ -218,47 +232,56 @@ if (!doNotTrack) {
 </span><span class="ln">2</span><span class="w">	</span><span class="nt">CreateProdResources</span><span class="p">:</span><span class="w"> </span>!<span class="l">Equals [!Ref EnvType, prod] </span><span class="w">
 </span><span class="ln">3</span><span class="w">
 </span><span class="ln">4</span><span class="w"></span><span class="nt">Resource</span><span class="p">:</span><span class="w">
-</span><span class="ln">5</span><span class="w">		</span><span class="nt">MountPoint</span><span class="p">:</span><span class="w">
-</span><span class="ln">6</span><span class="w">			</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::VolumeAttachment&#34;</span><span class="w">
-</span><span class="ln">7</span><span class="w">			</span><span class="nt">Condition</span><span class="p">:</span><span class="w"> </span><span class="l">CreateProdResources </span><span class="w">
+</span><span class="ln">5</span><span class="w">  </span><span class="nt">MountPoint</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::VolumeAttachment&#34;</span><span class="w">
+</span><span class="ln">7</span><span class="w">    </span><span class="nt">Condition</span><span class="p">:</span><span class="w"> </span><span class="l">CreateProdResources </span><span class="w">
 </span></code></pre></div><ul>
-<li>Resource: 	要建立的 AWS 資源，此為必要欄位</li>
+<li>Resource: 	要建立的 AWS 資源，此為必要欄位
+<ul>
+<li>格式 : AWS::aws-product-name::data-type-name</li>
+</ul>
+</li>
 <li>Mapping: 建立 Key Value Mapping</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Mapping</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">	</span><span class="nt">RegionMap</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 3</span><span class="w">		</span><span class="nt">user-east-1</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">			</span><span class="s2">&#34;32&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-aaa&#34;</span><span class="w">
-</span><span class="ln"> 5</span><span class="w">			</span><span class="s2">&#34;64&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-bbb&#34;</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">	  </span><span class="nt">user-east-2</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 7</span><span class="w">			</span><span class="s2">&#34;32&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-ccc&#34;</span><span class="w">
-</span><span class="ln"> 8</span><span class="w">			</span><span class="s2">&#34;64&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-ddd&#34;</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">RegionMap</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">user-east-1</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">      </span><span class="s2">&#34;32&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-aaa&#34;</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">      </span><span class="s2">&#34;64&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-bbb&#34;</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">    </span><span class="nt">user-east-2</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">      </span><span class="s2">&#34;32&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-ccc&#34;</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">      </span><span class="s2">&#34;64&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ami-ddd&#34;</span><span class="w">
 </span><span class="ln"> 9</span><span class="w">
 </span><span class="ln">10</span><span class="w"></span><span class="nt">ImagesId</span><span class="p">:</span><span class="w"> </span>!<span class="l">FindInMap [RegionMap, !Ref &#34;AWS:Region&#34;, 32] </span><span class="w">
 </span></code></pre></div><ul>
 <li>Transforms: 主要用於 Serve-less Application Model (SAM) ，宣告這是 SAM 的格式</li>
-<li>Output: 可以將 Stack 建立的 Resource Output 出來，所以其他 Stack 可以建立 reference</li>
+<li>Output: 可以將 Stack 建立的 Resource Output 出來，所以其他 Stack 可以建立 reference
+<ul>
+<li>如果被其他 Stack reference ，那就不能 delete</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Outputs</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">	</span><span class="nt">StackSSHSecurityGroup</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 3</span><span class="w">		</span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l">The SSH Security Group for our Company</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">		</span><span class="nt">Vaule</span><span class="p">:</span><span class="w"> </span>!<span class="l">Ref MyCompanyWideSSHSecurityGroup</span><span class="w">
-</span><span class="ln"> 5</span><span class="w">	</span><span class="nt">Export</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">		</span><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l">SSHSecurityGroup</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">StackSSHSecurityGroup</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">Description</span><span class="p">:</span><span class="w"> </span><span class="l">The SSH Security Group for our Company</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">Vaule</span><span class="p">:</span><span class="w"> </span>!<span class="l">Ref MyCompanyWideSSHSecurityGroup</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">  </span><span class="nt">Export</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">    </span><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l">SSHSecurityGroup</span><span class="w">
 </span><span class="ln"> 7</span><span class="w">
 </span><span class="ln"> 8</span><span class="w"></span><span class="nt">Resource</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 9</span><span class="w">	</span><span class="nt">MySecureInstance</span><span class="p">:</span><span class="w">
-</span><span class="ln">10</span><span class="w">	</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::EC2::Instance</span><span class="w">
-</span><span class="ln">11</span><span class="w">	</span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span><span class="ln">12</span><span class="w">		</span><span class="nt">AvailabilityZone</span><span class="p">:</span><span class="w"> </span><span class="l">us-east-1a</span><span class="w">
-</span><span class="ln">13</span><span class="w">		</span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-a5c7edb2</span><span class="w">
-</span><span class="ln">14</span><span class="w">		</span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
-</span><span class="ln">15</span><span class="w">		</span><span class="nt">SecurityGroup</span><span class="p">:</span><span class="w">
-</span><span class="ln">16</span><span class="w">			</span>- !<span class="l">ImportValue SSHSecurityGroup</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">  </span><span class="nt">MySecureInstance</span><span class="p">:</span><span class="w">
+</span><span class="ln">10</span><span class="w">  </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::EC2::Instance</span><span class="w">
+</span><span class="ln">11</span><span class="w">  </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">AvailabilityZone</span><span class="p">:</span><span class="w"> </span><span class="l">us-east-1a</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-a5c7edb2</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
+</span><span class="ln">15</span><span class="w">    </span><span class="nt">SecurityGroup</span><span class="p">:</span><span class="w">
+</span><span class="ln">16</span><span class="w">      </span>- !<span class="l">ImportValue SSHSecurityGroup</span><span class="w">
 </span></code></pre></div><ul>
 <li>Metadata: 提供額外有關 Template 資訊</li>
 </ul>
 <h2 id="intrinsic-functions">Intrinsic Functions</h2>
+<hr>
 <ul>
 <li>Fn::Ref
 <ul>
@@ -269,23 +292,23 @@ if (!doNotTrack) {
 <li>Fn:GetAtt</li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Resource</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">	</span><span class="nt">EC2Instance</span><span class="p">:</span><span class="w"> 
-</span><span class="ln"> 3</span><span class="w">		</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Instance&#34;</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">		</span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 5</span><span class="w">			</span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-1234567</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">			</span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">EC2Instance</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Instance&#34;</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">      </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-1234567</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">      </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
 </span><span class="ln"> 7</span><span class="w">
 </span><span class="ln"> 8</span><span class="w"></span><span class="nt">NewVolume</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 9</span><span class="w">	</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Volume&#34;</span><span class="w">
-</span><span class="ln">10</span><span class="w">	</span><span class="nt">Confition</span><span class="p">:</span><span class="w"> </span><span class="l">CreateProdResources</span><span class="w">
-</span><span class="ln">11</span><span class="w">	</span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span><span class="ln">12</span><span class="w">		</span><span class="nt">Size</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
-</span><span class="ln">13</span><span class="w">		</span><span class="nt">AvailabilityZone</span><span class="p">:</span><span class="w">
-</span><span class="ln">14</span><span class="w">			</span>!<span class="l">GetAtt EC2Instance.AvailabilityZone</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">  </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Volume&#34;</span><span class="w">
+</span><span class="ln">10</span><span class="w">  </span><span class="nt">Confition</span><span class="p">:</span><span class="w"> </span><span class="l">CreateProdResources</span><span class="w">
+</span><span class="ln">11</span><span class="w">  </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">Size</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span><span class="ln">13</span><span class="w">    </span><span class="nt">AvailabilityZone</span><span class="p">:</span><span class="w">
+</span><span class="ln">14</span><span class="w">    </span>!<span class="l">GetAtt EC2Instance.AvailabilityZone</span><span class="w">
 </span></code></pre></div><ul>
 <li>Fn::Join</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="s2">&#34;Fn::Join&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;:&#34;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;c&#34;</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="l">=&gt; &#34;a🅱️c&#34;</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="s2">&#34;Fn::Join&#34;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;,&#34;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;c&#34;</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="l">=&gt; &#34;a,b,c&#34;</span><span class="w">
 </span></code></pre></div><ul>
 <li>Fn::Sub</li>
 </ul>
@@ -308,25 +331,302 @@ if (!doNotTrack) {
 </span></code></pre></div><ul>
 <li>Fn::Base64
 <ul>
-<li>用於pass 整個 Script ，可以用在 ec2 的 user data</li>
+<li>可以用在 ec2 pass 整個 script 在 user data</li>
 <li>user data script log ⇒ /var/log/cloud-init-output.log</li>
 </ul>
 </li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Resource</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 2</span><span class="w">	</span><span class="nt">EC2Instance</span><span class="p">:</span><span class="w"> 
-</span><span class="ln"> 3</span><span class="w">		</span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Instance&#34;</span><span class="w">
-</span><span class="ln"> 4</span><span class="w">		</span><span class="nt">Properties</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 5</span><span class="w">			</span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-1234567</span><span class="w">
-</span><span class="ln"> 6</span><span class="w">			</span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
-</span><span class="ln"> 7</span><span class="w">		</span><span class="nt">UserData</span><span class="p">:</span><span class="w">
-</span><span class="ln"> 8</span><span class="w">			</span><span class="nt">Fn::Base64</span><span class="p">:</span><span class="w"> </span><span class="l">|</span><span class="w">
-</span><span class="ln"> 9</span><span class="w">				</span><span class="l">yum update -y</span><span class="w">
-</span><span class="ln">10</span><span class="w">				</span><span class="l">yum install -y httpd</span><span class="w">
-</span><span class="ln">11</span><span class="w">				</span><span class="l">systemctl start httpd</span><span class="w">
-</span><span class="ln">12</span><span class="w">				</span><span class="l">systemctl enable httpd</span><span class="w">
-</span><span class="ln">13</span><span class="w">				</span><span class="l">echo &#34;Hello World from user data&#34; &gt; /var/www/html/index.html </span><span class="w">
-</span></code></pre></div></div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">EC2Instance</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Instance&#34;</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">      </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-1234567</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">      </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="nt">UserData</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">      </span><span class="nt">Fn::Base64</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="ln"> 9</span><span class="sd">        yum update -y
+</span><span class="ln">10</span><span class="sd">        yum install -y httpd
+</span><span class="ln">11</span><span class="sd">        systemctl start httpd
+</span><span class="ln">12</span><span class="sd">        systemctl enable httpd
+</span><span class="ln">13</span><span class="sd">        echo &#34;Hello World from user data&#34; &gt; /var/www/html/index.html </span><span class="w">        
+</span></code></pre></div><h2 id="cfn-init---cfn-signal">cfn-init &amp;  cfn-signal</h2>
+<hr>
+<ul>
+<li>AWS::CloudFormation::Init 目的是讓 EC2 的設定可讀性更高， 需要放在 metadata section</li>
+<li>init 的 log 會寫在 /var/log/cfn-init.log</li>
+<li>cfn-init &amp;  cfn-signal 流程
+<ul>
+<li>CloudFormation 先建立 EC2 Instance ，如果有設定 WaitCondition 這時 CloudFormation 會等待 EC2 這邊的 signal</li>
+<li>EC2 上面執行 User Data 時執行 cfn-init，這時 cfn-init 會去 CloudFormation 拉 metadata 的設定回來並執行</li>
+<li>cfn-signal 用於執行完 cfn-init 告訴 CloudFormation 成功與否</li>
+</ul>
+</li>
+<li>沒有收到 Signal 怎麼辦
+<ul>
+<li>確認 Script 是否有安裝</li>
+<li>可以disable rollback，進機器看  /var/log/cfn-init.log 和 /var/log/cloud-init-output.log</li>
+<li>由於 Signal 必須透過 Internet 通知 CloudFormation ，確認 EC2 可以 Access Internet.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Resource</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">EC2Instance</span><span class="p">:</span><span class="w"> 
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::EC2::Instance&#34;</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">      </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-1234567</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">      </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">    </span><span class="nt">UserData</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">      </span><span class="nt">Fn::Base64</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="ln"> 9</span><span class="sd">        yum update -y aws-cfn-bootstrap
+</span><span class="ln">10</span><span class="sd">        # Start cfn-init
+</span><span class="ln">11</span><span class="sd">        /opt/aws/bin/cfn-init -s ${AWS::StackId} -r MyInstance --region ${AWS::Region} || error_exit &#39;Failed to run cfn-init&#39; 
+</span><span class="ln">12</span><span class="sd">        # Start cfn-signal to the wait confition
+</span><span class="ln">13</span><span class="sd">        /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackId} --resource SampleWaitCondition --region ${AWS::Region}</span><span class="w">        
+</span><span class="ln">14</span><span class="w">
+</span><span class="ln">15</span><span class="w"></span><span class="nt">Metadata</span><span class="p">:</span><span class="w">
+</span><span class="ln">16</span><span class="w">  </span><span class="nt">Comment</span><span class="p">:</span><span class="w"> </span><span class="l">Install a simple Apache HTTP page</span><span class="w">
+</span><span class="ln">17</span><span class="w">  </span><span class="nt">AWS:CloudFormation::Init</span><span class="p">:</span><span class="w">
+</span><span class="ln">18</span><span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span><span class="ln">19</span><span class="w">      </span><span class="nt">packages</span><span class="p">:</span><span class="w">
+</span><span class="ln">20</span><span class="w">        </span><span class="nt">yum</span><span class="p">:</span><span class="w">
+</span><span class="ln">21</span><span class="w">          </span><span class="nt">httpd</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="ln">22</span><span class="w">      </span><span class="nt">files</span><span class="p">:</span><span class="w">
+</span><span class="ln">23</span><span class="w">        </span><span class="s2">&#34;/var/www/html/index.html&#34;</span><span class="l">;</span><span class="w">
+</span><span class="ln">24</span><span class="w">        </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="ln">25</span><span class="sd">          </span><span class="w">          </span><span class="l">&lt;h1&gt;Hello World from Ec2 Instance&lt;/h1&gt;</span><span class="w">
+</span><span class="ln">26</span><span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;000644&#39;</span><span class="w">
+</span><span class="ln">27</span><span class="w">      </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="ln">28</span><span class="w">        </span><span class="nt">hello</span><span class="p">:</span><span class="w">
+</span><span class="ln">29</span><span class="w">          </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;echo &#39;hello world&#39;&#34;</span><span class="w">
+</span><span class="ln">30</span><span class="w">      </span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="ln">31</span><span class="w">        </span><span class="nt">sysvinit</span><span class="p">:</span><span class="w">
+</span><span class="ln">32</span><span class="w">          </span><span class="nt">httpd</span><span class="p">:</span><span class="w">
+</span><span class="ln">33</span><span class="w">            </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
+</span><span class="ln">34</span><span class="w">            </span><span class="nt">ensureRunning</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
+</span><span class="ln">35</span><span class="w">
+</span><span class="ln">36</span><span class="w"></span><span class="nt">SampleWaitCondition</span><span class="p">:</span><span class="w">
+</span><span class="ln">37</span><span class="w">  </span><span class="nt">CreationPolicy</span><span class="p">:</span><span class="w">
+</span><span class="ln">38</span><span class="w">    </span><span class="nt">ResourceSignal</span><span class="p">:</span><span class="w">
+</span><span class="ln">39</span><span class="w">      </span><span class="nt">Timeout</span><span class="p">:</span><span class="w"> </span><span class="l">PT1M</span><span class="w"> </span><span class="c">#等一分鐘</span><span class="w">
+</span><span class="ln">40</span><span class="w">      </span><span class="l">Count:2</span><span class="w"> </span><span class="c">#要兩個成功的 Signal</span><span class="w">
+</span><span class="ln">41</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::CoudFormation::WaitCondition</span><span class="w">
+</span></code></pre></div><h2 id="cloudformation-rollback">CloudFormation Rollback</h2>
+<hr>
+<ul>
+<li>Stack 建立失敗時，Stack 正常狀態會是 ROLLBACK_COMPLETE ，並且只能刪除不能更新
+<ul>
+<li>預設 : 所有的資源會 rollback ，但 Stack 還在，可以看原因
+<ul>
+<li>OnFailure=Rollback</li>
+</ul>
+</li>
+<li>可以 Disable rollback，所以可以做 troubleshooting
+<ul>
+<li>OnFailure=DO_NOTHING</li>
+</ul>
+</li>
+<li>可以刪除整個 Stack
+<ul>
+<li>OnFailure=Delete</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stack 更新失敗
+<ul>
+<li>Stack 如果 rollback 成功 Stack 狀態會是 UPDATE_ROLLBACK_COMPLETE ，可以嘗試更新或刪除</li>
+<li>Stack 如果 rollback 失敗 Stack 狀態會是 UPDATE_ROLLBACK_FAIL，可以嘗試修復問題再繼續 rollback</li>
+</ul>
+</li>
+</ul>
+<h2 id="nested-stacks">Nested Stacks</h2>
+<hr>
+<ul>
+<li>可以重複使用其他 Stack 當作整個 Stack 一部分</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">Reosurces</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w">  </span><span class="nt">myStack</span><span class="p">:</span><span class="w">
+</span><span class="ln">3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::CloudFormation::Stack</span><span class="w">
+</span><span class="ln">4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln">5</span><span class="w">      </span><span class="nt">TemplateURL</span><span class="p">:</span><span class="w">
+</span><span class="ln">6</span><span class="w">        </span><span class="l">xxx.com/...</span><span class="w">
+</span><span class="ln">7</span><span class="w">      </span><span class="nt">Paramters</span><span class="p">:</span><span class="w">
+</span><span class="ln">8</span><span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">value</span><span class="w">
+</span></code></pre></div><h2 id="changeset">ChangeSet</h2>
+<hr>
+<ul>
+<li>可以在 CloudFormation 更新新的Template 之前先評估有什麼資源會變動，並確認是否要繼續執行，但執行了並不代表一定會成功。</li>
+</ul>
+<h2 id="drift">Drift</h2>
+<hr>
+<ul>
+<li>CloudFormation 建立的資源是沒有預防人為手動更新的</li>
+<li>Drift 是用來檢查哪些資源跟當初 CloudFormation 建立的不一樣，並且告訴你哪些不同
+<div class="alert alert-warning" role="alert">
+  <i class="fas fa-fw fa-exclamation-triangle"></i>不是所有的資源 Drfit 都有支援。
+</div>
+</li>
+</ul>
+<h2 id="deletion-policy">Deletion Policy</h2>
+<hr>
+<ul>
+<li>用來控制當 Stack 被刪除時特定資源要做的事情</li>
+<li>三種 Policy
+<ul>
+<li>DeletionPolicy=Retain: 預防資源被刪除</li>
+<li>DeletionPolicy=Snapshot: 先將資料備份再刪除
+<ul>
+<li>Support: EBS Volume, ElasticCache, Cluster, ElasticCache, ReplicationGroup, RDS DBInstance, RDS DBCluster, Redshift Cluster</li>
+</ul>
+</li>
+<li>DeletionPolicy=Delete 刪除資源，但並非都會刪除成功，例如 S3 Bucket 裡面有 Object 就會刪除失敗</li>
+<li>RDS 預設 Snapshot , 其他預設 Delete</li>
+</ul>
+</li>
+</ul>
+<h2 id="termination-protection">Termination Protection</h2>
+<hr>
+<ul>
+<li>用於保護 Stack 不會被不小心刪除</li>
+</ul>
+<h2 id="creation-policy--update-policy">Creation Policy &amp; Update Policy</h2>
+<hr>
+<ul>
+<li>像 Auto Scaling Group 可以需要啟多個 Ec2 Instance，這時 Creation Policy 就可以設定在 Auto Scaling Group，要收時間內收多少個 Signal 才算成功</li>
+<li>UpdatePolicy
+<ul>
+<li>如果直接更新 template 中的 user data，Auto Scaling Group 裡面的 ec2 還會是舊的 user data。</li>
+<li>UpdatePolicy Attribute 可以使用在三種 AWS Resource
+<ul>
+<li>
+<p>auto scaling group 有三種 Policy ，前兩種需要設定 WillReplace = true</p>
+<ul>
+<li>AutoScalingReplacingUpdate: 建立全新的 Auto Scaling Group 取代舊的</li>
+<li>AutoScalingRollingUpdate: 在 Auto Scaling Group，將現有的 EC2 Instance 停掉，並建立新的取代</li>
+<li>AutoScalingScheduledAction</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">AutoScalingGroup</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">  </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::AutoScaling::AutoScalingGroup</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">  </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">    </span><span class="nt">AvailabilityZones</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">      </span><span class="nt">Fn::GetsAZs</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">        </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AWS::Region&#34;</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">    </span><span class="nt">LaunchConfigurationName</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">      </span><span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">LaunchConfig</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">Desiredcapacity</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;&#39;
+</span><span class="ln">11</span><span class="s1">    MinSize: &#39;</span><span class="m">1</span><span class="s1">&#39;
+</span><span class="ln">12</span><span class="s1">    MaxSize: &#39;</span><span class="m">4</span><span class="s1">&#39;
+</span><span class="ln">13</span><span class="s1">  CreationPolicy:
+</span><span class="ln">14</span><span class="s1">    ResourceSignal:
+</span><span class="ln">15</span><span class="s1">    Count: &#39;</span><span class="m">3</span><span class="s1">&#39;
+</span><span class="ln">16</span><span class="s1">    Timeout: PT15M
+</span><span class="ln">17</span><span class="s1">  UpdatePolicy:
+</span><span class="ln">18</span><span class="s1">    ## Example1 start
+</span><span class="ln">19</span><span class="s1">    AutoScalingRollingUpdate:
+</span><span class="ln">20</span><span class="s1">      MinInstancesInService: &#39;</span><span class="m">1</span><span class="s1">&#39;
+</span><span class="ln">21</span><span class="s1">      MaxBatchSize: &#39;</span><span class="m">2</span><span class="s1">&#39;
+</span><span class="ln">22</span><span class="s1">      #how much time to wait for the signal
+</span><span class="ln">23</span><span class="s1">      PauseTime: PT1M
+</span><span class="ln">24</span><span class="s1">      WaitOnResourceSignals: &#39;</span><span class="kc">true</span><span class="s1">&#39;
+</span><span class="ln">25</span><span class="s1">    ## 預防CloudFormation 有排程去 update min,max or desired size 
+</span><span class="ln">26</span><span class="s1">    AutoScalingScheduledAction:
+</span><span class="ln">27</span><span class="s1">      IgnoreUnmodifiedGroupSizeProperties: &#39;</span><span class="kc">true</span><span class="w">
+</span><span class="ln">28</span><span class="w">    </span><span class="c">## Example1 end</span><span class="w">
+</span><span class="ln">29</span><span class="w">    </span><span class="c">## Example1 and Example2 不會同時存在</span><span class="w">
+</span><span class="ln">30</span><span class="w">
+</span><span class="ln">31</span><span class="w">    </span><span class="c">## Example 2 start</span><span class="w">
+</span><span class="ln">32</span><span class="w">    </span><span class="c">## 會建立全新的 Auto Scaling Group 取代舊得</span><span class="w">
+</span><span class="ln">33</span><span class="w">    </span><span class="nt">AutoScalingReplacingUpdate</span><span class="p">:</span><span class="w">
+</span><span class="ln">34</span><span class="w">      </span><span class="nt">WillReplace</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="w">
+</span><span class="ln">35</span><span class="w">    </span><span class="c">## Example 2 end</span><span class="w">
+</span><span class="ln">36</span><span class="w">
+</span><span class="ln">37</span><span class="w"></span><span class="nt">LaunchConfig</span><span class="p">:</span><span class="w">
+</span><span class="ln">38</span><span class="w">  </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::AutoScaling::LaunchConfiguration</span><span class="w">
+</span><span class="ln">39</span><span class="w">  </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln">40</span><span class="w">    </span><span class="nt">ImageId</span><span class="p">:</span><span class="w"> </span><span class="l">ami-aaa</span><span class="w">
+</span><span class="ln">41</span><span class="w">    </span><span class="nt">InstanceType</span><span class="p">:</span><span class="w"> </span><span class="l">t2.micro</span><span class="w">
+</span><span class="ln">42</span><span class="w">    </span><span class="nt">UserData</span><span class="p">:</span><span class="w">
+</span><span class="ln">43</span><span class="w">      </span><span class="nt">Fn::Base64</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="ln">44</span><span class="sd">        yum update -y
+</span><span class="ln">45</span><span class="sd">        yum install -y httpd
+</span><span class="ln">46</span><span class="sd">        systemctl start httpd
+</span><span class="ln">47</span><span class="sd">        systemctl enable httpd
+</span><span class="ln">48</span><span class="sd">        echo &#34;Hello World from user data&#34; &gt; /var/www/html/index.html 	</span><span class="w">        
+</span></code></pre></div></li>
+<li>
+<p>lambda alias</p>
+<ul>
+<li>CodeDeployLambdaAliasUpdate</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">UpdatePolicy</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w">  </span><span class="nt">CodeDeployLambdaAliasUpdate</span><span class="p">:</span><span class="w">
+</span><span class="ln">3</span><span class="w">    </span><span class="nt">AfterAllowTrafficHook</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span><span class="ln">4</span><span class="w">    </span><span class="nt">ApplicationName</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span><span class="ln">5</span><span class="w">    </span><span class="nt">BeforeAllowTrafficHook</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span><span class="ln">6</span><span class="w">    </span><span class="nt">DeploymentGroupName</span><span class="p">:</span><span class="w"> </span><span class="l">String</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>elastic cache replication group</p>
+<ul>
+<li>UseOnlineResharding</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln">1</span><span class="nt">UpdatePolicy</span><span class="p">:</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">EnableVersionUpgrade</span><span class="p">:</span><span class="w"> </span><span class="l">Boolean</span><span class="w">
+</span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="depends-on">Depends ON</h2>
+<hr>
+<ul>
+<li>控制資源建立的順序，以下面為例，EC2 Instance 需要在 RDS 建立好以後才建立</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="ln"> 1</span><span class="nt">Resources</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 2</span><span class="w">  </span><span class="nt">Ec2Instance</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 3</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::EC2::Instance</span><span class="w">
+</span><span class="ln"> 4</span><span class="w">    </span><span class="nt">Properties</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 5</span><span class="w">      </span><span class="nt">ImageId</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 6</span><span class="w">        </span><span class="nt">Fn::FindInMap</span><span class="p">:</span><span class="w">
+</span><span class="ln"> 7</span><span class="w">        </span>- <span class="l">RegionMap</span><span class="w">
+</span><span class="ln"> 8</span><span class="w">        </span>- <span class="nt">Ref</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::Region</span><span class="w">
+</span><span class="ln"> 9</span><span class="w">        </span>- <span class="l">AMI</span><span class="w">
+</span><span class="ln">10</span><span class="w">    </span><span class="nt">DependsOn</span><span class="p">:</span><span class="w"> </span><span class="l">myDB</span><span class="w">
+</span><span class="ln">11</span><span class="w">  </span><span class="nt">myDB</span><span class="p">:</span><span class="w">
+</span><span class="ln">12</span><span class="w">    </span><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l">AWS::RDS::DBInstance</span><span class="w">
+</span></code></pre></div><h2 id="stack-policy">Stack Policy</h2>
+<hr>
+<ul>
+<li>像是 IM Policy ，可以用來控制 哪些 Resource 可以做什麼，哪些 不能做什麼</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="ln"> 1</span><span class="p">{</span>
+<span class="ln"> 2</span>  <span class="nt">&#34;Statement&#34;</span> <span class="p">:</span> <span class="p">[</span>
+<span class="ln"> 3</span>    <span class="p">{</span>
+<span class="ln"> 4</span>      <span class="nt">&#34;Effect&#34;</span> <span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+<span class="ln"> 5</span>      <span class="nt">&#34;Action&#34;</span> <span class="p">:</span> <span class="s2">&#34;Update:*&#34;</span><span class="p">,</span>
+<span class="ln"> 6</span>      <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+<span class="ln"> 7</span>      <span class="nt">&#34;Resource&#34;</span> <span class="p">:</span> <span class="s2">&#34;*&#34;</span>
+<span class="ln"> 8</span>    <span class="p">},</span>
+<span class="ln"> 9</span>    <span class="p">{</span>
+<span class="ln">10</span>      <span class="nt">&#34;Effect&#34;</span> <span class="p">:</span> <span class="s2">&#34;Deny&#34;</span><span class="p">,</span>
+<span class="ln">11</span>      <span class="nt">&#34;Action&#34;</span> <span class="p">:</span> <span class="s2">&#34;Update:*&#34;</span><span class="p">,</span>
+<span class="ln">12</span>      <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+<span class="ln">13</span>      <span class="nt">&#34;Resource&#34;</span> <span class="p">:</span> <span class="s2">&#34;LogicalResourceId/ProductionDatabase&#34;</span>
+<span class="ln">14</span>    <span class="p">}</span>
+<span class="ln">15</span>  <span class="p">]</span>
+<span class="ln">16</span><span class="p">}</span>
+</code></pre></div><h2 id="stacksets">StackSets</h2>
+<hr>
+<ul>
+<li>可以一次更動多個 Region 或多個 Account 的 Stack</li>
+<li>只有 Administrator Account 可以建立 StackSets</li>
+<li>Trust Account 可以更新 StackSets</li>
+<li>每次更動 StackSets 設定，全部的 Stack 都會被更新</li>
+<li>可以刪除整個 StackSets 或單獨刪除 StackSets 裡面的一個 Stack</li>
+</ul>
+</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
       <a href="https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
 </a>
