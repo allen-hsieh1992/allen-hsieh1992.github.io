@@ -2,117 +2,135 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>標籤 on 艾倫的開發心路歷程</title>
-    <link>https://allen-hsieh1992.github.io/tags/</link>
+    <link>https://allenhsieh1992.com/tags/</link>
     <description>Recent content in 標籤 on 艾倫的開發心路歷程</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AWS</title>
-      <link>https://allen-hsieh1992.github.io/tags/aws/</link>
+      <link>https://allenhsieh1992.com/tags/aws/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/aws/</guid>
+      <guid>https://allenhsieh1992.com/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>BEANSTALK</title>
-      <link>https://allen-hsieh1992.github.io/tags/beanstalk/</link>
+      <link>https://allenhsieh1992.com/tags/beanstalk/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/beanstalk/</guid>
+      <guid>https://allenhsieh1992.com/tags/beanstalk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CLOUDFORMATION</title>
+      <link>https://allenhsieh1992.com/tags/cloudformation/</link>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/tags/cloudformation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>S3</title>
-      <link>https://allen-hsieh1992.github.io/tags/s3/</link>
+      <link>https://allenhsieh1992.com/tags/s3/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/s3/</guid>
+      <guid>https://allenhsieh1992.com/tags/s3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SSM</title>
-      <link>https://allen-hsieh1992.github.io/tags/ssm/</link>
+      <link>https://allenhsieh1992.com/tags/ssm/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/ssm/</guid>
+      <guid>https://allenhsieh1992.com/tags/ssm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>VPC</title>
-      <link>https://allen-hsieh1992.github.io/tags/vpc/</link>
+      <link>https://allenhsieh1992.com/tags/vpc/</link>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/vpc/</guid>
+      <guid>https://allenhsieh1992.com/tags/vpc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ROUTE53</title>
-      <link>https://allen-hsieh1992.github.io/tags/route53/</link>
+      <link>https://allenhsieh1992.com/tags/route53/</link>
       <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/route53/</guid>
+      <guid>https://allenhsieh1992.com/tags/route53/</guid>
       <description></description>
     </item>
     
     <item>
       <title>EC2</title>
-      <link>https://allen-hsieh1992.github.io/tags/ec2/</link>
+      <link>https://allenhsieh1992.com/tags/ec2/</link>
       <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/ec2/</guid>
+      <guid>https://allenhsieh1992.com/tags/ec2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>COGNITO</title>
-      <link>https://allen-hsieh1992.github.io/tags/cognito/</link>
+      <link>https://allenhsieh1992.com/tags/cognito/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/cognito/</guid>
+      <guid>https://allenhsieh1992.com/tags/cognito/</guid>
       <description></description>
     </item>
     
     <item>
       <title>LIGHTSAIL</title>
-      <link>https://allen-hsieh1992.github.io/tags/lightsail/</link>
+      <link>https://allenhsieh1992.com/tags/lightsail/</link>
       <pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/lightsail/</guid>
+      <guid>https://allenhsieh1992.com/tags/lightsail/</guid>
       <description></description>
     </item>
     
     <item>
       <title>LAMBDA</title>
-      <link>https://allen-hsieh1992.github.io/tags/lambda/</link>
+      <link>https://allenhsieh1992.com/tags/lambda/</link>
       <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/lambda/</guid>
+      <guid>https://allenhsieh1992.com/tags/lambda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SAM</title>
+      <link>https://allenhsieh1992.com/tags/sam/</link>
+      <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/tags/sam/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JAVA</title>
-      <link>https://allen-hsieh1992.github.io/tags/java/</link>
+      <link>https://allenhsieh1992.com/tags/java/</link>
       <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/java/</guid>
+      <guid>https://allenhsieh1992.com/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OPTIONAL</title>
-      <link>https://allen-hsieh1992.github.io/tags/optional/</link>
+      <link>https://allenhsieh1992.com/tags/optional/</link>
       <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/tags/optional/</guid>
+      <guid>https://allenhsieh1992.com/tags/optional/</guid>
       <description></description>
     </item>
     

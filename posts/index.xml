@@ -2,108 +2,117 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>文章 on 艾倫的開發心路歷程</title>
-    <link>https://allen-hsieh1992.github.io/posts/</link>
+    <link>https://allenhsieh1992.com/posts/</link>
     <description>Recent content in 文章 on 艾倫的開發心路歷程</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allen-hsieh1992.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Beanstalk Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/</guid>
       <description>Beanstalk 是 PAAS 服務，可以透過 Config (.ebextensions) 設定去建立環境，例如基本的 Three Tire Architecture : Client -&amp;gt; Server -&amp;gt; DB，而我們只需要專注在 Application 上的開發 Beanstalk 本身是免費的，只需要付原本底下的資源費</description>
     </item>
     
     <item>
-      <title>S3 Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/</link>
+      <title>CloudFormation Associate Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>S3 Associate Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/</link>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/</guid>
       <description>Basic of S3 已 Object 為單位的儲存空間 ，而每個 Object 儲存在 Bucket 每 Object 的大小可以從 0 byptes to 5 TB，但 Bucket 沒有儲存中間上限 每個 S3 都會有獨立的 URL，這個是全球唯一的，所</description>
     </item>
     
     <item>
       <title>Systems Manager (SSM) Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/</guid>
       <description>可以用來管理 EC2 或是 On-Prime 的機器 需要安裝 SSM Agent 在機器上 AWS Linux AMI 和部分 Ubuntu AMI 預設已經裝好 Agent 了。 EC2 需要有 IAM Rule 的權限根 SSM 溝通 Patch 自動化 支援 Windows or Linux 可以整合 CloudWatch 和 AWS Config</description>
     </item>
     
     <item>
       <title>VPC Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</link>
       <pubDate>Tue, 07 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</guid>
       <description>Basic of VPC 每個 Region 預設上限五個 VPC 支援 IPv4 or IPv6 每個 VPC 可以有五個 CIDR ，每個 CIDR 最大 /16 (65536 IP) , 最小 /28 (16 IP) VPC 是 私有網路，所以只有以下 Range 是允許的 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 要注意，VPC</description>
     </item>
     
     <item>
       <title>Route53 Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</link>
       <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</guid>
       <description>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。 Route53 也是一個 DNS Register ，可以在上面購買 Domain Name TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間</description>
     </item>
     
     <item>
       <title>EC2 Associate Certification Note</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/</link>
+      <link>https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/</link>
       <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/</guid>
       <description>EC2 Purchase Option On-Demand Instances 用多少付多少，不需要提前預付也也不需要合約，根據秒來計費 不同 Region 有不同的 Instance &amp;amp; CPU 限制數量，可以透過 AWS Support Center 提高上限 Reserved Instances 需要一年或三年的合</description>
     </item>
     
     <item>
       <title>使用 AWS Cognito CLI 建立 User Pool</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/</link>
+      <link>https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/</guid>
       <description>個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己</description>
     </item>
     
     <item>
       <title>使用 Lightsail 架設 WordPress 網站</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/</link>
+      <link>https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/</link>
       <pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/</guid>
       <description>在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp;amp; org 的差</description>
     </item>
     
     <item>
       <title>Build AWS Lambda Hello World Function By SAM</title>
-      <link>https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/</link>
+      <link>https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/</link>
       <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/</guid>
+      <guid>https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/</guid>
       <description>以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless</description>
     </item>
     
     <item>
       <title>Java Jersey Client 取得每個 Request Duration</title>
-      <link>https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/</link>
+      <link>https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/</link>
       <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/</guid>
+      <guid>https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/</guid>
       <description>這新專案我選擇使用了之前沒使用過的 Jersey Client ~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99</description>
     </item>
     
     <item>
       <title>Java Optional 基本 &amp; 心得分享</title>
-      <link>https://allen-hsieh1992.github.io/posts/java/java-optional-basic/</link>
+      <link>https://allenhsieh1992.com/posts/java/java-optional-basic/</link>
       <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allen-hsieh1992.github.io/posts/java/java-optional-basic/</guid>
+      <guid>https://allenhsieh1992.com/posts/java/java-optional-basic/</guid>
       <description>最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning</description>
     </item>
     

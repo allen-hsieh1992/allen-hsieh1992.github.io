@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://allen-hsieh1992.github.io/sitemap.xml
+Sitemap: https://allenhsieh1992.com/sitemap.xml

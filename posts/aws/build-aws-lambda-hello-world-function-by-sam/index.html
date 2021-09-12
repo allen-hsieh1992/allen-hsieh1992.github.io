@@ -3,30 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Build AWS Lambda Hello World Function By SAM - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allen-hsieh1992.github.io/images/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="https://allen-hsieh1992.github.io/images/favicons/manifest.json">
-<link rel="icon" href="https://allen-hsieh1992.github.io/images/favicons/favicon.ico">
+    <title>Build AWS Lambda Hello World Function By SAM - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
 <meta name="description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。" /><meta itemprop="name" content="Build AWS Lambda Hello World Function By SAM">
 <meta itemprop="description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。"><meta itemprop="datePublished" content="2021-07-03T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-03T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2381"><meta itemprop="image" content="https://allen-hsieh1992.github.io/images/aws.jpeg">
-<meta itemprop="keywords" content="AWS,LAMBDA," /><meta property="og:title" content="Build AWS Lambda Hello World Function By SAM" />
+<meta itemprop="wordCount" content="2381"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="keywords" content="AWS,LAMBDA,CLOUDFORMATION,SAM," /><meta property="og:title" content="Build AWS Lambda Hello World Function By SAM" />
 <meta property="og:description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/" /><meta property="og:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-07-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-07-03T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://allen-hsieh1992.github.io/images/aws.jpeg"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/aws.jpeg"/>
 
 <meta name="twitter:title" content="Build AWS Lambda Hello World Function By SAM"/>
 <meta name="twitter:description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。"/>
-<meta data-name="palette" content="blue"><link rel="preload" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allen-hsieh1992.github.io/js/bundle.min.2da34b4efd951e2e552e9e3a1c4800ac1fee799aeb56a3e35a5599337cb94372.js" integrity="sha256-LaNLTv2VHi5VLp46HEgArB/ueZrrVqPjWlWZM3y5Q3I=" crossorigin="anonymous"></script>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.7fc0dcec4043950586f53c3fed9b2fbf28d6f4e4812a1e62a74b35afe159de07.css" integrity="sha256-f8Dc7EBDlQWG9Tw/7ZsvvyjW9OSBKh5ip0s1r&#43;FZ3gc=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.2da34b4efd951e2e552e9e3a1c4800ac1fee799aeb56a3e35a5599337cb94372.js" integrity="sha256-LaNLTv2VHi5VLp46HEgArB/ueZrrVqPjWlWZM3y5Q3I=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -38,35 +38,35 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<link rel="stylesheet" href="https://allen-hsieh1992.github.io/css/custom.css" crossorigin="anonymous"></head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
+<link rel="stylesheet" href="https://allenhsieh1992.com/css/custom.css" crossorigin="anonymous"></head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="https://allen-hsieh1992.github.io/">
-      <img class="logo" alt="Logo" src="https://allen-hsieh1992.github.io/images/logo.png"
+    <a class="navbar-brand" href="https://allenhsieh1992.com/">
+      <img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png"
    width="136" height="70" loading="lazy" />
 艾倫的開發心路歷程</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allen-hsieh1992.github.io/search">
+      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allenhsieh1992.com/search">
   <div class="input-group input-group-sm">
     <button class="btn btn-search disabled position-absolute left-0" type="submit" aria-label="submit"><i class="fas fa-fw fa-search"></i></button>
     <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
   </div>
 </form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
-          <a class="nav-link" href="https://allen-hsieh1992.github.io/archives/">
+          <a class="nav-link" href="https://allenhsieh1992.com/archives/">
             <i class="fas fa-fw fa-file-archive"></i>歸檔
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="https://allen-hsieh1992.github.io/categories/">
+          <a class="nav-link" href="https://allenhsieh1992.com/categories/">
             <i class="fas fa-fw fa-folder"></i>分類
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="https://allen-hsieh1992.github.io/tags/">
+          <a class="nav-link" href="https://allenhsieh1992.com/tags/">
             <i class="fas fa-fw fa-tags"></i>標籤
           </a>
         </li><li class="nav-item">
-          <a class="nav-link" href="https://allen-hsieh1992.github.io/series/">
+          <a class="nav-link" href="https://allenhsieh1992.com/series/">
             <i class="fas fa-fw fa-columns"></i>專欄
           </a>
         </li><li class="nav-item">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/">主頁</a></li><li class="breadcrumb-item"><a href="https://allen-hsieh1992.github.io/posts/">文章</a></li><li class="breadcrumb-item active">Build AWS Lambda Hello World Function by SAM</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Build AWS Lambda Hello World Function by SAM</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 <h1 class="post-title my-3">Build AWS Lambda Hello World Function by SAM
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 3, 2021
-  </span><span class="post-taxonomies"><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allen-hsieh1992.github.io/tags/lambda/" class="post-taxonomy">LAMBDA</a></span>
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy">LAMBDA</a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy">CLOUDFORMATION</a><a href="https://allenhsieh1992.com/tags/sam/" class="post-taxonomy">SAM</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -421,37 +421,37 @@ if (!doNotTrack) {
 </code></pre></div><h2 id="sam-部署到-aws">SAM 部署到 AWS</h2>
 <hr>
 <p>這邊可以透過 sam deploy –guided  Deploy 到 AWS 上面，由於內容資訊比較多，所以這邊用圖片的方式，在第一次執行時這邊會需要填寫一些預設資料。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/sam_deploy.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/sam_deploy.png"
    width="1914" height="1028" loading="lazy" />
 
 </p>
 <p>在填完預設資料後，SAM會一直執行，直到要你確認這次 Deploy 的改動 CloudFormation 的 changeset</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/sam_changeset.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/sam_changeset.png"
    width="1920" height="873" loading="lazy" />
 
 </p>
 <p>CloudFormation 這時候會卡在 REVIEW_IN_PROGRESS</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/cloudFormation_review_in_progress.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/cloudFormation_review_in_progress.png"
    width="1920" height="349" loading="lazy" />
 
 </p>
 <p>這時Change Set 同意以後，這時看 CloudFormation 會正在建立 Resource， Status 是 CREATE_IN_PROGRESS</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/cloudFormation_create_in_progress.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/cloudFormation_create_in_progress.png"
    width="1920" height="353" loading="lazy" />
 
 </p>
 <p>SAM CLI 在 Deploy 完以後，會看到類似以下資訊</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/sam_deploy_successfully.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/sam_deploy_successfully.png"
    width="1920" height="1010" loading="lazy" />
 
 </p>
 <p>可以在 API Gateway 看到新的 Endpoint</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/sam_created_api_gateway.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/sam_created_api_gateway.png"
    width="1920" height="786" loading="lazy" />
 
 </p>
 <p>也可以在 Lambda 看到 HelloWorld Lambda Function 建立好了</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/sam_created_lambda_function.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/sam_created_lambda_function.png"
    width="1920" height="819" loading="lazy" />
 
 </p>
@@ -515,23 +515,23 @@ if (!doNotTrack) {
 <p>如果大家有 Deploy 到 AWS 上，最後記得要把 CloudFormation 建立出來的環境給刪除，以免產生額外的費用。這邊可以直接到 AWS CloudFormation 把 Stack 給刪除，或者使用 AWS CLI</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ aws cloudformation delete-stack --stack-name demo  
 </code></pre></div><p>這邊要注意一下， SAM 會建立一個 S3 當作 Artifact ，所以需要先把 S3 裡面的資料手動清掉才可以 delete stack，否則 stack 會刪除失敗。以下是S3 沒有清空時的範例圖</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allen-hsieh1992.github.io/images/post/build-aws-lambda-hello-world-function-by-sam/cloudformation_delete_fail.png"
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/build-aws-lambda-hello-world-function-by-sam/cloudformation_delete_fail.png"
    width="1920" height="557" loading="lazy" />
 
 </p>
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
-      <a href="https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+      <a href="https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
 </a>
     </div></div>
   <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
-      <a href="https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+      <a href="https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
 </a>
     </div></div>
 </div><section class="related-posts">
     <h3>相關文章</h3>
-    <ul class="related-posts"><li><a href="https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/java/java-optional-basic/">Java Optional 基本 &amp; 心得分享
+    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></li><li><a href="https://allenhsieh1992.com/posts/java/java-optional-basic/">Java Optional 基本 &amp; 心得分享
 </a></li></ul>
   </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
   repo="allen-hsieh1992/allen-hsieh1992.github.io"
@@ -543,52 +543,52 @@ if (!doNotTrack) {
 </script></div></div>
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container"><section class="profile surface row text-center">
-  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allen-hsieh1992.github.io/images/icon.gif"
+  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif"
    width="154" height="153" loading="lazy" />
 </div>
   <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">Senior Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/">Beanstalk Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
-</a></li><li><a href="https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/">Route53 Associate Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/">Beanstalk Associate Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/">CloudFormation Associate Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/">S3 Associate Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/">Systems Manager (SSM) Associate Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/">VPC Associate Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
-        <a href="https://allen-hsieh1992.github.io/categories">分類</a>
+        <a href="https://allenhsieh1992.com/categories">分類</a>
       </h4>
-      <div><a href="https://allen-hsieh1992.github.io/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">9</span>
-        </a><a href="https://allen-hsieh1992.github.io/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+      <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">10</span>
+        </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
-        <a href="https://allen-hsieh1992.github.io/tags">標籤</a>
+        <a href="https://allenhsieh1992.com/tags">標籤</a>
       </h4>
-      <div><a href="https://allen-hsieh1992.github.io/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">9</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+      <div><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">10</span>
+        </a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CLOUDFORMATION">
+          CLOUDFORMATION <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
+        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
           ROUTE53 <span class="badge rounded-pill">2</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="BEANSTALK">
+        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="BEANSTALK">
           BEANSTALK <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
+        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
           COGNITO <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
+        </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LAMBDA">
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LAMBDA">
           LAMBDA <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/lightsail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LIGHTSAIL">
+        </a><a href="https://allenhsieh1992.com/tags/lightsail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="LIGHTSAIL">
           LIGHTSAIL <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
+        </a><a href="https://allenhsieh1992.com/tags/optional/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="OPTIONAL">
           OPTIONAL <span class="badge rounded-pill">1</span>
-        </a><a href="https://allen-hsieh1992.github.io/tags/s3/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="S3">
-          S3 <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

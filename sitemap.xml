@@ -2,97 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://allen-hsieh1992.github.io/tags/aws/</loc>
+    <loc>https://allenhsieh1992.com/tags/aws/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/categories/aws/</loc>
+    <loc>https://allenhsieh1992.com/categories/aws/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/beanstalk/</loc>
+    <loc>https://allenhsieh1992.com/tags/beanstalk/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/beanstalk-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/beanstalk-associate-certification-note/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/s3/</loc>
+    <loc>https://allenhsieh1992.com/tags/cloudformation/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/s3-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/cf-associate-certification-note/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/categories/</loc>
+    <loc>https://allenhsieh1992.com/tags/s3/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/s3-associate-certification-note/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/</loc>
+    <loc>https://allenhsieh1992.com/categories/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/</loc>
+    <loc>https://allenhsieh1992.com/posts/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/ssm/</loc>
+    <loc>https://allenhsieh1992.com/tags/</loc>
+    <lastmod>2021-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/</loc>
+    <lastmod>2021-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/ssm/</loc>
     <lastmod>2021-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/ssm-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/ssm-associate-certification-note/</loc>
     <lastmod>2021-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/vpc/</loc>
+    <loc>https://allenhsieh1992.com/tags/vpc/</loc>
     <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/vpc-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/vpc-associate-certification-note/</loc>
     <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/route53/</loc>
+    <loc>https://allenhsieh1992.com/tags/route53/</loc>
     <lastmod>2021-09-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/route53-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/route53-associate-certification-note/</loc>
     <lastmod>2021-09-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/ec2/</loc>
+    <loc>https://allenhsieh1992.com/tags/ec2/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/ec2-associate-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/ec2-associate-certification-note/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/cognito/</loc>
+    <loc>https://allenhsieh1992.com/tags/cognito/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/create-cognito-user-pool-by-aws-cli/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/lightsail/</loc>
+    <loc>https://allenhsieh1992.com/tags/lightsail/</loc>
     <lastmod>2021-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/use-lightsail-to-create-wordpress-website/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/</loc>
     <lastmod>2021-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/aws/build-aws-lambda-hello-world-function-by-sam/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/</loc>
     <lastmod>2021-07-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/lambda/</loc>
+    <loc>https://allenhsieh1992.com/tags/lambda/</loc>
     <lastmod>2021-07-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/java/</loc>
+    <loc>https://allenhsieh1992.com/tags/sam/</loc>
+    <lastmod>2021-07-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/java/</loc>
     <lastmod>2021-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/categories/java/</loc>
+    <loc>https://allenhsieh1992.com/categories/java/</loc>
     <lastmod>2021-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/java/java-jersey-client-log-request-duration/</loc>
+    <loc>https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/</loc>
     <lastmod>2021-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/posts/java/java-optional-basic/</loc>
+    <loc>https://allenhsieh1992.com/posts/java/java-optional-basic/</loc>
     <lastmod>2021-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/tags/optional/</loc>
+    <loc>https://allenhsieh1992.com/tags/optional/</loc>
     <lastmod>2021-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/series/</loc>
+    <loc>https://allenhsieh1992.com/series/</loc>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/search/</loc>
+    <loc>https://allenhsieh1992.com/search/</loc>
   </url><url>
-    <loc>https://allen-hsieh1992.github.io/archives/</loc>
+    <loc>https://allenhsieh1992.com/archives/</loc>
   </url>
 </urlset>
