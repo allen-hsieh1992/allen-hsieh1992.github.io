@@ -9,6 +9,15 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Mon, 13 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>CodeBuild Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/codebuild-certification-note/</link>
+      <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/codebuild-certification-note/</guid>
+      <description>CodeBuild Basic AWS 託管 Build Service類似 Jenkins。可以編譯，跑單元測試，或者打包 package 到 artifacts. 根據 運行力 和 執行時間來計價 Build Log 可以送到 CloudWatch or S3 CodeBuild 是使用 Docker 技術</description>
+    </item>
+    
+    <item>
       <title>CodeCommit Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/codecommit-certification-note/</link>
       <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
