@@ -13,7 +13,7 @@
 <meta itemprop="description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。"><meta itemprop="datePublished" content="2021-06-27T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-06-27T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2221"><meta itemprop="image" content="https://allenhsieh1992.com/images/java.jpeg">
-<meta itemprop="keywords" content="JAVA,OPTIONAL," /><meta property="og:title" content="Java Optional 基本 &amp; 心得分享" />
+<meta itemprop="keywords" content="Optional," /><meta property="og:title" content="Java Optional 基本 &amp; 心得分享" />
 <meta property="og:description" content="最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://allenhsieh1992.com/posts/java/java-optional-basic/" /><meta property="og:image" content="https://allenhsieh1992.com/images/java.jpeg" /><meta property="article:section" content="posts" />
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 <h1 class="post-title my-3">Java Optional 基本 &amp; 心得分享
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jun 27, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/java/" class="post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/optional/" class="post-taxonomy">OPTIONAL</a></span>
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/optional/" class="post-taxonomy">Optional</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -483,26 +483,26 @@ if (!doNotTrack) {
       <h4>
         <a href="https://allenhsieh1992.com/tags">標籤</a>
       </h4>
-      <div><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">13</span>
-        </a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CLOUDFORMATION">
-          CLOUDFORMATION <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
-          ROUTE53 <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="BEANSTALK">
-          BEANSTALK <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEBUILD">
-          CODEBUILD <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODECOMMIT">
-          CODECOMMIT <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEDEPLOY">
-          CODEDEPLOY <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
-          COGNITO <span class="badge rounded-pill">1</span>
+      <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
+          CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
+          Route53 <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
+          Beanstalk <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeBuild">
+          CodeBuild <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeCommit">
+          CodeCommit <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeDeploy">
+          CodeDeploy <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
+          Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lightstail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lightstail">
+          Lightstail <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

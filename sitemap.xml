@@ -2,9 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://allenhsieh1992.com/tags/aws/</loc>
-    <lastmod>2021-09-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://allenhsieh1992.com/categories/aws/</loc>
     <lastmod>2021-09-18T00:00:00+00:00</lastmod>
   </url><url>
@@ -56,10 +53,10 @@
     <loc>https://allenhsieh1992.com/posts/aws/s3-certification-note/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allenhsieh1992.com/tags/ssm/</loc>
+    <loc>https://allenhsieh1992.com/posts/aws/ssm-certification-note/</loc>
     <lastmod>2021-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allenhsieh1992.com/posts/aws/ssm-certification-note/</loc>
+    <loc>https://allenhsieh1992.com/tags/systemsmanager/</loc>
     <lastmod>2021-09-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/tags/vpc/</loc>
@@ -86,7 +83,7 @@
     <loc>https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allenhsieh1992.com/tags/lightsail/</loc>
+    <loc>https://allenhsieh1992.com/tags/lightstail/</loc>
     <lastmod>2021-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/tags/wordpress/</loc>
@@ -103,9 +100,6 @@
   </url><url>
     <loc>https://allenhsieh1992.com/tags/sam/</loc>
     <lastmod>2021-07-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allenhsieh1992.com/tags/java/</loc>
-    <lastmod>2021-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/categories/java/</loc>
     <lastmod>2021-06-30T00:00:00+00:00</lastmod>

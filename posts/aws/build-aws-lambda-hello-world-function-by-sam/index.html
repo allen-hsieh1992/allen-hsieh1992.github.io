@@ -13,7 +13,7 @@
 <meta itemprop="description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。"><meta itemprop="datePublished" content="2021-07-03T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-03T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2381"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="AWS,LAMBDA,CLOUDFORMATION,SAM," /><meta property="og:title" content="Build AWS Lambda Hello World Function By SAM" />
+<meta itemprop="keywords" content="Lambda,CloudFormation,SAM," /><meta property="og:title" content="Build AWS Lambda Hello World Function By SAM" />
 <meta property="og:description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 <h1 class="post-title my-3">Build AWS Lambda Hello World Function by SAM
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 3, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy">LAMBDA</a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy">CLOUDFORMATION</a><a href="https://allenhsieh1992.com/tags/sam/" class="post-taxonomy">SAM</a></span>
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy">Lambda</a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy">CloudFormation</a><a href="https://allenhsieh1992.com/tags/sam/" class="post-taxonomy">SAM</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -569,26 +569,26 @@ if (!doNotTrack) {
       <h4>
         <a href="https://allenhsieh1992.com/tags">標籤</a>
       </h4>
-      <div><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">13</span>
-        </a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CLOUDFORMATION">
-          CLOUDFORMATION <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
-          ROUTE53 <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="BEANSTALK">
-          BEANSTALK <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEBUILD">
-          CODEBUILD <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODECOMMIT">
-          CODECOMMIT <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEDEPLOY">
-          CODEDEPLOY <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
-          COGNITO <span class="badge rounded-pill">1</span>
+      <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
+          CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
+          Route53 <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
+          Beanstalk <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeBuild">
+          CodeBuild <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeCommit">
+          CodeCommit <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeDeploy">
+          CodeDeploy <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
+          Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lightstail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lightstail">
+          Lightstail <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

@@ -9,16 +9,7 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Sat, 18 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AWS</title>
-      <link>https://allenhsieh1992.com/tags/aws/</link>
-      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://allenhsieh1992.com/tags/aws/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CODEDEPLOY</title>
+      <title>CodeDeploy</title>
       <link>https://allenhsieh1992.com/tags/codedeploy/</link>
       <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -27,7 +18,7 @@
     </item>
     
     <item>
-      <title>CODEBUILD</title>
+      <title>CodeBuild</title>
       <link>https://allenhsieh1992.com/tags/codebuild/</link>
       <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -36,7 +27,7 @@
     </item>
     
     <item>
-      <title>CODECOMMIT</title>
+      <title>CodeCommit</title>
       <link>https://allenhsieh1992.com/tags/codecommit/</link>
       <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -45,7 +36,7 @@
     </item>
     
     <item>
-      <title>BEANSTALK</title>
+      <title>Beanstalk</title>
       <link>https://allenhsieh1992.com/tags/beanstalk/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -54,7 +45,7 @@
     </item>
     
     <item>
-      <title>CLOUDFORMATION</title>
+      <title>CloudFormation</title>
       <link>https://allenhsieh1992.com/tags/cloudformation/</link>
       <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -72,11 +63,11 @@
     </item>
     
     <item>
-      <title>SSM</title>
-      <link>https://allenhsieh1992.com/tags/ssm/</link>
+      <title>SystemsManager</title>
+      <link>https://allenhsieh1992.com/tags/systemsmanager/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/tags/ssm/</guid>
+      <guid>https://allenhsieh1992.com/tags/systemsmanager/</guid>
       <description></description>
     </item>
     
@@ -90,7 +81,7 @@
     </item>
     
     <item>
-      <title>ROUTE53</title>
+      <title>Route53</title>
       <link>https://allenhsieh1992.com/tags/route53/</link>
       <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -108,7 +99,7 @@
     </item>
     
     <item>
-      <title>COGNITO</title>
+      <title>Cognito</title>
       <link>https://allenhsieh1992.com/tags/cognito/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
@@ -117,11 +108,11 @@
     </item>
     
     <item>
-      <title>LIGHTSAIL</title>
-      <link>https://allenhsieh1992.com/tags/lightsail/</link>
+      <title>Lightstail</title>
+      <link>https://allenhsieh1992.com/tags/lightstail/</link>
       <pubDate>Sun, 04 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://allenhsieh1992.com/tags/lightsail/</guid>
+      <guid>https://allenhsieh1992.com/tags/lightstail/</guid>
       <description></description>
     </item>
     
@@ -135,7 +126,7 @@
     </item>
     
     <item>
-      <title>LAMBDA</title>
+      <title>Lambda</title>
       <link>https://allenhsieh1992.com/tags/lambda/</link>
       <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
       
@@ -153,16 +144,7 @@
     </item>
     
     <item>
-      <title>JAVA</title>
-      <link>https://allenhsieh1992.com/tags/java/</link>
-      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://allenhsieh1992.com/tags/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OPTIONAL</title>
+      <title>Optional</title>
       <link>https://allenhsieh1992.com/tags/optional/</link>
       <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
       

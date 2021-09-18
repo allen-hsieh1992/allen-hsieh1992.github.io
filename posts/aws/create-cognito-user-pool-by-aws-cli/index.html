@@ -13,7 +13,7 @@
 <meta itemprop="description" content="個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己的使用者群。這時可以選擇考慮 AWS Cognito，它可以讓你快速的為你的服務建立使用者群，並且可以整合讓使用者擁有權限操作其他 AWS 服務 。由於使用 UI 建立 Cognito User Pool 的文章已經不少，所以這邊文章會介紹使用 AWS CLI cognito-idp 建立一個用戶可以註冊，並且自己透過 Mail 認證通過的 User Pool。"><meta itemprop="datePublished" content="2021-07-11T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-11T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2421"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="AWS,COGNITO," /><meta property="og:title" content="使用 AWS Cognito CLI 建立 User Pool" />
+<meta itemprop="keywords" content="Cognito," /><meta property="og:title" content="使用 AWS Cognito CLI 建立 User Pool" />
 <meta property="og:description" content="個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己的使用者群。這時可以選擇考慮 AWS Cognito，它可以讓你快速的為你的服務建立使用者群，並且可以整合讓使用者擁有權限操作其他 AWS 服務 。由於使用 UI 建立 Cognito User Pool 的文章已經不少，所以這邊文章會介紹使用 AWS CLI cognito-idp 建立一個用戶可以註冊，並且自己透過 Mail 認證通過的 User Pool。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
@@ -161,7 +161,7 @@ if (!doNotTrack) {
 <h1 class="post-title my-3">使用 AWS Cognito CLI 建立 User Pool
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 11, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy">COGNITO</a></span>
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy">Cognito</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -494,26 +494,26 @@ if (!doNotTrack) {
       <h4>
         <a href="https://allenhsieh1992.com/tags">標籤</a>
       </h4>
-      <div><a href="https://allenhsieh1992.com/tags/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">13</span>
-        </a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CLOUDFORMATION">
-          CLOUDFORMATION <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="ROUTE53">
-          ROUTE53 <span class="badge rounded-pill">2</span>
-        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="BEANSTALK">
-          BEANSTALK <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEBUILD">
-          CODEBUILD <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODECOMMIT">
-          CODECOMMIT <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CODEDEPLOY">
-          CODEDEPLOY <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="COGNITO">
-          COGNITO <span class="badge rounded-pill">1</span>
+      <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
+          CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
+          Route53 <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
+          Beanstalk <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeBuild">
+          CodeBuild <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeCommit">
+          CodeCommit <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeDeploy">
+          CodeDeploy <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
+          Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/lightstail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lightstail">
+          Lightstail <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>
