@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="艾倫的開發心路歷程"/>
 <meta name="twitter:description" content="艾倫的學習筆記"/>
 <meta name="google-site-verification" content="_gKaAX8cSqcX1v_ahNmM-xC-MSd7O5dxXyyxkHemEVw" /><meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.5710a4c6e02f45d3c646606e34fa9c8bd1013fbbe58c7c1c77a8f7a5f96f7dbc.js" integrity="sha256-VxCkxuAvRdPGRmBuNPqci9EBP7vljHwcd6j3pflvfbw=" crossorigin="anonymous"></script>
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.00090c4e9364a3a60056a68e094853d5b09a8abdf7c032d5fbe90072cef5bfb1.js" integrity="sha256-AAkMTpNko6YAVqaOCUhT1bCair33wDLV&#43;&#43;kAcs71v7E=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -137,6 +137,20 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><div class="posts mb-4"><article class="post row surface">
+      <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
+</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Sep 3, 2021
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy">EC2</a></span>
+</div>
+<div class="post-summary mb-3">
+        
+        <img class="img-fluid" alt="EC2 Certification Note" src="https://allenhsieh1992.com/images/aws.jpeg"
+   width="425" height="213" loading="lazy" />
+
+        
+        準備 AWS Certificate 時 EC2 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。
+      </div>
+    </article><article class="post row surface">
       <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
 </a></h2><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jul 11, 2021
@@ -192,20 +206,6 @@ if (!doNotTrack) {
         
         這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “What is P99 latency?“)。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。
       </div>
-    </article><article class="post row surface">
-      <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/java/java-optional-basic/">Java Optional 基本 &amp; 心得分享
-</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
-    <i class="fas fa-fw fa-calendar-alt"></i>Jun 27, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/optional/" class="post-taxonomy">Optional</a></span>
-</div>
-<div class="post-summary mb-3">
-        
-        <img class="img-fluid" alt="Java Optional 基本 &amp; 心得分享" src="https://allenhsieh1992.com/images/java.jpeg"
-   width="1200" height="800" loading="lazy" />
-
-        
-        最近我們部門在開發新的微服務都是使用 Java，但許多同事都是寫習慣 PHP 且之前沒有使用過 Java 。由於像 PHP 這種 Script Language 在處理 Undefined Variable 時，只是提示Warning，導致有的同事沒有良好的檢查 null 的習慣。有的同事抱怨 Null Pointer Exception 花了許多的時間在尋找，所以我決定在這次的新專案中，使用 Optional 來減少 Null Pointer Exception。
-      </div>
     </article></div><div class="row table-responsive mb-3">
     <ul class="pagination pagination-default">
       <li class="page-item">
@@ -223,11 +223,14 @@ if (!doNotTrack) {
       <li class="page-item active">
         <a href="#" aria-current="page" aria-label="Page 3" class="page-link" role="button">3</a>
       </li>
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      <li class="page-item">
+        <a href="/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
       </li>
-      <li class="page-item disabled">
-        <a href="#" aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      <li class="page-item">
+        <a href="/page/4/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul></div>
 </div>
@@ -243,17 +246,17 @@ if (!doNotTrack) {
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
   <ul><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/">CodePipeline Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codebuild-certification-note/">CodeBuild Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codecommit-certification-note/">CodeCommit Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/">CloudFormation Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allenhsieh1992.com/categories">分類</a>
       </h4>
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">13</span>
+          AWS <span class="badge rounded-pill">14</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -273,14 +276,14 @@ if (!doNotTrack) {
           CodeCommit <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeDeploy">
           CodeDeploy <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodePipeline">
+          CodePipeline <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
           Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
           Lambda <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/lightstail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lightstail">
-          Lightstail <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>
