@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CloudFormation Certification Note">
 <meta itemprop="description" content="準備 AWS Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-12T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2019"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="2061"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="CloudFormation," /><meta property="og:title" content="CloudFormation Certification Note" />
 <meta property="og:description" content="準備 AWS Certificate 時 CloudFormation 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -532,7 +532,7 @@ if (!doNotTrack) {
 <li>
 <p>auto scaling group 有三種 Policy ，前兩種需要設定 WillReplace = true</p>
 <ul>
-<li>AutoScalingReplacingUpdate: 建立全新的 Auto Scaling Group 取代舊的</li>
+<li>AutoScalingReplacingUpdate: WillReplace可以用來決定建立全新的 Auto Scaling Group 取代舊，還是單純建立新的 Instance 來取代現有的 Instance 但 Auto Scaling Group 還是舊的。</li>
 <li>AutoScalingRollingUpdate: 在 Auto Scaling Group，將現有的 EC2 Instance 停掉，並建立新的取代</li>
 <li>AutoScalingScheduledAction</li>
 </ul>
@@ -812,18 +812,18 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/">CodePipeline Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codebuild-certification-note/">CodeBuild Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codecommit-certification-note/">CodeCommit Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allenhsieh1992.com/categories">分類</a>
       </h4>
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">14</span>
+          AWS <span class="badge rounded-pill">15</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -833,6 +833,8 @@ if (!doNotTrack) {
       </h4>
       <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
           CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
           Route53 <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
@@ -849,8 +851,6 @@ if (!doNotTrack) {
           Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
-          Lambda <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

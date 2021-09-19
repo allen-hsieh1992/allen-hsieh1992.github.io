@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sat, 18 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lambda Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/lambda-certification-note/</link>
+      <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/lambda-certification-note/</guid>
+      <description>Lambda 是 AWS 無伺服器的運算服務，以下幾點為 AWS 端的責任 Capacity Provisioning OS Patching Auto Scaling High Availability Basic Setting Memory usage 會影響 CPU timeout 設定，最多十五分鐘 role to execute the function 收費根據以下三點 Request 數量 Lambda Function 處理 request</description>
+    </item>
+    
     <item>
       <title>CodeDeploy Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/</link>

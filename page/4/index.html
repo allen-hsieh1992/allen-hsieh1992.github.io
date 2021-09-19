@@ -137,6 +137,20 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><div class="posts mb-4"><article class="post row surface">
+      <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jun 30, 2021
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a></span>
+</div>
+<div class="post-summary mb-3">
+        
+        <img class="img-fluid" alt="Java Jersey Client 取得每個 Request Duration" src="https://allenhsieh1992.com/images/java.jpeg"
+   width="1200" height="800" loading="lazy" />
+
+        
+        這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “What is P99 latency?“)。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。
+      </div>
+    </article><article class="post row surface">
       <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/java/java-optional-basic/">Java Optional 基本 &amp; 心得分享
 </a></h2><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jun 27, 2021
@@ -189,18 +203,18 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/">CodePipeline Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codebuild-certification-note/">CodeBuild Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codecommit-certification-note/">CodeCommit Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
         <a href="https://allenhsieh1992.com/categories">分類</a>
       </h4>
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
-          AWS <span class="badge rounded-pill">14</span>
+          AWS <span class="badge rounded-pill">15</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
           JAVA <span class="badge rounded-pill">2</span>
         </a></div>
@@ -210,6 +224,8 @@ if (!doNotTrack) {
       </h4>
       <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
           CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
           Route53 <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
@@ -226,8 +242,6 @@ if (!doNotTrack) {
           Cognito <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/ec2/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="EC2">
           EC2 <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
-          Lambda <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>
