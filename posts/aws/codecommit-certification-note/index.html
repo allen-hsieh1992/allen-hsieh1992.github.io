@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CodeCommit Certification Note">
 <meta itemprop="description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-13T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-13T00:00:00+00:00" />
-<meta itemprop="wordCount" content="344"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="368"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="CodeCommit," /><meta property="og:title" content="CodeCommit Certification Note" />
 <meta property="og:description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -177,6 +177,7 @@ if (!doNotTrack) {
     <li><a href="#repository">Repository</a></li>
     <li><a href="#pull-request">Pull Request</a></li>
     <li><a href="#透過-iam-限制-push--merge-master">透過 IAM 限制 Push &amp; Merge Master</a></li>
+    <li><a href="#iam-policy">IAM Policy</a></li>
   </ul>
 </nav>
   </div>
@@ -249,7 +250,13 @@ if (!doNotTrack) {
 <span class="ln">28</span>        <span class="p">}</span>
 <span class="ln">29</span>    <span class="p">]</span>
 <span class="ln">30</span><span class="p">}</span>
-</code></pre></div></div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+</code></pre></div><h2 id="iam-policy">IAM Policy</h2>
+<ul>
+<li>AWSCodeCommitFullAccess : Admin 權限</li>
+<li>AwSCodeCommitPowerUser: 不可以建立和刪除 repository</li>
+<li>AWSCodeCommitReadOnly: 使可以讀資訊</li>
+</ul>
+</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
       <a href="https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/">Beanstalk Certification Note
 </a>
