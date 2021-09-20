@@ -18,6 +18,15 @@
     </item>
     
     <item>
+      <title>Config Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/config-certification-note/</link>
+      <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/config-certification-note/</guid>
+      <description>Basic Resource Type : Config 是 Region Level 服務，預設存取當下 Region 下 Config 支援服務的全部設定，可以指定特定服務 可以存取 Global 服務的設定 所有 Config 紀錄存取到 S3 單一 Resource 可以看 Configuration Timeline detailed 包含 和其</description>
+    </item>
+    
+    <item>
       <title>Lambda Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/lambda-certification-note/</link>
       <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
