@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 19 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CloudTail</title>
+      <link>https://allenhsieh1992.com/tags/cloudtail/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/tags/cloudtail/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Lambda</title>
       <link>https://allenhsieh1992.com/tags/lambda/</link>

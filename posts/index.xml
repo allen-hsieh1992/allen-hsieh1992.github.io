@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Sun, 19 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CloudTail Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/</guid>
+      <description>CloudTail 主要用於監控和稽核 AWS 資源的 API Call Trails 每個 Region 上限五個 Type All Region : 所有的 Region Event Log 存在一個 S3 Bucket One Region : 指定特定 Region Event Log Organization Trail : 可以 Log 整個 AWS Organization 的 Event，只有 management</description>
+    </item>
+    
     <item>
       <title>Lambda Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/lambda-certification-note/</link>
