@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Mon, 20 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DynamoDB Certification Note</title>
+      <link>https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/</link>
+      <pubDate>Tue, 21 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/</guid>
+      <description>Basic of DynamoDB DynamoDB 是 AWS NOSQL Database. performance 的部分，DynamoDB 的資料存在 SSD Data 會自動備份到不同的 AZ ，預防 single point failure DynamoDB 以 table 為單位，裡面每筆的 Row 為 Item ，而每個 Item 的 Column 為 Attribute DynamoDB 有</description>
+    </item>
+    
     <item>
       <title>CloudTail Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/</link>
@@ -20,7 +29,7 @@
     <item>
       <title>Config Certification Note</title>
       <link>https://allenhsieh1992.com/posts/aws/config-certification-note/</link>
-      <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://allenhsieh1992.com/posts/aws/config-certification-note/</guid>
       <description>Basic Resource Type : Config 是 Region Level 服務，預設存取當下 Region 下 Config 支援服務的全部設定，可以指定特定服務 可以存取 Global 服務的設定 所有 Config 紀錄存取到 S3 單一 Resource 可以看 Configuration Timeline detailed 包含 和其</description>
