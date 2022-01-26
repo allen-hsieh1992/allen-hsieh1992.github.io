@@ -9,7 +9,7 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 26 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Java Garbage Collection 基礎</title>
+      <title>Java Garbage Collection 基礎原理</title>
       <link>https://allenhsieh1992.com/posts/java/java-garbage-collection/</link>
       <pubDate>Wed, 26 Jan 2022 00:00:00 +0000</pubDate>
       
