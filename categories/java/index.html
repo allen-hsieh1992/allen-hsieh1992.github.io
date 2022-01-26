@@ -138,6 +138,20 @@ if (!doNotTrack) {
   <div class="container"><nav class="row" aria-label="breadcrumb">
   <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/categories/">分類</a></li><li class="breadcrumb-item active">JAVA</li></ol>
 </nav><div class="posts mb-4"><article class="post row surface">
+      <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎
+</a></h2><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jan 26, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a></span>
+</div>
+<div class="post-summary mb-3">
+        
+        <img class="img-fluid" alt="Java Garbage Collection 基礎" src="https://allenhsieh1992.com/images/java.jpeg"
+   width="1200" height="800" loading="lazy" />
+
+        
+        這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “ What is P99 latency?“ )。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。
+      </div>
+    </article><article class="post row surface">
       <h2 class="post-title mb-4"><a href="https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
 </a></h2><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jun 30, 2021
@@ -178,11 +192,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
@@ -191,7 +205,7 @@ if (!doNotTrack) {
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">18</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
+          JAVA <span class="badge rounded-pill">3</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
@@ -225,7 +239,7 @@ if (!doNotTrack) {
       <i class="fas fa-fw fa-2x fa-rss"></i>
     </a></nav>
 <div class="copyright mb-2">
-  Copyright © 2021-2021 Allen Hsieh. All Rights Reserved.
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
 <a id="btnScrollToTop" class="btn-scroll-to-top">

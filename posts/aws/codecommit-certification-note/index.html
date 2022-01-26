@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CodeCommit Certification Note">
 <meta itemprop="description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-13T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-13T00:00:00+00:00" />
-<meta itemprop="wordCount" content="368"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="378"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="CodeCommit," /><meta property="og:title" content="CodeCommit Certification Note" />
 <meta property="og:description" content="準備 AWS Certificate 時 CodeCommit 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -197,7 +197,11 @@ if (!doNotTrack) {
 <hr>
 <ul>
 <li>每個 Repository 沒有 Size 限制</li>
-<li>可以建立 Notification Rule ，根據設定的 Event 發出 SNS</li>
+<li>可以建立 Notification Rule ，根據設定的 Event 發出 SNS
+<ul>
+<li>SNS 必須跟 CodeCommit 在同一個 Region</li>
+</ul>
+</li>
 <li>可以建立 Event Trigger 觸發 SNS 或 Lambda</li>
 <li>可以給予其他 AWS Account User 讀取權限</li>
 <li>可以透過 KMS 加密 Repository 裡面的 File</li>
@@ -254,7 +258,7 @@ if (!doNotTrack) {
 <ul>
 <li>AWSCodeCommitFullAccess : Admin 權限</li>
 <li>AwSCodeCommitPowerUser: 不可以建立和刪除 repository</li>
-<li>AWSCodeCommitReadOnly: 使可以讀資訊</li>
+<li>AWSCodeCommitReadOnly: 只可以讀資訊</li>
 </ul>
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
@@ -290,11 +294,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
@@ -303,7 +307,7 @@ if (!doNotTrack) {
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">18</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
+          JAVA <span class="badge rounded-pill">3</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
@@ -335,7 +339,7 @@ if (!doNotTrack) {
 </div>
     </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"></nav>
 <div class="copyright mb-2">
-  Copyright © 2021-2021 Allen Hsieh. All Rights Reserved.
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
 <a id="btnScrollToTop" class="btn-scroll-to-top">

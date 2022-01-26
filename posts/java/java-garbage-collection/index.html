@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CloudTail Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+    <title>Java Garbage Collection 基礎 - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
-<meta name="description" content="準備 AWS Certificate 時 CloudTail 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CloudTail Certification Note">
-<meta itemprop="description" content="準備 AWS Certificate 時 CloudTail 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-20T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-09-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="343"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="CloudTail," /><meta property="og:title" content="CloudTail Certification Note" />
-<meta property="og:description" content="準備 AWS Certificate 時 CloudTail 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
+<meta name="description" content="這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “ What is P99 latency?“ )。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。" /><meta itemprop="name" content="Java Garbage Collection 基礎">
+<meta itemprop="description" content="這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “ What is P99 latency?“ )。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。"><meta itemprop="datePublished" content="2022-01-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1602"><meta itemprop="image" content="https://allenhsieh1992.com/images/java.jpeg">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Java Garbage Collection 基礎" />
+<meta property="og:description" content="這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “ What is P99 latency?“ )。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-09-20T00:00:00+00:00" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/java/java-garbage-collection/" /><meta property="og:image" content="https://allenhsieh1992.com/images/java.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-26T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://allenhsieh1992.com/images/aws.jpeg"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/java.jpeg"/>
 
-<meta name="twitter:title" content="CloudTail Certification Note"/>
-<meta name="twitter:description" content="準備 AWS Certificate 時 CloudTail 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
+<meta name="twitter:title" content="Java Garbage Collection 基礎"/>
+<meta name="twitter:description" content="這新專案我選擇使用了之前沒使用過的 Jersey Client~ 由於希望分析打到其他服務的 P99 latency，所以我研究了一下怎麼去 log 下來所有的 duration (如果不知道什麼是 P99 latency 可以參考這篇文章 “ What is P99 latency?“ )。這邊分享一下，我最後使用的方法，由於不太熟 Jersey Client，所以最後也是花了一點時間才找到使用 ClientRequestFilter &amp; ClientResponseFilter 來解決。"/>
 <meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.00090c4e9364a3a60056a68e094853d5b09a8abdf7c032d5fbe90072cef5bfb1.js" integrity="sha256-AAkMTpNko6YAVqaOCUhT1bCair33wDLV&#43;&#43;kAcs71v7E=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
 <script type="application/javascript">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">CloudTail Certification Note</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Java Garbage Collection 基礎</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -158,10 +158,10 @@ if (!doNotTrack) {
 </a>
   </div>
 </div>
-<h1 class="post-title my-3">CloudTail Certification Note
+<h1 class="post-title my-3">Java Garbage Collection 基礎
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
-    <i class="fas fa-fw fa-calendar-alt"></i>Sep 20, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/cloudtail/" class="post-taxonomy">CloudTail</a></span>
+    <i class="fas fa-fw fa-calendar-alt"></i>Jan 26, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a></span>
 </div>
 <div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
   <div class="offcanvas-header">
@@ -173,87 +173,99 @@ if (!doNotTrack) {
   <div class="offcanvas-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#trails">Trails</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#security">Security</a></li>
+    <li><a href="#什麼是-garbage-collection">什麼是 Garbage Collection</a></li>
+    <li><a href="#garbage-collection-演算法">Garbage Collection 演算法</a>
+      <ul>
+        <li><a href="#reference-counting">Reference Counting</a></li>
+        <li><a href="#mark--sweep">Mark &amp; Sweep</a></li>
+        <li><a href="#copying">Copying</a></li>
+        <li><a href="#mark-compact">Mark-Compact</a></li>
+      </ul>
+    </li>
+    <li><a href="#java-garbage-collection">Java Garbage Collection</a>
+      <ul>
+        <li><a href="#generation-collector">Generation Collector</a></li>
+        <li><a href="#region">Region</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
-</div><div class="post-content mb-3"><ul>
-<li>CloudTail 主要用於監控和稽核 AWS 資源的 API Call</li>
-</ul>
-<h2 id="trails">Trails</h2>
+</div><div class="post-content mb-3"><h2 id="什麼是-garbage-collection">什麼是 Garbage Collection</h2>
 <hr>
-<ul>
-<li>每個 Region 上限五個</li>
-<li>Type
-<ul>
-<li>All Region : 所有的 Region Event Log 存在一個 S3 Bucket</li>
-<li>One Region : 指定特定 Region Event Log</li>
-</ul>
-</li>
-<li>Organization Trail : 可以 Log 整個 AWS Organization 的 Event，只有 management account.</li>
-<li>也可以 Cross Account Trail，原理是設定 S3 Bucket Policy 給予每個 AWS Account 權限，每個 Tail 的 Log 放入同一個 S3</li>
-<li>可以發送 SNS</li>
-</ul>
-<h2 id="events">Events</h2>
+<p>在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C++ 來當作課程教材的語言。而 C 與 C++ 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 <a href="http://www.os161.org/" target="_blank" rel="noopener noreferrer">OS161</a>
+ 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是 &ldquo;I can&rsquo;t handle this&hellip; I think I&rsquo;ll just die now&hellip;&quot;，然後就要開始艱辛的 Debug 路程。</p>
+<p>之後當我接觸 Java 以後，我就回不去了 C 和 C++ 的世界了。因為 Java 已經有一套非常完善的機制幫我們管理記憶體，那就是 Garbage Collection。 Garbage Collection 是一個演算法，會自動將不需要在使用的內存給釋放出來，而我們就不用在管理複雜的記憶體了萬歲~</p>
+<h2 id="garbage-collection-演算法">Garbage Collection 演算法</h2>
 <hr>
+<h3 id="reference-counting">Reference Counting</h3>
+<p>這是最簡單易懂的演算法，每個物件都有個記地址去紀錄目前被多少引用，當引用數量等於零時，就代表這個物件可以被清除掉。</p>
+<p>Reference Counting演算法的問題是 Cycle Reference。例如A reference B 和 B reference A，這樣 A 和 B 的引用的數量永遠不可能為零，也代表永遠不會被清除。</p>
+<h3 id="mark--sweep">Mark &amp; Sweep</h3>
+<p>Mark &amp; Sweep 演算法一共用兩個階段，如同英文 Mark 和 Sweep 分別代表不同的階段<!-- raw HTML omitted -->
+階段1. Mark: 就是透過根引用開始一一走過一遍目前的記憶體，將所有有被引用的物件地址標記為正在使用。<!-- raw HTML omitted -->
+階段2. Sweep: 在走過一次將地址將所有沒有被標記為還正在使用的記憶體清除。</p>
+<p>Mark &amp; Sweep 演算法的問題是記憶碎片(fragmentation)，由於被清除的記憶是隨機的，造成剩下還正在使用的記憶地址是非連續性的。</p>
+<h3 id="copying">Copying</h3>
+<p>Copying 演算法是將記憶體切成兩個區塊(Region)，一次只會有一個區塊在使用，這邊分別使用 &ldquo;激活區塊&rdquo; 和 &ldquo;未激活區塊&rdquo; 來表示。當演算法執行時，會將所有在 &ldquo;激活區塊&rdquo; 中還需要使用的物件複製到 &ldquo;未激活區塊中&rdquo;。在複製的過程中，會將地址重新整理，解決了 Mark &amp; Sweep 演算法中的 Fragmentation 的問題。複製完後 &ldquo;未激活區塊&rdquo; 就會變成新的 &ldquo;激活區塊&rdquo;，而 &ldquo;激活區塊&rdquo; 會變成 &ldquo;未激活區塊&rdquo; 這樣一直循環。</p>
+<p>Copying 演算法的問題是</p>
 <ul>
-<li>Type
+<li>由於需要兩個區塊，所以使用的記憶體也是兩倍。</li>
+<li>如果每次執行時，需要清理的記憶體很少，那就代表每次需要複製到 &ldquo;未激活區塊&rdquo; 的很多，效能也會很差</li>
+</ul>
+<h3 id="mark-compact">Mark-Compact</h3>
+<p>Mark-Compact 演算法是基於 Mark &amp; Sweep 演算法的優化，多增加一個 Compact 階段，將還需要使用的記憶重新整理，解決了記憶碎片，也不像 Copying 演算法依樣需要使用兩倍的記憶體</p>
+<h2 id="java-garbage-collection">Java Garbage Collection</h2>
+<hr>
+<h3 id="generation-collector">Generation Collector</h3>
+<p>在Java9 之前，Generation 演算法一直是主流。Generation 演算法的核心理論在於大部分的物件很快就是被清掉，如果沒被清掉，就不需要這麼頻繁的一直重複確認是否存在。Generation 演算法會將記憶體分為 Young &amp; Old Generation。Young Generation 用於存放所有新物件，在幾次 GC 後還在 Young Generation 未清除的物件，將被升級到 Old Generation。</p>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/heapStructure.png"
+   width="1170" height="388" loading="lazy" />
+
+</p>
+<p>如上圖 Java 將記憶體資料結構分為</p>
 <ul>
-<li>Management events: AWS 服務操作，又分為 Read, Write 兩種 Type
+<li>Young Generation
 <ul>
-<li>預設Log， 最近 90 的 Log 是免費的，可以直接在 Event History 內查看</li>
-<li>Type example
+<li>有兩個 <code>survivor</code> 空間，也就是以上的 S0 &amp; S1
 <ul>
-<li>Read: EC2 的 DescribeSecurityGroups</li>
-<li>Write: EC2 的 TerminateInstances</li>
+<li>這邊使用 Copying 演算法，將物件在 S0 與 S1 之間複製。</li>
+</ul>
+</li>
+<li>Eden Space: 這邊用於存新的物件</li>
+</ul>
+</li>
+<li>Old Generation
+<ul>
+<li>這邊使用 Mark-Compact 演算法。</li>
+</ul>
+</li>
+<li>Permanent Generation
+<ul>
+<li>這邊用於存取 JVM 長期需要使用的資料，例如 Class, Method 等等。這裡的資料不會被 GC 掉</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Data event : 操作特定 AWS 服務裡的資源，例如 S3 GetObject, DynamoDB PutItem or Lambda Invoke
-<ul>
-<li>預設沒啟用，須額外收費</li>
-</ul>
-</li>
-<li>如果是全球性的服務例如 IAM, STS 等等，Log 是放到 US East (N. Virginia) Region</li>
-<li>Event History 可以根據時間區間或以下屬性做 filter
-<ul>
-<li>Event name, User name, Resource name, Event source, Event ID, and Resource type.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="security">Security</h2>
-<ul>
-<li>有 Log File Validation ，可以檢查刪除和修改
-<ul>
-<li>刪除會顯示 not found 錯誤</li>
-<li>修改會顯示 hash value doesn&rsquo;t match</li>
-</ul>
-</li>
-<li>可以整合 CloudWatch Log ，去監控特定事件，發出 Alert</li>
-<li>S3 預設使用 AWS AES key 加密，可以改用 KMS</li>
-<li>AWSCloudTrail_FullAccess 限制只有少數人，擁有這個權限</li>
-</ul>
+<p>Generation 演算法中有個特別的資料結構叫做 Card Table，想像如果現在要 GC Young Generation，而 Young Generation 萬一有 Old Generation 裡面的記憶體來引用那要怎麼辦？這樣是否每次在 GC Young Generation 時都要去 Full Scan Old Generation 是否有任何索引？但這樣效能就會很差，而 Card Table 就是用於處理這樣的情況。在 Card Table 中會紀錄現在 Old Generation 的地址是否有引用 Young Generation 的，這樣在 Young Generation GC 時可以透過 Card Table 來增加效能。</p>
+<h3 id="region">Region</h3>
+<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/g1Heap.png"
+   width="1066" height="726" loading="lazy" />
+
+</p>
+<p>Java9 現在預設的 Garbage Collection G1 是使用 Region 演算法。如上圖，Region 演算法還是有 Generation 的概念，但跟 Generation 演算法不同的地方是，它將記憶體切成多個不同大小(1 MB 到 32 MB 不等)的 Region。由於更多的區塊，所以可以並發GC，而且也因為每個 Region 更小，所以 GC 的數度更快。</p>
 </div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
-      <a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
-</a>
-    </div></div>
-  <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
       <a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a>
     </div></div>
+  <div class="post-nav flex-row-reverse"></div>
 </div><section class="related-posts">
     <h3>相關文章</h3>
-    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
+    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/">CodePipeline Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codebuild-certification-note/">CodeBuild Certification Note
 </a></li></ul>
   </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
   repo="allen-hsieh1992/allen-hsieh1992.github.io"

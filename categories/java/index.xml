@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 30 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Garbage Collection 基礎</title>
+      <link>https://allenhsieh1992.com/posts/java/java-garbage-collection/</link>
+      <pubDate>Wed, 26 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/java/java-garbage-collection/</guid>
+      <description>什麼是 Garbage Collection 在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C++ 來當作課程教材的語言。而 C 與 C++ 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory L</description>
+    </item>
+    
     <item>
       <title>Java Jersey Client 取得每個 Request Duration</title>
       <link>https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/</link>

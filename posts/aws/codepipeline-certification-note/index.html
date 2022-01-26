@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Certificate 時 CodePipeline 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="CodePipeline Certification Note">
 <meta itemprop="description" content="準備 AWS Certificate 時 CodePipeline 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-18T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="265"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="280"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="CodePipeline," /><meta property="og:title" content="CodePipeline Certification Note" />
 <meta property="og:description" content="準備 AWS Certificate 時 CodePipeline 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -237,6 +237,9 @@ if (!doNotTrack) {
 <li>可以設定 Input artifacts and output  artifacts</li>
 </ul>
 </li>
+<li>
+<p>Custom Action: 需要建立一個 Job Worker 去執行程式</p>
+</li>
 </ul>
 <h3 id="example">Example</h3>
 <div class="mermaid">
@@ -294,11 +297,11 @@ sequenceDiagram
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/">CodeDeploy Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
@@ -307,7 +310,7 @@ sequenceDiagram
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">18</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">2</span>
+          JAVA <span class="badge rounded-pill">3</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
@@ -339,7 +342,7 @@ sequenceDiagram
 </div>
     </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"></nav>
 <div class="copyright mb-2">
-  Copyright © 2021-2021 Allen Hsieh. All Rights Reserved.
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
 <a id="btnScrollToTop" class="btn-scroll-to-top">
