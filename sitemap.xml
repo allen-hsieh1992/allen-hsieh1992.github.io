@@ -3,18 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://allenhsieh1992.com/categories/java/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allenhsieh1992.com/posts/java/java-garbage-collection/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <loc>https://allenhsieh1992.com/tags/javacore/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/posts/java/java-reference/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/categories/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/</loc>
-    <lastmod>2022-01-26T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/posts/java/java-garbage-collection/</loc>
     <lastmod>2022-01-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/categories/aws/</loc>
@@ -24,9 +33,6 @@
     <lastmod>2021-09-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/</loc>
-    <lastmod>2021-09-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allenhsieh1992.com/tags/</loc>
     <lastmod>2021-09-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/tags/cloudtail/</loc>
@@ -138,9 +144,6 @@
     <lastmod>2021-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/java/java-optional-basic/</loc>
-    <lastmod>2021-06-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allenhsieh1992.com/tags/optional/</loc>
     <lastmod>2021-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/series/</loc>

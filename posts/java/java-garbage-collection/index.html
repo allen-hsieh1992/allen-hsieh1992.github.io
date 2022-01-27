@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Java Garbage Collection 基礎原理 - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+    <title>Java Garbage Collection 基礎演算法 - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
 <link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
 <link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
 <meta name="keywords" content="" />
-<meta name="description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程" /><meta itemprop="name" content="Java Garbage Collection 基礎原理">
+<meta name="description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程" /><meta itemprop="name" content="Java Garbage Collection 基礎演算法">
 <meta itemprop="description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程"><meta itemprop="datePublished" content="2022-01-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-01-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1602"><meta itemprop="image" content="https://allenhsieh1992.com/images/java.jpeg">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="Java Garbage Collection 基礎原理" />
+<meta itemprop="wordCount" content="1807"><meta itemprop="image" content="https://allenhsieh1992.com/images/java.jpeg">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Java Garbage Collection 基礎演算法" />
 <meta property="og:description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://allenhsieh1992.com/posts/java/java-garbage-collection/" /><meta property="og:image" content="https://allenhsieh1992.com/images/java.jpeg" /><meta property="article:section" content="posts" />
@@ -23,10 +23,10 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://allenhsieh1992.com/images/java.jpeg"/>
 
-<meta name="twitter:title" content="Java Garbage Collection 基礎原理"/>
+<meta name="twitter:title" content="Java Garbage Collection 基礎演算法"/>
 <meta name="twitter:description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程"/>
 <meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.00090c4e9364a3a60056a68e094853d5b09a8abdf7c032d5fbe90072cef5bfb1.js" integrity="sha256-AAkMTpNko6YAVqaOCUhT1bCair33wDLV&#43;&#43;kAcs71v7E=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.74c6e47a82e8cf492ffea8d02fb091cf255915ab48f17c52f3dc003d80e2c9b8.js" integrity="sha256-dMbkeoLoz0kv/qjQL7CRzyVZFatI8XxS89wAPYDiybg=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -143,7 +143,7 @@ if (!doNotTrack) {
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row" aria-label="breadcrumb">
-  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Java Garbage Collection 基礎原理</li></ol>
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Java Garbage Collection 基礎演算法</li></ol>
 </nav><article class="post row surface"><div class="post-panel-wrapper">
   <div class="post-panel d-flex flex-column">
     <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
@@ -158,7 +158,7 @@ if (!doNotTrack) {
 </a>
   </div>
 </div>
-<h1 class="post-title my-3">Java Garbage Collection 基礎原理
+<h1 class="post-title my-3">Java Garbage Collection 基礎演算法
 </h1><div class="post-meta mb-3"><span class="post-date me-2">
     <i class="fas fa-fw fa-calendar-alt"></i>Jan 26, 2022
   </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a></span>
@@ -188,6 +188,7 @@ if (!doNotTrack) {
         <li><a href="#region">Region</a></li>
       </ul>
     </li>
+    <li><a href="#java-取得-garbage-collection-資訊">Java 取得 Garbage Collection 資訊</a></li>
   </ul>
 </nav>
   </div>
@@ -218,7 +219,7 @@ if (!doNotTrack) {
 <h2 id="java-garbage-collection">Java Garbage Collection</h2>
 <hr>
 <h3 id="generation-collector">Generation Collector</h3>
-<p>在Java9 之前，Generation 演算法一直是主流。Generation 演算法的核心理論在於大部分的物件很快就是被清掉，如果沒被清掉，就不需要這麼頻繁的一直重複確認是否存在。Generation 演算法會將記憶體分為 Young &amp; Old Generation。Young Generation 用於存放所有新物件，在幾次 GC 後還在 Young Generation 未清除的物件，將被升級到 Old Generation。</p>
+<p>Generation 演算法的核心理論在於大部分的物件很快就是被清掉，如果沒被清掉，就不需要這麼頻繁的一直重複確認是否存在。Generation 演算法會將記憶體分為 Young &amp; Old Generation。Young Generation 用於存放所有新物件，在幾次 GC 後還在 Young Generation 未清除的物件，將被升級到 Old Generation。</p>
 <p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/heapStructure.png"
    width="1170" height="388" loading="lazy" />
 
@@ -227,12 +228,13 @@ if (!doNotTrack) {
 <ul>
 <li>Young Generation
 <ul>
-<li>有兩個 <code>survivor</code> 空間，也就是以上的 S0 &amp; S1
+<li>有兩個 <code>survivor</code> 空間，也就是圖上的 S0 &amp; S1
 <ul>
 <li>這邊使用 Copying 演算法，將物件在 S0 與 S1 之間複製。</li>
+<li>複製到一定次數會被升級到 Olde Generation</li>
 </ul>
 </li>
-<li>Eden Space: 這邊用於存新的物件</li>
+<li>Eden Space: 這邊用於存新的物件，在第一次 GC 時，沒有被清除就會移到 S0 or S1</li>
 </ul>
 </li>
 <li>Old Generation
@@ -253,12 +255,60 @@ if (!doNotTrack) {
 
 </p>
 <p>Java9 現在預設的 Garbage Collection G1 是使用 Region 演算法。如上圖，Region 演算法還是有 Generation 的概念，但跟 Generation 演算法不同的地方是，它將記憶體切成多個不同大小(1 MB 到 32 MB 不等)的 Region。由於更多的區塊，所以可以並發GC，而且也因為每個 Region 更小，所以 GC 的數度更快。</p>
-</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+<h2 id="java-取得-garbage-collection-資訊">Java 取得 Garbage Collection 資訊</h2>
+<p>Java 有特別的 Garbage Collection 接口 GarbageCollectorMXBean，以下是範例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.gc</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.lang.management.GarbageCollectorMXBean</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">java.lang.management.ManagementFactory</span><span class="o">;</span>
+<span class="ln"> 5</span><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MxBean</span> <span class="o">{</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">GarbageCollectorMXBean</span><span class="o">&gt;</span> <span class="n">beanList</span> <span class="o">=</span> <span class="n">ManagementFactory</span><span class="o">.</span><span class="na">getGarbageCollectorMXBeans</span><span class="o">();</span>
+<span class="ln">11</span>        <span class="k">for</span> <span class="o">(</span><span class="n">GarbageCollectorMXBean</span> <span class="n">bean</span><span class="o">:</span> <span class="n">beanList</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Name: &#34;</span> <span class="o">+</span> <span class="n">bean</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+<span class="ln">13</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Number of Collection Count: &#34;</span> <span class="o">+</span> <span class="n">bean</span><span class="o">.</span><span class="na">getCollectionCount</span><span class="o">());</span>
+<span class="ln">14</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Collection Time &#34;</span> <span class="o">+</span> <span class="n">bean</span><span class="o">.</span><span class="na">getCollectionTime</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;ms&#34;</span><span class="o">);</span>
+<span class="ln">15</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Pool Name &#34;</span> <span class="o">+</span> <span class="n">bean</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+<span class="ln">16</span>
+<span class="ln">17</span>            <span class="k">for</span><span class="o">(</span><span class="n">String</span> <span class="n">pool</span> <span class="o">:</span> <span class="n">bean</span><span class="o">.</span><span class="na">getMemoryPoolNames</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">18</span>                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">pool</span><span class="o">);</span>
+<span class="ln">19</span>            <span class="o">}</span>
+<span class="ln">20</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+<span class="ln">21</span>        <span class="o">}</span>
+<span class="ln">22</span>    <span class="o">}</span>
+<span class="ln">23</span><span class="o">}</span>
+</code></pre></div><ul>
+<li>getCollectionCount(): 以執行次數</li>
+<li>getCollectionTime(): 預計以執行 Total 時間，單位為毫秒</li>
+</ul>
+<p>以下是 Open JDK11 預設 G1 執行結果</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln"> 1</span>Name: G1 Young Generation
+<span class="ln"> 2</span>Number of Collection Count: <span class="m">0</span>
+<span class="ln"> 3</span>Collection Time <span class="m">0</span>
+<span class="ln"> 4</span>Pool Name G1 Young Generation
+<span class="ln"> 5</span>G1 Eden Space
+<span class="ln"> 6</span>G1 Survivor Space
+<span class="ln"> 7</span>G1 Old Gen
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>Name: G1 Old Generation
+<span class="ln">10</span>Number of Collection Count: <span class="m">0</span>
+<span class="ln">11</span>Collection Time <span class="m">0</span>
+<span class="ln">12</span>Pool Name G1 Old Generation
+<span class="ln">13</span>G1 Eden Space
+<span class="ln">14</span>G1 Survivor Space
+<span class="ln">15</span>G1 Old Gen
+</code></pre></div></div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
   <div class="post-nav w-50"><div class="prev-post btn btn-sm">
       <a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a>
     </div></div>
-  <div class="post-nav flex-row-reverse"></div>
+  <div class="post-nav flex-row-reverse"><div class="next-post btn btn-sm">
+      <a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a>
+    </div></div>
 </div><section class="related-posts">
     <h3>相關文章</h3>
     <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
@@ -284,11 +334,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎原理
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a></li><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
@@ -297,7 +347,7 @@ if (!doNotTrack) {
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">18</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">3</span>
+          JAVA <span class="badge rounded-pill">4</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
@@ -305,6 +355,8 @@ if (!doNotTrack) {
       </h4>
       <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
           CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/javacore/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JavaCore">
+          JavaCore <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
           Lambda <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
@@ -321,8 +373,6 @@ if (!doNotTrack) {
           CodeDeploy <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodePipeline">
           CodePipeline <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
-          Cognito <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

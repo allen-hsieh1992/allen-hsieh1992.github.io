@@ -26,7 +26,7 @@
 <meta name="twitter:title" content="使用 Lightsail 架設 WordPress 網站"/>
 <meta name="twitter:description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。"/>
 <meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.00090c4e9364a3a60056a68e094853d5b09a8abdf7c032d5fbe90072cef5bfb1.js" integrity="sha256-AAkMTpNko6YAVqaOCUhT1bCair33wDLV&#43;&#43;kAcs71v7E=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.74c6e47a82e8cf492ffea8d02fb091cf255915ab48f17c52f3dc003d80e2c9b8.js" integrity="sha256-dMbkeoLoz0kv/qjQL7CRzyVZFatI8XxS89wAPYDiybg=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -378,11 +378,11 @@ if (!doNotTrack) {
 </section>
   <section class="recent-posts row surface">
   <h4>最近文章</h4>
-  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎原理
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a></li><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
-</a></li><li><a href="https://allenhsieh1992.com/posts/aws/lambda-certification-note/">Lambda Certification Note
 </a></li></ul>
 </section><section class="taxonomy-categories row surface">
       <h4>
@@ -391,7 +391,7 @@ if (!doNotTrack) {
       <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
           AWS <span class="badge rounded-pill">18</span>
         </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
-          JAVA <span class="badge rounded-pill">3</span>
+          JAVA <span class="badge rounded-pill">4</span>
         </a></div>
     </section><section class="taxonomy-tags row surface">
       <h4>
@@ -399,6 +399,8 @@ if (!doNotTrack) {
       </h4>
       <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
           CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/javacore/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JavaCore">
+          JavaCore <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
           Lambda <span class="badge rounded-pill">2</span>
         </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
@@ -415,8 +417,6 @@ if (!doNotTrack) {
           CodeDeploy <span class="badge rounded-pill">1</span>
         </a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodePipeline">
           CodePipeline <span class="badge rounded-pill">1</span>
-        </a><a href="https://allenhsieh1992.com/tags/cognito/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Cognito">
-          Cognito <span class="badge rounded-pill">1</span>
         </a></div>
     </section></div>
 </aside>

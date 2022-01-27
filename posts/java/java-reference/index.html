@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>你知道 Java 的四個引用嗎？ - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="https://allenhsieh1992.com/images/favicons/manifest.json">
+<link rel="icon" href="https://allenhsieh1992.com/images/favicons/favicon.ico">
+<meta name="keywords" content="" />
+<meta name="description" content="使用 Java 也有一段時間了，之前一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java Garbage Collection 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為強引用、軟引用、弱引用和虛引用" /><meta itemprop="name" content="你知道 Java 的四個引用嗎？">
+<meta itemprop="description" content="使用 Java 也有一段時間了，之前一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java Garbage Collection 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為強引用、軟引用、弱引用和虛引用"><meta itemprop="datePublished" content="2022-01-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2050"><meta itemprop="image" content="https://allenhsieh1992.com/images/java.jpeg">
+<meta itemprop="keywords" content="JavaCore," /><meta property="og:title" content="你知道 Java 的四個引用嗎？" />
+<meta property="og:description" content="使用 Java 也有一段時間了，之前一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java Garbage Collection 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為強引用、軟引用、弱引用和虛引用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/java/java-reference/" /><meta property="og:image" content="https://allenhsieh1992.com/images/java.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-27T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/java.jpeg"/>
+
+<meta name="twitter:title" content="你知道 Java 的四個引用嗎？"/>
+<meta name="twitter:description" content="使用 Java 也有一段時間了，之前一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java Garbage Collection 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為強引用、軟引用、弱引用和虛引用"/>
+<meta data-name="palette" content="blue"><link rel="preload" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://allenhsieh1992.com/css/bundle.min.584ad61bfb9121e174610ca0716e7303fbd4708cb91ca3f4b802d8d6d4745f84.css" integrity="sha256-WErWG/uRIeF0YQygcW5zA/vUcIy5HKP0uALY1tR0X4Q=" crossorigin="anonymous"></noscript><script src="https://allenhsieh1992.com/js/bundle.min.74c6e47a82e8cf492ffea8d02fb091cf255915ab48f17c52f3dc003d80e2c9b8.js" integrity="sha256-dMbkeoLoz0kv/qjQL7CRzyVZFatI8XxS89wAPYDiybg=" crossorigin="anonymous"></script><script defer src="https://allenhsieh1992.com/js/mermaid.dd6784cacbf9d6fb35056ad39bd3dc937b5ba2f9580a678b37fb34199cf6fc73.js" integrity="sha256-3WeEysv51vs1BWrTm9Pck3tbovlYCmeLN/s0GZz2/HM=" crossorigin="anonymous"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-201290280-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head><body class="mode-dark"><header><nav class="navbar navbar-expand-xl fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="https://allenhsieh1992.com/">
+      <img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png"
+   width="136" height="70" loading="lazy" />
+艾倫的開發心路歷程</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-1 mb-2 mb-lg-0"><form class="search-bar d-flex ms-1" action="https://allenhsieh1992.com/search">
+  <div class="input-group input-group-sm">
+    <button class="btn btn-search disabled position-absolute left-0" type="submit" aria-label="submit"><i class="fas fa-fw fa-search"></i></button>
+    <input class="form-control rounded-pill" id="searchQuery" name="q" type="search" aria-label="Search">
+  </div>
+</form></ul><ul class="navbar-nav me-1 mb-2 mb-lg-0 me-1 ms-auto"><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>歸檔
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/categories/">
+            <i class="fas fa-fw fa-folder"></i>分類
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/tags/">
+            <i class="fas fa-fw fa-tags"></i>標籤
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/series/">
+            <i class="fas fa-fw fa-columns"></i>專欄
+          </a>
+        </li><li class="nav-item">
+  <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasSettings" role="button"
+    aria-controls="offcanvasSettings">
+    <i class="fas fa-fw fa-sliders-h"></i> 設置
+  </a>
+</li>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings"
+  aria-labelledby="offcanvasSettingsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" w id="offcanvasSettingsLabel"><i class="fas fa-fw fa-sliders-h"></i> 設置</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+<section class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</section>
+
+<section class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <span id="btnPalette" class="btn btn-sm"><i class="fas fa-eye-dropper"></i></span>
+    </div>
+  </form>
+  <div class="container mt-2 visually-hidden" id="palettePicker">
+    <div class="btn-group"><button type="button" id="palette-blue" title="藍色" 
+          class="btn btn-sm palette bg-blue d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-blue-gray" title="藍灰色" 
+          class="btn btn-sm palette bg-blue-gray d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-brown" title="棕色" 
+          class="btn btn-sm palette bg-brown d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-cyan" title="青色" 
+          class="btn btn-sm palette bg-cyan d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-green" title="綠色" 
+          class="btn btn-sm palette bg-green d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-indigo" title="靛青色" 
+          class="btn btn-sm palette bg-indigo d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-orange" title="橙色" 
+          class="btn btn-sm palette bg-orange d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-pink" title="粉色" 
+          class="btn btn-sm palette bg-pink d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-purple" title="紫色" 
+          class="btn btn-sm palette bg-purple d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-red" title="紅色" 
+          class="btn btn-sm palette bg-red d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-teal" title="藍綠色" 
+          class="btn btn-sm palette bg-teal d-flex align-items-center justify-content-center">
+        </button><button type="button" id="palette-yellow" title="黃色" 
+          class="btn btn-sm palette bg-yellow d-flex align-items-center justify-content-center">
+        </button></button>
+    </div>
+  </div>
+</section></div>
+</div></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main role="main" class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row" aria-label="breadcrumb">
+  <ol class="breadcrumb surface"><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">你知道 Java 的四個引用嗎？</li></ol>
+</nav><article class="post row surface"><div class="post-panel-wrapper">
+  <div class="post-panel d-flex flex-column">
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button">
+  <i class="fas fa-fw fa-expand-alt fa-rotate-45"></i>
+</a>
+  
+    
+
+    
+    
+    <a id="btnTOC" class="fas fa-fw fa-list-alt" data-bs-toggle="offcanvas" href="#offcanvasTOC" aria-controls="offcanvasTOC" role="button">
+</a>
+  </div>
+</div>
+<h1 class="post-title my-3">你知道 Java 的四個引用嗎？
+</h1><div class="post-meta mb-3"><span class="post-date me-2">
+    <i class="fas fa-fw fa-calendar-alt"></i>Jan 27, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/javacore/" class="post-taxonomy">JavaCore</a></span>
+</div>
+<div class="offcanvas offcanvas-end surface" tabindex="-1" id="offcanvasTOC" aria-labelledby="offcanvasTOCLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasTOCLabel">目錄</h5>
+    <a role="button" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="fas fa-2x fa-fw fa-times"></span>
+    </a>
+  </div>
+  <div class="offcanvas-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#強引用">強引用</a></li>
+    <li><a href="#軟引用">軟引用</a></li>
+    <li><a href="#弱引用">弱引用</a></li>
+    <li><a href="#referencequeue">ReferenceQueue</a></li>
+    <li><a href="#虛引用">虛引用</a></li>
+    <li><a href="#weakhashmap">WeakHashMap</a></li>
+    <li><a href="#總結">總結</a></li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content mb-3"><p>使用 Java 也有一段時間了，一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java <a href="/posts/java/java-garbage-collection/">Garbage Collection</a>
+ 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為:</p>
+<ul>
+<li>強引用 (Strong Reference)</li>
+<li>軟引用 (Soft Reference)</li>
+<li>弱引用 (Weak Reference)</li>
+<li>虛引用 (Phantom Reference)</li>
+</ul>
+<hr>
+<h2 id="強引用">強引用</h2>
+<hr>
+<p>相信大家對強引用一定不陌生，我們正常建立新的物件時所使用的引用都是強引用。當記憶體中的物件有強引用時，Garbage Collection 就一定不會回收此物件。甚至當記憶體不足時 Java Virtual Machine 寧願噴出 OutOfMemoryError 的錯誤，也不會清除它。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StrongRef</span> <span class="o">{</span>
+<span class="ln"> 7</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">userList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="ln">11</span>        <span class="k">while</span> <span class="o">(</span><span class="n">userList</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>            <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+<span class="ln">13</span>            <span class="n">userList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+<span class="ln">14</span>        <span class="o">}</span>
+<span class="ln">15</span>    <span class="o">}</span>
+<span class="ln">16</span><span class="o">}</span>
+</code></pre></div><p>上面的 While Loop 的 User(Line12) 就是強引用，雖然 Loop 中 User 會一直指向新的物件，但是 Line13 將 User 加入 List 中也是強引用，所以所有的 User 都會一直保留在記憶體中。我使用 10 MB 的 Heap 執行 (jvm option -Xmx10m)，得到下面的結果，不出意外一下就空間不足了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Exception in thread <span class="s2">&#34;main&#34;</span> java.lang.OutOfMemoryError: Java heap space
+<span class="ln">2</span>	at java.base/java.util.Arrays.copyOf<span class="o">(</span>Arrays.java:3720<span class="o">)</span>
+<span class="ln">3</span>	at java.base/java.util.Arrays.copyOf<span class="o">(</span>Arrays.java:3689<span class="o">)</span>
+<span class="ln">4</span>	at java.base/java.util.ArrayList.grow<span class="o">(</span>ArrayList.java:238<span class="o">)</span>
+<span class="ln">5</span>	at java.base/java.util.ArrayList.grow<span class="o">(</span>ArrayList.java:243<span class="o">)</span>
+<span class="ln">6</span>	at java.base/java.util.ArrayList.add<span class="o">(</span>ArrayList.java:486<span class="o">)</span>
+<span class="ln">7</span>	at java.base/java.util.ArrayList.add<span class="o">(</span>ArrayList.java:499<span class="o">)</span>
+<span class="ln">8</span>	at com.javacore.ref.StrongRef.main<span class="o">(</span>StrongRef.java:13<span class="o">)</span>
+</code></pre></div><h2 id="軟引用">軟引用</h2>
+<hr>
+<p>軟引用跟強引用最大的不同之處就是，當 Garbage Collection 認為記憶體有壓力時，才會將軟引用的物件給清除。也就代表 Garbage Collection 執行時，不一定會從記憶體清除。<!-- raw HTML omitted -->
+注意:當記憶不足時，JVM 會先嘗試清除軟引用，但如果清除完以後還是不足，還是為噴 OutOfMemoryError</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.lang.ref.SoftReference</span><span class="o">;</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SoftRef</span> <span class="o">{</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Available Memory Size &#34;</span> <span class="o">+</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">());</span>
+<span class="ln">11</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Available Memory Size &#34;</span> <span class="o">+</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">totalMemory</span><span class="o">());</span>
+<span class="ln">12</span>
+<span class="ln">13</span>        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+<span class="ln">14</span>        <span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">userSoftReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SoftReference</span><span class="o">&lt;&gt;(</span><span class="n">user</span><span class="o">);</span>
+<span class="ln">15</span>        <span class="n">user</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">16</span>
+<span class="ln">17</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userSoftReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">18</span>        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<span class="ln">19</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userSoftReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">20</span>
+<span class="ln">21</span>        <span class="kt">byte</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">1024</span> <span class="o">*</span> <span class="n">1024</span> <span class="o">*</span> <span class="n">3</span><span class="o">];</span>
+<span class="ln">22</span>        <span class="k">while</span> <span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">userSoftReference</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">23</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Free Memory Size &#34;</span> <span class="o">+</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">freeMemory</span><span class="o">());</span>
+<span class="ln">24</span>            <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">1024</span> <span class="o">*</span> <span class="n">1000</span><span class="o">];</span>
+<span class="ln">25</span>        <span class="o">}</span>
+<span class="ln">26</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;The soft reference &#34;</span> <span class="o">+</span> <span class="n">userSoftReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">27</span>    <span class="o">}</span>
+<span class="ln">28</span><span class="o">}</span>
+</code></pre></div><p>這邊使用 5MB 的 Heap 來執行(JVM Option -Xmx5m)，得到以下的結果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>Available Memory Size <span class="m">6291456</span>
+<span class="ln">2</span>Available Memory Size <span class="m">6291456</span>
+<span class="ln">3</span>com.javacore.ref.SoftRef<span class="nv">$User</span>@71be98f5
+<span class="ln">4</span>com.javacore.ref.SoftRef<span class="nv">$User</span>@71be98f5
+<span class="ln">5</span>Free Memory Size <span class="m">1222280</span>
+<span class="ln">6</span>Free Memory Size <span class="m">185952</span>
+<span class="ln">7</span>Free Memory Size <span class="m">185952</span>
+<span class="ln">8</span>The soft reference null
+</code></pre></div><p>從上面的 Code 來看</p>
+<ul>
+<li>Line13 一開始強引用 User</li>
+<li>Line14 建立一個新的軟引用到同一個 User</li>
+<li>Line15 將原本的強引用給釋放出來，所以 Line13 建立的 User ，已經沒有任何強引用，只剩下 Line14 的軟引用</li>
+<li>Line17 嘗試從軟引用拉出資料，執行的結果當下會拿到 User 的物件</li>
+<li>Line19 雖然 Line18 強制呼叫 JVM 執行了 Garbage Collection，但由於記憶體沒有壓力，所以還是取得到 User 的物件。</li>
+<li>Line21-25 嘗試給記憶體施壓，直到 Garbage Collection 將 User 從記憶體清除</li>
+</ul>
+<h2 id="弱引用">弱引用</h2>
+<hr>
+<p>弱引用跟軟引用最大的不同點就是，當 Garbage Collection 產生時，不管記憶體是否足夠，都一定會將弱引用的物件給清除掉。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.lang.ref.WeakReference</span><span class="o">;</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeakRef</span> <span class="o">{</span>
+<span class="ln"> 6</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{}</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 9</span>        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+<span class="ln">10</span>        <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">userWeakReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakReference</span><span class="o">&lt;&gt;(</span><span class="n">user</span><span class="o">);</span>
+<span class="ln">11</span>        <span class="n">user</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">12</span>
+<span class="ln">13</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userWeakReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">14</span>        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<span class="ln">15</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userWeakReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">16</span>    <span class="o">}</span>
+<span class="ln">17</span><span class="o">}</span>
+</code></pre></div><p>從上面的 Code 來看</p>
+<ul>
+<li>Line9 一開始強引用 User</li>
+<li>Line10 建立一個新的弱引用到同一個 User</li>
+<li>Line11 將原本的強引用給釋放出來，所以 Line9 建立的 User ，已經沒有任何強引用，只有弱引用</li>
+<li>Line13 如果 Garbage Collection 還沒跑的話，弱引用會拿到 User 的物件，所以當拿到 Null 時不要感到意外，因為已經 GC 掉了。</li>
+<li>Line15 這時弱引用正常會拿到 Null ，因為我們在 Line14 請JVM 執行了 GC</li>
+</ul>
+<p>由於這邊不管記憶體大小都會清除，所以就沒特別限制 Heap 的Size，Code 執行結果如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>com.javacore.ref.WeakRef<span class="nv">$User</span>@3f0ee7cb
+<span class="ln">2</span>null
+</code></pre></div><h2 id="referencequeue">ReferenceQueue</h2>
+<hr>
+<p>在介紹虛引用前，這邊想先介紹 ReferenceQueue。ReferenceQueue 是當物件被 GC 以後，Reference 會被放到這個 Queue。是不是有點抽象，我們用以下的例子來看</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.lang.ref.ReferenceQueue</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">java.lang.ref.WeakReference</span><span class="o">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReferenceQueueExample</span> <span class="o">{</span>
+<span class="ln"> 7</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+<span class="ln"> 8</span>    <span class="o">}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">11</span>        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+<span class="ln">12</span>        <span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>  <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReferenceQueue</span><span class="o">&lt;&gt;();</span>
+<span class="ln">13</span>        <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">weakReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakReference</span><span class="o">&lt;&gt;(</span><span class="n">user</span><span class="o">,</span> <span class="n">queue</span><span class="o">);</span>
+<span class="ln">14</span>
+<span class="ln">15</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try to pull from queue &#34;</span> <span class="o">+</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
+<span class="ln">16</span>        <span class="n">user</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">17</span>        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<span class="ln">18</span>        <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">19</span>        <span class="k">while</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">20</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;trying to get from queue&#34;</span><span class="o">);</span>
+<span class="ln">21</span>            <span class="n">result</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+<span class="ln">22</span>        <span class="o">}</span>
+<span class="ln">23</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try to pull from queue &#34;</span> <span class="o">+</span> <span class="n">result</span><span class="o">);</span>
+<span class="ln">24</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try to get from weakReference &#34;</span> <span class="o">+</span> <span class="n">weakReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+<span class="ln">25</span>    <span class="o">}</span>
+<span class="ln">26</span><span class="o">}</span>
+</code></pre></div><p>執行結果可以看出，有時 GC 並不是這麼即時，所以會有需要等一下之後才會放到Queue中。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>try to pull from queue null
+<span class="ln">2</span>trying to get from queue.
+<span class="ln">3</span>trying to get from queue.
+<span class="ln">4</span>trying to get from queue.
+<span class="ln">5</span>trying to get from queue.
+<span class="ln">6</span>try to pull from queue java.lang.ref.WeakReference@7e0ea639
+<span class="ln">7</span>try to get from weakReference null
+</code></pre></div><h2 id="虛引用">虛引用</h2>
+<hr>
+<p>虛引用跟其他引用不同，它就跟名字如同虛設，在 get() 函式永遠回返回 Null。那它究竟有什麼用？ 它跟前面介紹的 <a href="#referencequeue">ReferenceQueue</a>
+ 是一起使用的，可以用來追中物件的回收的生命週期。在 Java9 時 finalize 的函式已經被deprecated，建議使用 虛引用加上 ReferenceQueue 取代</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.lang.ref.PhantomReference</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">java.lang.ref.Reference</span><span class="o">;</span>
+<span class="ln"> 5</span><span class="kn">import</span> <span class="nn">java.lang.ref.ReferenceQueue</span><span class="o">;</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhantomRef</span> <span class="o">{</span>
+<span class="ln"> 8</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">TraceObject</span> <span class="o">{}</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PhantomTraceObject</span> <span class="kd">extends</span> <span class="n">PhantomReference</span><span class="o">&lt;</span><span class="n">TraceObject</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="ln">11</span>        <span class="n">PhantomTraceObject</span><span class="o">(</span><span class="n">TraceObject</span> <span class="n">traceObject</span><span class="o">,</span> <span class="n">ReferenceQueue</span><span class="o">&lt;?</span> <span class="kd">super</span>  <span class="n">TraceObject</span><span class="o">&gt;</span> <span class="n">queue</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>            <span class="kd">super</span><span class="o">(</span><span class="n">traceObject</span><span class="o">,</span> <span class="n">queue</span><span class="o">);</span>
+<span class="ln">13</span>        <span class="o">}</span>
+<span class="ln">14</span>
+<span class="ln">15</span>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cleanup</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">16</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;trace object is cleaning up &#34;</span><span class="o">);</span>
+<span class="ln">17</span>        <span class="o">}</span>
+<span class="ln">18</span>    <span class="o">}</span>
+<span class="ln">19</span>
+<span class="ln">20</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+<span class="ln">21</span>        <span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">TraceObject</span><span class="o">&gt;</span> <span class="n">referenceQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReferenceQueue</span><span class="o">();</span>
+<span class="ln">22</span>        <span class="n">TraceObject</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TraceObject</span><span class="o">();</span>
+<span class="ln">23</span>        <span class="n">PhantomTraceObject</span> <span class="n">phantomTraceObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhantomTraceObject</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">referenceQueue</span><span class="o">);</span>
+<span class="ln">24</span>        <span class="n">data</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">25</span>
+<span class="ln">26</span>        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<span class="ln">27</span>        <span class="n">Reference</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">TraceObject</span><span class="o">&gt;</span> <span class="n">referenceFromQueue</span><span class="o">;</span>
+<span class="ln">28</span>        <span class="k">if</span> <span class="o">((</span><span class="n">referenceFromQueue</span> <span class="o">=</span> <span class="n">referenceQueue</span><span class="o">.</span><span class="na">remove</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">29</span>            <span class="o">((</span><span class="n">PhantomTraceObject</span><span class="o">)</span> <span class="n">referenceFromQueue</span><span class="o">).</span><span class="na">cleanup</span><span class="o">();</span>
+<span class="ln">30</span>        <span class="o">}</span>
+<span class="ln">31</span>    <span class="o">}</span>
+<span class="ln">32</span><span class="o">}</span>
+</code></pre></div><p>執行結果如下，line28 可以看到我使用 ReferenceQueue 中的 remove() 而非之前 <a href="#referencequeue">ReferenceQueue</a>
+ 中的 poll()。 remove() 和 poll() 最大的差別在於，remove() 會卡在那邊等 queue 裡面有資料而 poll() 是拉當下的結果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>trace object is cleaning up 
+</code></pre></div><h2 id="weakhashmap">WeakHashMap</h2>
+<hr>
+<p>這邊最後要介紹一個特別的 HashMap WeakHashMap，看到Weak大家一定就知道他是弱引用，它是將 Key 當成弱引用，所以存在 Map 裡面的值是會被 GC 的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.javacore.ref</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">java.util.WeakHashMap</span><span class="o">;</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeakHashMapExample</span> <span class="o">{</span>
+<span class="ln"> 6</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Process</span> <span class="o">{}</span>
+<span class="ln"> 7</span>    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Thread</span> <span class="o">{}</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>        <span class="n">Process</span> <span class="n">process</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Process</span><span class="o">();</span>
+<span class="ln">11</span>        <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">();</span>
+<span class="ln">12</span>
+<span class="ln">13</span>        <span class="n">WeakHashMap</span><span class="o">&lt;</span><span class="n">Process</span><span class="o">,</span> <span class="n">Thread</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakHashMap</span><span class="o">&lt;</span><span class="n">Process</span><span class="o">,</span> <span class="n">Thread</span><span class="o">&gt;();</span>
+<span class="ln">14</span>        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">process</span><span class="o">,</span> <span class="n">thread</span><span class="o">);</span>
+<span class="ln">15</span>        <span class="n">process</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln">16</span>
+<span class="ln">17</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Does map contain the thread: &#34;</span> <span class="o">+</span> <span class="n">map</span><span class="o">.</span><span class="na">containsValue</span><span class="o">(</span><span class="n">thread</span><span class="o">));</span>
+<span class="ln">18</span>        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+<span class="ln">19</span>        <span class="k">while</span> <span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">containsValue</span><span class="o">(</span><span class="n">thread</span><span class="o">))</span> <span class="o">{</span>
+<span class="ln">20</span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map still contains the value&#34;</span><span class="o">);</span>
+<span class="ln">21</span>        <span class="o">}</span>
+<span class="ln">22</span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;The map now is empty &#34;</span> <span class="o">+</span> <span class="n">map</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">());</span>
+<span class="ln">23</span>    <span class="o">}</span>
+<span class="ln">24</span><span class="o">}</span>
+</code></pre></div><p>執行的結果如下，從結果可以看出，當 line15 process 沒有強引用以後，map 裡面的內容就會消失。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Does map contain the thread: <span class="nb">true</span>
+<span class="ln">2</span>map still contains the value
+<span class="ln">3</span>The map now is empty <span class="nb">true</span>
+</code></pre></div><h2 id="總結">總結</h2>
+<hr>
+<p>雖然 Java 裡面有弱引用和軟引用的方式可以當作短暫的緩存，但緩存的時間是不可控的，因為是控制在 Java 的 Garbage Collection。而且大量的緩存也會造成更頻繁的GC。
+目前還沒有在實務上使用的經驗，所以如果將來有幸有用到再來分享更多細節。不過目前個人觀點，這應該只適合用在 client Side，Web Server 還是建議使用像 Redis 或 Memcache 這些 Cache 的技術。</p>
+</div><hr /><div class="post-navs d-flex mb-3 justify-content-between">
+  <div class="post-nav w-50"><div class="prev-post btn btn-sm">
+      <a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
+</a>
+    </div></div>
+  <div class="post-nav flex-row-reverse"></div>
+</div><section class="related-posts">
+    <h3>相關文章</h3>
+    <ul class="related-posts"><li><a href="https://allenhsieh1992.com/posts/java/java-optional-basic/">Java Optional 基本 &amp; 心得分享
+</a></li><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
+</a></li></ul>
+  </section></article><div class="post-comments surface row"><script src="https://utteranc.es/client.js"
+  repo="allen-hsieh1992/allen-hsieh1992.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container"><section class="profile surface row text-center">
+  <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif"
+   width="154" height="153" loading="lazy" />
+</div>
+  <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">Senior Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+</section>
+  <section class="recent-posts row surface">
+  <h4>最近文章</h4>
+  <ul><li><a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a></li><li><a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
+</a></li><li><a href="https://allenhsieh1992.com/posts/aws/config-certification-note/">Config Certification Note
+</a></li></ul>
+</section><section class="taxonomy-categories row surface">
+      <h4>
+        <a href="https://allenhsieh1992.com/categories">分類</a>
+      </h4>
+      <div><a href="https://allenhsieh1992.com/categories/aws/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="AWS">
+          AWS <span class="badge rounded-pill">18</span>
+        </a><a href="https://allenhsieh1992.com/categories/java/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JAVA">
+          JAVA <span class="badge rounded-pill">4</span>
+        </a></div>
+    </section><section class="taxonomy-tags row surface">
+      <h4>
+        <a href="https://allenhsieh1992.com/tags">標籤</a>
+      </h4>
+      <div><a href="https://allenhsieh1992.com/tags/cloudformation/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudFormation">
+          CloudFormation <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/javacore/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="JavaCore">
+          JavaCore <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/lambda/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Lambda">
+          Lambda <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/route53/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Route53">
+          Route53 <span class="badge rounded-pill">2</span>
+        </a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="Beanstalk">
+          Beanstalk <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/cloudtail/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CloudTail">
+          CloudTail <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codebuild/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeBuild">
+          CodeBuild <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codecommit/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeCommit">
+          CodeCommit <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodeDeploy">
+          CodeDeploy <span class="badge rounded-pill">1</span>
+        </a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="post-taxonomy rounded btn btn-sm me-2 mb-2" title="CodePipeline">
+          CodePipeline <span class="badge rounded-pill">1</span>
+        </a></div>
+    </section></div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav my-2 justify-content-center"></nav>
+<div class="copyright mb-2">
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
+</div>
+</footer>
+<a id="btnScrollToTop" class="btn-scroll-to-top">
+  <i class="fas fa-fw fa-chevron-circle-up fa-2x"></i>
+</a>
+</body>
+</html>

@@ -7,9 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 26 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Java Garbage Collection 基礎原理</title>
+      <title>你知道 Java 的四個引用嗎？</title>
+      <link>https://allenhsieh1992.com/posts/java/java-reference/</link>
+      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/java/java-reference/</guid>
+      <description>使用 Java 也有一段時間了，一直不知道有 java.lang.ref 這包 package 的存在，直到最近在研究 Java Garbage Collection 的時候，才剛好知道原來 Java 的引用還有細分成四個，分別由強到弱為: 強引用 (Strong</description>
+    </item>
+    
+    <item>
+      <title>Java Garbage Collection 基礎演算法</title>
       <link>https://allenhsieh1992.com/posts/java/java-garbage-collection/</link>
       <pubDate>Wed, 26 Jan 2022 00:00:00 +0000</pubDate>
       
