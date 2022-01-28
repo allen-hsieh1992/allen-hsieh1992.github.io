@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Thu, 27 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Docker 在 Mac 上裝 Mysql Server</title>
+      <link>https://allenhsieh1992.com/posts/container/create_mysql_server_by_docker/</link>
+      <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/container/create_mysql_server_by_docker/</guid>
+      <description>由於公司的 Package Managment 都是客製化的，外加維護的服務沒有 Container 化，所以以前很難在本機上開發。但最近公司開始導入了 Spring Boot ，所以現在想在本機架起一個環境也不像以</description>
+    </item>
+    
     <item>
       <title>你知道 Java 的四個引用嗎？</title>
       <link>https://allenhsieh1992.com/posts/java/java-reference/</link>
