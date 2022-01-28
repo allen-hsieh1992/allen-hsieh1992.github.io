@@ -4,7 +4,7 @@ window.params = {
         lineNos: true,
     },
     utterances: {
-        theme: "",
+        theme: "github-light",
     },
 }
 
