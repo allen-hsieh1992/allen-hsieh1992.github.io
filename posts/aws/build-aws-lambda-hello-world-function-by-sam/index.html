@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="以前當我第一次接觸 AWS Lambda Function 時，是在上 AWS Training 課程，使用 AWS Console 建立了一隻 Hello World。而 SAM (Serverless Application Model) 是一個開源的程式，主要在 CloudFormation 的基礎上擴展，專門用來開發 Serverless Application。我們可以透過 YAML 去定義我們的系統架構 像是 Endpoint 由哪個handler 處理，額外的 database (DynamoDB) 等等。這次的文章，主要是介紹使用 SAM 建立一個 Java Hello World 的 Lambda Function。"/>
 <link rel="stylesheet" href="https://allenhsieh1992.com/css/main.min.b7a6eda8d46e39a549f182cf72a9ff4f4c1d4d82c31ecc3ede0b7f4d5b26f32b.css" integrity="sha256-t6btqNRuOaVJ8YLPcqn/T0wdTYLDHsw&#43;3gt/TVsm8ys=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/css/viewer.min.3d228794bcedbbfa0412beb8fbc1ec6973202945e42af7004f742a4d7bd620ab.css" integrity="sha256-PSKHlLztu/oEEr64&#43;8HsaXMgKUXkKvcAT3QqTXvWIKs=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
@@ -156,7 +156,7 @@
   </div>
 </nav>
 </header>
-<main role="main" class="container-fluid">
+<main role="main" class="container">
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
@@ -666,7 +666,7 @@
   </div>
 </aside>
 </div>
-    </main><footer class="footer mt-auto py-3 text-center container-fluid"><nav class="social-links nav justify-content-center mb-2"></nav>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"></nav>
 <div class="copyright mb-2">
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
