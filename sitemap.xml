@@ -5,6 +5,12 @@
     <loc>https://allenhsieh1992.com/categories/java/</loc>
     <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/javacore/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/</loc>
+    <lastmod>2022-01-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/java/java-reference/</loc>
     <lastmod>2022-01-27T00:00:00+00:00</lastmod>
   </url><url>
@@ -23,34 +29,67 @@
     <loc>https://allenhsieh1992.com/categories/aws/</loc>
     <lastmod>2021-09-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/dynamodb/</loc>
+    <lastmod>2021-09-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/</loc>
     <lastmod>2021-09-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/cloudtail/</loc>
+    <lastmod>2021-09-20T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/</loc>
+    <lastmod>2021-09-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/config/</loc>
     <lastmod>2021-09-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/config-certification-note/</loc>
     <lastmod>2021-09-20T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/lambda/</loc>
+    <lastmod>2021-09-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/lambda-certification-note/</loc>
     <lastmod>2021-09-19T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/codedeploy/</loc>
+    <lastmod>2021-09-18T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/codedeploy-certification-note/</loc>
+    <lastmod>2021-09-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/codepipeline/</loc>
     <lastmod>2021-09-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/</loc>
     <lastmod>2021-09-18T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/codebuild/</loc>
+    <lastmod>2021-09-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/codebuild-certification-note/</loc>
+    <lastmod>2021-09-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/codecommit/</loc>
     <lastmod>2021-09-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/codecommit-certification-note/</loc>
     <lastmod>2021-09-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/beanstalk/</loc>
+    <lastmod>2021-09-12T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/beanstalk-certification-note/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/cloudformation/</loc>
+    <lastmod>2021-09-12T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/cloudformation-certification-note/</loc>
+    <lastmod>2021-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/s3/</loc>
     <lastmod>2021-09-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/s3-certification-note/</loc>
@@ -59,22 +98,46 @@
     <loc>https://allenhsieh1992.com/posts/aws/ssm-certification-note/</loc>
     <lastmod>2021-09-09T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/systemsmanager/</loc>
+    <lastmod>2021-09-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/vpc/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/vpc-certification-note/</loc>
     <lastmod>2021-09-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/route53/</loc>
+    <lastmod>2021-09-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/route53-certification-note/</loc>
     <lastmod>2021-09-05T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/ec2/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/ec2-certification-note/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://allenhsieh1992.com/tags/cognito/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/lightstail/</loc>
+    <lastmod>2021-07-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/wordpress/</loc>
+    <lastmod>2021-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/</loc>
     <lastmod>2021-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/</loc>
+    <lastmod>2021-07-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/tags/sam/</loc>
     <lastmod>2021-07-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/</loc>
