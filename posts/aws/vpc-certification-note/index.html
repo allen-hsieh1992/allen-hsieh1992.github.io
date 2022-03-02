@@ -12,7 +12,7 @@
 <meta name="description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="VPC Certification Note">
 <meta itemprop="description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-07T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-07T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1178"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
+<meta itemprop="wordCount" content="1248"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
 <meta itemprop="keywords" content="VPC," /><meta property="og:title" content="VPC Certification Note" />
 <meta property="og:description" content="準備 AWS Certificate 時 VPC 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
 <meta property="og:type" content="article" />
@@ -231,6 +231,12 @@
 </ul>
 </li>
 </ul>
+<h2 id="route-table">Route Table<a class="anchor ms-1" href="#route-table"><i class="fas fa-link"></i></a></h2>
+<ul>
+<li>VPC 都有一個預設 Main Route Table</li>
+<li>每個 Route Table 都有預設 Local Route</li>
+<li>如果建立 Subnet 時，沒有指定自定義 Route Table，都會自動使用 Main Route Table</li>
+</ul>
 <h2 id="default-vpc">Default VPC<a class="anchor ms-1" href="#default-vpc"><i class="fas fa-link"></i></a></h2>
 <hr>
 <ul>
@@ -348,6 +354,9 @@
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Securit Group 可以 Reference 其他 Security Group</li>
+</ul>
 <h2 id="vpc-peering">VPC Peering<a class="anchor ms-1" href="#vpc-peering"><i class="fas fa-link"></i></a></h2>
 <hr>
 <ul>
@@ -364,6 +373,7 @@
 </li>
 <li>VPC Peering 不限制在同一個 Region 也不限制在同一個 AWS 帳號下的 VPC</li>
 <li>VPC Peering 設定完，還需要設定 Route Table 才可以連線</li>
+<li>兩個 VPC 不能有重疊的 CIDR</li>
 </ul>
 <h2 id="vpc-endpoint">VPC Endpoint<a class="anchor ms-1" href="#vpc-endpoint"><i class="fas fa-link"></i></a></h2>
 <hr>
@@ -414,7 +424,7 @@
 <h2 id="vpn">VPN<a class="anchor ms-1" href="#vpn"><i class="fas fa-link"></i></a></h2>
 <hr>
 <ul>
-<li>在公司那邊建立  Customer Gateway （可以是軟體，或一個實體裝置）</li>
+<li>在公司那邊建立  Customer Gateway （可以是軟體，或一個實體裝置</li>
 <li>在AWS這邊建立 Virtual Private Gateway ，並連結在VPC上</li>
 <li>透過 site to site VPN Connection 將 VPN Gateway &amp; customer gateway 建起連線</li>
 </ul>
@@ -499,6 +509,7 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#basic-of-vpc">Basic of VPC</a></li>
+    <li><a href="#route-table">Route Table</a></li>
     <li><a href="#default-vpc">Default VPC</a></li>
     <li><a href="#internet-gateway">Internet Gateway</a></li>
     <li><a href="#nat-gateway-vs-instance">Nat Gateway v.s Instance</a></li>
@@ -519,6 +530,9 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
+        <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
+</a>
+      </li><li>
         <a href="https://allenhsieh1992.com/posts/container/create_mysql_server_by_docker/">使用 Docker 在 Mac 上裝 Mysql Server
 </a>
       </li><li>
@@ -529,9 +543,6 @@
 </a>
       </li><li>
         <a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
-</a>
-      </li><li>
-        <a href="https://allenhsieh1992.com/posts/aws/cloudtail-certification-note/">CloudTail Certification Note
 </a>
       </li></ul>
   </div>
@@ -545,7 +556,8 @@
         <div class="py-2"><a href="https://allenhsieh1992.com/categories/aws/" class="badge rounded post-taxonomy" title="AWS">
             AWS</a><a href="https://allenhsieh1992.com/categories/java/" class="badge rounded post-taxonomy" title="JAVA">
             JAVA</a><a href="https://allenhsieh1992.com/categories/container/" class="badge rounded post-taxonomy" title="CONTAINER">
-            CONTAINER</a></div>
+            CONTAINER</a><a href="https://allenhsieh1992.com/categories/tools/" class="badge rounded post-taxonomy" title="TOOLS">
+            TOOLS</a></div>
       </div>
     </section><section class="tags-taxonomies row card component">
       <div class="card-header">
