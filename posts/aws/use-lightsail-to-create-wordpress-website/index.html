@@ -1,4 +1,6 @@
-<!doctype html><html lang="zh-tw" data-palette="blue"
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
    data-mode="dark">
   <head>
     <meta charset="utf-8">
@@ -25,15 +27,17 @@
 
 <meta name="twitter:title" content="使用 Lightsail 架設 WordPress 網站"/>
 <meta name="twitter:description" content="在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。"/>
-<link rel="stylesheet" href="https://allenhsieh1992.com/css/main.min.b7a6eda8d46e39a549f182cf72a9ff4f4c1d4d82c31ecc3ede0b7f4d5b26f32b.css" integrity="sha256-t6btqNRuOaVJ8YLPcqn/T0wdTYLDHsw&#43;3gt/TVsm8ys=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/css/viewer.min.3d228794bcedbbfa0412beb8fbc1ec6973202945e42af7004f742a4d7bd620ab.css" integrity="sha256-PSKHlLztu/oEEr64&#43;8HsaXMgKUXkKvcAT3QqTXvWIKs=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
-    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
-   width="136" height="70"
-   />
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
 艾倫的開發心路歷程
     </a>
     <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
@@ -70,7 +74,7 @@
 
 
 
-<section class="setting">
+<div class="setting">
   <form class="font-size-switcher-form row">
     <div class="col-auto">
       <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
@@ -79,10 +83,10 @@
       <input type="range" class="form-range" min="-2" max="2" id="fontSize">
     </div>
   </form>
-</section>
+</div>
 
 
-<section class="setting palettes">
+<div class="setting palettes">
   <form class="row">
     <div class="col-auto">
       <label><i class="fas fa-fw fa-palette"></i> 配色</label>
@@ -118,20 +122,20 @@
       </button><button type="button" id="palette-yellow" aria-label="黃色"
         class="btn btn-sm w-100 palette" data-palette="yellow">
       </button></div>
-</section>
-<section class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
   <a role="button" class="action action-go-back" href="javascript: window.history.back();">
-    <span class="action-icon"><i class="fas fa-2x fa-arrow-left"></i></span> 返回
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
   </a>
   <a role="button" class="action action-reload-page">
     <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
   </a>
   <a role="button" class="action action-copy-url">
     <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
-  </a><a class="action action-social-share" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
     aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
     <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
-  </a></section>
+  </a></div>
 
 </div>
 </div>
@@ -156,15 +160,15 @@
   </div>
 </nav>
 </header>
-<main role="main" class="container">
+<main class="container">
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
     <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">使用 Lightsail 架設 WordPress 網站</li></ol>
   </div>
-</nav><div class="post-panel-wrapper">
-  <div class="d-flex flex-column component rounded post-panel">
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
     
     <a class="action action-panel-toggler" role="button" title="Panel toggler">
       <i class="fas fa-fw fa-chevron-circle-down"></i>
@@ -199,28 +203,36 @@
 <div class="post-content mb-3"><p>在大學時間，我曾經使用過 WordPress.com 只是最後覺得 WordPress.com 限制太多，想要達到我想要的效果，又需要額外花錢，所以最後就放棄了。這邊不會花太多時間解釋 WordPress com &amp; org 的差別，如果有興趣的人，可以參考這邊文章 WordPress.org 和 WordPress.com 有什麼不一樣？。 2016年，AWS 宣布新的 Lightsail 服務上市。Lightsail 這邊使用 Bitnami 一鍵部署很快， 不用自己啟一個 EC2 &amp; MySql Server 然後還要設定網路， WordPress 也會安裝好。這邊介紹直接用 Lightsail Console 頁面直接部署。</p>
 <h2 id="lightsail-架設-wordpress-server">Lightsail 架設 WordPress Server<a class="anchor ms-1" href="#lightsail-架設-wordpress-server"><i class="fas fa-link"></i></a></h2>
 <h3 id="step1-進入-lightstail-服務點下-create-instance">Step1 進入 Lightstail 服務，點下 Create instance<a class="anchor ms-1" href="#step1-進入-lightstail-服務點下-create-instance"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail1.png" loading="lazy"
-   width="1194" height="828"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail1.png" loading="lazy"
+    
+     width="1194" height="828"
+     />
+</picture>
 
 </p>
 <h3 id="step-2-選擇-地區服務和方案">Step 2 選擇 地區、服務和方案。<a class="anchor ms-1" href="#step-2-選擇-地區服務和方案"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail2.png" loading="lazy"
-   width="676" height="901"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail2.png" loading="lazy"
+    
+     width="676" height="901"
+     />
+</picture>
 
 </p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail3.png" loading="lazy"
-   width="823" height="875"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Lightsail3.png" loading="lazy"
+    
+     width="823" height="875"
+     />
+</picture>
 
 </p>
 <p>由於我是新網站，所以這邊選用有一個月免費試用的 3.5 美金一個月的方案。</p>
 <h2 id="使用-bncert-建立-https">使用 bncert 建立 HTTPS<a class="anchor ms-1" href="#使用-bncert-建立-https"><i class="fas fa-link"></i></a></h2>
 <p>透過UI，可以直接連線到 Instance 上</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/ssh_to_lightsail_instance.png" loading="lazy"
-   width="465" height="227"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/ssh_to_lightsail_instance.png" loading="lazy"
+    
+     width="465" height="227"
+     />
+</picture>
 
 </p>
 <p>使用 bncert 安裝憑證，我的機器一開始上面安裝有安裝 bncert。</p>
@@ -233,62 +245,80 @@
 <span class="ln">7</span>sudo chmod +x /opt/bitnami/bncert/bncert-linux-x64.run
 <span class="ln">8</span>sudo ln -s /opt/bitnami/bncert/bncert-linux-x64.run /opt/bitnami/bncert-tool
 </code></pre></div><p>執行bncert-tool，一開始會詢問 Domain List 和 是否將 Http 近來的頁面全部轉到 Https</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert2.png" loading="lazy"
-   width="2206" height="1194"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert2.png" loading="lazy"
+    
+     width="2206" height="1194"
+     />
+</picture>
 
 </p>
 <p>之後會確認改動和填寫憑證上面的 mail</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert3.png" loading="lazy"
-   width="1974" height="1276"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert3.png" loading="lazy"
+    
+     width="1974" height="1276"
+     />
+</picture>
 
 </p>
 <p>執行結果</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert4.png" loading="lazy"
-   width="1910" height="1296"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/bncert4.png" loading="lazy"
+    
+     width="1910" height="1296"
+     />
+</picture>
 
 </p>
 <h2 id="router-53-購買域名">Router 53 購買域名<a class="anchor ms-1" href="#router-53-購買域名"><i class="fas fa-link"></i></a></h2>
 <hr>
 <p>進入Router53 購買域名頁面，點選 Register Domain</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_1.png" loading="lazy"
-   width="1920" height="682"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_1.png" loading="lazy"
+    
+     width="1920" height="682"
+     />
+</picture>
 
 </p>
 <p>這邊可以搜尋你要的 domain，同時 Router 53 也會提供其他建議。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_2.png" loading="lazy"
-   width="1042" height="250"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_2.png" loading="lazy"
+    
+     width="1042" height="250"
+     />
+</picture>
 
 </p>
 <p>確認要購買域名時，需要填寫個人資訊</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_3.png" loading="lazy"
-   width="1920" height="862"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_3.png" loading="lazy"
+    
+     width="1920" height="862"
+     />
+</picture>
 
 </p>
 <p>購買完以後就可以在 Rounter 53 上確認自己的 Domain 狀態</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_4.png" loading="lazy"
-   width="1711" height="288"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/router53_4.png" loading="lazy"
+    
+     width="1711" height="288"
+     />
+</picture>
 
 </p>
 <p>申請完 Domain 需要一點時間喔～艾倫這邊等了大約兩天才下來。</p>
 <h2 id="建立新的-index-到-google-search">建立新的 index 到 Google Search<a class="anchor ms-1" href="#建立新的-index-到-google-search"><i class="fas fa-link"></i></a></h2>
 <hr>
 <p>這邊順便介紹一下，我目前在 Worldpress 使用的 SEO Plugin Yoast SEO ，安裝完以後每一個 Post &amp; Page 下面可以設定一些 keyphrase、Meta description 等等資訊，也會提供每一個 Status 作為參考。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/seo_example.png" loading="lazy"
-   width="495" height="822"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/seo_example.png" loading="lazy"
+    
+     width="495" height="822"
+     />
+</picture>
 
 </p>
 <p>這邊簡單一個方法可以確認 Google 是否有 index 你的網站，新的網站通常都沒有資訊，在 Google 打上 “site:domainName”</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_site_result.png" loading="lazy"
-   width="885" height="380"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_site_result.png" loading="lazy"
+    
+     width="885" height="380"
+     />
+</picture>
 
 </p>
 <div class="alert alert-warning" role="alert">
@@ -298,38 +328,50 @@
 <h2 id="google-search-console-驗證網域">Google Search Console 驗證網域<a class="anchor ms-1" href="#google-search-console-驗證網域"><i class="fas fa-link"></i></a></h2>
 <hr>
 <p>Google Search Console 是一個 Google 讓我們告訴他現在新的網域方法。目前有兩種驗證方法，這邊建議使用網域的新功能，因為使用網域前置字元，會把 HTTPS 和 HTTP 當作不同的網域處理。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain.png" loading="lazy"
-   width="771" height="620"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain.png" loading="lazy"
+    
+     width="771" height="620"
+     />
+</picture>
 
 </p>
 <p>我一開始使用右邊的方式 &ldquo;網址前置字元&rdquo;，但因為我一開始架設網站時，不是先設定HTTPS，所以先驗證了HTTP。由於之後犯蠢登入不同的Gmail，所以以為HTTP 沒驗證成功，又驗證了一次HTTPS。事後發現 HTTP &amp; HTTPS 是可以分開建立成功的，所以這邊會教學並建議使用&quot;網域&quot;的方式，並免大家跟我犯一樣的錯誤</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain1.png" loading="lazy"
-   width="315" height="199"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain1.png" loading="lazy"
+    
+     width="315" height="199"
+     />
+</picture>
 
 
-<img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain2.png" loading="lazy"
-   width="387" height="155"
-   />
+<picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/google_search_console_add_domain2.png" loading="lazy"
+    
+     width="387" height="155"
+     />
+</picture>
 
 </p>
 <h3 id="step1-輸入要驗證的網域">Step1 輸入要驗證的網域<a class="anchor ms-1" href="#step1-輸入要驗證的網域"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step1.png" loading="lazy"
-   width="769" height="617"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step1.png" loading="lazy"
+    
+     width="769" height="617"
+     />
+</picture>
 
 </p>
 <h3 id="step2-複製-google-提供的-txt-record-設定資訊">Step2 複製 Google 提供的 TXT Record 設定資訊<a class="anchor ms-1" href="#step2-複製-google-提供的-txt-record-設定資訊"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step2.png" loading="lazy"
-   width="650" height="568"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step2.png" loading="lazy"
+    
+     width="650" height="568"
+     />
+</picture>
 
 </p>
 <h3 id="step3-在-router-53-建立-txt-record">Step3 在 Router 53 建立 Txt Record<a class="anchor ms-1" href="#step3-在-router-53-建立-txt-record"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step3.png" loading="lazy"
-   width="1122" height="523"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/add_domain_step3.png" loading="lazy"
+    
+     width="1122" height="523"
+     />
+</picture>
 
 </p>
 <div class="alert alert-warning" role="alert">
@@ -343,21 +385,27 @@
 <p>Sitemap 主要包含了網站結構資訊，上交 Sitemap 可以讓 Google 更好地瞭解你的網站。這邊的 Sitemap 是由之前所提的 Yoast SEO Plugin 所產生的</p>
 <h3 id="step1-取得-sitemap-endpoint">Step1 取得 Sitemap endpoint<a class="anchor ms-1" href="#step1-取得-sitemap-endpoint"><i class="fas fa-link"></i></a></h3>
 <p>在 Yoast 介面的 Features 下面有一個 XML Sitemaps 的設定，點選右邊的問號，在點下 See the xml sitemap，這時候就會直接打開 Sitemap 的頁面</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap.png" loading="lazy"
-   width="498" height="429"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap.png" loading="lazy"
+    
+     width="498" height="429"
+     />
+</picture>
 
 </p>
 <p>Sitemap 實際內容就這個網域下所有的網頁，並且最後修改時間</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap2.png" loading="lazy"
-   width="879" height="459"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap2.png" loading="lazy"
+    
+     width="879" height="459"
+     />
+</picture>
 
 </p>
 <h3 id="step2-上交-sitemap-到-google-search-console">Step2 上交 Sitemap 到 Google Search Console<a class="anchor ms-1" href="#step2-上交-sitemap-到-google-search-console"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap3.png" loading="lazy"
-   width="921" height="383"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/use-lightsail-to-create-wordpress-website/Sitemap3.png" loading="lazy"
+    
+     width="921" height="383"
+     />
+</picture>
 
 </p>
 <p>接著等待幾天後，就可以在 Google 透過 site 找到自己的網站</p>
@@ -365,14 +413,14 @@
 <hr>
 <p>這次架完以後，挺佩服那些沒有資訊背景又自己一手包辦，從零開始架設WorldPress 網站的人。這次的網站，雖然不如我內心所想要的外觀，無奈前端不熟，如果想要用出自己的外觀，又要花不少時間。所以艾倫我決定先增加這個網站的內容，將來這個網站如果我有動力繼續做下去，再花時間修改外觀。</p>
 </div></div>
-  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly">
-  <div class="post-nav post-prev"><i class="fas fa-fw fa-chevron-left"></i>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
     <a href="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
 </a>
   </div><div class="post-nav post-next">
     <a href="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
 </a>
-    <i class="fas fa-fw fa-chevron-right"></i>
+    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -412,16 +460,18 @@
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container d-flex flex-column">
     
-    <section class="card row text-center profile component">
+    <div class="card row text-center profile component">
   <div class="card-body">
-    <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy"
-   width="154" height="153"
-   />
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
 </div>
     <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
   </div>
-</section>
-  <div class="post-toc row mb-4 card component" id="postTOC">
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
   <div class="card-header">
     <h2 class="card-title">目錄</h2>
   </div>
@@ -507,9 +557,22 @@
             CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
             CodeCommit</a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="badge rounded post-taxonomy" title="CodeDeploy">
             CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
-            CodePipeline</a></div>
+            CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">22</span>
+        </a></div>
       </div>
-    </section>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(4)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
     
   </div>
 </aside>
@@ -519,8 +582,8 @@
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
-<script src="https://allenhsieh1992.com/js/main.4b6a8521f980740da98f19e4ad567e6e74adadb01ee79c43fd0d6ec843f03281.js" integrity="sha256-S2qFIfmAdA2pjxnkrVZ&#43;bnStrbAe55xD/Q1uyEPwMoE=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/js/icons.min.a35670f2f90c398e5ee5c8e509b428fae75aa2746854cee10b60794633076859.js" integrity="sha256-o1Zw8vkMOY5e5cjlCbQo&#43;udaonRoVM7hC2B5RjMHaFk=" crossorigin="anonymous" defer></script>
-<script src="https://allenhsieh1992.com/js/viewer.min.4dba52a0a790f909408b7385316651299158381686401d50ff1f04dda6476473.js" integrity="sha256-TbpSoKeQ&#43;QlAi3OFMWZRKZFYOBaGQB1Q/x8E3aZHZHM=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/js/mermaid.min.f7f85f37aecd926c1536d7d7a068bda61384696972268ebd5624343dc57768e1.js" integrity="sha256-9/hfN67NkmwVNtfXoGi9phOEaWlyJo69ViQ0PcV3aOE=" crossorigin="anonymous"></script>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;

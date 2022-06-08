@@ -1,4 +1,6 @@
-<!doctype html><html lang="zh-tw" data-palette="blue"
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
    data-mode="dark">
   <head>
     <meta charset="utf-8">
@@ -25,15 +27,17 @@
 
 <meta name="twitter:title" content="Java Garbage Collection 基礎演算法"/>
 <meta name="twitter:description" content="在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C&#43;&#43; 來當作課程教材的語言。而 C 與 C&#43;&#43; 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 OS161] 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是“I can&#39;t handle this... I think I&#39;ll just die now...“，然後就要開始艱辛的 Debug 路程"/>
-<link rel="stylesheet" href="https://allenhsieh1992.com/css/main.min.b7a6eda8d46e39a549f182cf72a9ff4f4c1d4d82c31ecc3ede0b7f4d5b26f32b.css" integrity="sha256-t6btqNRuOaVJ8YLPcqn/T0wdTYLDHsw&#43;3gt/TVsm8ys=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/css/viewer.min.3d228794bcedbbfa0412beb8fbc1ec6973202945e42af7004f742a4d7bd620ab.css" integrity="sha256-PSKHlLztu/oEEr64&#43;8HsaXMgKUXkKvcAT3QqTXvWIKs=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
-    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
-   width="136" height="70"
-   />
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
 艾倫的開發心路歷程
     </a>
     <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
@@ -70,7 +74,7 @@
 
 
 
-<section class="setting">
+<div class="setting">
   <form class="font-size-switcher-form row">
     <div class="col-auto">
       <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
@@ -79,10 +83,10 @@
       <input type="range" class="form-range" min="-2" max="2" id="fontSize">
     </div>
   </form>
-</section>
+</div>
 
 
-<section class="setting palettes">
+<div class="setting palettes">
   <form class="row">
     <div class="col-auto">
       <label><i class="fas fa-fw fa-palette"></i> 配色</label>
@@ -118,20 +122,20 @@
       </button><button type="button" id="palette-yellow" aria-label="黃色"
         class="btn btn-sm w-100 palette" data-palette="yellow">
       </button></div>
-</section>
-<section class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
   <a role="button" class="action action-go-back" href="javascript: window.history.back();">
-    <span class="action-icon"><i class="fas fa-2x fa-arrow-left"></i></span> 返回
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
   </a>
   <a role="button" class="action action-reload-page">
     <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
   </a>
   <a role="button" class="action action-copy-url">
     <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
-  </a><a class="action action-social-share" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
     aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
     <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
-  </a></section>
+  </a></div>
 
 </div>
 </div>
@@ -156,15 +160,15 @@
   </div>
 </nav>
 </header>
-<main role="main" class="container">
+<main class="container">
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
     <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Java Garbage Collection 基礎演算法</li></ol>
   </div>
-</nav><div class="post-panel-wrapper">
-  <div class="d-flex flex-column component rounded post-panel">
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
     
     <a class="action action-panel-toggler" role="button" title="Panel toggler">
       <i class="fas fa-fw fa-chevron-circle-down"></i>
@@ -198,8 +202,8 @@
 </div>
 <div class="post-content mb-3"><h2 id="什麼是-garbage-collection">什麼是 Garbage Collection<a class="anchor ms-1" href="#什麼是-garbage-collection"><i class="fas fa-link"></i></a></h2>
 <hr>
-<p>在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C++ 來當作課程教材的語言。而 C 與 C++ 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 <a href="http://www.os161.org/" target="_blank" rel="noopener noreferrer">OS161</a>
- 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是 &ldquo;I can&rsquo;t handle this&hellip; I think I&rsquo;ll just die now&hellip;&quot;，然後就要開始艱辛的 Debug 路程。</p>
+<p>在大學時 Algorithm, OS, 和 Data Structure 等課程都是使用 C 或 C++ 來當作課程教材的語言。而 C 與 C++ 語言可以擁有很大的掌控權力在 Memory 上，但是一處理不好就容易造成 Memory Leak。讓我印象最深刻的是 Operating System 課程，使用 <a href="http://www.os161.org/" target="_blank" rel="noopener noreferrer">OS161<i class="fas fa-external-link-square-alt ms-1"></i>
+</a> 來當作做作業的練習， 而最後一個作業就是實作 Memory Management。大家那時候最害怕遇到的錯誤訊息就是 &ldquo;I can&rsquo;t handle this&hellip; I think I&rsquo;ll just die now&hellip;&quot;，然後就要開始艱辛的 Debug 路程。</p>
 <p>之後當我接觸 Java 以後，我就回不去了 C 和 C++ 的世界了。因為 Java 已經有一套非常完善的機制幫我們管理記憶體，那就是 Garbage Collection。 Garbage Collection 是一個演算法，會自動將不需要在使用的內存給釋放出來，而我們就不用在管理複雜的記憶體了萬歲~</p>
 <h2 id="garbage-collection-演算法">Garbage Collection 演算法<a class="anchor ms-1" href="#garbage-collection-演算法"><i class="fas fa-link"></i></a></h2>
 <hr>
@@ -224,9 +228,11 @@
 <hr>
 <h3 id="generation-collector">Generation Collector<a class="anchor ms-1" href="#generation-collector"><i class="fas fa-link"></i></a></h3>
 <p>Generation 演算法的核心理論在於大部分的物件很快就是被清掉，如果沒被清掉，就不需要這麼頻繁的一直重複確認是否存在。Generation 演算法會將記憶體分為 Young &amp; Old Generation。Young Generation 用於存放所有新物件，在幾次 GC 後還在 Young Generation 未清除的物件，將被升級到 Old Generation。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/heapStructure.png" loading="lazy"
-   width="1170" height="388"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/heapStructure.png" loading="lazy"
+    
+     width="1170" height="388"
+     />
+</picture>
 
 </p>
 <p>如上圖 Java 將記憶體資料結構分為</p>
@@ -255,9 +261,11 @@
 </ul>
 <p>Generation 演算法中有個特別的資料結構叫做 Card Table，想像如果現在要 GC Young Generation，而 Young Generation 萬一有 Old Generation 裡面的記憶體來引用那要怎麼辦？這樣是否每次在 GC Young Generation 時都要去 Full Scan Old Generation 是否有任何索引？但這樣效能就會很差，而 Card Table 就是用於處理這樣的情況。在 Card Table 中會紀錄現在 Old Generation 的地址是否有引用 Young Generation 的，這樣在 Young Generation GC 時可以透過 Card Table 來增加效能。</p>
 <h3 id="region">Region<a class="anchor ms-1" href="#region"><i class="fas fa-link"></i></a></h3>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/g1Heap.png" loading="lazy"
-   width="1066" height="726"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/java-garbage-collection/g1Heap.png" loading="lazy"
+    
+     width="1066" height="726"
+     />
+</picture>
 
 </p>
 <p>Java9 現在預設的 Garbage Collection G1 是使用 Region 演算法。如上圖，Region 演算法還是有 Generation 的概念，但跟 Generation 演算法不同的地方是，它將記憶體切成多個不同大小(1 MB 到 32 MB 不等)的 Region。由於更多的區塊，所以可以並發GC，而且也因為每個 Region 更小，所以 GC 的數度更快。</p>
@@ -307,14 +315,14 @@
 <span class="ln">14</span>G1 Survivor Space
 <span class="ln">15</span>G1 Old Gen
 </code></pre></div></div></div>
-  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly">
-  <div class="post-nav post-prev"><i class="fas fa-fw fa-chevron-left"></i>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
     <a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
 </a>
   </div><div class="post-nav post-next">
     <a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
 </a>
-    <i class="fas fa-fw fa-chevron-right"></i>
+    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -364,16 +372,18 @@
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container d-flex flex-column">
     
-    <section class="card row text-center profile component">
+    <div class="card row text-center profile component">
   <div class="card-body">
-    <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy"
-   width="154" height="153"
-   />
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
 </div>
     <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
   </div>
-</section>
-  <div class="post-toc row mb-4 card component" id="postTOC">
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
   <div class="card-header">
     <h2 class="card-title">目錄</h2>
   </div>
@@ -451,9 +461,22 @@
             CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
             CodeCommit</a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="badge rounded post-taxonomy" title="CodeDeploy">
             CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
-            CodePipeline</a></div>
+            CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">22</span>
+        </a></div>
       </div>
-    </section>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(4)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
     
   </div>
 </aside>
@@ -463,8 +486,8 @@
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
-<script src="https://allenhsieh1992.com/js/main.4b6a8521f980740da98f19e4ad567e6e74adadb01ee79c43fd0d6ec843f03281.js" integrity="sha256-S2qFIfmAdA2pjxnkrVZ&#43;bnStrbAe55xD/Q1uyEPwMoE=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/js/icons.min.a35670f2f90c398e5ee5c8e509b428fae75aa2746854cee10b60794633076859.js" integrity="sha256-o1Zw8vkMOY5e5cjlCbQo&#43;udaonRoVM7hC2B5RjMHaFk=" crossorigin="anonymous" defer></script>
-<script src="https://allenhsieh1992.com/js/viewer.min.4dba52a0a790f909408b7385316651299158381686401d50ff1f04dda6476473.js" integrity="sha256-TbpSoKeQ&#43;QlAi3OFMWZRKZFYOBaGQB1Q/x8E3aZHZHM=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/js/mermaid.min.f7f85f37aecd926c1536d7d7a068bda61384696972268ebd5624343dc57768e1.js" integrity="sha256-9/hfN67NkmwVNtfXoGi9phOEaWlyJo69ViQ0PcV3aOE=" crossorigin="anonymous"></script>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;

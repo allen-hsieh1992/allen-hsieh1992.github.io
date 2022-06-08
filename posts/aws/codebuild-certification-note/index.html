@@ -1,4 +1,6 @@
-<!doctype html><html lang="zh-tw" data-palette="blue"
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
    data-mode="dark">
   <head>
     <meta charset="utf-8">
@@ -25,15 +27,17 @@
 
 <meta name="twitter:title" content="CodeBuild Certification Note"/>
 <meta name="twitter:description" content="準備 AWS Certificate 時 CodeBuild 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
-<link rel="stylesheet" href="https://allenhsieh1992.com/css/main.min.b7a6eda8d46e39a549f182cf72a9ff4f4c1d4d82c31ecc3ede0b7f4d5b26f32b.css" integrity="sha256-t6btqNRuOaVJ8YLPcqn/T0wdTYLDHsw&#43;3gt/TVsm8ys=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/css/viewer.min.3d228794bcedbbfa0412beb8fbc1ec6973202945e42af7004f742a4d7bd620ab.css" integrity="sha256-PSKHlLztu/oEEr64&#43;8HsaXMgKUXkKvcAT3QqTXvWIKs=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
-    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
-   width="136" height="70"
-   />
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
 艾倫的開發心路歷程
     </a>
     <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
@@ -70,7 +74,7 @@
 
 
 
-<section class="setting">
+<div class="setting">
   <form class="font-size-switcher-form row">
     <div class="col-auto">
       <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
@@ -79,10 +83,10 @@
       <input type="range" class="form-range" min="-2" max="2" id="fontSize">
     </div>
   </form>
-</section>
+</div>
 
 
-<section class="setting palettes">
+<div class="setting palettes">
   <form class="row">
     <div class="col-auto">
       <label><i class="fas fa-fw fa-palette"></i> 配色</label>
@@ -118,20 +122,20 @@
       </button><button type="button" id="palette-yellow" aria-label="黃色"
         class="btn btn-sm w-100 palette" data-palette="yellow">
       </button></div>
-</section>
-<section class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
   <a role="button" class="action action-go-back" href="javascript: window.history.back();">
-    <span class="action-icon"><i class="fas fa-2x fa-arrow-left"></i></span> 返回
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
   </a>
   <a role="button" class="action action-reload-page">
     <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
   </a>
   <a role="button" class="action action-copy-url">
     <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
-  </a><a class="action action-social-share" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
     aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
     <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
-  </a></section>
+  </a></div>
 
 </div>
 </div>
@@ -156,15 +160,15 @@
   </div>
 </nav>
 </header>
-<main role="main" class="container">
+<main class="container">
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
     <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">CodeBuild Certification Note</li></ol>
   </div>
-</nav><div class="post-panel-wrapper">
-  <div class="d-flex flex-column component rounded post-panel">
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
     
     <a class="action action-panel-toggler" role="button" title="Panel toggler">
       <i class="fas fa-fw fa-chevron-circle-down"></i>
@@ -206,8 +210,8 @@
 <li>Source 可以從 Github, CodeCommit, S3, Bitbucket 和 Github Enterprise 拉</li>
 <li>可以設定 Build Timeout 或 Queue Timeout</li>
 <li>也可以設定特定 VPC 執行</li>
-<li>AWS 有預設 <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html" target="_blank" rel="noopener noreferrer">Environment Variable</a>
- ，也可以客製化個人的環境變數</li>
+<li>AWS 有預設 <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html" target="_blank" rel="noopener noreferrer">Environment Variable<i class="fas fa-external-link-square-alt ms-1"></i>
+</a> ，也可以客製化個人的環境變數</li>
 </ul>
 <h2 id="cloud-watch">Cloud Watch<a class="anchor ms-1" href="#cloud-watch"><i class="fas fa-link"></i></a></h2>
 <hr>
@@ -316,22 +320,24 @@
 </span><span class="ln">17</span><span class="w">      </span>- <span class="l">echo Pushing the Docker image...</span><span class="w">
 </span><span class="ln">18</span><span class="w">      </span>- <span class="l">docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG</span><span class="w">
 </span></code></pre></div><h2 id="使用-code-build-驗證-code-commit-pull-request">使用 Code Build 驗證 Code Commit Pull Request<a class="anchor ms-1" href="#使用-code-build-驗證-code-commit-pull-request"><i class="fas fa-link"></i></a></h2>
-<p>原始 AWS 文章 <a href="https://aws.amazon.com/tw/blogs/devops/validating-aws-codecommit-pull-requests-with-aws-codebuild-and-aws-lambda/" target="_blank" rel="noopener noreferrer">Validating AWS CodeCommit Pull Requests with AWS CodeBuild and AWS Lambda</a>
-</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/codebuild-certification-note/validating-aws-codecommit-pull-requests-with-aws-codebuild-and-aws-lambda.png" loading="lazy"
-   width="720" height="405"
-   />
+<p>原始 AWS 文章 <a href="https://aws.amazon.com/tw/blogs/devops/validating-aws-codecommit-pull-requests-with-aws-codebuild-and-aws-lambda/" target="_blank" rel="noopener noreferrer">Validating AWS CodeCommit Pull Requests with AWS CodeBuild and AWS Lambda<i class="fas fa-external-link-square-alt ms-1"></i>
+</a></p>
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/codebuild-certification-note/validating-aws-codecommit-pull-requests-with-aws-codebuild-and-aws-lambda.png" loading="lazy"
+    
+     width="720" height="405"
+     />
+</picture>
 
 </p>
 </div></div>
-  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly">
-  <div class="post-nav post-prev"><i class="fas fa-fw fa-chevron-left"></i>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
     <a href="https://allenhsieh1992.com/posts/aws/codecommit-certification-note/">CodeCommit Certification Note
 </a>
   </div><div class="post-nav post-next">
     <a href="https://allenhsieh1992.com/posts/aws/codepipeline-certification-note/">CodePipeline Certification Note
 </a>
-    <i class="fas fa-fw fa-chevron-right"></i>
+    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -381,16 +387,18 @@
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container d-flex flex-column">
     
-    <section class="card row text-center profile component">
+    <div class="card row text-center profile component">
   <div class="card-body">
-    <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy"
-   width="154" height="153"
-   />
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
 </div>
     <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
   </div>
-</section>
-  <div class="post-toc row mb-4 card component" id="postTOC">
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
   <div class="card-header">
     <h2 class="card-title">目錄</h2>
   </div>
@@ -457,9 +465,22 @@
             CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
             CodeCommit</a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="badge rounded post-taxonomy" title="CodeDeploy">
             CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
-            CodePipeline</a></div>
+            CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">22</span>
+        </a></div>
       </div>
-    </section>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(4)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
     
   </div>
 </aside>
@@ -469,8 +490,8 @@
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
-<script src="https://allenhsieh1992.com/js/main.4b6a8521f980740da98f19e4ad567e6e74adadb01ee79c43fd0d6ec843f03281.js" integrity="sha256-S2qFIfmAdA2pjxnkrVZ&#43;bnStrbAe55xD/Q1uyEPwMoE=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/js/icons.min.a35670f2f90c398e5ee5c8e509b428fae75aa2746854cee10b60794633076859.js" integrity="sha256-o1Zw8vkMOY5e5cjlCbQo&#43;udaonRoVM7hC2B5RjMHaFk=" crossorigin="anonymous" defer></script>
-<script src="https://allenhsieh1992.com/js/viewer.min.4dba52a0a790f909408b7385316651299158381686401d50ff1f04dda6476473.js" integrity="sha256-TbpSoKeQ&#43;QlAi3OFMWZRKZFYOBaGQB1Q/x8E3aZHZHM=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/js/mermaid.min.f7f85f37aecd926c1536d7d7a068bda61384696972268ebd5624343dc57768e1.js" integrity="sha256-9/hfN67NkmwVNtfXoGi9phOEaWlyJo69ViQ0PcV3aOE=" crossorigin="anonymous"></script>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;

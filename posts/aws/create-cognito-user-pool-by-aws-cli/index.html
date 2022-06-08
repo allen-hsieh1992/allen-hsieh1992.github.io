@@ -1,4 +1,6 @@
-<!doctype html><html lang="zh-tw" data-palette="blue"
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
    data-mode="dark">
   <head>
     <meta charset="utf-8">
@@ -25,15 +27,17 @@
 
 <meta name="twitter:title" content="使用 AWS Cognito CLI 建立 User Pool"/>
 <meta name="twitter:description" content="個人用戶管理對於許多網站 或 App 都是不可缺少的，大家有可能會經常煩惱要怎麼樣讓自己的服務，可以透過 Google 、Facebook 等第三方認證，或者擁有自己的使用者群。這時可以選擇考慮 AWS Cognito，它可以讓你快速的為你的服務建立使用者群，並且可以整合讓使用者擁有權限操作其他 AWS 服務 。由於使用 UI 建立 Cognito User Pool 的文章已經不少，所以這邊文章會介紹使用 AWS CLI cognito-idp 建立一個用戶可以註冊，並且自己透過 Mail 認證通過的 User Pool。"/>
-<link rel="stylesheet" href="https://allenhsieh1992.com/css/main.min.b7a6eda8d46e39a549f182cf72a9ff4f4c1d4d82c31ecc3ede0b7f4d5b26f32b.css" integrity="sha256-t6btqNRuOaVJ8YLPcqn/T0wdTYLDHsw&#43;3gt/TVsm8ys=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/css/viewer.min.3d228794bcedbbfa0412beb8fbc1ec6973202945e42af7004f742a4d7bd620ab.css" integrity="sha256-PSKHlLztu/oEEr64&#43;8HsaXMgKUXkKvcAT3QqTXvWIKs=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
-    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
-   width="136" height="70"
-   />
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
 艾倫的開發心路歷程
     </a>
     <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
@@ -70,7 +74,7 @@
 
 
 
-<section class="setting">
+<div class="setting">
   <form class="font-size-switcher-form row">
     <div class="col-auto">
       <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
@@ -79,10 +83,10 @@
       <input type="range" class="form-range" min="-2" max="2" id="fontSize">
     </div>
   </form>
-</section>
+</div>
 
 
-<section class="setting palettes">
+<div class="setting palettes">
   <form class="row">
     <div class="col-auto">
       <label><i class="fas fa-fw fa-palette"></i> 配色</label>
@@ -118,20 +122,20 @@
       </button><button type="button" id="palette-yellow" aria-label="黃色"
         class="btn btn-sm w-100 palette" data-palette="yellow">
       </button></div>
-</section>
-<section class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
   <a role="button" class="action action-go-back" href="javascript: window.history.back();">
-    <span class="action-icon"><i class="fas fa-2x fa-arrow-left"></i></span> 返回
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
   </a>
   <a role="button" class="action action-reload-page">
     <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
   </a>
   <a role="button" class="action action-copy-url">
     <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
-  </a><a class="action action-social-share" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
     aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
     <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
-  </a></section>
+  </a></div>
 
 </div>
 </div>
@@ -156,15 +160,15 @@
   </div>
 </nav>
 </header>
-<main role="main" class="container">
+<main class="container">
       <div class="row content">
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
     <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">使用 AWS Cognito CLI 建立 User Pool</li></ol>
   </div>
-</nav><div class="post-panel-wrapper">
-  <div class="d-flex flex-column component rounded post-panel">
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
     
     <a class="action action-panel-toggler" role="button" title="Panel toggler">
       <i class="fas fa-fw fa-chevron-circle-down"></i>
@@ -208,43 +212,55 @@
 <h3 id="step1-註冊-ses-mail">Step1 註冊 SES Mail<a class="anchor ms-1" href="#step1-註冊-ses-mail"><i class="fas fa-link"></i></a></h3>
 <p>這邊要注意，Cognito 目前允許的 SES Region 只有三個，分別是 us-east-1、us-east-2、eu-west-1。所以在建立 Email 時，請確認要別確認 Region 喔，不然之後有可能會無法設定喔</p>
 <p>請到 SES 下面，點選 Email Address，然後點下 Verify a New Email Address，並填寫你的 Mail</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_1.png" loading="lazy"
-   width="1920" height="233"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_1.png" loading="lazy"
+    
+     width="1920" height="233"
+     />
+</picture>
 
 </p>
 <p>當你填完以後，這時可以你的 Email 在 list 中，而 Verification Status 還會在 Pending 喔～ AWS 會寄 Mail 到你的郵箱，請去填寫的 Email 認證。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_2.png" loading="lazy"
-   width="1699" height="226"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_2.png" loading="lazy"
+    
+     width="1699" height="226"
+     />
+</picture>
 
 </p>
 <h3 id="step2-驗證-mail">Step2 驗證 Mail<a class="anchor ms-1" href="#step2-驗證-mail"><i class="fas fa-link"></i></a></h3>
 <p>這時候當入剛剛輸入的 Mail 中，應該會有一封 Email Address Verification Request 的 Mail ，這時候請點選裡面的 Link 完成驗證</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_3.png" loading="lazy"
-   width="1611" height="577"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_3.png" loading="lazy"
+    
+     width="1611" height="577"
+     />
+</picture>
 
 </p>
 <h3 id="step3-確認信箱已驗證">Step3 確認信箱已驗證<a class="anchor ms-1" href="#step3-確認信箱已驗證"><i class="fas fa-link"></i></a></h3>
 <p>這時候重新進入 SES 頁面，會發現 Verification Status 是 verified</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_4.png" loading="lazy"
-   width="1699" height="235"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_4.png" loading="lazy"
+    
+     width="1699" height="235"
+     />
+</picture>
 
 </p>
 <p>如果你也在嘗試練習，請點選 UI 的 Email ，這時候可以看到 Identity ARN。請將 Identity ARN 記錄下來，後面建立 User Pool 會使用到。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_5.png" loading="lazy"
-   width="596" height="56"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/Ses_register_5.png" loading="lazy"
+    
+     width="596" height="56"
+     />
+</picture>
 
 </p>
 <h2 id="使用-aws-cli-cognito-idp-建立-user-pool--client">使用 AWS CLI cognito-idp 建立 User Pool & Client<a class="anchor ms-1" href="#使用-aws-cli-cognito-idp-建立-user-pool--client"><i class="fas fa-link"></i></a></h2>
-<p>aws <a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html" target="_blank" rel="noopener noreferrer">cognito-idp</a>
- command 主要是讓我們來管理 User Pool 的，裡面有分兩種不同的 level 的 command ，分別是 ADMIN 和 一般 User 的， 所有 admin 的 command 都會是 admin- 開頭的。以下是附上 AWS 官方的圖片，一開始 User 在 Cognito 註冊是在 已註冊狀態(Registered) 是不能 Login 的，必須要是認證狀態(Confirmed) ，才能 Login。而目前只有兩種方式才能讓 User 變成認證的，第一種就是由 ADMIN 這邊認證，而第二種就是 User 可以自己認證透過電話或 Mail。這邊要示範透過 Mail 認證</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/amazon-cognito-sign-in-confirm-user.png" loading="lazy"
-   width="652" height="500"
-   />
+<p>aws <a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html" target="_blank" rel="noopener noreferrer">cognito-idp<i class="fas fa-external-link-square-alt ms-1"></i>
+</a> command 主要是讓我們來管理 User Pool 的，裡面有分兩種不同的 level 的 command ，分別是 ADMIN 和 一般 User 的， 所有 admin 的 command 都會是 admin- 開頭的。以下是附上 AWS 官方的圖片，一開始 User 在 Cognito 註冊是在 已註冊狀態(Registered) 是不能 Login 的，必須要是認證狀態(Confirmed) ，才能 Login。而目前只有兩種方式才能讓 User 變成認證的，第一種就是由 ADMIN 這邊認證，而第二種就是 User 可以自己認證透過電話或 Mail。這邊要示範透過 Mail 認證</p>
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/amazon-cognito-sign-in-confirm-user.png" loading="lazy"
+    
+     width="652" height="500"
+     />
+</picture>
 
 </p>
 <h3 id="step1-使用-aws-cognito-idp-列出目前所擁有的-user-pool">Step1 使用 AWS cognito-idp 列出目前所擁有的 User Pool<a class="anchor ms-1" href="#step1-使用-aws-cognito-idp-列出目前所擁有的-user-pool"><i class="fas fa-link"></i></a></h3>
@@ -376,9 +392,11 @@
 <span class="ln">14</span>     <span class="o">}</span>
 <span class="ln">15</span> <span class="o">}</span>
 </code></pre></div><p>這時後透過 AWS Console 進入 User Pool 裡面的 Users &amp; Groups 裡面，可以看到剛剛註冊的用戶，這邊可以看到 Account Status 是 UNCONFIRMED</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/user-pool-user1.png" loading="lazy"
-   width="1915" height="416"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/user-pool-user1.png" loading="lazy"
+    
+     width="1915" height="416"
+     />
+</picture>
 
 </p>
 <h3 id="step2-嘗試-login">Step2 嘗試 Login<a class="anchor ms-1" href="#step2-嘗試-login"><i class="fas fa-link"></i></a></h3>
@@ -400,9 +418,11 @@
 <span class="ln">7</span>An error occurred <span class="o">(</span>UserNotConfirmedException<span class="o">)</span> when calling the InitiateAuth operation: User is not confirmed. 
 </code></pre></div><h3 id="step3-驗證-user">Step3 驗證 User<a class="anchor ms-1" href="#step3-驗證-user"><i class="fas fa-link"></i></a></h3>
 <p>Cognito 會寄送 verification code 到你的 mail ，信箱內應該要有一封 email title 叫做 Your verification code，如果沒有看到，建議先到垃圾郵箱裡面查看。</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/verification_code_mail.png" loading="lazy"
-   width="667" height="170"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/verification_code_mail.png" loading="lazy"
+    
+     width="667" height="170"
+     />
+</picture>
 
 </p>
 <p>這邊使用 confirm-sign-up 去認證 ，注意正常認證成功是不會有任何 result</p>
@@ -416,9 +436,11 @@
 <span class="ln">3</span>  --username  allen.hsieh.aws@gmail.com
 </code></pre></div><h3 id="step4-確認驗證">Step4 確認驗證<a class="anchor ms-1" href="#step4-確認驗證"><i class="fas fa-link"></i></a></h3>
 <p>這時後透過 UI，可以看到 Account Status 已經是 CONFIRMED</p>
-<p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/user-pool-user2.png" loading="lazy"
-   width="1920" height="379"
-   />
+<p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/user-pool-user2.png" loading="lazy"
+    
+     width="1920" height="379"
+     />
+</picture>
 
 </p>
 <h3 id="step5-再次-login">Step5 再次 Login<a class="anchor ms-1" href="#step5-再次-login"><i class="fas fa-link"></i></a></h3>
@@ -439,22 +461,24 @@
 <span class="ln">14</span>     <span class="o">}</span>,
 <span class="ln">15</span>     <span class="s2">&#34;ChallengeParameters&#34;</span>: <span class="o">{}</span>
 <span class="ln">16</span> <span class="o">}</span>
-</code></pre></div><p><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/jwt_decode_example.png" loading="lazy"
-   width="1175" height="709"
-   />
+</code></pre></div><p><picture><img class="img-fluid mx-auto d-block" alt="Center" src="https://allenhsieh1992.com/images/post/create-cognito-user-pool-by-aws-cli/jwt_decode_example.png" loading="lazy"
+    
+     width="1175" height="709"
+     />
+</picture>
 
 </p>
 <h2 id="總結">總結<a class="anchor ms-1" href="#總結"><i class="fas fa-link"></i></a></h2>
 <p>AWS Cognito 真的很方便，對於還沒有自己的用戶管理App，可以快速的部署。內部還有許多功能例如 Host Login UI 、客製化 Lambda trigger 或者使用第三方認證。艾倫之後有空的話，也會寫使用第三方認證如 Facebook 或 Gmail，或者建立 Serverless Application (API Gateway 驗證）相關文章～</p>
 </div></div>
-  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly">
-  <div class="post-nav post-prev"><i class="fas fa-fw fa-chevron-left"></i>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
     <a href="https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
 </a>
   </div><div class="post-nav post-next">
     <a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
 </a>
-    <i class="fas fa-fw fa-chevron-right"></i>
+    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -499,16 +523,18 @@
 </div><aside class="col-lg-4 sidebar d-flex">
   <div class="container d-flex flex-column">
     
-    <section class="card row text-center profile component">
+    <div class="card row text-center profile component">
   <div class="card-body">
-    <div class="col-12 d-flex align-items-center justify-content-center"><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy"
-   width="154" height="153"
-   />
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
 </div>
     <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
   </div>
-</section>
-  <div class="post-toc row mb-4 card component" id="postTOC">
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
   <div class="card-header">
     <h2 class="card-title">目錄</h2>
   </div>
@@ -596,9 +622,22 @@
             CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
             CodeCommit</a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="badge rounded post-taxonomy" title="CodeDeploy">
             CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
-            CodePipeline</a></div>
+            CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">22</span>
+        </a></div>
       </div>
-    </section>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(4)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
     
   </div>
 </aside>
@@ -608,8 +647,8 @@
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
-<script src="https://allenhsieh1992.com/js/main.4b6a8521f980740da98f19e4ad567e6e74adadb01ee79c43fd0d6ec843f03281.js" integrity="sha256-S2qFIfmAdA2pjxnkrVZ&#43;bnStrbAe55xD/Q1uyEPwMoE=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/js/icons.min.a35670f2f90c398e5ee5c8e509b428fae75aa2746854cee10b60794633076859.js" integrity="sha256-o1Zw8vkMOY5e5cjlCbQo&#43;udaonRoVM7hC2B5RjMHaFk=" crossorigin="anonymous" defer></script>
-<script src="https://allenhsieh1992.com/js/viewer.min.4dba52a0a790f909408b7385316651299158381686401d50ff1f04dda6476473.js" integrity="sha256-TbpSoKeQ&#43;QlAi3OFMWZRKZFYOBaGQB1Q/x8E3aZHZHM=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/js/mermaid.min.f7f85f37aecd926c1536d7d7a068bda61384696972268ebd5624343dc57768e1.js" integrity="sha256-9/hfN67NkmwVNtfXoGi9phOEaWlyJo69ViQ0PcV3aOE=" crossorigin="anonymous"></script>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
