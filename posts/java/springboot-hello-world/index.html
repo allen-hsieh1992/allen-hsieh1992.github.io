@@ -1,0 +1,618 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
+   data-mode="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring Boot Hello World - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/favicon.ico">
+<link rel="manifest" href="https://allenhsieh1992.com/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" /><meta itemprop="name" content="Spring Boot Hello World">
+<meta itemprop="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。"><meta itemprop="datePublished" content="2022-06-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-06-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1830"><meta itemprop="image" content="https://allenhsieh1992.com/images/spring.png">
+<meta itemprop="keywords" content="SPRING," /><meta property="og:title" content="Spring Boot Hello World" />
+<meta property="og:description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/java/springboot-hello-world/" /><meta property="og:image" content="https://allenhsieh1992.com/images/spring.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-08T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/spring.png"/>
+
+<meta name="twitter:title" content="Spring Boot Hello World"/>
+<meta name="twitter:description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。"/>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
+  <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
+艾倫的開發心路歷程
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Spring%20Boot%20Hello%20World&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspringboot-hello-world%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspringboot-hello-world%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">設置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="藍色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="藍灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="綠色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="紅色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="藍綠色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黃色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="https://allenhsieh1992.com/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>歸檔
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/categories/">
+            <i class="fas fa-fw fa-folder"></i>分類
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Spring Boot Hello World</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Spring Boot Hello World
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="創建於 2022-06-08 08:00:00 &#43;0800 CST。">
+    Jun 8, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="badge post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/categories/spring/" class="badge post-taxonomy">SPRING</a><a href="https://allenhsieh1992.com/tags/spring/" class="badge post-taxonomy">SPRING</a></span>
+</div>
+<div class="post-content mb-3"><p>前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。</p>
+<h2 id="環境確認">環境確認<a class="anchor ms-1" href="#環境確認"><i class="fas fa-link"></i></a></h2>
+<hr>
+<p>這系列的文章，會以以下的版本為主</p>
+<ul>
+<li>Java 11</li>
+<li>Spring Boot 2.7</li>
+<li>Apache Maven 3.8.2</li>
+</ul>
+<h2 id="建立第一個-hello-world">建立第一個 Hello World<a class="anchor ms-1" href="#建立第一個-hello-world"><i class="fas fa-link"></i></a></h2>
+<hr>
+<p>由於艾倫以前已經使用過 IDE 或 網頁版的 Spring Boot Initializr 初始化，所以這次會以還未使用過的 Spring CLI。</p>
+<h3 id="安裝-spring-cli">安裝 Spring CLI<a class="anchor ms-1" href="#安裝-spring-cli"><i class="fas fa-link"></i></a></h3>
+<hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ brew tap spring-io/tap
+<span class="ln">2</span>$ brew install springboot
+<span class="ln">3</span>
+<span class="ln">4</span>$ spring --version
+<span class="ln">5</span>Spring CLI v2.7.0
+</code></pre></div><h3 id="使用-spring-cli-初始化專案">使用 Spring CLI 初始化專案<a class="anchor ms-1" href="#使用-spring-cli-初始化專案"><i class="fas fa-link"></i></a></h3>
+<hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ spring init -dweb -j <span class="m">11</span> -v 1.0.0 -a helloworld
+<span class="ln">2</span>Using service at https://start.spring.io
+<span class="ln">3</span>Content saved to <span class="s1">&#39;helloworld.zip&#39;</span>
+</code></pre></div><p>這邊對參數做一些小解釋</p>
+<ul>
+<li>-d: 是 Dependencies，指定專案所需要的 packages，目前先選擇最基本的 web starter</li>
+<li>-j: 是 Java 版本，這邊我們選擇 Java 11</li>
+<li>-v: 此專案的版本初始化</li>
+<li>-a: 是 artifact Id</li>
+</ul>
+<p>更多的參數或者 dependencies 的選擇，可以透過 spring init -list 看到。</p>
+<h3 id="執行-spring-boot">執行 Spring Boot<a class="anchor ms-1" href="#執行-spring-boot"><i class="fas fa-link"></i></a></h3>
+<hr>
+<p>建立一個新的資料夾如 demo，將剛剛 Spring CLI 所產生的 ZIP 檔案放入資料夾中，並解壓縮。<!-- raw HTML omitted -->
+在 Terminal 中移動到那個 folder 並在裡面執行 &ldquo;mvn spring-boot:run&rdquo; ，最後可以看到以下畫面</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>  .   ____          _            __ _ _
+<span class="ln"> 2</span> /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+</span><span class="ln"> 3</span><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
+</span><span class="ln"> 4</span><span class="se"></span> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+<span class="ln"> 5</span>  <span class="s1">&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+</span><span class="ln"> 6</span><span class="s1"> =========|_|==============|___/=/_/_/_/
+</span><span class="ln"> 7</span><span class="s1"> :: Spring Boot ::                (v2.7.0)
+</span><span class="ln"> 8</span><span class="s1">
+</span><span class="ln"> 9</span><span class="s1">2022-06-12 22:08:28.328  INFO 85059 --- [           main] com.example.helloworld.DemoApplication   : Starting DemoApplication using Java 17 on ChangdeMacBook-Pro.local with PID 85059 (/Users/allen/helloworld/target/classes started by allen in /Users/allen/helloworld)
+</span><span class="ln">10</span><span class="s1">2022-06-12 22:08:28.331  INFO 85059 --- [           main] com.example.helloworld.DemoApplication   : No active profile set, falling back to 1 default profile: &#34;default&#34;
+</span><span class="ln">11</span><span class="s1">2022-06-12 22:08:29.023  INFO 85059 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+</span><span class="ln">12</span><span class="s1">2022-06-12 22:08:29.035  INFO 85059 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+</span><span class="ln">13</span><span class="s1">2022-06-12 22:08:29.035  INFO 85059 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+</span><span class="ln">14</span><span class="s1">2022-06-12 22:08:29.107  INFO 85059 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+</span><span class="ln">15</span><span class="s1">2022-06-12 22:08:29.107  INFO 85059 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 721 ms
+</span><span class="ln">16</span><span class="s1">2022-06-12 22:08:29.395  INFO 85059 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;</span><span class="err">&#39;</span>
+<span class="ln">17</span>2022-06-12 22:08:29.404  INFO <span class="m">85059</span> --- <span class="o">[</span>           main<span class="o">]</span> com.example.helloworld.DemoApplication   : Started DemoApplication in 1.627 seconds <span class="o">(</span>JVM running <span class="k">for</span> 1.887<span class="o">)</span>
+</code></pre></div><p>從上面的訊息來看，可以看到 Spring Application 已經用 Tomcat 起來，且正在聽 8080 port。</p>
+<p>這時我們嘗試打 8080 port</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span> ~  curl http://127.0.0.
+<span class="ln">2</span><span class="o">{</span><span class="s2">&#34;timestamp&#34;</span>:<span class="s2">&#34;2022-06-12T14:10:55.321+00:00&#34;</span>,<span class="s2">&#34;status&#34;</span>:404,<span class="s2">&#34;error&#34;</span>:<span class="s2">&#34;Not Found&#34;</span>,<span class="s2">&#34;path&#34;</span>:<span class="s2">&#34;/&#34;</span><span class="o">}</span>
+</code></pre></div><p>會得到 404 Error Msg，這是正常的，因為目前我們還沒有建立任何的 endpoint ～ 但至少確認 Tomcat 有起來。</p>
+<h2 id="spring-cli-產生檔案">Spring CLI 產生檔案<a class="anchor ms-1" href="#spring-cli-產生檔案"><i class="fas fa-link"></i></a></h2>
+<p>我們可以看到 Spring CLI 已經幫我們產生了以下的檔案</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$ tree
+<span class="ln"> 2</span>.
+<span class="ln"> 3</span>├── HELP.md
+<span class="ln"> 4</span>├── mvnw
+<span class="ln"> 5</span>├── mvnw.cmd
+<span class="ln"> 6</span>├── pom.xml
+<span class="ln"> 7</span>└── src
+<span class="ln"> 8</span>    ├── main
+<span class="ln"> 9</span>    │   ├── java
+<span class="ln">10</span>    │   │   └── com
+<span class="ln">11</span>    │   │       └── example
+<span class="ln">12</span>    │   │           └── helloworld
+<span class="ln">13</span>    │   │               └── DemoApplication.java
+<span class="ln">14</span>    │   └── resources
+<span class="ln">15</span>    │       ├── application.properties
+<span class="ln">16</span>    │       ├── static
+<span class="ln">17</span>    │       └── templates
+<span class="ln">18</span>    └── <span class="nb">test</span>
+<span class="ln">19</span>        └── java
+<span class="ln">20</span>            └── com
+<span class="ln">21</span>                └── example
+<span class="ln">22</span>                    └── helloworld
+<span class="ln">23</span>                        └── DemoApplicationTests.java
+</code></pre></div><h3 id="demoapplicationjava">DemoApplication.java<a class="anchor ms-1" href="#demoapplicationjava"><i class="fas fa-link"></i></a></h3>
+<p>我們可以看到 Spring Boot 的進入點
+如果對 Spring Boot 啟動時做了什麼事情有興趣，可以看看這篇文章 <a href="https://www.twblogs.net/a/5ef3f904efdbac7f8b1043f2" target="_blank" rel="noopener noreferrer">從 SpringBootApplication 談談 Spring Boot 啓動時都做了哪些事？<i class="fas fa-external-link-square-alt ms-1"></i>
+</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.example.helloworld</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span><span class="nd">@SpringBootApplication</span>
+<span class="ln"> 7</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoApplication</span> <span class="o">{</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>		<span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">DemoApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+<span class="ln">11</span>	<span class="o">}</span>
+<span class="ln">12</span>
+<span class="ln">13</span><span class="o">}</span>
+</code></pre></div><h3 id="pomxml">Pom.xml<a class="anchor ms-1" href="#pomxml"><i class="fas fa-link"></i></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="ln"> 1</span><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="ln"> 2</span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+<span class="ln"> 3</span>	<span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span class="nt">&gt;</span>
+<span class="ln"> 4</span>	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+<span class="ln"> 5</span>	<span class="nt">&lt;parent&gt;</span>
+<span class="ln"> 6</span>		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln"> 7</span>		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln"> 8</span>		<span class="nt">&lt;version&gt;</span>2.7.0<span class="nt">&lt;/version&gt;</span>
+<span class="ln"> 9</span>		<span class="nt">&lt;relativePath/&gt;</span> <span class="c">&lt;!-- lookup parent from repository --&gt;</span>
+<span class="ln">10</span>	<span class="nt">&lt;/parent&gt;</span>
+<span class="ln">11</span>	<span class="nt">&lt;groupId&gt;</span>com.example<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">12</span>	<span class="nt">&lt;artifactId&gt;</span>helloworld<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">13</span>	<span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="ln">14</span>	<span class="nt">&lt;name&gt;</span>demo<span class="nt">&lt;/name&gt;</span>
+<span class="ln">15</span>	<span class="nt">&lt;description&gt;</span>Demo project for Spring Boot<span class="nt">&lt;/description&gt;</span>
+<span class="ln">16</span>	<span class="nt">&lt;properties&gt;</span>
+<span class="ln">17</span>		<span class="nt">&lt;java.version&gt;</span>11<span class="nt">&lt;/java.version&gt;</span>
+<span class="ln">18</span>	<span class="nt">&lt;/properties&gt;</span>
+<span class="ln">19</span>	<span class="nt">&lt;dependencies&gt;</span>
+<span class="ln">20</span>		<span class="nt">&lt;dependency&gt;</span>
+<span class="ln">21</span>			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">22</span>			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">23</span>		<span class="nt">&lt;/dependency&gt;</span>
+<span class="ln">24</span>
+<span class="ln">25</span>		<span class="nt">&lt;dependency&gt;</span>
+<span class="ln">26</span>			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">27</span>			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">28</span>			<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="ln">29</span>		<span class="nt">&lt;/dependency&gt;</span>
+<span class="ln">30</span>	<span class="nt">&lt;/dependencies&gt;</span>
+<span class="ln">31</span>
+<span class="ln">32</span>	<span class="nt">&lt;build&gt;</span>
+<span class="ln">33</span>		<span class="nt">&lt;plugins&gt;</span>
+<span class="ln">34</span>			<span class="nt">&lt;plugin&gt;</span>
+<span class="ln">35</span>				<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">36</span>				<span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">37</span>			<span class="nt">&lt;/plugin&gt;</span>
+<span class="ln">38</span>		<span class="nt">&lt;/plugins&gt;</span>
+<span class="ln">39</span>	<span class="nt">&lt;/build&gt;</span>
+<span class="ln">40</span>
+<span class="ln">41</span><span class="nt">&lt;/project&gt;</span>
+</code></pre></div><p>從上面看到，我們繼承了 starter parent，且 dependencies 如預期裡面包含了 web starter 跟我們一開始初始化專案時所要求的一樣。</p>
+<p>最後這邊可以看到，有裝 spring boot maven plugin，這是我們執行 mvn spring-boot:run 所需要的 plugin。</p>
+<h3 id="maven-dependency-tree">Maven dependency tree<a class="anchor ms-1" href="#maven-dependency-tree"><i class="fas fa-link"></i></a></h3>
+<p>當我們下 &ldquo;mvn dependency:tree&rdquo; 時，我們可以看到整個專案所需要的所包含的 package，也可以看到 package 中所拉到的其他 package。</p>
+<p>以下面的結果為範例，我們可以看到 spring-boot-starter-web 裡面有包含 spring-boot-starter-tomcat</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$  mvn dependency:tree
+<span class="ln"> 2</span><span class="o">[</span>INFO<span class="o">]</span> com.example:helloworld:jar:1.0.0
+<span class="ln"> 3</span><span class="o">[</span>INFO<span class="o">]</span> +- org.springframework.boot:spring-boot-starter-web:jar:2.7.0:compile
+<span class="ln"> 4</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  +- org.springframework.boot:spring-boot-starter:jar:2.7.0:compile
+<span class="ln"> 5</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- org.springframework.boot:spring-boot:jar:2.7.0:compile
+<span class="ln"> 6</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- org.springframework.boot:spring-boot-autoconfigure:jar:2.7.0:compile
+<span class="ln"> 7</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- org.springframework.boot:spring-boot-starter-logging:jar:2.7.0:compile
+<span class="ln"> 8</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  +- ch.qos.logback:logback-classic:jar:1.2.11:compile
+<span class="ln"> 9</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> ch.qos.logback:logback-core:jar:1.2.11:compile
+<span class="ln">10</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  +- org.apache.logging.log4j:log4j-to-slf4j:jar:2.17.2:compile
+<span class="ln">11</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> org.apache.logging.log4j:log4j-api:jar:2.17.2:compile
+<span class="ln">12</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> org.slf4j:jul-to-slf4j:jar:1.7.36:compile
+<span class="ln">13</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- jakarta.annotation:jakarta.annotation-api:jar:1.3.5:compile
+<span class="ln">14</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> org.yaml:snakeyaml:jar:1.30:compile
+<span class="ln">15</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  +- org.springframework.boot:spring-boot-starter-json:jar:2.7.0:compile
+<span class="ln">16</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- com.fasterxml.jackson.core:jackson-databind:jar:2.13.3:compile
+<span class="ln">17</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.13.3:compile
+<span class="ln">18</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> com.fasterxml.jackson.core:jackson-core:jar:2.13.3:compile
+<span class="ln">19</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.13.3:compile
+<span class="ln">20</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.13.3:compile
+<span class="ln">21</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.13.3:compile
+<span class="ln">22</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  +- org.springframework.boot:spring-boot-starter-tomcat:jar:2.7.0:compile
+<span class="ln">23</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- org.apache.tomcat.embed:tomcat-embed-core:jar:9.0.63:compile
+<span class="ln">24</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  +- org.apache.tomcat.embed:tomcat-embed-el:jar:9.0.63:compile
+<span class="ln">25</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> org.apache.tomcat.embed:tomcat-embed-websocket:jar:9.0.63:compile
+<span class="ln">26</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  +- org.springframework:spring-web:jar:5.3.20:compile
+<span class="ln">27</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="p">|</span>  <span class="se">\-</span> org.springframework:spring-beans:jar:5.3.20:compile
+<span class="ln">28</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  <span class="se">\-</span> org.springframework:spring-webmvc:jar:5.3.20:compile
+<span class="ln">29</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>     +- org.springframework:spring-aop:jar:5.3.20:compile
+<span class="ln">30</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>     +- org.springframework:spring-context:jar:5.3.20:compile
+<span class="ln">31</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>     <span class="se">\-</span> org.springframework:spring-expression:jar:5.3.20:compile
+</code></pre></div><h2 id="將-tomcat-換成-jetty">將 Tomcat 換成 Jetty<a class="anchor ms-1" href="#將-tomcat-換成-jetty"><i class="fas fa-link"></i></a></h2>
+<p>從 dependency tree 我們已經看到 tomcat 是由 web start 拉入的，所以我們可以透過 exclusion 將 tomcat starter 從 web starter 中排除，並手動拉入 jetty starter</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="ln"> 1</span><span class="nt">&lt;dependencies&gt;</span>
+<span class="ln"> 2</span>	<span class="nt">&lt;dependency&gt;</span>
+<span class="ln"> 3</span>		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln"> 4</span>		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln"> 5</span>		<span class="nt">&lt;exclusions&gt;</span>
+<span class="ln"> 6</span>			<span class="c">&lt;!-- 去除Tomcat容器 --&gt;</span>
+<span class="ln"> 7</span>			<span class="nt">&lt;exclusion&gt;</span>
+<span class="ln"> 8</span>			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln"> 9</span>			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-tomcat<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">10</span>			<span class="nt">&lt;/exclusion&gt;</span>
+<span class="ln">11</span>		<span class="nt">&lt;/exclusions&gt;</span>
+<span class="ln">12</span>	<span class="nt">&lt;/dependency&gt;</span>
+<span class="ln">13</span>	<span class="c">&lt;!-- 增加Jetty容器 --&gt;</span>
+<span class="ln">14</span>	<span class="nt">&lt;dependency&gt;</span>
+<span class="ln">15</span>		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">16</span>		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-jetty<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">17</span>	<span class="nt">&lt;/dependency&gt;</span>
+<span class="ln">18</span>	<span class="nt">&lt;dependency&gt;</span>
+<span class="ln">19</span>		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">20</span>		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">21</span>		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="ln">22</span>	<span class="nt">&lt;/dependency&gt;</span>
+<span class="ln">23</span><span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div><p>這時我們重新執行 mvn spring-boot:run</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>  .   ____          _            __ _ _
+<span class="ln"> 2</span> /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+</span><span class="ln"> 3</span><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
+</span><span class="ln"> 4</span><span class="se"></span> <span class="se">\\</span>/  ___<span class="o">)</span><span class="p">|</span> <span class="p">|</span>_<span class="o">)</span><span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">||</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span>  <span class="o">)</span> <span class="o">)</span> <span class="o">)</span> <span class="o">)</span>
+<span class="ln"> 5</span>  <span class="s1">&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+</span><span class="ln"> 6</span><span class="s1"> =========|_|==============|___/=/_/_/_/
+</span><span class="ln"> 7</span><span class="s1"> :: Spring Boot ::                (v2.7.0)
+</span><span class="ln"> 8</span><span class="s1">
+</span><span class="ln"> 9</span><span class="s1">2022-06-12 22:49:19.224  INFO 87278 --- [           main] com.example.helloworld.DemoApplication   : Starting DemoApplication using Java 17 on ChangdeMacBook-Pro.local with PID 87278 (/Users/allen/helloworld/target/classes started by allen in /Users/allen/helloworld)
+</span><span class="ln">10</span><span class="s1">2022-06-12 22:49:19.226  INFO 87278 --- [           main] com.example.helloworld.DemoApplication   : No active profile set, falling back to 1 default profile: &#34;default&#34;
+</span><span class="ln">11</span><span class="s1">2022-06-12 22:49:19.740  INFO 87278 --- [           main] org.eclipse.jetty.util.log               : Logging initialized @1029ms to org.eclipse.jetty.util.log.Slf4jLog
+</span><span class="ln">12</span><span class="s1">2022-06-12 22:49:19.857  INFO 87278 --- [           main] o.s.b.w.e.j.JettyServletWebServerFactory : Server initialized with port: 8080
+</span><span class="ln">13</span><span class="s1">2022-06-12 22:49:19.860  INFO 87278 --- [           main] org.eclipse.jetty.server.Server          : jetty-9.4.46.v20220331; built: 2022-03-31T16:38:08.030Z; git: bc17a0369a11ecf40bb92c839b9ef0a8ac50ea18; jvm 17+0
+</span><span class="ln">14</span><span class="s1">2022-06-12 22:49:19.896  INFO 87278 --- [           main] o.e.j.s.h.ContextHandler.application     : Initializing Spring embedded WebApplicationContext
+</span><span class="ln">15</span><span class="s1">2022-06-12 22:49:19.897  INFO 87278 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 633 ms
+</span><span class="ln">16</span><span class="s1">2022-06-12 22:49:19.958  INFO 87278 --- [           main] org.eclipse.jetty.server.session         : DefaultSessionIdManager workerName=node0
+</span><span class="ln">17</span><span class="s1">2022-06-12 22:49:19.958  INFO 87278 --- [           main] org.eclipse.jetty.server.session         : No SessionScavenger set, using defaults
+</span><span class="ln">18</span><span class="s1">2022-06-12 22:49:19.959  INFO 87278 --- [           main] org.eclipse.jetty.server.session         : node0 Scavenging every 600000ms
+</span><span class="ln">19</span><span class="s1">2022-06-12 22:49:19.966  INFO 87278 --- [           main] o.e.jetty.server.handler.ContextHandler  : Started o.s.b.w.e.j.JettyEmbeddedWebAppContext@69da0b12{application,/,[file:///private/var/folders/dx/18qvmm_55hz74r3xdx9wn6x40000gn/T/jetty-docbase.8080.12428220257398218881/],AVAILABLE}
+</span><span class="ln">20</span><span class="s1">2022-06-12 22:49:19.966  INFO 87278 --- [           main] org.eclipse.jetty.server.Server          : Started @1256ms
+</span><span class="ln">21</span><span class="s1">2022-06-12 22:49:20.187  INFO 87278 --- [           main] o.e.j.s.h.ContextHandler.application     : Initializing Spring DispatcherServlet &#39;</span>dispatcherServlet<span class="s1">&#39;
+</span><span class="ln">22</span><span class="s1">2022-06-12 22:49:20.187  INFO 87278 --- [           main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;</span>dispatcherServlet<span class="s1">&#39;
+</span><span class="ln">23</span><span class="s1">2022-06-12 22:49:20.188  INFO 87278 --- [           main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+</span><span class="ln">24</span><span class="s1">2022-06-12 22:49:20.219  INFO 87278 --- [           main] o.e.jetty.server.AbstractConnector       : Started ServerConnector@17ca8b92{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+</span><span class="ln">25</span><span class="s1">2022-06-12 22:49:20.220  INFO 87278 --- [           main] o.s.b.web.embedded.jetty.JettyWebServer  : Jetty started on port(s) 8080 (http/1.1) with context path &#39;</span>/<span class="err">&#39;</span>
+<span class="ln">26</span>2022-06-12 22:49:20.230  INFO <span class="m">87278</span> --- <span class="o">[</span>           main<span class="o">]</span> com.example.helloworld.DemoApplication   : Started DemoApplication in 1.274 seconds <span class="o">(</span>JVM running <span class="k">for</span> 1.52<span class="o">)</span>
+</code></pre></div><p>我們可以看到 Application 現在由 Jetty 9.4 起來。</p>
+</div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
+    <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
+</a>
+  </div></div></div>
+</article><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相關文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
+</a>
+          <span class="float-end post-date">Mar 2, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/container/create_mysql_server_by_docker/">使用 Docker 在 Mac 上裝 Mysql Server
+</a>
+          <span class="float-end post-date">Jan 28, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a>
+          <span class="float-end post-date">Jan 27, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
+</a>
+          <span class="float-end post-date">Jan 26, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/aws/dynamodb-certification-note/">DynamoDB Certification Note
+</a>
+          <span class="float-end post-date">Sep 21, 2021
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">評論</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="allen-hsieh1992/allen-hsieh1992.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="card row text-center profile component">
+  <div class="card-body">
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
+</div>
+    <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+  </div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目錄</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#環境確認">環境確認</a></li>
+    <li><a href="#建立第一個-hello-world">建立第一個 Hello World</a>
+      <ul>
+        <li><a href="#安裝-spring-cli">安裝 Spring CLI</a></li>
+        <li><a href="#使用-spring-cli-初始化專案">使用 Spring CLI 初始化專案</a></li>
+        <li><a href="#執行-spring-boot">執行 Spring Boot</a></li>
+      </ul>
+    </li>
+    <li><a href="#spring-cli-產生檔案">Spring CLI 產生檔案</a>
+      <ul>
+        <li><a href="#demoapplicationjava">DemoApplication.java</a></li>
+        <li><a href="#pomxml">Pom.xml</a></li>
+        <li><a href="#maven-dependency-tree">Maven dependency tree</a></li>
+      </ul>
+    </li>
+    <li><a href="#將-tomcat-換成-jetty">將 Tomcat 換成 Jetty</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="https://allenhsieh1992.com/posts/java/springboot-hello-world/">Spring Boot Hello World
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/container/create_mysql_server_by_docker/">使用 Docker 在 Mac 上裝 Mysql Server
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
+</a>
+      </li></ul>
+  </div>
+</section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="https://allenhsieh1992.com/categories">分類</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="https://allenhsieh1992.com/categories/aws/" class="badge rounded post-taxonomy" title="AWS">
+            AWS</a><a href="https://allenhsieh1992.com/categories/java/" class="badge rounded post-taxonomy" title="JAVA">
+            JAVA</a><a href="https://allenhsieh1992.com/categories/container/" class="badge rounded post-taxonomy" title="CONTAINER">
+            CONTAINER</a><a href="https://allenhsieh1992.com/categories/spring/" class="badge rounded post-taxonomy" title="SPRING">
+            SPRING</a><a href="https://allenhsieh1992.com/categories/tools/" class="badge rounded post-taxonomy" title="TOOLS">
+            TOOLS</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="https://allenhsieh1992.com/tags">標籤</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="https://allenhsieh1992.com/tags/javacore/" class="badge rounded post-taxonomy" title="JavaCore">
+            JavaCore</a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="badge rounded post-taxonomy" title="CloudFormation">
+            CloudFormation</a><a href="https://allenhsieh1992.com/tags/lambda/" class="badge rounded post-taxonomy" title="Lambda">
+            Lambda</a><a href="https://allenhsieh1992.com/tags/route53/" class="badge rounded post-taxonomy" title="Route53">
+            Route53</a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="badge rounded post-taxonomy" title="Beanstalk">
+            Beanstalk</a><a href="https://allenhsieh1992.com/tags/cloudtail/" class="badge rounded post-taxonomy" title="CloudTail">
+            CloudTail</a><a href="https://allenhsieh1992.com/tags/codebuild/" class="badge rounded post-taxonomy" title="CodeBuild">
+            CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
+            CodeCommit</a><a href="https://allenhsieh1992.com/tags/codedeploy/" class="badge rounded post-taxonomy" title="CodeDeploy">
+            CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
+            CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">23</span>
+        </a></div>
+      </div>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(5)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"></nav>
+<div class="copyright mb-2">
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
+</div>
+</footer>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-201290280-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>
