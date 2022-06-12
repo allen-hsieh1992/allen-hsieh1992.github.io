@@ -14,7 +14,7 @@
 <meta name="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" /><meta itemprop="name" content="Spring Boot Hello World">
 <meta itemprop="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。"><meta itemprop="datePublished" content="2022-06-08T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-06-08T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1830"><meta itemprop="image" content="https://allenhsieh1992.com/images/spring.png">
+<meta itemprop="wordCount" content="1897"><meta itemprop="image" content="https://allenhsieh1992.com/images/spring.png">
 <meta itemprop="keywords" content="SPRING," /><meta property="og:title" content="Spring Boot Hello World" />
 <meta property="og:description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" />
 <meta property="og:type" content="article" />
@@ -284,8 +284,8 @@
 <span class="ln">22</span>                    └── helloworld
 <span class="ln">23</span>                        └── DemoApplicationTests.java
 </code></pre></div><h3 id="demoapplicationjava">DemoApplication.java<a class="anchor ms-1" href="#demoapplicationjava"><i class="fas fa-link"></i></a></h3>
-<p>我們可以看到 Spring Boot 的進入點
-如果對 Spring Boot 啟動時做了什麼事情有興趣，可以看看這篇文章 <a href="https://www.twblogs.net/a/5ef3f904efdbac7f8b1043f2" target="_blank" rel="noopener noreferrer">從 SpringBootApplication 談談 Spring Boot 啓動時都做了哪些事？<i class="fas fa-external-link-square-alt ms-1"></i>
+<p>我們可以看到 Spring Boot 的進入點 SpringApplication.run。</p>
+<p>如果對 Spring Boot 啟動時做了什麼事情有興趣，可以看看這篇文章 <a href="https://www.twblogs.net/a/5ef3f904efdbac7f8b1043f2" target="_blank" rel="noopener noreferrer">從 SpringBootApplication 談談 Spring Boot 啓動時都做了哪些事？<i class="fas fa-external-link-square-alt ms-1"></i>
 </a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.example.helloworld</span><span class="o">;</span>
 <span class="ln"> 2</span>
@@ -345,8 +345,8 @@
 </code></pre></div><p>從上面看到，我們繼承了 starter parent，且 dependencies 如預期裡面包含了 web starter 跟我們一開始初始化專案時所要求的一樣。</p>
 <p>最後這邊可以看到，有裝 spring boot maven plugin，這是我們執行 mvn spring-boot:run 所需要的 plugin。</p>
 <h3 id="maven-dependency-tree">Maven dependency tree<a class="anchor ms-1" href="#maven-dependency-tree"><i class="fas fa-link"></i></a></h3>
-<p>當我們下 &ldquo;mvn dependency:tree&rdquo; 時，我們可以看到整個專案所需要的所包含的 package，也可以看到 package 中所拉到的其他 package。</p>
-<p>以下面的結果為範例，我們可以看到 spring-boot-starter-web 裡面有包含 spring-boot-starter-tomcat</p>
+<p>當我們下 &ldquo;mvn dependency:tree&rdquo; 時，我們可以看到整個專案所需要的所包含的 package，也可以看到 package 中所拉到的其他 package 或者我們叫 transitive dependencies。</p>
+<p>以下面的結果為範例，我們可以看到 spring-boot-starter-web 裡面有包含 spring-boot-starter-tomcat。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$  mvn dependency:tree
 <span class="ln"> 2</span><span class="o">[</span>INFO<span class="o">]</span> com.example:helloworld:jar:1.0.0
 <span class="ln"> 3</span><span class="o">[</span>INFO<span class="o">]</span> +- org.springframework.boot:spring-boot-starter-web:jar:2.7.0:compile
@@ -379,7 +379,7 @@
 <span class="ln">30</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>     +- org.springframework:spring-context:jar:5.3.20:compile
 <span class="ln">31</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>     <span class="se">\-</span> org.springframework:spring-expression:jar:5.3.20:compile
 </code></pre></div><h2 id="將-tomcat-換成-jetty">將 Tomcat 換成 Jetty<a class="anchor ms-1" href="#將-tomcat-換成-jetty"><i class="fas fa-link"></i></a></h2>
-<p>從 dependency tree 我們已經看到 tomcat 是由 web start 拉入的，所以我們可以透過 exclusion 將 tomcat starter 從 web starter 中排除，並手動拉入 jetty starter</p>
+<p>從 dependency tree 我們已經看到 tomcat 是由 web start 拉入的，所以我們可以透過 exclusion 將 tomcat starter 從 web starter 中排除，並手動拉入 jetty starter。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="ln"> 1</span><span class="nt">&lt;dependencies&gt;</span>
 <span class="ln"> 2</span>	<span class="nt">&lt;dependency&gt;</span>
 <span class="ln"> 3</span>		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
@@ -430,7 +430,7 @@
 </span><span class="ln">24</span><span class="s1">2022-06-12 22:49:20.219  INFO 87278 --- [           main] o.e.jetty.server.AbstractConnector       : Started ServerConnector@17ca8b92{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
 </span><span class="ln">25</span><span class="s1">2022-06-12 22:49:20.220  INFO 87278 --- [           main] o.s.b.web.embedded.jetty.JettyWebServer  : Jetty started on port(s) 8080 (http/1.1) with context path &#39;</span>/<span class="err">&#39;</span>
 <span class="ln">26</span>2022-06-12 22:49:20.230  INFO <span class="m">87278</span> --- <span class="o">[</span>           main<span class="o">]</span> com.example.helloworld.DemoApplication   : Started DemoApplication in 1.274 seconds <span class="o">(</span>JVM running <span class="k">for</span> 1.52<span class="o">)</span>
-</code></pre></div><p>我們可以看到 Application 現在由 Jetty 9.4 起來。</p>
+</code></pre></div><p>我們可以看到 Application 現在由 Jetty 9.4 起來～</p>
 </div></div>
   <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
