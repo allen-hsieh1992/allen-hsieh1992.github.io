@@ -233,28 +233,29 @@ $$</p>
 <p>所以我會從最右開始往左看，用一個變數去記錄當下最高建築物的高度，如果當下的建築物沒有比記錄的建築物高，也就代表可以看到海洋。</p>
 <p>由於回傳的結果必須是由左到右的，所以這邊我會先用 Stack 將可看見海洋的建築物存下來，最後在將 Stack 裡面的東西轉換回 Array 返回。</p>
 <h2 id="程式碼">程式碼<a class="anchor ms-1" href="#程式碼"><i class="fas fa-link"></i></a></h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln"> 1</span>class Solution {
-<span class="ln"> 2</span>    public int[] findBuildings(int[] heights) {
-<span class="ln"> 3</span>        int length = heights.length;
-<span class="ln"> 4</span>        int heightest = heights[length - 1];
-<span class="ln"> 5</span>        Stack&lt;Integer&gt; stack = new Stack();
-<span class="ln"> 6</span>        stack.push(length - 1);
+<hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">findBuildings</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">heights</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 3</span>        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">heights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+<span class="ln"> 4</span>        <span class="kt">int</span> <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">];</span>
+<span class="ln"> 5</span>        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">();</span>
+<span class="ln"> 6</span>        <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
 <span class="ln"> 7</span>        
-<span class="ln"> 8</span>        for(int i = length - 1; i &gt;= 0; i--) {
-<span class="ln"> 9</span>            if (heights[i] &gt; heightest) {
-<span class="ln">10</span>                stack.push(i);
-<span class="ln">11</span>                heightest = heights[i];
-<span class="ln">12</span>            }
-<span class="ln">13</span>        }
+<span class="ln"> 8</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+<span class="ln"> 9</span>            <span class="k">if</span> <span class="o">(</span><span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">heightest</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">10</span>                <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="ln">11</span>                <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+<span class="ln">12</span>            <span class="o">}</span>
+<span class="ln">13</span>        <span class="o">}</span>
 <span class="ln">14</span>        
-<span class="ln">15</span>        int size = stack.size();
-<span class="ln">16</span>        int[] result = new int[size];
-<span class="ln">17</span>        for(int i = 0; i &lt; size; i++) {
-<span class="ln">18</span>            result[i] = stack.pop();
-<span class="ln">19</span>        }
-<span class="ln">20</span>        return result;
-<span class="ln">21</span>    }
-<span class="ln">22</span>}
+<span class="ln">15</span>        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+<span class="ln">16</span>        <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+<span class="ln">17</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">18</span>            <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+<span class="ln">19</span>        <span class="o">}</span>
+<span class="ln">20</span>        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="ln">21</span>    <span class="o">}</span>
+<span class="ln">22</span><span class="o">}</span>
 </code></pre></div><p>Time complexity: O(N)</p>
 <p>Space complexity: O(N)</p>
 </div></div>
