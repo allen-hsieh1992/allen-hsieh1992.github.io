@@ -5,17 +5,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring Boot Hello World - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
+    <title>透過 Spring CLI 建立 Spring Boot Hello World - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/favicon.ico">
 <link rel="manifest" href="https://allenhsieh1992.com/manifest.json">
 <meta name="keywords" content="" />
-<meta name="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" /><meta itemprop="name" content="Spring Boot Hello World">
+<meta name="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" /><meta itemprop="name" content="透過 Spring CLI 建立 Spring Boot Hello World">
 <meta itemprop="description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。"><meta itemprop="datePublished" content="2022-06-08T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-06-08T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1897"><meta itemprop="image" content="https://allenhsieh1992.com/images/spring.png">
-<meta itemprop="keywords" content="SPRING," /><meta property="og:title" content="Spring Boot Hello World" />
+<meta itemprop="keywords" content="SPRING," /><meta property="og:title" content="透過 Spring CLI 建立 Spring Boot Hello World" />
 <meta property="og:description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://allenhsieh1992.com/posts/java/springboot-hello-world/" /><meta property="og:image" content="https://allenhsieh1992.com/images/spring.png" /><meta property="article:section" content="posts" />
@@ -25,9 +25,10 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://allenhsieh1992.com/images/spring.png"/>
 
-<meta name="twitter:title" content="Spring Boot Hello World"/>
+<meta name="twitter:title" content="透過 Spring CLI 建立 Spring Boot Hello World"/>
 <meta name="twitter:description" content="前一陣子公司專案讓我有機會使用 Spring Boot 開發，但因為當時專案時間很趕，所以也一直專注在開發上當時開發所需要的技術。由於不熟 Spring Boot or Spring Core，所以用的東西都很基礎。所以我想趁現在好好的充實自己並嘗試寫一個 Spring Boot 系列的文章。"/>
-<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/katex/bundle.min.c7738aed5534d96f5c4eb1790af05b44a2ca1cc7d0cb6d5de1dcf95595d3f91a.css" integrity="sha256-x3OK7VU02W9cTrF5CvBbRKLKHMfQy21d4dz5VZXT&#43;Ro=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
   <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -49,7 +50,7 @@
   </div>
   <div class="offcanvas-body">
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
-      target="_blank" href="https://twitter.com/intent/tweet?title=Spring%20Boot%20Hello%20World&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspringboot-hello-world%2f">
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e9%80%8f%e9%81%8e%20Spring%20CLI%20%e5%bb%ba%e7%ab%8b%20Spring%20Boot%20Hello%20World&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspringboot-hello-world%2f">
       <i class="fab fa-fw fa-twitter"></i> Twitter
     </a>
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
@@ -165,7 +166,7 @@
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
-    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Spring Boot Hello World</li></ol>
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">透過 Spring CLI 建立 Spring Boot Hello World</li></ol>
   </div>
 </nav><div class="post-panel-wrapper position-sticky">
   <div class="d-flex flex-column component rounded post-panel position-absolute">
@@ -192,7 +193,7 @@
 </div>
 <article class="row card component mb-4 post">
   <div class="card-header ">
-    <h1 class="card-title post-title">Spring Boot Hello World
+    <h1 class="card-title post-title">透過 Spring CLI 建立 Spring Boot Hello World
 </h1>
   </div>
   <div class="card-body"><div class="post-meta">
@@ -345,9 +346,9 @@
 </code></pre></div><p>從上面看到，我們繼承了 starter parent，且 dependencies 如預期裡面包含了 web starter 跟我們一開始初始化專案時所要求的一樣。</p>
 <p>最後這邊可以看到，有裝 spring boot maven plugin，這是我們執行 mvn spring-boot:run 所需要的 plugin。</p>
 <h3 id="maven-dependency-tree">Maven dependency tree<a class="anchor ms-1" href="#maven-dependency-tree"><i class="fas fa-link"></i></a></h3>
-<p>當我們下 &ldquo;mvn dependency:tree&rdquo; 時，我們可以看到整個專案所需要的所包含的 package，也可以看到 package 中所拉到的其他 package 或者我們叫 transitive dependencies。</p>
+<p>當我們下 &ldquo;./mvnw dependency:tree&rdquo; 時，我們可以看到整個專案所需要的所包含的 package，也可以看到 package 中所拉到的其他 package 或者我們叫 transitive dependencies。</p>
 <p>以下面的結果為範例，我們可以看到 spring-boot-starter-web 裡面有包含 spring-boot-starter-tomcat。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$  mvn dependency:tree
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>$  ./mvnw dependency:tree
 <span class="ln"> 2</span><span class="o">[</span>INFO<span class="o">]</span> com.example:helloworld:jar:1.0.0
 <span class="ln"> 3</span><span class="o">[</span>INFO<span class="o">]</span> +- org.springframework.boot:spring-boot-starter-web:jar:2.7.0:compile
 <span class="ln"> 4</span><span class="o">[</span>INFO<span class="o">]</span> <span class="p">|</span>  +- org.springframework.boot:spring-boot-starter:jar:2.7.0:compile
@@ -403,7 +404,7 @@
 <span class="ln">21</span>		<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="ln">22</span>	<span class="nt">&lt;/dependency&gt;</span>
 <span class="ln">23</span><span class="nt">&lt;/dependencies&gt;</span>
-</code></pre></div><p>這時我們重新執行 mvn spring-boot:run</p>
+</code></pre></div><p>這時我們重新執行 ./mvnw spring-boot:run</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln"> 1</span>  .   ____          _            __ _ _
 <span class="ln"> 2</span> /<span class="se">\\</span> / ___<span class="s1">&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
 </span><span class="ln"> 3</span><span class="s1">( ( )\___ | &#39;</span>_ <span class="p">|</span> <span class="s1">&#39;_| | &#39;</span>_ <span class="se">\/</span> _<span class="sb">`</span> <span class="p">|</span> <span class="se">\ \ \ \
@@ -436,6 +437,10 @@
     <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
     <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
 </a>
+  </div><div class="post-nav post-next">
+    <a href="https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/">演算法 [Java] LeetCode #1762. Buildings With an Ocean View
+</a>
+    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -528,7 +533,10 @@
   </div>
   <div class="card-body">
     <ul class="post-list"><li>
-        <a href="https://allenhsieh1992.com/posts/java/springboot-hello-world/">Spring Boot Hello World
+        <a href="https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/">演算法 [Java] LeetCode #1762. Buildings With an Ocean View
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/java/springboot-hello-world/">透過 Spring CLI 建立 Spring Boot Hello World
 </a>
       </li><li>
         <a href="https://allenhsieh1992.com/posts/tools/how_git_works/">Git 是如何運作的
@@ -538,9 +546,6 @@
 </a>
       </li><li>
         <a href="https://allenhsieh1992.com/posts/java/java-reference/">你知道 Java 的四個引用嗎？
-</a>
-      </li><li>
-        <a href="https://allenhsieh1992.com/posts/java/java-garbage-collection/">Java Garbage Collection 基礎演算法
 </a>
       </li></ul>
   </div>
@@ -553,7 +558,8 @@
       <div class="card-body">
         <div class="py-2"><a href="https://allenhsieh1992.com/categories/aws/" class="badge rounded post-taxonomy" title="AWS">
             AWS</a><a href="https://allenhsieh1992.com/categories/java/" class="badge rounded post-taxonomy" title="JAVA">
-            JAVA</a><a href="https://allenhsieh1992.com/categories/container/" class="badge rounded post-taxonomy" title="CONTAINER">
+            JAVA</a><a href="https://allenhsieh1992.com/categories/algorithm/" class="badge rounded post-taxonomy" title="ALGORITHM">
+            ALGORITHM</a><a href="https://allenhsieh1992.com/categories/container/" class="badge rounded post-taxonomy" title="CONTAINER">
             CONTAINER</a><a href="https://allenhsieh1992.com/categories/spring/" class="badge rounded post-taxonomy" title="SPRING">
             SPRING</a><a href="https://allenhsieh1992.com/categories/tools/" class="badge rounded post-taxonomy" title="TOOLS">
             TOOLS</a></div>
@@ -577,7 +583,7 @@
             CodeDeploy</a><a href="https://allenhsieh1992.com/tags/codepipeline/" class="badge rounded post-taxonomy" title="CodePipeline">
             CodePipeline</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
           全部
-          <span class="badge badge-sm text-white bg-accent ms-1">23</span>
+          <span class="badge badge-sm text-white bg-accent ms-1">24</span>
         </a></div>
       </div>
     </section><section class="row card component">
@@ -586,7 +592,7 @@
     </div>
     <div class="card-body">
       <ul class="post-list">
-        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(5)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(6)</a></li>
         <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
       </ul>
     </div>
@@ -600,8 +606,9 @@
   Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
 </div>
 </footer>
-<script src="https://allenhsieh1992.com/assets/main/bundle.min.1803073cd9d6b392eb296bfd7e94e5f5d8d09ff28986502b27b393fa36d2a612.js" integrity="sha256-GAMHPNnWs5LrKWv9fpTl9djQn/KJhlArJ7OT&#43;jbSphI=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
-<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.32bd703fcd6b9a2a1dbb75ff1d9664696d7ddcbab939170d619f7affd0bdbb0f.js" integrity="sha256-Mr1wP81rmiodu3X/HZZkaW193Lq5ORcNYZ96/9C9uw8=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/katex/bundle.min.9425c9c8b018985099738dfa8d0782bb9faab07a82f6f0df751989c4855e7601.js" integrity="sha256-lCXJyLAYmFCZc436jQeCu5&#43;qsHqC9vDfdRmJxIVedgE=" crossorigin="anonymous"></script>
+<script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
 
 <script type="application/javascript">
 var doNotTrack = false;

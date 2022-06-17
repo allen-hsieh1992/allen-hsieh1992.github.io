@@ -9,7 +9,7 @@
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
     <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Spring Boot Hello World</title>
+      <title>透過 Spring CLI 建立 Spring Boot Hello World</title>
       <link>https://allenhsieh1992.com/posts/java/springboot-hello-world/</link>
       <pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate>
       

@@ -7,9 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Spring Boot Hello World</title>
+      <title>演算法 [Java] LeetCode #1762. Buildings With an Ocean View</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/</link>
+      <pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/</guid>
+      <description>題目 There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line. The ocean is to the right of the buildings. A building has an ocean view if the building can see the ocean without obstructions. Formally, a building has an ocean view if all the buildings to its right have a smaller</description>
+    </item>
+    
+    <item>
+      <title>透過 Spring CLI 建立 Spring Boot Hello World</title>
       <link>https://allenhsieh1992.com/posts/java/springboot-hello-world/</link>
       <pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate>
       
