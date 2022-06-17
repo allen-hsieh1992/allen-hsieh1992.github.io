@@ -14,7 +14,7 @@
 <meta name="description" content="There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line." /><meta itemprop="name" content="演算法 [Java] LeetCode #1762. Buildings With an Ocean View">
 <meta itemprop="description" content="There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line."><meta itemprop="datePublished" content="2022-06-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-06-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="429"><meta itemprop="image" content="https://allenhsieh1992.com/images/leetcode.jpeg">
+<meta itemprop="wordCount" content="450"><meta itemprop="image" content="https://allenhsieh1992.com/images/leetcode.jpeg">
 <meta itemprop="keywords" content="LEETCODE," /><meta property="og:title" content="演算法 [Java] LeetCode #1762. Buildings With an Ocean View" />
 <meta property="og:description" content="There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line." />
 <meta property="og:type" content="article" />
@@ -211,13 +211,13 @@
 <span class="ln">2</span>Output: <span class="o">[</span>0,2,3<span class="o">]</span>
 <span class="ln">3</span>Explanation: Building <span class="m">1</span> <span class="o">(</span>0-indexed<span class="o">)</span> does not have an ocean view because building <span class="m">2</span> is taller.
 </code></pre></div><p>Example 2:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Input: heights = [4,3,2,1]
-<span class="ln">2</span>Output: [0,1,2,3]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">heights</span> <span class="o">=</span> <span class="o">[</span>4,3,2,1<span class="o">]</span>
+<span class="ln">2</span>Output: <span class="o">[</span>0,1,2,3<span class="o">]</span>
 <span class="ln">3</span>Explanation: All the buildings have an ocean view.
 </code></pre></div><p>Example 3:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span>Input: heights = [1,3,2,4]
-<span class="ln">2</span>Output: [3]
-<span class="ln">3</span>Explanation: Only building 3 has an ocean view.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">heights</span> <span class="o">=</span> <span class="o">[</span>1,3,2,4<span class="o">]</span>
+<span class="ln">2</span>Output: <span class="o">[</span>3<span class="o">]</span>
+<span class="ln">3</span>Explanation: Only building <span class="m">3</span> has an ocean view.
 </code></pre></div><p>Constraints:
 $$
   
@@ -236,26 +236,27 @@ $$</p>
 <hr>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
 <span class="ln"> 2</span>    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">findBuildings</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">heights</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln"> 3</span>        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">heights</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-<span class="ln"> 4</span>        <span class="kt">int</span> <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">];</span>
+<span class="ln"> 3</span>        <span class="c1">// 初始化最右邊的建築物
+</span><span class="ln"> 4</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">heights</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">];</span>
 <span class="ln"> 5</span>        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">();</span>
-<span class="ln"> 6</span>        <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-<span class="ln"> 7</span>        
-<span class="ln"> 8</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-<span class="ln"> 9</span>            <span class="k">if</span> <span class="o">(</span><span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">heightest</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">10</span>                <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-<span class="ln">11</span>                <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-<span class="ln">12</span>            <span class="o">}</span>
-<span class="ln">13</span>        <span class="o">}</span>
-<span class="ln">14</span>        
-<span class="ln">15</span>        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-<span class="ln">16</span>        <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
-<span class="ln">17</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-<span class="ln">18</span>            <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
-<span class="ln">19</span>        <span class="o">}</span>
-<span class="ln">20</span>        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-<span class="ln">21</span>    <span class="o">}</span>
-<span class="ln">22</span><span class="o">}</span>
+<span class="ln"> 6</span>        <span class="c1">// 最右邊的放子一定看的到海
+</span><span class="ln"> 7</span><span class="c1"></span>        <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">heights</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+<span class="ln"> 8</span>        
+<span class="ln"> 9</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">heights</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+<span class="ln">10</span>            <span class="k">if</span> <span class="o">(</span><span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">heightest</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">11</span>                <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="ln">12</span>                <span class="n">heightest</span> <span class="o">=</span> <span class="n">heights</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+<span class="ln">13</span>            <span class="o">}</span>
+<span class="ln">14</span>        <span class="o">}</span>
+<span class="ln">15</span>        
+<span class="ln">16</span>        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+<span class="ln">17</span>        <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+<span class="ln">18</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">19</span>            <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+<span class="ln">20</span>        <span class="o">}</span>
+<span class="ln">21</span>        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="ln">22</span>    <span class="o">}</span>
+<span class="ln">23</span><span class="o">}</span>
 </code></pre></div><p>Time complexity: O(N)</p>
 <p>Space complexity: O(N)</p>
 </div></div>
@@ -320,7 +321,7 @@ $$</p>
      />
 </picture>
 </div>
-    <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">4xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+    <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">5xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
   </div>
 </div>
 <div class="post-toc row mb-4 card component" id="postTOC">
