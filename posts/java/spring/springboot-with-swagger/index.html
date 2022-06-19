@@ -1,0 +1,433 @@
+<!doctype html><html class="position-relative" itemscope itemtype="http://schema.org/WebPage" lang="zh-tw"
+  
+   data-palette="blue"
+   data-mode="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring Boot with Swagger - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="https://allenhsieh1992.com/images/icons/favicon.ico">
+<link rel="manifest" href="https://allenhsieh1992.com/manifest.json">
+<meta name="keywords" content="" />
+<meta name="description" content="上次分享了如何透過 Spring CLI 建立 Hello World Application，這邊文章將延續上次的文章繼續產生第一個 endpoint 和產生 Swagger 頁面" /><meta itemprop="name" content="Spring Boot with Swagger">
+<meta itemprop="description" content="上次分享了如何透過 Spring CLI 建立 Hello World Application，這邊文章將延續上次的文章繼續產生第一個 endpoint 和產生 Swagger 頁面"><meta itemprop="datePublished" content="2022-06-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-06-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="503"><meta itemprop="image" content="https://allenhsieh1992.com/images/spring.png">
+<meta itemprop="keywords" content="SPRING," /><meta property="og:title" content="Spring Boot with Swagger" />
+<meta property="og:description" content="上次分享了如何透過 Spring CLI 建立 Hello World Application，這邊文章將延續上次的文章繼續產生第一個 endpoint 和產生 Swagger 頁面" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/java/spring/springboot-with-swagger/" /><meta property="og:image" content="https://allenhsieh1992.com/images/spring.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-19T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/spring.png"/>
+
+<meta name="twitter:title" content="Spring Boot with Swagger"/>
+<meta name="twitter:description" content="上次分享了如何透過 Spring CLI 建立 Hello World Application，這邊文章將延續上次的文章繼續產生第一個 endpoint 和產生 Swagger 頁面"/>
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/katex/bundle.min.c7738aed5534d96f5c4eb1790af05b44a2ca1cc7d0cb6d5de1dcf95595d3f91a.css" integrity="sha256-x3OK7VU02W9cTrF5CvBbRKLKHMfQy21d4dz5VZXT&#43;Ro=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
+  <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button><a class="navbar-brand flex-grow-1 flex-lg-grow-0 text-center text-lg-start mx-auto me-lg-3" href="https://allenhsieh1992.com/"><picture><img class="logo" alt="Logo" src="https://allenhsieh1992.com/images/logo.png" loading="lazy"
+    
+     width="136" height="70"
+     />
+</picture>
+艾倫的開發心路歷程
+    </a>
+    <div class="offcanvas offcanvas-bottom surface" tabindex="-1" id="offcanvasSocialShare" aria-labelledby="offcanvasSocialShare">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">Share</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
+      target="_blank" href="https://twitter.com/intent/tweet?title=Spring%20Boot%20with%20Swagger&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspring%2fspringboot-with-swagger%2f">
+      <i class="fab fa-fw fa-twitter"></i> Twitter
+    </a>
+    <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2fjava%2fspring%2fspringboot-with-swagger%2f">
+      <i class="fab fa-fw fa-facebook-f"></i> Facebook
+    </a>
+  </div>
+</div>
+    <button class="navbar-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings"
+  aria-controls="offcanvasSettings" aria-label="Toggle settings">
+  <i class="fas fa-ellipsis-v"></i>
+</button>
+
+<div class="offcanvas offcanvas-end surface h-100" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettings">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title">設置</h3>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+
+
+<div class="setting">
+  <form class="font-size-switcher-form row">
+    <div class="col-auto">
+      <label for="fontSize" class="form-label"><i class="fas fa-fw fa-font"></i> 字體大小</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <input type="range" class="form-range" min="-2" max="2" id="fontSize">
+    </div>
+  </form>
+</div>
+
+
+<div class="setting palettes">
+  <form class="row">
+    <div class="col-auto">
+      <label><i class="fas fa-fw fa-palette"></i> 配色</label>
+    </div>
+    <div class="col-auto ms-auto">
+      <a id="btnPalette" class="btn btn-sm btn-outline-primary" role="button" aria-label="palettePicker">
+        <i class="fas fa-eye-dropper"></i>
+      </a>
+    </div>
+  </form>
+  <div class="mt-2 d-flex justify-content-between visually-hidden" id="palettePicker"><button type="button" id="palette-blue" aria-label="藍色"
+        class="btn btn-sm w-100 palette" data-palette="blue">
+      </button><button type="button" id="palette-blue-gray" aria-label="藍灰色"
+        class="btn btn-sm w-100 palette" data-palette="blue-gray">
+      </button><button type="button" id="palette-brown" aria-label="棕色"
+        class="btn btn-sm w-100 palette" data-palette="brown">
+      </button><button type="button" id="palette-cyan" aria-label="青色"
+        class="btn btn-sm w-100 palette" data-palette="cyan">
+      </button><button type="button" id="palette-green" aria-label="綠色"
+        class="btn btn-sm w-100 palette" data-palette="green">
+      </button><button type="button" id="palette-indigo" aria-label="靛青色"
+        class="btn btn-sm w-100 palette" data-palette="indigo">
+      </button><button type="button" id="palette-orange" aria-label="橙色"
+        class="btn btn-sm w-100 palette" data-palette="orange">
+      </button><button type="button" id="palette-pink" aria-label="粉色"
+        class="btn btn-sm w-100 palette" data-palette="pink">
+      </button><button type="button" id="palette-purple" aria-label="紫色"
+        class="btn btn-sm w-100 palette" data-palette="purple">
+      </button><button type="button" id="palette-red" aria-label="紅色"
+        class="btn btn-sm w-100 palette" data-palette="red">
+      </button><button type="button" id="palette-teal" aria-label="藍綠色"
+        class="btn btn-sm w-100 palette" data-palette="teal">
+      </button><button type="button" id="palette-yellow" aria-label="黃色"
+        class="btn btn-sm w-100 palette" data-palette="yellow">
+      </button></div>
+</div>
+<div class="setting actions d-flex justify-content-around mt-auto overflow-auto">
+  <a role="button" class="action action-go-back" href="javascript: window.history.back();">
+    <span class="action-icon"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform="rotate-90"></i></span> 返回
+  </a>
+  <a role="button" class="action action-reload-page">
+    <span class="action-icon"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新
+  </a>
+  <a role="button" class="action action-copy-url">
+    <span class="action-icon"><i class="fas fa-2x fa-link"></i></span> 複製連結
+  </a><a class="action action-social-share" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSocialShare"
+    aria-controls="offcanvasSocialShare" aria-label="Toggle social share">
+    <span class="action-icon"><i class="fas fa-2x fa-share-alt"></i></span> 分享
+  </a></div>
+
+</div>
+</div>
+
+    <div class="collapse navbar-collapse" tabindex="-1" id="navbarSupportedContent" aria-labelledby="navbarSupportedContent">
+      <form class="search-bar my-1" action="https://allenhsieh1992.com/search">
+  <div class="input-group input-group-sm">
+    <span class="btn btn-search disabled position-absolute left-0"><i class="fas fa-fw fa-search"></i></span>
+    <input class="form-control rounded-pill" name="q" type="search" aria-label="Search">
+  </div>
+</form>
+      <ul class="navbar-nav ms-auto"><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/archives/">
+            <i class="fas fa-fw fa-file-archive"></i>歸檔
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="https://allenhsieh1992.com/categories/">
+            <i class="fas fa-fw fa-folder"></i>分類
+          </a>
+        </li></ul>
+    </div>
+  </div>
+</nav>
+</header>
+<main class="container">
+      <div class="row content">
+<div class="col-lg-8">
+  <div class="container"><nav class="row card component" aria-label="breadcrumb">
+  <div class="card-body">
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Spring Boot With Swagger</li></ol>
+  </div>
+</nav><div class="post-panel-wrapper position-sticky">
+  <div class="d-flex flex-column component rounded post-panel position-absolute">
+    
+    <a class="action action-panel-toggler" role="button" title="Panel toggler">
+      <i class="fas fa-fw fa-chevron-circle-down"></i>
+    </a>
+    <a id="sidebarToggler" class="action d-none d-lg-block" role="button" title="Sidebar toggler">
+  <i class="fas fa-fw fa-expand-alt" data-fa-transform="rotate-45"></i>
+</a>
+
+    
+
+    
+    
+    <a class="action" href="#post-comments" role="button" aria-label="Comments" title="Comments">
+  <i class="fas fa-fw fa-comments"></i>
+</a>
+    <a class="action" href="#postTOC" aria-controls="Table of contents" role="button" title="Table of contents">
+  <i class="fas fa-fw fa-list-alt"></i>
+</a>
+    
+  </div>
+</div>
+<article class="row card component mb-4 post">
+  <div class="card-header ">
+    <h1 class="card-title post-title">Spring Boot With Swagger
+</h1>
+  </div>
+  <div class="card-body"><div class="post-meta">
+  <span class="post-date" title="創建於 2022-06-19 08:00:00 &#43;0800 CST。">
+    Jun 19, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/java/" class="badge post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/categories/spring/" class="badge post-taxonomy">SPRING</a><a href="https://allenhsieh1992.com/tags/spring/" class="badge post-taxonomy">SPRING</a></span>
+</div>
+<div class="post-content mb-3"><p>上次分享了如何透過 <a href="/posts/java/spring/springboot-hello-world/">Spring CLI 建立 Hello World Application
+</a>，這邊文章將延續上次的文章繼續產生第一個 endpoint 和產生 Swagger 頁面</p>
+<h2 id="建立第一個-endpoints">建立第一個 Endpoints<a class="anchor ms-1" href="#建立第一個-endpoints"><i class="fas fa-link"></i></a></h2>
+<hr>
+<p>建立一個新的 package contoller 並建立 statusController.java</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kn">package</span> <span class="nn">com.example.springboot_demo.contoller</span><span class="o">;</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="ln"> 4</span><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="nd">@RestController</span> <span class="c1">//1
+</span><span class="ln"> 8</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">statusController</span> <span class="o">{</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span>    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">&#34;/status&#34;</span><span class="o">)</span> <span class="c1">//2
+</span><span class="ln">11</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span>  <span class="nf">status</span><span class="o">()</span> <span class="o">{</span>
+<span class="ln">12</span>        <span class="k">return</span> <span class="s">&#34;ok&#34;</span><span class="o">;</span>
+<span class="ln">13</span>    <span class="o">}</span>
+<span class="ln">14</span><span class="o">}</span>
+<span class="ln">15</span>
+</code></pre></div><p>備註1 : RestController 等於 @Controller + @ResponseBody，</p>
+<ul>
+<li>ResponseBody: Spring 會自動幫你把 Response 轉換成 Json 格式</li>
+<li>Controller: 告訴 Spring 這是一個 request 進入點的 Class ，負責調度請求(RequestDispatcher)</li>
+</ul>
+<p>備註2 : GetMapping 是 RequestMapping 的 alias 只是一種 Method 指定了是 Http Get Method， RequestMapping 告訴 SpringBoot endpoint 設定，如 path 、header  等等，後面會提到更多，目前先知道當打 /status 這個 endpoint 時，SpringBoot 會找到這個函式並執行。</p>
+<h3 id="測試">測試<a class="anchor ms-1" href="#測試"><i class="fas fa-link"></i></a></h3>
+<p>現在將 Web Server 啟動，並打 status endpoint，我們會得到我們剛剛所寫的 &ldquo;OK&rdquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>$ curl http:/127.0.0.1:8080/status
+<span class="ln">2</span>ok
+</code></pre></div><h2 id="建立-swagger-ui">建立 Swagger UI<a class="anchor ms-1" href="#建立-swagger-ui"><i class="fas fa-link"></i></a></h2>
+<p>在 pom.xml 的 dependencies 中加入 pringdoc-openapi-ui 的 dependency</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="ln">1</span><span class="c">&lt;!-- Swagger UI --&gt;</span>
+<span class="ln">2</span><span class="nt">&lt;dependency&gt;</span>
+<span class="ln">3</span>    <span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">4</span>    <span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-ui<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">5</span>    <span class="nt">&lt;version&gt;</span>1.6.9<span class="nt">&lt;/version&gt;</span>
+<span class="ln">6</span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div><p>這時候將 Application 執行起來，就可以在 /swagger-ui.html 的 path 看到 Swagger UI。</p>
+<p>Swagger UI 可以看到現在 Application Endpoint 資訊，例如這個 endpoint 是什麼 method、需要帶什麼參數，並且會返回樣的資料結構等等。當然這需要一些額外的 Coding 提供資訊，所以這個之後找時間會再細講</p>
+<p><picture><img class="img-fluid mx-auto d-block" alt="Left" src="https://allenhsieh1992.com/images/post/springboot-with-swagger/swagger-ui.png" loading="lazy"
+    
+     width="1491" height="608"
+     />
+</picture>
+
+</p>
+<p>這邊順便介紹一下 application.properties 這個文件，是用來設定 Spring Boot Application 的檔案</p>
+<p>例如我想要自定義剛剛安裝 Swagger 預設的 URL，可以在 application.properties 裡面加以下內容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="ln">1</span># swagger-ui custom path
+<span class="ln">2</span>springdoc.swagger-ui.path=/swagger
+</code></pre></div><p>更多這可以設定什麼可以看<a href="https://springdoc.org/properties.html" target="_blank" rel="noopener noreferrer">官方文件<i class="fas fa-external-link-square-alt ms-1"></i>
+</a></p>
+</div></div>
+  <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
+    <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
+    <a href="https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/">演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid
+</a>
+  </div></div></div>
+</article><section class="related-posts row card component">
+    <div class="card-header">
+      <h2 class="card-title">相關文章</h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list"><li>
+          <a href="https://allenhsieh1992.com/posts/java/spring/springboot-hello-world/">透過 Spring CLI 建立 Spring Boot Hello World
+</a>
+          <span class="float-end post-date">Jun 8, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/">演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid
+</a>
+          <span class="float-end post-date">Jun 19, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/leetcode/easy/1119_remove_vowels_from_a_string/">演算法 [Java] LeetCode #1119. Remove Vowels From a String
+</a>
+          <span class="float-end post-date">Jun 18, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/">演算法 [Java] LeetCode #1762. Buildings With an Ocean View
+</a>
+          <span class="float-end post-date">Jun 17, 2022
+</span>
+        </li><li>
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/304_range_sum_query_2d_immutable/">演算法 [Java] LeetCode #304. Range Sum Query 2D - Immutable
+</a>
+          <span class="float-end post-date">Jun 3, 2022
+</span>
+        </li></ul>
+    </div>
+  </section><div class="card component row post-comments" id="post-comments">
+  <div class="card-header">
+    <h2 class="card-title">評論</h2>
+  </div>
+  <div class="card-body"><script src="https://utteranc.es/client.js"
+  repo="allen-hsieh1992/allen-hsieh1992.github.io"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script></div>
+</div></div>
+</div><aside class="col-lg-4 sidebar d-flex">
+  <div class="container d-flex flex-column">
+    
+    <div class="card row text-center profile component">
+  <div class="card-body">
+    <div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src="https://allenhsieh1992.com/images/icon.gif" loading="lazy" data-viewer-invisible
+    
+     width="154" height="153"
+     />
+</picture>
+</div>
+    <div class="col-12 profile-meta"><div class="profile-name">Allen Hsieh</div><div class="profile-bio">5xAWS Certified | Senior Backend Software Engineer</div><div class="profile-company"><i class="fas fa-fw fa-building"></i>Secret Company</div><div class="profile-location"><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div>
+  </div>
+</div>
+<div class="post-toc row mb-4 card component" id="postTOC">
+  <div class="card-header">
+    <h2 class="card-title">目錄</h2>
+  </div>
+  <div class="card-body">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#建立第一個-endpoints">建立第一個 Endpoints</a>
+      <ul>
+        <li><a href="#測試">測試</a></li>
+      </ul>
+    </li>
+    <li><a href="#建立-swagger-ui">建立 Swagger UI</a></li>
+  </ul>
+</nav>
+  </div>
+</div><section class="recent-posts row card component">
+  <div class="card-header">
+    <h2 class="card-title">最近文章</h2>
+  </div>
+  <div class="card-body">
+    <ul class="post-list"><li>
+        <a href="https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/">演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/java/spring/springboot-with-swagger/">Spring Boot With Swagger
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/leetcode/easy/1119_remove_vowels_from_a_string/">演算法 [Java] LeetCode #1119. Remove Vowels From a String
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/">演算法 [Java] LeetCode #1762. Buildings With an Ocean View
+</a>
+      </li><li>
+        <a href="https://allenhsieh1992.com/posts/java/spring/springboot-hello-world/">透過 Spring CLI 建立 Spring Boot Hello World
+</a>
+      </li></ul>
+  </div>
+</section><section class="categories-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="https://allenhsieh1992.com/categories">分類</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="https://allenhsieh1992.com/categories/aws/" class="badge rounded post-taxonomy" title="AWS">
+            AWS</a><a href="https://allenhsieh1992.com/categories/java/" class="badge rounded post-taxonomy" title="JAVA">
+            JAVA</a><a href="https://allenhsieh1992.com/categories/leetcode/" class="badge rounded post-taxonomy" title="LEETCODE">
+            LEETCODE</a><a href="https://allenhsieh1992.com/categories/spring/" class="badge rounded post-taxonomy" title="SPRING">
+            SPRING</a><a href="https://allenhsieh1992.com/categories/container/" class="badge rounded post-taxonomy" title="CONTAINER">
+            CONTAINER</a><a href="https://allenhsieh1992.com/categories/tools/" class="badge rounded post-taxonomy" title="TOOLS">
+            TOOLS</a></div>
+      </div>
+    </section><section class="tags-taxonomies row card component">
+      <div class="card-header">
+        <h2 class="card-title">
+          <a href="https://allenhsieh1992.com/tags">標籤</a>
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="py-2"><a href="https://allenhsieh1992.com/tags/leetcode/" class="badge rounded post-taxonomy" title="LEETCODE">
+            LEETCODE</a><a href="https://allenhsieh1992.com/tags/javacore/" class="badge rounded post-taxonomy" title="JavaCore">
+            JavaCore</a><a href="https://allenhsieh1992.com/tags/cloudformation/" class="badge rounded post-taxonomy" title="CloudFormation">
+            CloudFormation</a><a href="https://allenhsieh1992.com/tags/lambda/" class="badge rounded post-taxonomy" title="Lambda">
+            Lambda</a><a href="https://allenhsieh1992.com/tags/route53/" class="badge rounded post-taxonomy" title="Route53">
+            Route53</a><a href="https://allenhsieh1992.com/tags/spring/" class="badge rounded post-taxonomy" title="SPRING">
+            SPRING</a><a href="https://allenhsieh1992.com/tags/beanstalk/" class="badge rounded post-taxonomy" title="Beanstalk">
+            Beanstalk</a><a href="https://allenhsieh1992.com/tags/cloudtail/" class="badge rounded post-taxonomy" title="CloudTail">
+            CloudTail</a><a href="https://allenhsieh1992.com/tags/codebuild/" class="badge rounded post-taxonomy" title="CodeBuild">
+            CodeBuild</a><a href="https://allenhsieh1992.com/tags/codecommit/" class="badge rounded post-taxonomy" title="CodeCommit">
+            CodeCommit</a><a href="https://allenhsieh1992.com/tags" class="badge rounded post-taxonomy" title='全部'>
+          全部
+          <span class="badge badge-sm text-white bg-accent ms-1">24</span>
+        </a></div>
+      </div>
+    </section><section class="row card component">
+    <div class="card-header">
+      <h2 class="card-title"><a href="https://allenhsieh1992.com/archives/">歸檔</a></h2>
+    </div>
+    <div class="card-body">
+      <ul class="post-list">
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2022">2022(12)</a></li>
+        <li><a href="https://allenhsieh1992.com/archives/#archive-2021">2021(20)</a></li>
+      </ul>
+    </div>
+</section>
+    
+  </div>
+</aside>
+</div>
+    </main><footer class="footer mt-auto py-3 text-center container"><nav class="social-links nav justify-content-center mb-2"></nav>
+<div class="copyright mb-2">
+  Copyright © 2021-2022 Allen Hsieh. All Rights Reserved.
+</div>
+</footer>
+<script src="https://allenhsieh1992.com/assets/main/bundle.min.32bd703fcd6b9a2a1dbb75ff1d9664696d7ddcbab939170d619f7affd0bdbb0f.js" integrity="sha256-Mr1wP81rmiodu3X/HZZkaW193Lq5ORcNYZ96/9C9uw8=" crossorigin="anonymous" defer></script><script src="https://allenhsieh1992.com/assets/icons/bundle.min.1e2bb7dd6f9d57d0c9703b901c58216befedcce0ebfda805234b268b6486d737.js" integrity="sha256-Hiu33W&#43;dV9DJcDuQHFgha&#43;/tzODr/agFI0smi2SG1zc=" crossorigin="anonymous" defer></script>
+<script src="https://allenhsieh1992.com/assets/viewer/bundle.min.30dd9526f0c5145f4ca851c78a3d034d2eccb7671790a5cf933f98d087843848.js" integrity="sha256-MN2VJvDFFF9MqFHHij0DTS7Mt2cXkKXPkz&#43;Y0IeEOEg=" crossorigin="anonymous" defer></script><script defer src="https://allenhsieh1992.com/assets/katex/bundle.min.9425c9c8b018985099738dfa8d0782bb9faab07a82f6f0df751989c4855e7601.js" integrity="sha256-lCXJyLAYmFCZc436jQeCu5&#43;qsHqC9vDfdRmJxIVedgE=" crossorigin="anonymous"></script>
+<script defer src="https://allenhsieh1992.com/assets/mermaid/bundle.min.a6ffeb2b49c81f863a8fe19eed60c1068aafbc7346e84c1df723c42d4f2e68f7.js" integrity="sha256-pv/rK0nIH4Y6j&#43;Ge7WDBBoqvvHNG6Ewd9yPELU8uaPc=" crossorigin="anonymous"></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-201290280-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>

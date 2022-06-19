@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LEETCODE on 艾倫的開發心路歷程</title>
+    <link>https://allenhsieh1992.com/categories/leetcode/</link>
+    <description>Recent content in LEETCODE on 艾倫的開發心路歷程</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
+    <lastBuildDate>Sun, 19 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/</link>
+      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/</guid>
+      <description>題目 A parentheses string is valid if and only if: It is the empty string, It can be written as AB (A concatenated with B), where A and B are valid strings, or It can be written as (A), where A is a valid string. You are given a parentheses string s. In one move, you can insert a parenthesis at any position of the string. For example, if</description>
+    </item>
+    
+    <item>
+      <title>演算法 [Java] LeetCode #1119. Remove Vowels from a String</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/easy/1119_remove_vowels_from_a_string/</link>
+      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/easy/1119_remove_vowels_from_a_string/</guid>
+      <description>題目 Given a string s, remove the vowels &amp;lsquo;a&amp;rsquo;, &amp;lsquo;e&amp;rsquo;, &amp;lsquo;i&amp;rsquo;, &amp;lsquo;o&amp;rsquo;, and &amp;lsquo;u&amp;rsquo; from it, and return the new string. Example 1: 1Input: s = &amp;#34;leetcodeisacommunityforcoders&amp;#34; 2Output: &amp;#34;ltcdscmmntyfrcdrs&amp;#34; Example 2: 1Input: s = &amp;#34;aeiou&amp;#34; 2Output: &amp;#34;&amp;#34; Constraints: 1 &amp;lt;= s.length &amp;lt;= 1000 s consists of only lowercase English letters. 我的思路 由於是將一個 String 中所有的母音都移</description>
+    </item>
+    
+    <item>
+      <title>演算法 [Java] LeetCode #1762. Buildings With an Ocean View</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/</link>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/</guid>
+      <description>題目 There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line. The ocean is to the right of the buildings. A building has an ocean view if the building can see the ocean without obstructions. Formally, a building has an ocean view if all the buildings to its right have a smaller</description>
+    </item>
+    
+    <item>
+      <title>演算法 [Java] LeetCode #304. Range Sum Query 2D - Immutable</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/medium/304_range_sum_query_2d_immutable/</link>
+      <pubDate>Fri, 03 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/medium/304_range_sum_query_2d_immutable/</guid>
+      <description>題目 Given a 2D matrix matrix, handle multiple queries of the following type: Calculate the sum of the elements of matrix inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2). Implement the NumMatrix class: NumMatrix(int[][] matrix) Initializes the object with the integer matrix matrix. int sumRegion(int row1, int col1, int row2, int col2) Returns the sum of the elements of matrix</description>
+    </item>
+    
+    <item>
+      <title>演算法 [Java] LeetCode #867. Transpose Matrix</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/easy/867_transpose_matrix/</link>
+      <pubDate>Thu, 02 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/easy/867_transpose_matrix/</guid>
+      <description>題目 Given a 2D integer array matrix, return the transpose of matrix. The transpose of a matrix is the matrix flipped over its main diagonal, switching the matrix&amp;rsquo;s row and column indices. Example 1: 1Input: matrix = [[1,2,3],[4,5,6],[7,8,9]] 2Output: [[1,4,7],[2,5,8],[3,6,9]] Example 2: 1Input: matrix = [[1,2,3],[4,5,6]] 2Output: [[1,4],[2,5],[3,6]] Constraints: $$ \begin{array}{l} m == matrix.length \\ n == matrix[i].length \\ 1 我的思路 假設現在已</description>
+    </item>
+    
+    <item>
+      <title>演算法 [Java] LeetCode #1480. Running Sum of 1d Array</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/easy/1480_running_sum_of_1d_array/</link>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/easy/1480_running_sum_of_1d_array/</guid>
+      <description>題目 Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]). Return the running sum of nums. Example 1: 1Input: nums = [1,2,3,4] 2Output: [1,3,6,10] 3Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4]. Example 2: 1Input: nums = [1,1,1,1,1] 2Output:</description>
+    </item>
+    
+  </channel>
+</rss>
