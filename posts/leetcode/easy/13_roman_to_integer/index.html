@@ -5,28 +5,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Route53 Certification Note - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
+    <title>演算法 [Java] LeetCode #13. Roman to Integer - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/favicon.ico">
 <link rel="manifest" href="https://allenhsieh1992.com/manifest.json">
 <meta name="keywords" content="" />
-<meta name="description" content="準備 AWS Certificate 時 Route53 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" /><meta itemprop="name" content="Route53 Certification Note">
-<meta itemprop="description" content="準備 AWS Certificate 時 Route53 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"><meta itemprop="datePublished" content="2021-09-05T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-09-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="623"><meta itemprop="image" content="https://allenhsieh1992.com/images/aws.jpeg">
-<meta itemprop="keywords" content="Route53," /><meta property="og:title" content="Route53 Certification Note" />
-<meta property="og:description" content="準備 AWS Certificate 時 Route53 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。" />
+<meta name="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M." /><meta itemprop="name" content="演算法 [Java] LeetCode #13. Roman to Integer">
+<meta itemprop="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M."><meta itemprop="datePublished" content="2022-06-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-06-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="730"><meta itemprop="image" content="https://allenhsieh1992.com/images/leetcode.jpeg">
+<meta itemprop="keywords" content="LEETCODE," /><meta property="og:title" content="演算法 [Java] LeetCode #13. Roman to Integer" />
+<meta property="og:description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allenhsieh1992.com/posts/aws/route53-certification-note/" /><meta property="og:image" content="https://allenhsieh1992.com/images/aws.jpeg" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-09-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-09-05T00:00:00+00:00" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/leetcode/easy/13_roman_to_integer/" /><meta property="og:image" content="https://allenhsieh1992.com/images/leetcode.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-20T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://allenhsieh1992.com/images/aws.jpeg"/>
+<meta name="twitter:image" content="https://allenhsieh1992.com/images/leetcode.jpeg"/>
 
-<meta name="twitter:title" content="Route53 Certification Note"/>
-<meta name="twitter:description" content="準備 AWS Certificate 時 Route53 相關的筆記，如果有資訊太舊或不正確請留言給我謝謝。"/>
+<meta name="twitter:title" content="演算法 [Java] LeetCode #13. Roman to Integer"/>
+<meta name="twitter:description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M."/>
 <link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/katex/bundle.min.c7738aed5534d96f5c4eb1790af05b44a2ca1cc7d0cb6d5de1dcf95595d3f91a.css" integrity="sha256-x3OK7VU02W9cTrF5CvBbRKLKHMfQy21d4dz5VZXT&#43;Ro=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
   <body><script>const items=['mode','palette'];items.forEach(function(a){const b=localStorage.getItem('hbs-'+a);b&&document.body.parentElement.setAttribute('data-'+a,b)})</script><header><nav class="navbar top-app-bar top-app-bar-expand-lg fixed-top">
@@ -50,11 +50,11 @@
   </div>
   <div class="offcanvas-body">
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
-      target="_blank" href="https://twitter.com/intent/tweet?title=Route53%20Certification%20Note&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2faws%2froute53-certification-note%2f">
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e6%bc%94%e7%ae%97%e6%b3%95%20%5bJava%5d%20LeetCode%20%2313.%20Roman%20to%20Integer&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2feasy%2f13_roman_to_integer%2f">
       <i class="fab fa-fw fa-twitter"></i> Twitter
     </a>
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
-      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2faws%2froute53-certification-note%2f">
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2feasy%2f13_roman_to_integer%2f">
       <i class="fab fa-fw fa-facebook-f"></i> Facebook
     </a>
   </div>
@@ -166,7 +166,7 @@
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
-    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">Route53 Certification Note</li></ol>
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">演算法 [Java] LeetCode #13. Roman to Integer</li></ol>
   </div>
 </nav><div class="post-panel-wrapper position-sticky">
   <div class="d-flex flex-column component rounded post-panel position-absolute">
@@ -193,197 +193,146 @@
 </div>
 <article class="row card component mb-4 post">
   <div class="card-header ">
-    <h1 class="card-title post-title">Route53 Certification Note
+    <h1 class="card-title post-title">演算法 [Java] LeetCode #13. Roman to Integer
 </h1>
   </div>
   <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="創建於 2021-09-05 08:00:00 &#43;0800 CST。">
-    Sep 5, 2021
-  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/aws/" class="badge post-taxonomy">AWS</a><a href="https://allenhsieh1992.com/tags/route53/" class="badge post-taxonomy">Route53</a></span>
+  <span class="post-date" title="創建於 2022-06-20 08:00:00 &#43;0800 CST。">
+    Jun 20, 2022
+  </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/algorithm/" class="badge post-taxonomy">ALGORITHM</a><a href="https://allenhsieh1992.com/categories/java/" class="badge post-taxonomy">JAVA</a><a href="https://allenhsieh1992.com/tags/leetcode/" class="badge post-taxonomy">LEETCODE</a></span>
 </div>
-<div class="post-content mb-3"><ul>
-<li>Route53 是 AWS 的 Domain Name System (DNS)，名字中有 53 的原因是因為 DNS 的 Port 是 53。</li>
-<li>Route53 也是一個 DNS Register ，可以在上面購買 Domain Name</li>
-<li>TTL (Time to Live) : 單位為秒，告訴 Browser 去 Cache Response 的 Record 多少時間。</li>
-<li>主要 Component
-<ul>
-<li>Hosted Zone
-<ul>
-<li>包含所有 Record 資訊</li>
-<li>會自動建立 Name Server 和 SOA records</li>
-<li>Public hosted Zone  :  解析互聯網的 Request</li>
-<li>Private hosted Zone :  解析Amazon上內部的 Request
-<ul>
-<li>VPC 需要設定 enableDnsHostnames &amp; enableDnsSupport</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Name Server
-<ul>
-<li>主要轉換 Hostname to IP</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="dns-basic-records">DNS Basic Records<a class="anchor ms-1" href="#dns-basic-records"><i class="fas fa-link"></i></a></h2>
+<div class="post-content mb-3"><h2 id="題目">題目<a class="anchor ms-1" href="#題目"><i class="fas fa-link"></i></a></h2>
 <hr>
+<p>Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.</p>
 <table>
 <thead>
 <tr>
-<th>Record Name</th>
-<th>描述</th>
+<th>Symbol</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>A.</td>
-<td>Hostname to IPv4</td>
+<td>I</td>
+<td>1</td>
 </tr>
 <tr>
-<td>AAAA.</td>
-<td>Hostname to IPv6</td>
+<td>V</td>
+<td>5</td>
 </tr>
 <tr>
-<td>CNAME</td>
-<td>Hostname to Hostname</td>
-</tr>
-<tr>
-<td>Alias</td>
-<td>Hostname to AWS resource</td>
-</tr>
-<tr>
-<td>MX.</td>
-<td>Email</td>
-</tr>
-<tr>
-<td>PTR</td>
-<td>反向解析 A record IPv4 to Hostname</td>
-</tr>
-<tr>
-<td>NS.</td>
-<td>Name Server</td>
-</tr>
-<tr>
-<td>SOA</td>
-<td>主要記錄網域名稱伺服器的名稱和負責人資訊</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Alias V.S. Cname</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Cname</th>
-<th>Alias</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Example</td>
-<td>app.domain.com =&gt; xxx.otherDomain.com</td>
-<td>app.domain.com =&gt; elbxx.amazon.com</td>
-</tr>
-<tr>
-<td>ROOT DOMAIN</td>
-<td>只能是 non root domain Ex: 不可以是 domain.com =&gt; xxx.otherDomain.com</td>
-<td>non root &amp; root domain 都可以</td>
-</tr>
-</tbody>
-</table>
-<h2 id="routing-policy">Routing Policy<a class="anchor ms-1" href="#routing-policy"><i class="fas fa-link"></i></a></h2>
-<hr>
-<table>
-<thead>
-<tr>
-<th>Policy</th>
-<th>描述</th>
-<th>是否有 Health Check</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Simple Routing Policy</td>
-<td>如果有多筆值 ，會隨機返回一個</td>
 <td>X</td>
+<td>10</td>
 </tr>
 <tr>
-<td>Weight Routing Policy</td>
-<td>根據 Weight (%) 來分流</td>
-<td>V</td>
+<td>L</td>
+<td>50</td>
 </tr>
 <tr>
-<td>Latency Routing Policy</td>
-<td>AWS 會返回延遲最小的值</td>
-<td>V</td>
+<td>C</td>
+<td>100</td>
 </tr>
 <tr>
-<td>Failover Routing Policy</td>
-<td>有 Primary 和 Secondary，如果 Primary health check pass 就會返回 Primary 否則返回 Secondary</td>
-<td>V</td>
+<td>D</td>
+<td>500</td>
 </tr>
 <tr>
-<td>GeoLocation Routing Policy</td>
-<td>根據 User IP 地理位置 來決定返回哪個值</td>
-<td>V</td>
-</tr>
-<tr>
-<td>Geo proximity Routing Policy</td>
-<td>根據 User 地址位置外加 Bias 值 Ex:us-west-1 &amp; us-east-1 都在 us ，如果有設定 bias ， bias 高的會有比較多的 request</td>
-<td>V</td>
-</tr>
-<tr>
-<td>Multi Value Routing Policy</td>
-<td>回覆多筆值 ，瀏覽器自己選一個值去發送請求 (request)</td>
-<td>V</td>
+<td>M</td>
+<td>1000</td>
 </tr>
 </tbody>
 </table>
-<h2 id="health-check">Health Check<a class="anchor ms-1" href="#health-check"><i class="fas fa-link"></i></a></h2>
+<p>For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.</p>
+<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:</p>
 <ul>
-<li>Type
+<li>I can be placed before V (5) and X (10) to make 4 and 9.</li>
+<li>X can be placed before L (50) and C (100) to make 40 and 90.</li>
+<li>C can be placed before D (500) and M (1000) to make 400 and 900.</li>
+</ul>
+<p>Given a roman numeral, convert it to an integer.</p>
+<p>Example 1:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;III&#34;</span>
+<span class="ln">2</span>Output: <span class="m">3</span>
+<span class="ln">3</span>Explanation: <span class="nv">III</span> <span class="o">=</span> 3.
+</code></pre></div><p>Example 2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;LVIII&#34;</span>
+<span class="ln">2</span>Output: <span class="m">58</span>
+<span class="ln">3</span>Explanation: <span class="nv">L</span> <span class="o">=</span> 50, <span class="nv">V</span><span class="o">=</span> 5, <span class="nv">III</span> <span class="o">=</span> 3.
+</code></pre></div><p>Example 3:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;MCMXCIV&#34;</span>
+<span class="ln">2</span>Output: <span class="m">1994</span>
+<span class="ln">3</span>Explanation: <span class="nv">M</span> <span class="o">=</span> 1000, <span class="nv">CM</span> <span class="o">=</span> 900, <span class="nv">XC</span> <span class="o">=</span> <span class="m">90</span> and <span class="nv">IV</span> <span class="o">=</span> 4.
+</code></pre></div><p>Constraints:</p>
 <ul>
-<li>endpoint IP or Domain
-<ul>
-<li>支援協議 : TCP, HTTP, HTTPS</li>
-<li>預設檢查區間 : 30 秒，最快可以 10 秒</li>
-<li>進階可以設定根據 Response 內容前 5120 Bytes 是否有包含預期的 String</li>
-<li>有 N 次檢查不過 =&gt; Unhealthy Status</li>
-<li>已經有 N 次檢查過 =&gt; healthy Status</li>
-<li>可以產生 Latency 圖</li>
-<li>大約有 15 檢查者（checker) 從不同地方檢查 ，所以 endpoint 不能是 private 的 (如VPC內</li>
+<li>1 &lt;= s.length &lt;= 15</li>
+<li>s contains only the characters (&lsquo;I&rsquo;, &lsquo;V&rsquo;, &lsquo;X&rsquo;, &lsquo;L&rsquo;, &lsquo;C&rsquo;, &lsquo;D&rsquo;, &lsquo;M&rsquo;).</li>
+<li>It is guaranteed that s is a valid roman numeral in the range [1, 3999].</li>
 </ul>
-</li>
-<li>calculated health check 根據其他 Health check 來計算</li>
-<li>cloudWatch alarms</li>
-</ul>
-</li>
-</ul>
-<h2 id="others">Others<a class="anchor ms-1" href="#others"><i class="fas fa-link"></i></a></h2>
+<h2 id="我的思路">我的思路<a class="anchor ms-1" href="#我的思路"><i class="fas fa-link"></i></a></h2>
 <hr>
+<p>先用 HashMap 將所有的符號跟值做 Mapping 存起來。</p>
+<p>Loop 一遍 Input 的 String</p>
 <ul>
-<li>可以只用第三方 DNS Register 註冊的 Domain ，將第三方的 Domain 的 Name Server 設定為 Route53 的 Name Server。</li>
-<li>Router53 Domain 指向 S3
-- bucket name 需要跟 url 一樣
+<li>如果遇到 I、Ｘ 或 C 先用一個 Varaible previousChar 存起來並且不做任何事情跳過</li>
+<li>如果不是就直接把當下代表的數字加上。</li>
+</ul>
+<p>然後當發現 previousChar 不等於空時，代表著前一個字母為 I、Ｘ 或 C，這時候有一下兩種可能</p>
 <ul>
-<li>for http : 建立 Alias Record 指向 S3, 並且 S3 需要是 Public 和 開啟 website 功能</li>
-<li>for https : 需要使用 CloudFormation</li>
+<li>那六種排列組合之一 例如 IV 、 IX、XL、XC、CD 或 CM。</li>
+<li>除了以上六種以外，代表著 previousChar 就代表原本數字的意思 (ex I =&gt; 1)，將 previousChar 代表的值直接加回去。</li>
 </ul>
-</li>
-</ul>
-</div></div>
+<p>最後由於我們之前一直把 I、Ｘ 或 C 跳過，直到下一個字母確認後，才把它加減上。
+但這會造成整個字串最後一個字母沒有處理到，所以在 loop 完字串以後，要確認有沒有沒處理到的 I、Ｘ 或 C，然後再加回去。</p>
+<h2 id="我的思路-1">我的思路<a class="anchor ms-1" href="#我的思路-1"><i class="fas fa-link"></i></a></h2>
+<hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+<span class="ln"> 2</span>    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">romanMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;()</span> <span class="o">{{</span>
+<span class="ln"> 3</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;I&#39;</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
+<span class="ln"> 4</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;V&#39;</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
+<span class="ln"> 5</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="n">10</span><span class="o">);</span>
+<span class="ln"> 6</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;L&#39;</span><span class="o">,</span> <span class="n">50</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;C&#39;</span><span class="o">,</span> <span class="n">100</span><span class="o">);</span>
+<span class="ln"> 8</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;D&#39;</span><span class="o">,</span> <span class="n">500</span><span class="o">);</span>
+<span class="ln"> 9</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;M&#39;</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
+<span class="ln">10</span>    <span class="o">}};</span>
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">romanToInt</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">13</span>        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="ln">14</span>        <span class="kt">char</span> <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+<span class="ln">15</span>
+<span class="ln">16</span>        <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">17</span>            <span class="k">if</span> <span class="o">(</span><span class="n">previousChar</span> <span class="o">!=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">18</span>                <span class="k">if</span> <span class="o">((</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;I&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;V&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="o">))</span> <span class="o">||</span>
+<span class="ln">19</span>                    <span class="o">(</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;L&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;C&#39;</span><span class="o">))</span> <span class="o">||</span>
+<span class="ln">20</span>                    <span class="o">(</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;C&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;D&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;M&#39;</span><span class="o">)))</span> <span class="o">{</span>
+<span class="ln">21</span>                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">)</span> <span class="o">-</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>
+<span class="ln">22</span>                    <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+<span class="ln">23</span>                    <span class="k">continue</span><span class="o">;</span>
+<span class="ln">24</span>                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln">25</span>                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>    
+<span class="ln">26</span>                <span class="o">}</span>               
+<span class="ln">27</span>            <span class="o">}</span>
+<span class="ln">28</span>
+<span class="ln">29</span>            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;I&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span><span class="sc">&#39;C&#39;</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">30</span>                <span class="n">previousChar</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+<span class="ln">31</span>            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln">32</span>                <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+<span class="ln">33</span>                <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+<span class="ln">34</span>            <span class="o">}</span>
+<span class="ln">35</span>        <span class="o">}</span>
+<span class="ln">36</span>
+<span class="ln">37</span>        <span class="k">if</span> <span class="o">(</span><span class="n">previousChar</span> <span class="o">!=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">38</span>            <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>
+<span class="ln">39</span>        <span class="o">}</span>
+<span class="ln">40</span>
+<span class="ln">41</span>        <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
+<span class="ln">42</span>    <span class="o">}</span>   
+<span class="ln">43</span><span class="o">}</span>
+</code></pre></div></div></div>
   <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
-    <a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
+    <a href="https://allenhsieh1992.com/posts/java/spring/springboot-with-swagger/">Spring Boot With Swagger
 </a>
-  </div><div class="post-nav post-next">
-    <a href="https://allenhsieh1992.com/posts/aws/vpc-certification-note/">VPC Certification Note
-</a>
-    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -391,29 +340,29 @@
     </div>
     <div class="card-body">
       <ul class="post-list"><li>
-          <a href="https://allenhsieh1992.com/posts/aws/use-lightsail-to-create-wordpress-website/">使用 Lightsail 架設 WordPress 網站
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/">演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid
 </a>
-          <span class="float-end post-date">Jul 4, 2021
+          <span class="float-end post-date">Jun 19, 2022
 </span>
         </li><li>
-          <a href="https://allenhsieh1992.com/posts/aws/ec2-certification-note/">EC2 Certification Note
+          <a href="https://allenhsieh1992.com/posts/leetcode/easy/1119_remove_vowels_from_a_string/">演算法 [Java] LeetCode #1119. Remove Vowels From a String
 </a>
-          <span class="float-end post-date">Sep 3, 2021
+          <span class="float-end post-date">Jun 18, 2022
 </span>
         </li><li>
-          <a href="https://allenhsieh1992.com/posts/aws/create-cognito-user-pool-by-aws-cli/">使用 AWS Cognito CLI 建立 User Pool
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/1762_buildings_with_an_ocean_view/">演算法 [Java] LeetCode #1762. Buildings With an Ocean View
 </a>
-          <span class="float-end post-date">Jul 11, 2021
+          <span class="float-end post-date">Jun 17, 2022
 </span>
         </li><li>
-          <a href="https://allenhsieh1992.com/posts/aws/build-aws-lambda-hello-world-function-by-sam/">Build AWS Lambda Hello World Function by SAM
+          <a href="https://allenhsieh1992.com/posts/leetcode/medium/304_range_sum_query_2d_immutable/">演算法 [Java] LeetCode #304. Range Sum Query 2D - Immutable
 </a>
-          <span class="float-end post-date">Jul 3, 2021
+          <span class="float-end post-date">Jun 3, 2022
 </span>
         </li><li>
-          <a href="https://allenhsieh1992.com/posts/java/java-jersey-client-log-request-duration/">Java Jersey Client 取得每個 Request Duration
+          <a href="https://allenhsieh1992.com/posts/leetcode/easy/867_transpose_matrix/">演算法 [Java] LeetCode #867. Transpose Matrix
 </a>
-          <span class="float-end post-date">Jun 30, 2021
+          <span class="float-end post-date">Jun 2, 2022
 </span>
         </li></ul>
     </div>
@@ -451,10 +400,9 @@
   <div class="card-body">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#dns-basic-records">DNS Basic Records</a></li>
-    <li><a href="#routing-policy">Routing Policy</a></li>
-    <li><a href="#health-check">Health Check</a></li>
-    <li><a href="#others">Others</a></li>
+    <li><a href="#題目">題目</a></li>
+    <li><a href="#我的思路">我的思路</a></li>
+    <li><a href="#我的思路-1">我的思路</a></li>
   </ul>
 </nav>
   </div>
