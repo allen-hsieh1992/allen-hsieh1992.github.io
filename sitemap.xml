@@ -2,13 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://allenhsieh1992.com/categories/algorithm/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://allenhsieh1992.com/categories/java/</loc>
-    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://allenhsieh1992.com/tags/leetcode/</loc>
+    <lastmod>2022-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://allenhsieh1992.com/categories/leetcode/</loc>
     <lastmod>2022-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/tags/</loc>
@@ -26,7 +23,7 @@
     <loc>https://allenhsieh1992.com/</loc>
     <lastmod>2022-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://allenhsieh1992.com/categories/leetcode/</loc>
+    <loc>https://allenhsieh1992.com/categories/java/</loc>
     <lastmod>2022-06-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://allenhsieh1992.com/tags/spring/</loc>
