@@ -5,27 +5,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>演算法 [Java] LeetCode #13. Roman to Integer - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
+    <title>演算法 [Java] LeetCode #12. Integer to Roman - 艾倫的開發心路歷程</title><link rel="apple-touch-icon" href="https://allenhsieh1992.com/images/icons/icon-180x180.png" sizes="180x180">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/icon-16x16.png" sizes="16x16" type="image/png">
 <link rel="icon" href="https://allenhsieh1992.com/images/icons/favicon.ico">
 <link rel="manifest" href="https://allenhsieh1992.com/manifest.json">
 <meta name="keywords" content="" />
-<meta name="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M." /><meta itemprop="name" content="演算法 [Java] LeetCode #13. Roman to Integer">
-<meta itemprop="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M."><meta itemprop="datePublished" content="2022-06-20T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-06-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="730"><meta itemprop="image" content="https://allenhsieh1992.com/images/leetcode.jpeg">
-<meta itemprop="keywords" content="LEETCODE," /><meta property="og:title" content="演算法 [Java] LeetCode #13. Roman to Integer" />
+<meta name="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M." /><meta itemprop="name" content="演算法 [Java] LeetCode #12. Integer to Roman">
+<meta itemprop="description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M."><meta itemprop="datePublished" content="2022-06-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-06-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="661"><meta itemprop="image" content="https://allenhsieh1992.com/images/leetcode.jpeg">
+<meta itemprop="keywords" content="LEETCODE," /><meta property="og:title" content="演算法 [Java] LeetCode #12. Integer to Roman" />
 <meta property="og:description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://allenhsieh1992.com/posts/leetcode/easy/13_roman_to_integer/" /><meta property="og:image" content="https://allenhsieh1992.com/images/leetcode.jpeg" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-06-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-06-20T00:00:00+00:00" />
+<meta property="og:url" content="https://allenhsieh1992.com/posts/leetcode/medium/12_integer_to_roman/" /><meta property="og:image" content="https://allenhsieh1992.com/images/leetcode.jpeg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-21T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://allenhsieh1992.com/images/leetcode.jpeg"/>
 
-<meta name="twitter:title" content="演算法 [Java] LeetCode #13. Roman to Integer"/>
+<meta name="twitter:title" content="演算法 [Java] LeetCode #12. Integer to Roman"/>
 <meta name="twitter:description" content="Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M."/>
 <link rel="stylesheet" href="https://allenhsieh1992.com/assets/main/bundle.min.8863bf56587451bf488cc4f1eb0c667dd88fc396483195cfc74ecb717a79a151.css" integrity="sha256-iGO/Vlh0Ub9IjMTx6wxmfdiPw5ZIMZXPx07LcXp5oVE=" crossorigin="anonymous"><link rel="stylesheet" href="https://allenhsieh1992.com/assets/katex/bundle.min.c7738aed5534d96f5c4eb1790af05b44a2ca1cc7d0cb6d5de1dcf95595d3f91a.css" integrity="sha256-x3OK7VU02W9cTrF5CvBbRKLKHMfQy21d4dz5VZXT&#43;Ro=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://allenhsieh1992.com/assets/viewer/bundle.min.05d84cef8ecf0f936293c62c90ebe16275bf8f5f5649297e1a4338e63676ba2b.css" integrity="sha256-BdhM747PD5Nik8YskOvhYnW/j19WSSl&#43;GkM45jZ2uis=" crossorigin="anonymous"></head>
@@ -50,11 +50,11 @@
   </div>
   <div class="offcanvas-body">
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Twitter Share Button"
-      target="_blank" href="https://twitter.com/intent/tweet?title=%e6%bc%94%e7%ae%97%e6%b3%95%20%5bJava%5d%20LeetCode%20%2313.%20Roman%20to%20Integer&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2feasy%2f13_roman_to_integer%2f">
+      target="_blank" href="https://twitter.com/intent/tweet?title=%e6%bc%94%e7%ae%97%e6%b3%95%20%5bJava%5d%20LeetCode%20%2312.%20Integer%20to%20Roman&url=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2fmedium%2f12_integer_to_roman%2f">
       <i class="fab fa-fw fa-twitter"></i> Twitter
     </a>
     <a class="btn btn-sm btn-outline-primary social-share-button" rel="noopener noreferrer" aria-label="Facebook Share Button"
-      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2feasy%2f13_roman_to_integer%2f">
+      target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fposts%2fleetcode%2fmedium%2f12_integer_to_roman%2f">
       <i class="fab fa-fw fa-facebook-f"></i> Facebook
     </a>
   </div>
@@ -166,7 +166,7 @@
 <div class="col-lg-8">
   <div class="container"><nav class="row card component" aria-label="breadcrumb">
   <div class="card-body">
-    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">演算法 [Java] LeetCode #13. Roman to Integer</li></ol>
+    <ol class="breadcrumb "><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/">主頁</a></li><li class="breadcrumb-item"><a href="https://allenhsieh1992.com/posts/">文章</a></li><li class="breadcrumb-item active">演算法 [Java] LeetCode #12. Integer to Roman</li></ol>
   </div>
 </nav><div class="post-panel-wrapper position-sticky">
   <div class="d-flex flex-column component rounded post-panel position-absolute">
@@ -193,12 +193,12 @@
 </div>
 <article class="row card component mb-4 post">
   <div class="card-header ">
-    <h1 class="card-title post-title">演算法 [Java] LeetCode #13. Roman to Integer
+    <h1 class="card-title post-title">演算法 [Java] LeetCode #12. Integer to Roman
 </h1>
   </div>
   <div class="card-body"><div class="post-meta">
-  <span class="post-date" title="創建於 2022-06-20 08:00:00 &#43;0800 CST。">
-    Jun 20, 2022
+  <span class="post-date" title="創建於 2022-06-21 08:00:00 &#43;0800 CST。">
+    Jun 21, 2022
   </span><span class="post-taxonomies"><a href="https://allenhsieh1992.com/categories/leetcode/" class="badge post-taxonomy">LEETCODE</a><a href="https://allenhsieh1992.com/tags/leetcode/" class="badge post-taxonomy">LEETCODE</a></span>
 </div>
 <div class="post-content mb-3"><h2 id="題目">題目<a class="anchor ms-1" href="#題目"><i class="fas fa-link"></i></a></h2>
@@ -242,101 +242,115 @@
 </tr>
 </tbody>
 </table>
-<p>For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.</p>
+<p>For example, 2 is written as II in Roman numeral, just two one&rsquo;s added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.</p>
 <p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:</p>
 <ul>
 <li>I can be placed before V (5) and X (10) to make 4 and 9.</li>
 <li>X can be placed before L (50) and C (100) to make 40 and 90.</li>
 <li>C can be placed before D (500) and M (1000) to make 400 and 900.</li>
 </ul>
-<p>Given a roman numeral, convert it to an integer.</p>
+<p>Given an integer, convert it to a roman numeral.</p>
 <p>Example 1:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;III&#34;</span>
-<span class="ln">2</span>Output: <span class="m">3</span>
-<span class="ln">3</span>Explanation: <span class="nv">III</span> <span class="o">=</span> 3.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>Input: <span class="nv">num</span> <span class="o">=</span> <span class="m">3</span>
+<span class="ln">2</span>Output: <span class="s2">&#34;III&#34;</span>
+<span class="ln">3</span>Explanation: <span class="m">3</span> is represented as <span class="m">3</span> ones.
 </code></pre></div><p>Example 2:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;LVIII&#34;</span>
-<span class="ln">2</span>Output: <span class="m">58</span>
-<span class="ln">3</span>Explanation: <span class="nv">L</span> <span class="o">=</span> 50, <span class="nv">V</span><span class="o">=</span> 5, <span class="nv">III</span> <span class="o">=</span> 3.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>Input: <span class="nv">num</span> <span class="o">=</span> <span class="m">58</span>
+<span class="ln">2</span>Output: <span class="s2">&#34;LVIII&#34;</span>
+<span class="ln">3</span>Explanation: <span class="nv">L</span> <span class="o">=</span> 50, <span class="nv">V</span> <span class="o">=</span> 5, <span class="nv">III</span> <span class="o">=</span> 3.
 </code></pre></div><p>Example 3:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>Input: <span class="nv">s</span> <span class="o">=</span> <span class="s2">&#34;MCMXCIV&#34;</span>
-<span class="ln">2</span>Output: <span class="m">1994</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="ln">1</span>Input: <span class="nv">num</span> <span class="o">=</span> <span class="m">1994</span>
+<span class="ln">2</span>Output: <span class="s2">&#34;MCMXCIV&#34;</span>
 <span class="ln">3</span>Explanation: <span class="nv">M</span> <span class="o">=</span> 1000, <span class="nv">CM</span> <span class="o">=</span> 900, <span class="nv">XC</span> <span class="o">=</span> <span class="m">90</span> and <span class="nv">IV</span> <span class="o">=</span> 4.
 </code></pre></div><p>Constraints:</p>
 <ul>
-<li>1 &lt;= s.length &lt;= 15</li>
-<li>s contains only the characters (&lsquo;I&rsquo;, &lsquo;V&rsquo;, &lsquo;X&rsquo;, &lsquo;L&rsquo;, &lsquo;C&rsquo;, &lsquo;D&rsquo;, &lsquo;M&rsquo;).</li>
-<li>It is guaranteed that s is a valid roman numeral in the range [1, 3999].</li>
+<li>1 &lt;= num &lt;= 3999</li>
 </ul>
 <h2 id="我的思路">我的思路<a class="anchor ms-1" href="#我的思路"><i class="fas fa-link"></i></a></h2>
 <hr>
-<p>先用 HashMap 將所有的符號跟值做 Mapping 存起來。</p>
-<p>Loop 一遍 Input 的 String</p>
+<p>除了千位數，每一個位數先看有沒有 9 和 4 ，如果有就直接 Append 對應的羅馬數字。如果沒有就看有沒有大於五，有就將五的數字羅馬數字加上去，然後再把剩下一加上。</p>
+<p>例如:</p>
 <ul>
-<li>如果遇到 I、Ｘ 或 C 先用一個 Varaible previousChar 存起來並且不做任何事情跳過</li>
-<li>如果不是就直接把當下代表的數字加上。</li>
+<li>80: 由於 80 的十位數為 8，那就先加上 50(L) ，然後 8 - 5 = 3 ，就代表要加上 3 個 10(X)，最後等於 LXXX</li>
 </ul>
-<p>然後當發現 previousChar 不等於空時，代表著前一個字母為 I、Ｘ 或 C，這時候有一下兩種可能</p>
-<ul>
-<li>那六種排列組合之一 例如 IV 、 IX、XL、XC、CD 或 CM。</li>
-<li>除了以上六種以外，代表著 previousChar 就代表原本數字的意思 (ex I =&gt; 1)，將 previousChar 代表的值直接加回去。</li>
-</ul>
-<p>最後由於我們之前一直把 I、Ｘ 或 C 跳過，直到下一個字母確認後，才把它加減上。
-但這會造成整個字串最後一個字母沒有處理到，所以在 loop 完字串以後，要確認有沒有沒處理到的 I、Ｘ 或 C，然後再加回去。</p>
 <h2 id="我的思路-1">我的思路<a class="anchor ms-1" href="#我的思路-1"><i class="fas fa-link"></i></a></h2>
 <hr>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-<span class="ln"> 2</span>    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">romanMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;()</span> <span class="o">{{</span>
-<span class="ln"> 3</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;I&#39;</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
-<span class="ln"> 4</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;V&#39;</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
-<span class="ln"> 5</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;X&#39;</span><span class="o">,</span> <span class="n">10</span><span class="o">);</span>
-<span class="ln"> 6</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;L&#39;</span><span class="o">,</span> <span class="n">50</span><span class="o">);</span>
-<span class="ln"> 7</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;C&#39;</span><span class="o">,</span> <span class="n">100</span><span class="o">);</span>
-<span class="ln"> 8</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;D&#39;</span><span class="o">,</span> <span class="n">500</span><span class="o">);</span>
-<span class="ln"> 9</span>        <span class="n">put</span><span class="o">(</span><span class="sc">&#39;M&#39;</span><span class="o">,</span> <span class="n">1000</span><span class="o">);</span>
-<span class="ln">10</span>    <span class="o">}};</span>
-<span class="ln">11</span>
-<span class="ln">12</span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">romanToInt</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">13</span>        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-<span class="ln">14</span>        <span class="kt">char</span> <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-<span class="ln">15</span>
-<span class="ln">16</span>        <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
-<span class="ln">17</span>            <span class="k">if</span> <span class="o">(</span><span class="n">previousChar</span> <span class="o">!=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">18</span>                <span class="k">if</span> <span class="o">((</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;I&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;V&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="o">))</span> <span class="o">||</span>
-<span class="ln">19</span>                    <span class="o">(</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;L&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;C&#39;</span><span class="o">))</span> <span class="o">||</span>
-<span class="ln">20</span>                    <span class="o">(</span><span class="n">previousChar</span> <span class="o">==</span> <span class="sc">&#39;C&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;D&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;M&#39;</span><span class="o">)))</span> <span class="o">{</span>
-<span class="ln">21</span>                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">)</span> <span class="o">-</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>
-<span class="ln">22</span>                    <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-<span class="ln">23</span>                    <span class="k">continue</span><span class="o">;</span>
-<span class="ln">24</span>                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-<span class="ln">25</span>                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>    
-<span class="ln">26</span>                <span class="o">}</span>               
-<span class="ln">27</span>            <span class="o">}</span>
-<span class="ln">28</span>
-<span class="ln">29</span>            <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;I&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span> <span class="o">||</span> <span class="n">c</span> <span class="o">==</span><span class="sc">&#39;C&#39;</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">30</span>                <span class="n">previousChar</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
-<span class="ln">31</span>            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-<span class="ln">32</span>                <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-<span class="ln">33</span>                <span class="n">previousChar</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
-<span class="ln">34</span>            <span class="o">}</span>
-<span class="ln">35</span>        <span class="o">}</span>
-<span class="ln">36</span>
-<span class="ln">37</span>        <span class="k">if</span> <span class="o">(</span><span class="n">previousChar</span> <span class="o">!=</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">)</span> <span class="o">{</span>
-<span class="ln">38</span>            <span class="n">sum</span> <span class="o">+=</span> <span class="n">romanMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">previousChar</span><span class="o">);</span>
-<span class="ln">39</span>        <span class="o">}</span>
-<span class="ln">40</span>
-<span class="ln">41</span>        <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
-<span class="ln">42</span>    <span class="o">}</span>   
-<span class="ln">43</span><span class="o">}</span>
+<span class="ln"> 2</span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">intToRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 3</span>        <span class="n">StringBuilder</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+<span class="ln"> 4</span>        <span class="n">appendThousandsRoman</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="ln"> 5</span>        <span class="n">appendHundredsRoman</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="ln"> 6</span>        <span class="n">appendTensRoman</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="ln"> 7</span>        <span class="n">appendDigitsRoman</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+<span class="ln"> 8</span>        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="ln"> 9</span>    <span class="o">}</span>
+<span class="ln">10</span>    
+<span class="ln">11</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">appendThousandsRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">StringBuilder</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">12</span>        <span class="kt">int</span> <span class="n">nums_of_thousands_roman</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">1000</span><span class="o">;</span>
+<span class="ln">13</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums_of_thousands_roman</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">14</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;M&#34;</span><span class="o">);</span>
+<span class="ln">15</span>        <span class="o">}</span>
+<span class="ln">16</span>    <span class="o">}</span>
+<span class="ln">17</span>    
+<span class="ln">18</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">appendHundredsRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">StringBuilder</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">19</span>        <span class="kt">int</span> <span class="n">nums_of_hundreds_roman</span> <span class="o">=</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">1000</span><span class="o">)</span> <span class="o">/</span> <span class="n">100</span><span class="o">;</span>
+<span class="ln">20</span>        <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">9</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">21</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;CM&#34;</span><span class="o">);</span>
+<span class="ln">22</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">23</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">4</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">24</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;CD&#34;</span><span class="o">);</span>
+<span class="ln">25</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">26</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">&gt;=</span> <span class="n">5</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">27</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">);</span>
+<span class="ln">28</span>            <span class="n">nums_of_hundreds_roman</span> <span class="o">-=</span> <span class="n">5</span><span class="o">;</span>
+<span class="ln">29</span>        <span class="o">}</span>
+<span class="ln">30</span>
+<span class="ln">31</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums_of_hundreds_roman</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">32</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">);</span>
+<span class="ln">33</span>        <span class="o">}</span>
+<span class="ln">34</span>    <span class="o">}</span>
+<span class="ln">35</span>
+<span class="ln">36</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">appendTensRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">StringBuilder</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">37</span>        <span class="kt">int</span> <span class="n">nums_of_hundreds_roman</span> <span class="o">=</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">100</span><span class="o">)</span> <span class="o">/</span> <span class="n">10</span><span class="o">;</span>
+<span class="ln">38</span>        <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">9</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">39</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;XC&#34;</span><span class="o">);</span>
+<span class="ln">40</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">41</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">4</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">42</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;XL&#34;</span><span class="o">);</span>
+<span class="ln">43</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">44</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">&gt;=</span> <span class="n">5</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">45</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;L&#34;</span><span class="o">);</span>
+<span class="ln">46</span>            <span class="n">nums_of_hundreds_roman</span> <span class="o">-=</span> <span class="n">5</span><span class="o">;</span>
+<span class="ln">47</span>        <span class="o">}</span>
+<span class="ln">48</span>
+<span class="ln">49</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums_of_hundreds_roman</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">50</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;X&#34;</span><span class="o">);</span>
+<span class="ln">51</span>        <span class="o">}</span>
+<span class="ln">52</span>    <span class="o">}</span>
+<span class="ln">53</span>    
+<span class="ln">54</span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">appendDigitsRoman</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">StringBuilder</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">55</span>        <span class="kt">int</span> <span class="n">nums_of_hundreds_roman</span> <span class="o">=</span> <span class="n">num</span> <span class="o">%</span> <span class="n">10</span><span class="o">;</span>
+<span class="ln">56</span>        <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">9</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">57</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;IX&#34;</span><span class="o">);</span>
+<span class="ln">58</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">59</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">==</span> <span class="n">4</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">60</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;IV&#34;</span><span class="o">);</span>
+<span class="ln">61</span>            <span class="k">return</span><span class="o">;</span>
+<span class="ln">62</span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums_of_hundreds_roman</span> <span class="o">&gt;=</span> <span class="n">5</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">63</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;V&#34;</span><span class="o">);</span>
+<span class="ln">64</span>            <span class="n">nums_of_hundreds_roman</span> <span class="o">-=</span> <span class="n">5</span><span class="o">;</span>
+<span class="ln">65</span>        <span class="o">}</span>
+<span class="ln">66</span>
+<span class="ln">67</span>        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums_of_hundreds_roman</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="ln">68</span>            <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;I&#34;</span><span class="o">);</span>
+<span class="ln">69</span>        <span class="o">}</span>
+<span class="ln">70</span>    <span class="o">}</span>
+<span class="ln">71</span><span class="o">}</span>
 </code></pre></div></div></div>
   <div class="card-footer"><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev">
     <i class="fas fa-fw fa-chevron-circle-down post-prev-icon" data-fa-transform="rotate-90"></i>
-    <a href="https://allenhsieh1992.com/posts/java/spring/springboot-with-swagger/">Spring Boot With Swagger
+    <a href="https://allenhsieh1992.com/posts/leetcode/easy/13_roman_to_integer/">演算法 [Java] LeetCode #13. Roman to Integer
 </a>
-  </div><div class="post-nav post-next">
-    <a href="https://allenhsieh1992.com/posts/leetcode/medium/12_integer_to_roman/">演算法 [Java] LeetCode #12. Integer to Roman
-</a>
-    <i class="fas fa-fw fa-chevron-circle-down post-next-icon" data-fa-transform="rotate-270"></i>
   </div></div></div>
 </article><section class="related-posts row card component">
     <div class="card-header">
@@ -344,6 +358,11 @@
     </div>
     <div class="card-body">
       <ul class="post-list"><li>
+          <a href="https://allenhsieh1992.com/posts/leetcode/easy/13_roman_to_integer/">演算法 [Java] LeetCode #13. Roman to Integer
+</a>
+          <span class="float-end post-date">Jun 20, 2022
+</span>
+        </li><li>
           <a href="https://allenhsieh1992.com/posts/leetcode/medium/921.minimum_add_to_make_parentheses_valid/">演算法 [Java] LeetCode #921. Minimum Add to Make Parentheses Valid
 </a>
           <span class="float-end post-date">Jun 19, 2022
@@ -362,11 +381,6 @@
           <a href="https://allenhsieh1992.com/posts/leetcode/medium/304_range_sum_query_2d_immutable/">演算法 [Java] LeetCode #304. Range Sum Query 2D - Immutable
 </a>
           <span class="float-end post-date">Jun 3, 2022
-</span>
-        </li><li>
-          <a href="https://allenhsieh1992.com/posts/leetcode/easy/867_transpose_matrix/">演算法 [Java] LeetCode #867. Transpose Matrix
-</a>
-          <span class="float-end post-date">Jun 2, 2022
 </span>
         </li></ul>
     </div>
