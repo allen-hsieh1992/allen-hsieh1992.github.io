@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>Copyright © 2021-{year} Allen Hsieh. All Rights Reserved.</copyright>
-    <lastBuildDate>Tue, 21 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://allenhsieh1992.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>演算法 [Java] LeetCode #724. Find Pivot Index</title>
+      <link>https://allenhsieh1992.com/posts/leetcode/easy/724_find_pivot_index/</link>
+      <pubDate>Sat, 25 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://allenhsieh1992.com/posts/leetcode/easy/724_find_pivot_index/</guid>
+      <description>題目 Given an array of integers nums, calculate the pivot index of this array. The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index&amp;rsquo;s right. If the index is on the left edge of the array, then the left sum is 0 because there are no</description>
+    </item>
+    
     <item>
       <title>演算法 [Java] LeetCode #12. Integer to Roman</title>
       <link>https://allenhsieh1992.com/posts/leetcode/medium/12_integer_to_roman/</link>
