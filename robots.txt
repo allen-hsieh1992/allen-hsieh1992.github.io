@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://allenhsieh1992.com/sitemap.xml

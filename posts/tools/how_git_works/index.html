@@ -1,0 +1,430 @@
+<!doctype html><html class=position-relative itemscope itemtype=http://schema.org/WebPage lang=zh-tw data-bs-theme=dark data-palette=blue><head><script src=/assets/init/bundle.min.9d67e5ab3beeeb44afbc443cf3bfaf8c3d747ebf4d9c3edb32c85cee5186fc30.js integrity="sha256-nWflqzvu60SvvEQ887+vjD10fr9NnD7bMshc7lGG/DA=" crossorigin=anonymous></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git 是如何運作的 - 艾倫的開發心路歷程</title><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_16x16_resize_box_3.png sizes=16x16 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_32x32_resize_box_3.png sizes=32x32 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_150x150_resize_box_3.png sizes=150x150 type=image/png><link rel=apple-touch-icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_180x180_resize_box_3.png sizes=180x180 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_192x192_resize_box_3.png sizes=192x192 type=image/png><link rel=mask-icon href=/safari-pinned-tab.svg color=#6f42c1><meta name=keywords content="艾倫,AWS,Allen,Note"><meta name=description content="使用 Git 當作 Soruce Control 也有一段時間了，但以前都只是基本的了解 Git 基本使用，並沒有深入了解 Git 後面實作原理。最近在 Pluralsight 上看到 Paolo Perrotta 講解 Git 是如何運作的，覺得講得不錯~這邊也算是將這次吸收到的知識做個筆記。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://allenhsieh1992.com/images/git.webp"><meta name=twitter:title content="Git 是如何運作的"><meta name=twitter:description content="使用 Git 當作 Soruce Control 也有一段時間了，但以前都只是基本的了解 Git 基本使用，並沒有深入了解 Git 後面實作原理。最近在 Pluralsight 上看到 Paolo Perrotta 講解 Git 是如何運作的，覺得講得不錯~這邊也算是將這次吸收到的知識做個筆記。"><meta property="og:title" content="Git 是如何運作的"><meta property="og:description" content="使用 Git 當作 Soruce Control 也有一段時間了，但以前都只是基本的了解 Git 基本使用，並沒有深入了解 Git 後面實作原理。最近在 Pluralsight 上看到 Paolo Perrotta 講解 Git 是如何運作的，覺得講得不錯~這邊也算是將這次吸收到的知識做個筆記。"><meta property="og:type" content="article"><meta property="og:url" content="https://allenhsieh1992.com/posts/tools/how_git_works/"><meta property="og:image" content="https://allenhsieh1992.com/images/git.webp"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-03-02T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-02T00:00:00+00:00"><meta itemprop=name content="Git 是如何運作的"><meta itemprop=description content="使用 Git 當作 Soruce Control 也有一段時間了，但以前都只是基本的了解 Git 基本使用，並沒有深入了解 Git 後面實作原理。最近在 Pluralsight 上看到 Paolo Perrotta 講解 Git 是如何運作的，覺得講得不錯~這邊也算是將這次吸收到的知識做個筆記。"><meta itemprop=datePublished content="2022-03-02T00:00:00+00:00"><meta itemprop=dateModified content="2022-03-02T00:00:00+00:00"><meta itemprop=wordCount content="3803"><meta itemprop=image content="https://allenhsieh1992.com/images/git.webp"><meta itemprop=keywords content="Git,"><meta property="og:image:alt" content="Git 是如何運作的"><meta name=twitter:image:alt content="Git 是如何運作的"><link rel=manifest href=/manifest.json><link data-precache rel=stylesheet href="/assets/main/bundle.min.bd992ce1a5de5a527057227de4f8f0f547924afb39b41163a987ebe558c00e21.css" integrity="sha256-vZks4aXeWlJwVyJ95Pjw9UeSSvs5tBFjqYfr5VjADiE=" crossorigin=anonymous><link data-precache rel=stylesheet href=/assets/viewer/bundle.min.6d0fc65b8b058ac563091dc5c36f61afba5dd705058680aa24f1d5a3bcf0064d.css integrity="sha256-bQ/GW4sFisVjCR3Fw29hr7pd1wUFhoCqJPHVo7zwBk0=" crossorigin=anonymous></head><body><header><nav class="top-app-bar shadow navbar navbar-expand-xxl fixed-top"><div class=container><a class="navbar-brand d-flex align-items-center flex-grow-1 flex-xxl-grow-0 justify-content-xxl-start ms-2 ms-xxl-0 mx-auto me-xxl-2" href=https://allenhsieh1992.com/><picture><img class=logo alt=Logo src=https://allenhsieh1992.com/images/logo.png loading=lazy width=136 height=70></picture>
+艾倫的開發心路歷程</a><div class="offcanvas-xxl offcanvas-end flex-grow-1" data-bs-scroll=true tabindex=-1 id=navbarMenus aria-labelledby=navbarMenusLabel><div class="offcanvas-header px-4 pb-0"><div class="offcanvas-title h5" id=navbarMenusLabel>艾倫的開發心路歷程</div><button type=button class="btn-close btn-close-white" data-bs-dismiss=offcanvas data-bs-target=#navbarMenus aria-label=Close></button></div><div class="offcanvas-body p-4 pt-0 p-xxl-0"><hr class=d-xxl-none><ul class="navbar-nav flex-row flex-wrap align-items-center me-auto"><li class="nav-item col-12 col-xxl-auto dropdown px-0"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownTech role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-chevron-circle-down"></i>技術</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=navbarDropdownTech data-bs-popper=none><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/aws><div class=dropdown-item-content><p class="dropdown-item-title mb-0">AWS</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/java><div class=dropdown-item-content><p class="dropdown-item-title mb-0">JAVA</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/container><div class=dropdown-item-content><p class="dropdown-item-title mb-0">CONTAINER</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/tools><div class=dropdown-item-content><p class="dropdown-item-title mb-0">TOOLS</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/leetcode><div class=dropdown-item-content><p class="dropdown-item-title mb-0">LEETCODE</p></div></a></li></ul></li><li class="nav-item col-12 col-xxl-auto dropdown px-0"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownLife role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-chevron-circle-down"></i>生活</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=navbarDropdownLife data-bs-popper=none><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/travel><div class=dropdown-item-content><p class="dropdown-item-title mb-0">旅遊</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/unboxing><div class=dropdown-item-content><p class="dropdown-item-title mb-0">開箱</p></div></a></li></ul></li><li class="nav-item col-6 col-xxl-auto"><a class="nav-link py-2 px-0 px-xxl-2" href=https://allenhsieh1992.com/archives/><i class="fas fa-fw fa-file-archive"></i>歸檔</a></li><li class="nav-item col-6 col-xxl-auto"><a class="nav-link py-2 px-0 px-xxl-2" href=https://allenhsieh1992.com/categories/><i class="fas fa-fw fa-folder"></i>分類</a></li></ul><hr class=d-xxl-none><form class="search-bar ms-auto my-1" action=/search/ novalidate><div class="input-group input-group-sm align-items-center"><span class="btn btn-search disabled position-absolute left-0 border-0 px-1"><i class="fas fa-fw fa-search fa-lg"></i></span>
+<input class="my-1 form-control border-white rounded search-input bg-body" name=q type=search placeholder="按 / 搜索" aria-label=Search required></div></form><hr class=d-xxl-none><ul class="navbar-nav flex-row flex-wrap align-items-center ms-md-auto"><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=fontSizeDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-font"></i>
+<span class=d-xxl-none>字體大小</span></a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=fontSizeDropdown><li><button class="font-size-item dropdown-item" data-size=xs>
+特小號</button></li><li><button class="font-size-item dropdown-item" data-size=sm>
+小號</button></li><li><button class="font-size-item dropdown-item active" data-size=md>
+中等</button></li><li><button class="font-size-item dropdown-item" data-size=lg>
+大號</button></li><li><button class="font-size-item dropdown-item" data-size=xl>
+特大號</button></li></ul></li><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=paletteDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-palette"></i>
+<span class=d-xxl-none>配色</span></a><ul class="palette-dropdown-menu dropdown-menu dropdown-menu-end px-2 row g-2" aria-labelledby=paletteDropdown><li class="col-4 my-1"><a role=button id=palette-blue aria-label=藍色 class="btn btn-sm w-100 palette text-bg-blue" data-palette=blue></a></li><li class="col-4 my-1"><a role=button id=palette-blue-gray aria-label=藍灰色 class="btn btn-sm w-100 palette text-bg-blue-gray" data-palette=blue-gray></a></li><li class="col-4 my-1"><a role=button id=palette-brown aria-label=棕色 class="btn btn-sm w-100 palette text-bg-brown" data-palette=brown></a></li><li class="col-4 my-1"><a role=button id=palette-cyan aria-label=青色 class="btn btn-sm w-100 palette text-bg-cyan" data-palette=cyan></a></li><li class="col-4 my-1"><a role=button id=palette-green aria-label=綠色 class="btn btn-sm w-100 palette text-bg-green" data-palette=green></a></li><li class="col-4 my-1"><a role=button id=palette-indigo aria-label=靛青色 class="btn btn-sm w-100 palette text-bg-indigo" data-palette=indigo></a></li><li class="col-4 my-1"><a role=button id=palette-orange aria-label=橙色 class="btn btn-sm w-100 palette text-bg-orange" data-palette=orange></a></li><li class="col-4 my-1"><a role=button id=palette-pink aria-label=粉色 class="btn btn-sm w-100 palette text-bg-pink" data-palette=pink></a></li><li class="col-4 my-1"><a role=button id=palette-purple aria-label=紫色 class="btn btn-sm w-100 palette text-bg-purple" data-palette=purple></a></li><li class="col-4 my-1"><a role=button id=palette-red aria-label=紅色 class="btn btn-sm w-100 palette text-bg-red" data-palette=red></a></li><li class="col-4 my-1"><a role=button id=palette-teal aria-label=藍綠色 class="btn btn-sm w-100 palette text-bg-teal" data-palette=teal></a></li><li class="col-4 my-1"><a role=button id=palette-yellow aria-label=黃色 class="btn btn-sm w-100 palette text-bg-yellow" data-palette=yellow></a></li></ul></li><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=modeDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="mode-icon fas fa-fw fa-moon" id=modeIcon></i>
+<span class=d-xxl-none>模式</span></a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=modeDropdown><li class=mode-item data-color-mode=light data-icon=sun><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-sun"></i> Light</button></li><li class="mode-item active" data-color-mode=dark data-icon=moon><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-moon"></i> Dark</button></li><li class=mode-item data-color-mode=auto data-icon=adjust><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-adjust"></i> Auto</button></li></ul></li></ul></div></div><div class=d-flex><button class="navbar-toggler order-5 border-0" type=button data-bs-toggle=offcanvas data-bs-target=#navbarMenus aria-controls=navbarMenus aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-ellipsis-h"></i></button></div></div></nav></header><main class=container><div class="row content"><noscript><div class="alert alert-danger" role=alert>你的瀏覽器不支持 JavaScript。</div></noscript><div class=col-xxl-8><div class=container><nav class="row card component" aria-label=breadcrumb><div class="card-body pb-0"><ol class="hbs-breadcrumb breadcrumb flex-nowrap"><li class="breadcrumb-item text-surface"><a href=/>主頁</a></li><li class="breadcrumb-item text-surface"><a href=/posts/>文章</a></li><li class="breadcrumb-item text-surface"><a href=/posts/tools/>TOOLS</a></li><li class="breadcrumb-item active">Git 是如何運作的</li></ol></div></nav><div class="post-panel-wrapper position-relative d-flex justify-content-center"><div class="d-flex flex-row justify-content-center rounded rounded-5 border border-primary post-panel position-fixed px-3 py-1 surface shadow"><a class="action action-toc d-none d-xxl-block" href=#postTOC role=button title="Table of contents"><i class="fas fa-fw fa-list-alt"></i></a>
+<a class="action action-toc d-block d-xxl-none" href=#post-toc-container role=button title="Table of contents"><i class="fas fa-fw fa-list-alt"></i></a>
+<a class="action action-post-comments" href=#post-comments role=button aria-label=Comments title=Comments><i class="fas fa-fw fa-comments"></i></a>
+<a id=sidebarToggler class="action action-sidebar-toggler d-none d-xxl-block" role=button title="Sidebar toggler"><i class="fas fa-fw fa-expand-alt" data-fa-transform=rotate-45></i></a></div></div><article class="row card component mb-4 post"><div class=card-header><h1 class="card-title post-title my-2">Git 是如何運作的</h1></div><div class=card-body><div class="post-meta mb-3"><span class="post-date me-1 mb-1" title="創建於 2022-03-02 08:00:00 +0800 CST。">March 2, 2022</span><a href=/categories/tools/ class="btn btn-sm btn-secondary mb-1 me-2 py-0 pe-1 post-taxonomy post-taxonomy-sm post-category">
+<i class="fas fa-fw fa-folder me-1"></i>TOOLS</a><a href=/tags/git/ class="btn btn-sm btn-secondary mb-1 me-2 py-0 pe-1 post-taxonomy post-taxonomy-sm post-tag">Git</a></div><div class="mt-2 mb-3 d-block d-xxl-none"><h2 class="text-surface mb-3">目錄</h2><div id=post-toc-container></div><hr class=text-secondary></div><div class="post-content mb-3" data-bs-spy=scroll data-bs-target=#TableOfContents tabindex=0><div id=post-content-body><p>使用 Git 當作 Soruce Control 也有一段時間了，但以前都只是基本的了解 Git 基本使用，並沒有深入了解 Git 後面實作原理。最近在 Pluralsight 上看到 Paolo Perrotta 講解 Git 是如何運作的，覺得講得不錯~ 這邊也算是將這次吸收到的知識做個筆記。</p><h2 id=git-databases data-numberify>Git Databases<a class="anchor ms-1" href=#git-databases></a></h2><hr><p>Git init 是初始化 Git 的 Databases 或者又稱 Repository ，而 Git 的所有資料都存取在 .git 的目錄下。當執行 git init 後，可以看到 .git 資料夾產生</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>.git
+</span></span><span class=line><span class=ln> 2</span><span class=cl>├── HEAD
+</span></span><span class=line><span class=ln> 3</span><span class=cl>├── config
+</span></span><span class=line><span class=ln> 4</span><span class=cl>├── description
+</span></span><span class=line><span class=ln> 5</span><span class=cl>├── hooks
+</span></span><span class=line><span class=ln> 6</span><span class=cl>│   ├── applypatch-msg.sample
+</span></span><span class=line><span class=ln> 7</span><span class=cl>│   ├── commit-msg.sample
+</span></span><span class=line><span class=ln> 8</span><span class=cl>│   ├── fsmonitor-watchman.sample
+</span></span><span class=line><span class=ln> 9</span><span class=cl>│   ├── post-update.sample
+</span></span><span class=line><span class=ln>10</span><span class=cl>│   ├── pre-applypatch.sample
+</span></span><span class=line><span class=ln>11</span><span class=cl>│   ├── pre-commit.sample
+</span></span><span class=line><span class=ln>12</span><span class=cl>│   ├── pre-merge-commit.sample
+</span></span><span class=line><span class=ln>13</span><span class=cl>│   ├── pre-push.sample
+</span></span><span class=line><span class=ln>14</span><span class=cl>│   ├── pre-rebase.sample
+</span></span><span class=line><span class=ln>15</span><span class=cl>│   ├── pre-receive.sample
+</span></span><span class=line><span class=ln>16</span><span class=cl>│   ├── prepare-commit-msg.sample
+</span></span><span class=line><span class=ln>17</span><span class=cl>│   ├── push-to-checkout.sample
+</span></span><span class=line><span class=ln>18</span><span class=cl>│   └── update.sample
+</span></span><span class=line><span class=ln>19</span><span class=cl>├── info
+</span></span><span class=line><span class=ln>20</span><span class=cl>│   └── exclude
+</span></span><span class=line><span class=ln>21</span><span class=cl>├── objects
+</span></span><span class=line><span class=ln>22</span><span class=cl>│   ├── info
+</span></span><span class=line><span class=ln>23</span><span class=cl>│   └── pack
+</span></span><span class=line><span class=ln>24</span><span class=cl>└── refs
+</span></span><span class=line><span class=ln>25</span><span class=cl>    ├── heads
+</span></span><span class=line><span class=ln>26</span><span class=cl>        └── tags
+</span></span></code></pre></div><h2 id=內容追蹤 data-numberify>內容追蹤<a class="anchor ms-1" href=#內容追蹤></a></h2><hr><p>有執行過 &ldquo;man git&rdquo; 的話，可以看到 Name 那邊寫著 &ldquo;git - the stupid content tracker&rdquo;。這也是 Git 最核心的價值，可以讓我們知道所有檔案的修改紀錄，但這是怎麼做到的呢？</p><h3 id=hash-obejct data-numberify>Hash-Obejct<a class="anchor ms-1" href=#hash-obejct></a></h3><hr><p>Git 使用 SHA1 來 hash 檔案內容，並透過雜湊值的結果，來建立起 Database，以下面為例子</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ <span class=nb>echo</span> <span class=s2>&#34;hello world&#34;</span> <span class=p>|</span> git hash-object --stdin
+</span></span><span class=line><span class=ln>2</span><span class=cl>3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+</span></span></code></pre></div><h3 id=commit data-numberify>Commit<a class="anchor ms-1" href=#commit></a></h3><hr><p>我們可以看到 &ldquo;hello world&rdquo; 的雜湊值是 3b18e512dba79e4c8300dd08aeb37f8e728b8dad。</p><p>這時我們在 local 產生一個 helloWorld.txt ，並 commit &ldquo;first file&rdquo; 進去。</p><p>這時我們看看 .git/objects，這時會發現多了一些 Folder</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>tree .git/objects
+</span></span><span class=line><span class=ln> 2</span><span class=cl>.git/objects
+</span></span><span class=line><span class=ln> 3</span><span class=cl>├── 3b
+</span></span><span class=line><span class=ln> 4</span><span class=cl>│   └── 18e512dba79e4c8300dd08aeb37f8e728b8dad
+</span></span><span class=line><span class=ln> 5</span><span class=cl>├── <span class=m>48</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>│   └── 971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln> 7</span><span class=cl>├── a6
+</span></span><span class=line><span class=ln> 8</span><span class=cl>│   └── 10f3aeab960b6dd657d6f371419954e923bcdf
+</span></span><span class=line><span class=ln> 9</span><span class=cl>├── info
+</span></span><span class=line><span class=ln>10</span><span class=cl>└── pack
+</span></span></code></pre></div><h3 id=log data-numberify>Log<a class="anchor ms-1" href=#log></a></h3><hr><p>這時執行 Git Log 可以看到我們的 Commit 紀錄</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln>1</span><span class=cl>$ git log
+</span></span><span class=line><span class=ln>2</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723 <span class=o>(</span>HEAD -&gt; master<span class=o>)</span>
+</span></span><span class=line><span class=ln>3</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>4</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>5</span><span class=cl>
+</span></span><span class=line><span class=ln>6</span><span class=cl>    first file
+</span></span></code></pre></div><p>在 Commit 後面有一個雜湊值是 &ldquo;48971f01848a55ac80698bd8c8b999b431f14723&rdquo; ，不知道大家有沒有發現這個數字在哪裡見過？</p><p>答案就是在剛剛的 .git/objects 裡面，前兩位數 &ldquo;48&rdquo; 是資料夾的名字，剩餘的是檔案名稱。</p><p>這時我們來看看檔案裡面有什麼吧</p><h3 id=cat-file data-numberify>Cat-File<a class="anchor ms-1" href=#cat-file></a></h3><hr><p>如果大家直接去讀 objects 下面的資料，會發現裡面是一堆不可讀亂碼！檔案的內容是有經過特殊處理過的，但這時可以使用 cat-file 來讀取裡面的資料</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl><span class=c1># 使用方式為  git cat-file options &lt;雜湊值&gt;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=c1># optins 這次這邊只會 Demo -t 顯示物件類型 -p 物件內容。更多資訊可以直接執行 git cat-file，會有使用教學</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ git cat-file -t 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln> 5</span><span class=cl>commit
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>$ git cat-file -p 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln> 8</span><span class=cl>tree a610f3aeab960b6dd657d6f371419954e923bcdf
+</span></span><span class=line><span class=ln> 9</span><span class=cl>author Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645538422</span> +0800
+</span></span><span class=line><span class=ln>10</span><span class=cl>committer Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645538422</span> +0800
+</span></span><span class=line><span class=ln>11</span><span class=cl>
+</span></span><span class=line><span class=ln>12</span><span class=cl>first file
+</span></span></code></pre></div><ul><li>line5 : 我們可以看到 &ldquo;48971f01848a55ac80698bd8c8b999b431f14723&rdquo; 這個物件代表的是 commit</li><li>line8 : 我們可以看到雜湊值前面有個 Tree，是代表這個類型。 Tree 記錄該目錄下有哪些檔案(blob) 和 Tree</li><li>line9-10: 是作者和 Commit 人的資訊</li><li>line12: 是 commit 的訊息</li></ul><p>那接著來看看 line8 tree 的內容吧</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git cat-file -p a610f3aeab960b6dd657d6f371419954e923bcdf
+</span></span><span class=line><span class=ln>2</span><span class=cl><span class=m>100644</span> blob 3b18e512dba79e4c8300dd08aeb37f8e728b8dad	helloWorld.txt
+</span></span></code></pre></div><p>這邊可以看到 blob 這個類型，代表紀錄檔案內容，而最後面是檔案名稱。</p><p>大家可以仔細看，helloWorld的雜湊值會跟前面 Hash-Obejct 使用的範例是一樣的，因為 Git 是拿檔案裡面的內容去做 Hash。同樣的值 Hash 出來的雜湊值需要是一樣的。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git cat-file -p 3b18e512dba79e4c8300dd08aeb37f8e728b8dad
+</span></span><span class=line><span class=ln>2</span><span class=cl>hello world
+</span></span></code></pre></div><h3 id=版本實現 data-numberify>版本實現<a class="anchor ms-1" href=#版本實現></a></h3><hr><p>我們現在在 Local 建立一個 Folder 叫 I_AM_FOLDER 並在裡面建立一個 helloWorld2.txt 但內容跟 helloWorld.txt 一樣，並 commit 看看會發生什麼事情。</p><p>目前資料結構</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ tree
+</span></span><span class=line><span class=ln>2</span><span class=cl>.
+</span></span><span class=line><span class=ln>3</span><span class=cl>├── I_AM_FOLDER
+</span></span><span class=line><span class=ln>4</span><span class=cl>│   └── helloWorld2.txt
+</span></span><span class=line><span class=ln>5</span><span class=cl>└── helloWorld.txt
+</span></span></code></pre></div><p>新的 File Commit 之後的 Log</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git log
+</span></span><span class=line><span class=ln> 2</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a <span class=o>(</span>HEAD -&gt; master<span class=o>)</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln> 4</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln> 5</span><span class=cl>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln> 7</span><span class=cl>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln> 9</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>10</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>11</span><span class=cl>
+</span></span><span class=line><span class=ln>12</span><span class=cl>    first file
+</span></span></code></pre></div><p>接下來我們來看看新的 commit 內容吧</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git cat-file -p 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln>2</span><span class=cl>tree bbdf0c43f735049c51bca17ea7543621c38efdd3
+</span></span><span class=line><span class=ln>3</span><span class=cl>parent 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>4</span><span class=cl>author Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645541402</span> +0800
+</span></span><span class=line><span class=ln>5</span><span class=cl>committer Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645541402</span> +0800
+</span></span><span class=line><span class=ln>6</span><span class=cl>
+</span></span><span class=line><span class=ln>7</span><span class=cl>add helloWorld2.txt
+</span></span></code></pre></div><ul><li>Line3: 我們可以看到 parent， parent 代表這個 commit 的父是誰，所以透過這樣的方式，可以知道之前的 commit 內容，這也是 Git 實現版本的方式。</li></ul><p>接著我們來看看 tree 裡面的內容</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git cat-file -p bbdf0c43f735049c51bca17ea7543621c38efdd3
+</span></span><span class=line><span class=ln>2</span><span class=cl><span class=m>040000</span> tree 41758064447cf1624a474c3732dc2aead98e701e	I_AM_FOLDER
+</span></span><span class=line><span class=ln>3</span><span class=cl><span class=m>100644</span> blob 3b18e512dba79e4c8300dd08aeb37f8e728b8dad	helloWorld.txt
+</span></span></code></pre></div><p>我們可以看到 line2 ， I_AM_FOLDER 的屬性也是 tree。接著我們來看看I_AM_FOLDER 裡面有什麼吧。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git cat-file -p 41758064447cf1624a474c3732dc2aead98e701e 
+</span></span><span class=line><span class=ln>2</span><span class=cl><span class=m>100644</span> blob 3b18e512dba79e4c8300dd08aeb37f8e728b8dad	helloWorld2.txt
+</span></span></code></pre></div><p>我們可以看到， I_AM_FOLDER 裡面有 helloWorld2.txt ，而 helloWorld2.txt 和 helloWorld.txt 的內容是一樣的，所以不會花額外的空間存取。</p><h2 id=分支實現 data-numberify>分支實現<a class="anchor ms-1" href=#分支實現></a></h2><hr><p>當我們使用 git branch 時，可以看到現在所有的分支。而有一個會是當前的分支，前面會備註星號。那 Git 怎麼知道我們現在在哪個分支呢，是透過 .git/HEAD 這個檔案</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git branch
+</span></span><span class=line><span class=ln> 2</span><span class=cl>* master
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ cat .git/HEAD
+</span></span><span class=line><span class=ln> 5</span><span class=cl>ref: refs/heads/master
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>$ cat .git/refs/heads/master
+</span></span><span class=line><span class=ln> 8</span><span class=cl>9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln> 9</span><span class=cl>
+</span></span><span class=line><span class=ln>10</span><span class=cl>$ git log
+</span></span><span class=line><span class=ln>11</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a <span class=o>(</span>HEAD -&gt; master<span class=o>)</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>13</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>14</span><span class=cl>
+</span></span><span class=line><span class=ln>15</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>18</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>19</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>20</span><span class=cl>
+</span></span><span class=line><span class=ln>21</span><span class=cl>    first file
+</span></span></code></pre></div><ul><li>line5: ref 後面跟著一個路徑，代表現在分支所在的檔案。</li><li>line8: 我們可以看到 master 檔案裡面實際只存了一個雜湊值。</li><li>line11: 我們可以看到後面有標記 Head 指向 Master ，而 Master 指向這個 commit</li></ul><h3 id=建立新的分支 data-numberify>建立新的分支<a class="anchor ms-1" href=#建立新的分支></a></h3><hr><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git branch I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln> 2</span><span class=cl>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>$ git branch
+</span></span><span class=line><span class=ln> 4</span><span class=cl>  I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln> 5</span><span class=cl>  * master
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>$  cat .git/HEAD
+</span></span><span class=line><span class=ln> 8</span><span class=cl>ref: refs/heads/master
+</span></span><span class=line><span class=ln> 9</span><span class=cl>
+</span></span><span class=line><span class=ln>10</span><span class=cl>$ tree .git/refs
+</span></span><span class=line><span class=ln>11</span><span class=cl>.git/refs
+</span></span><span class=line><span class=ln>12</span><span class=cl>├── heads
+</span></span><span class=line><span class=ln>13</span><span class=cl>│   ├── I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln>14</span><span class=cl>│   └── master
+</span></span><span class=line><span class=ln>15</span><span class=cl>└── tags
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>$ cat .git/refs/heads/I_AM_GOING_TO_UPDATE_HELLO_UPDAT
+</span></span><span class=line><span class=ln>18</span><span class=cl>9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln>19</span><span class=cl>
+</span></span><span class=line><span class=ln>20</span><span class=cl>$ cat .git/refs/heads/master
+</span></span><span class=line><span class=ln>21</span><span class=cl>9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln>22</span><span class=cl>
+</span></span><span class=line><span class=ln>23</span><span class=cl>$ git log
+</span></span><span class=line><span class=ln>24</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a <span class=o>(</span>HEAD -&gt; master, I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span>
+</span></span><span class=line><span class=ln>25</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>26</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>27</span><span class=cl>
+</span></span><span class=line><span class=ln>28</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln>29</span><span class=cl>
+</span></span><span class=line><span class=ln>30</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>31</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>32</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>33</span><span class=cl>
+</span></span><span class=line><span class=ln>34</span><span class=cl>    first file
+</span></span></code></pre></div><ul><li>Line1: 我們這邊建立一個新的分支叫做 I_AM_GOING_TO_UPDATE_HELLO_UPDATE</li><li>Line3 和 line 7: 我們可以看到，現在的 Head 還是指向 Master</li><li>Line10: 我們可以看到 refs 裡面有新的檔案就是我們 Branch 的名字</li><li>Line 17,20 和23: 我們可以看到目前 I_AM_GOING_TO_UPDATE_HELLO_UPDATE & Master 都指向同一個 Git Commit</li></ul><h3 id=切換分支 data-numberify>切換分支<a class="anchor ms-1" href=#切換分支></a></h3><hr><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git checkout I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln>2</span><span class=cl>Switched to branch <span class=s1>&#39;I_AM_GOING_TO_UPDATE_HELLO_UPDATE&#39;</span>
+</span></span><span class=line><span class=ln>3</span><span class=cl>
+</span></span><span class=line><span class=ln>4</span><span class=cl>$ git branch
+</span></span><span class=line><span class=ln>5</span><span class=cl>* I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln>6</span><span class=cl>  master
+</span></span><span class=line><span class=ln>7</span><span class=cl>
+</span></span><span class=line><span class=ln>8</span><span class=cl>$ cat .git/HEAD
+</span></span><span class=line><span class=ln>9</span><span class=cl>ref: refs/heads/I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span></code></pre></div><ul><li>Line1 : 我們使用 checkout 將現在的 Branch 切換到 I_AM_GOING_TO_UPDATE_HELLO_UPDATE</li><li>Line5& Line7 : 我們可以看到現在分之在 I_AM_GOING_TO_UPDATE_HELLO_UPDATE</li></ul><h3 id=新分支-commit data-numberify>新分支 Commit<a class="anchor ms-1" href=#新分支-commit></a></h3><hr><p>現在我們嘗試修改 helloWorld.txt 來看看回如何</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ cat helloWorld.txt
+</span></span><span class=line><span class=ln> 2</span><span class=cl>hello world2
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ git log
+</span></span><span class=line><span class=ln> 5</span><span class=cl>commit 08e7447af10f14ec4cd6bffc210fddfbae3aa64f <span class=o>(</span>HEAD -&gt; I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln> 7</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 23:43:14 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln> 8</span><span class=cl>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>    update helloWorld.txt
+</span></span><span class=line><span class=ln>10</span><span class=cl>
+</span></span><span class=line><span class=ln>11</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a <span class=o>(</span>master<span class=o>)</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>13</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>14</span><span class=cl>
+</span></span><span class=line><span class=ln>15</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>18</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>19</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>20</span><span class=cl>
+</span></span><span class=line><span class=ln>21</span><span class=cl>    first file
+</span></span></code></pre></div><ul><li>Line1: 新的 helloWorld.txt 內容</li><li>Line5: 我們可以看到 HEAD 指向 I_AM_GOING_TO_UPDATE_HELLO_UPDATE 和 I_AM_GOING_TO_UPDATE_HELLO_UPDATE 指向最新的 Commit 08e7447af10f14ec4cd6bffc210fddfbae3aa64f</li><li>Line11: 我們可以看到 Master 現在還是指向上一個 Commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a</li></ul><h3 id=舊分支-commit data-numberify>舊分支 Commit<a class="anchor ms-1" href=#舊分支-commit></a></h3><hr><p>我們現在切回 master branch 來看看</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git checkout master
+</span></span><span class=line><span class=ln> 2</span><span class=cl>Switched to branch <span class=s1>&#39;master&#39;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ git log 
+</span></span><span class=line><span class=ln> 5</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a <span class=o>(</span>HEAD -&gt; master<span class=o>)</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln> 7</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln> 8</span><span class=cl>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln>10</span><span class=cl>
+</span></span><span class=line><span class=ln>11</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>12</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>13</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>14</span><span class=cl>
+</span></span><span class=line><span class=ln>15</span><span class=cl>    first file
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln>18</span><span class=cl>* 08e7447 <span class=o>(</span>I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span> update helloWorld.txt
+</span></span><span class=line><span class=ln>19</span><span class=cl>* 9c15c7d <span class=o>(</span>HEAD -&gt; master<span class=o>)</span> add helloWorld2.txt
+</span></span><span class=line><span class=ln>20</span><span class=cl>* 48971f0 first file
+</span></span><span class=line><span class=ln>21</span><span class=cl>
+</span></span><span class=line><span class=ln>22</span><span class=cl>$ cat helloWorld.txt
+</span></span><span class=line><span class=ln>23</span><span class=cl>hello world
+</span></span></code></pre></div><ul><li>Line1: 切換回 master branch</li><li>Line4: 大家會發現，Log 只顯示當下 Master 相關的 Log ，會看不到 I_AM_GOING_TO_UPDATE_HELLO_UPDATE Branch 相關的</li><li>Line17: 我們可以更清楚看到現在的 Commit 結構</li><li>Line22: 我們會發現 helloWolrd.txt 恢復成原本舊的還在 Master Branch 的版本。</li></ul><p>我們現在一樣來修改 helloWorld.txt 並 commit 看看會發生什麼事情。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ cat helloWorld.txt
+</span></span><span class=line><span class=ln>2</span><span class=cl>hello world3
+</span></span><span class=line><span class=ln>3</span><span class=cl>
+</span></span><span class=line><span class=ln>4</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln>5</span><span class=cl>* f7c9f13 <span class=o>(</span>HEAD -&gt; master<span class=o>)</span> master update helloWorld.txt
+</span></span><span class=line><span class=ln>6</span><span class=cl><span class=p>|</span> * 08e7447 <span class=o>(</span>I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span> update helloWorld.txt
+</span></span><span class=line><span class=ln>7</span><span class=cl><span class=p>|</span>/
+</span></span><span class=line><span class=ln>8</span><span class=cl>* 9c15c7d add helloWorld2.txt
+</span></span><span class=line><span class=ln>9</span><span class=cl>* 48971f0 first file
+</span></span></code></pre></div><p>line4 : 大家應該會發現 9c15c7d 這邊分支成兩個 f7c9f13 和 08e7447。</p><h3 id=合併兩個分支 data-numberify>合併兩個分支<a class="anchor ms-1" href=#合併兩個分支></a></h3><hr><p>我們現在來將 I_AM_GOING_TO_UPDATE_HELLO_UPDATE 合併回 master 看看會發生什麼事情</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git checkout master
+</span></span><span class=line><span class=ln> 2</span><span class=cl>Switched to branch <span class=s1>&#39;master&#39;</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ git merge I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln> 5</span><span class=cl>Auto-merging helloWorld.txt
+</span></span><span class=line><span class=ln> 6</span><span class=cl>CONFLICT <span class=o>(</span>content<span class=o>)</span>: Merge conflict in helloWorld.txt
+</span></span><span class=line><span class=ln> 7</span><span class=cl>Automatic merge failed<span class=p>;</span> fix conflicts and <span class=k>then</span> commit the result.
+</span></span><span class=line><span class=ln> 8</span><span class=cl>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>$ git diff
+</span></span><span class=line><span class=ln>10</span><span class=cl>diff --cc helloWorld.txt
+</span></span><span class=line><span class=ln>11</span><span class=cl>index 923e989,1142904..0000000
+</span></span><span class=line><span class=ln>12</span><span class=cl>--- a/helloWorld.txt
+</span></span><span class=line><span class=ln>13</span><span class=cl>+++ b/helloWorld.txt
+</span></span><span class=line><span class=ln>14</span><span class=cl>@@@ -1,1 -1,1 +1,5 @@@
+</span></span><span class=line><span class=ln>15</span><span class=cl>++<span class=o>&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
+</span></span><span class=line><span class=ln>16</span><span class=cl> +hello world3
+</span></span><span class=line><span class=ln>17</span><span class=cl>++<span class=o>=======</span>
+</span></span><span class=line><span class=ln>18</span><span class=cl>+ hello world2
+</span></span><span class=line><span class=ln>19</span><span class=cl>++&gt;&gt;&gt;&gt;&gt;&gt;&gt; I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span></code></pre></div><ul><li>Line4: 由於 I_AM_GOING_TO_UPDATE_HELLO_UPDATE 和 master 都修改過 helloWorld.txt。所以 Git 會不知道要保留哪個版本，而這時就出現了 CONFLICT。</li><li>Line9: 從 Git Diff 中我們可以明顯看到， Git 已經幫我們修改檔案，並 Highlight 出兩邊的不同。</li></ul><p>現在假設我覺得 master 寫得比較好，所以我保留 master 的內容。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ cat helloWorld.txt
+</span></span><span class=line><span class=ln> 2</span><span class=cl>hello world3
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>commit 063d5d5307dd178d11bed8ee67a1ed5c614276bf <span class=o>(</span>HEAD -&gt; master<span class=o>)</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl>Merge: f7c9f13 08e7447
+</span></span><span class=line><span class=ln> 6</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln> 7</span><span class=cl>Date:   Wed Feb <span class=m>23</span> 09:20:10 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln> 8</span><span class=cl>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>    fix CONFLICT
+</span></span><span class=line><span class=ln>10</span><span class=cl>
+</span></span><span class=line><span class=ln>11</span><span class=cl>commit f7c9f13b17ba1fa6641e7c6abb90935321e4f33c
+</span></span><span class=line><span class=ln>12</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>13</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 23:57:00 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>14</span><span class=cl>
+</span></span><span class=line><span class=ln>15</span><span class=cl>    master update helloWorld.txt
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>commit 08e7447af10f14ec4cd6bffc210fddfbae3aa64f <span class=o>(</span>I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span>
+</span></span><span class=line><span class=ln>18</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>19</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 23:43:14 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>20</span><span class=cl>
+</span></span><span class=line><span class=ln>21</span><span class=cl>    update helloWorld.txt
+</span></span><span class=line><span class=ln>22</span><span class=cl>
+</span></span><span class=line><span class=ln>23</span><span class=cl>commit 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln>24</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>25</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:50:02 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>26</span><span class=cl>
+</span></span><span class=line><span class=ln>27</span><span class=cl>    add helloWorld2.txt
+</span></span><span class=line><span class=ln>28</span><span class=cl>
+</span></span><span class=line><span class=ln>29</span><span class=cl>commit 48971f01848a55ac80698bd8c8b999b431f14723
+</span></span><span class=line><span class=ln>30</span><span class=cl>Author: Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt;
+</span></span><span class=line><span class=ln>31</span><span class=cl>Date:   Tue Feb <span class=m>22</span> 22:00:22 <span class=m>2022</span> +0800
+</span></span><span class=line><span class=ln>32</span><span class=cl>
+</span></span><span class=line><span class=ln>33</span><span class=cl>    first file
+</span></span></code></pre></div><ul><li>Line5： 多了 Merge的提示</li></ul><p>這時我們來看看最新的 commit 內容吧</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git cat-file -p 063d5d5307dd178d11bed8ee67a1ed5c614276bf
+</span></span><span class=line><span class=ln> 2</span><span class=cl>tree e65ced472fc129e23c9074c2cfd3649d4c43ff29
+</span></span><span class=line><span class=ln> 3</span><span class=cl>parent f7c9f13b17ba1fa6641e7c6abb90935321e4f33c
+</span></span><span class=line><span class=ln> 4</span><span class=cl>parent 08e7447af10f14ec4cd6bffc210fddfbae3aa64f
+</span></span><span class=line><span class=ln> 5</span><span class=cl>author Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645579210</span> +0800
+</span></span><span class=line><span class=ln> 6</span><span class=cl>committer Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645579210</span> +0800
+</span></span><span class=line><span class=ln> 7</span><span class=cl>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>fix CONFLICT
+</span></span><span class=line><span class=ln> 9</span><span class=cl>
+</span></span><span class=line><span class=ln>10</span><span class=cl>$ git cat-file -p f7c9f13b17ba1fa6641e7c6abb90935321e4f33c
+</span></span><span class=line><span class=ln>11</span><span class=cl>tree e65ced472fc129e23c9074c2cfd3649d4c43ff29
+</span></span><span class=line><span class=ln>12</span><span class=cl>parent 9c15c7d8323c7f9cd2cb18164e0c8d69c575a15a
+</span></span><span class=line><span class=ln>13</span><span class=cl>author Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645545420</span> +0800
+</span></span><span class=line><span class=ln>14</span><span class=cl>committer Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645545420</span> +0800
+</span></span><span class=line><span class=ln>15</span><span class=cl>
+</span></span><span class=line><span class=ln>16</span><span class=cl>master update helloWorld.txt
+</span></span></code></pre></div><ul><li>Line1: 這時可以清楚看到裡面有兩個parent，第一個 parent (line3) 是 master 而第二個 parent (line4) 是 I_AM_GOING_TO_UPDATE_HELLO_UPDATE。所以從這裡這裡知道，我們是從第二個 parent merge 到第一個 parent</li><li>Line10: 我們再回頭看看原本 master parent 的內容，因為我們保留了 master ，所以 Line11 和 Line2 的雜湊值是一樣的</li></ul><p>接下來我們來看一下最新的 Tree 的樣子</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=ln>1</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln>2</span><span class=cl>*   063d5d5 (HEAD -&gt; master) fix CONFLICT
+</span></span><span class=line><span class=ln>3</span><span class=cl>|\
+</span></span><span class=line><span class=ln>4</span><span class=cl>| * 08e7447 (I_AM_GOING_TO_UPDATE_HELLO_UPDATE) update helloWorld.txt
+</span></span><span class=line><span class=ln>5</span><span class=cl>* | f7c9f13 master update helloWorld.txt
+</span></span><span class=line><span class=ln>6</span><span class=cl>|/
+</span></span><span class=line><span class=ln>7</span><span class=cl>* 9c15c7d add helloWorld2.txt
+</span></span><span class=line><span class=ln>8</span><span class=cl>* 48971f0 first file
+</span></span></code></pre></div><p>可以看到最上面又將兩個 Tree 合併了</p><h2 id=rebase-原理 data-numberify>Rebase 原理<a class="anchor ms-1" href=#rebase-原理></a></h2><hr><p>我將之前的 Merge reset 回去</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$ git reset f7c9f13
+</span></span><span class=line><span class=ln>2</span><span class=cl>
+</span></span><span class=line><span class=ln>3</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln>4</span><span class=cl>* f7c9f13 <span class=o>(</span>HEAD -&gt; master<span class=o>)</span> master update helloWorld.txt
+</span></span><span class=line><span class=ln>5</span><span class=cl><span class=p>|</span> * 08e7447 <span class=o>(</span>I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span> update helloWorld.txt
+</span></span><span class=line><span class=ln>6</span><span class=cl><span class=p>|</span>/
+</span></span><span class=line><span class=ln>7</span><span class=cl>* 9c15c7d add helloWorld2.txt
+</span></span><span class=line><span class=ln>8</span><span class=cl>* 48971f0 first file
+</span></span></code></pre></div><p>rebase 會先找到兩個 branch 開始分差的 commit ，以上面的例子是 9c15c7d。如果要將 I_AM_GOING_TO_UPDATE_HELLO_UPDATE rebase 到 master，會將 9c15c7d 到 I_AM_GOING_TO_UPDATE_HELLO_UPDATE 之間的所有commit 修改，從 Master 之後嘗試做一次，最後在將 master 指向最新的 commit</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git rebase I_AM_GOING_TO_UPDATE_HELLO_UPDATE
+</span></span><span class=line><span class=ln> 2</span><span class=cl>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>Auto-merging helloWorld.txt
+</span></span><span class=line><span class=ln> 4</span><span class=cl>CONFLICT <span class=o>(</span>content<span class=o>)</span>: Merge conflict in helloWorld.txt
+</span></span><span class=line><span class=ln> 5</span><span class=cl>error: could not apply f7c9f13... master update helloWorld.txt
+</span></span><span class=line><span class=ln> 6</span><span class=cl>Resolve all conflicts manually, mark them as resolved with
+</span></span><span class=line><span class=ln> 7</span><span class=cl><span class=s2>&#34;git add/rm &lt;conflicted_files&gt;&#34;</span>, <span class=k>then</span> run <span class=s2>&#34;git rebase --continue&#34;</span>.
+</span></span><span class=line><span class=ln> 8</span><span class=cl>You can instead skip this commit: run <span class=s2>&#34;git rebase --skip&#34;</span>.
+</span></span><span class=line><span class=ln> 9</span><span class=cl>To abort and get back to the state before <span class=s2>&#34;git rebase&#34;</span>, run <span class=s2>&#34;git rebase --abort&#34;</span>.
+</span></span><span class=line><span class=ln>10</span><span class=cl>Could not apply f7c9f13... master update helloWorld.txt
+</span></span></code></pre></div><p>由於兩個分支之前都修改過 helloWorld.txt ，所以會有 conflict 。如果沒有 conflict， master 就會 fast forward 到最新的 commit。</p><p>修改完 helloWorld.txt 我們繼續執行 git rebase &ndash;continue</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln>1</span><span class=cl>$  git rebase --continue
+</span></span><span class=line><span class=ln>2</span><span class=cl>Successfully rebased and updated refs/heads/master.
+</span></span><span class=line><span class=ln>3</span><span class=cl>
+</span></span><span class=line><span class=ln>4</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln>5</span><span class=cl>* 08e7447 <span class=o>(</span>HEAD -&gt; master, I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span> update helloWorld.txt
+</span></span><span class=line><span class=ln>6</span><span class=cl>* 9c15c7d add helloWorld2.txt
+</span></span><span class=line><span class=ln>7</span><span class=cl>* 48971f0 first file
+</span></span></code></pre></div><h3 id=merge-vs--rebase data-numberify>Merge v.s. Rebase<a class="anchor ms-1" href=#merge-vs--rebase></a></h3><hr><p>Merge 的好處就是會紀錄所有的修改，包含兩個分支合併時的修改。但是當開發者太多時，同時太多 Merge 會很難追中，這時候反而 rebase 會讓整個 Histroy 看起來比較直觀，但是代價就是不能像 merge 一樣，清楚地知道所有的修改。</p><h2 id=tag-原理 data-numberify>Tag 原理<a class="anchor ms-1" href=#tag-原理></a></h2><hr><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git checkout 08e7447
+</span></span><span class=line><span class=ln> 2</span><span class=cl>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>$ git tag tag1 
+</span></span><span class=line><span class=ln> 4</span><span class=cl>
+</span></span><span class=line><span class=ln> 5</span><span class=cl>$ git log --oneline --graph --decorate --all
+</span></span><span class=line><span class=ln> 6</span><span class=cl>* ac766f3 <span class=o>(</span>master<span class=o>)</span> master2
+</span></span><span class=line><span class=ln> 7</span><span class=cl>* 19f9d5c <span class=o>(</span>I_AM_GOING_TO_UPDATE_HELLO_UPDATE<span class=o>)</span> helloWorld
+</span></span><span class=line><span class=ln> 8</span><span class=cl>* 08e7447 <span class=o>(</span>HEAD, tag: tag1<span class=o>)</span> update helloWorld.txt
+</span></span><span class=line><span class=ln> 9</span><span class=cl>* 9c15c7d add helloWorld2.txt
+</span></span><span class=line><span class=ln>10</span><span class=cl>* 48971f0 first file
+</span></span><span class=line><span class=ln>11</span><span class=cl>
+</span></span><span class=line><span class=ln>12</span><span class=cl>$ cat .git/refs/tags/tag1
+</span></span><span class=line><span class=ln>13</span><span class=cl>08e7447af10f14ec4cd6bffc210fddfbae3aa64f
+</span></span></code></pre></div><ul><li>line3: 我們在 08e7447 建立一個 tag 叫 tag1</li><li>line8: 我們可以看到 08e7447 後面多了一個 tag</li><li>line12: 在 .git/refs/tags 檔案夾裡面，可以找到一個檔案叫做 tag1 ，而裡面的雜湊值是我們 tags 的 commit</li></ul><p>如果我們想要在 tag 上加上一些有用的描述呢</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$ git tag tag2 -a -m <span class=s2>&#34;i am tag2&#34;</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=c1># -a Make an unsigned, annotated tag object </span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>$ cat .git/refs/tags/tag2
+</span></span><span class=line><span class=ln> 5</span><span class=cl>9a9cf462e7960ddbe7a926dbf46c3ffc8afdb363
+</span></span><span class=line><span class=ln> 6</span><span class=cl>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>$ git cat-file -t 9a9cf462e7960ddbe7a926dbf46c3ffc8afdb363
+</span></span><span class=line><span class=ln> 8</span><span class=cl>tag
+</span></span><span class=line><span class=ln> 9</span><span class=cl>
+</span></span><span class=line><span class=ln>10</span><span class=cl>$ git cat-file -p 9a9cf462e7960ddbe7a926dbf46c3ffc8afdb363
+</span></span><span class=line><span class=ln>11</span><span class=cl>object 08e7447af10f14ec4cd6bffc210fddfbae3aa64f
+</span></span><span class=line><span class=ln>12</span><span class=cl><span class=nb>type</span> commit
+</span></span><span class=line><span class=ln>13</span><span class=cl>tag tag2
+</span></span><span class=line><span class=ln>14</span><span class=cl>tagger Chang Lin Hsieh &lt;allen@ChangdeMacBook-Pro.local&gt; <span class=m>1645628590</span> +0800
+</span></span><span class=line><span class=ln>15</span><span class=cl>
+</span></span><span class=line><span class=ln>16</span><span class=cl>i am tag2
+</span></span></code></pre></div><ul><li>line1: 我們建立一個新的 tag object ，並包含了 &ldquo;i am tag2&rdquo; 的資訊</li><li>line4: 我們可以看到 tag2 裡面的雜湊值不是我們的 commit 的雜湊值</li><li>line9: 我們可以知道 line5 的這個雜湊值是一個 tag 物件</li><li>line11,12: 我們可以知道這個 tag 對應到一個 commit 而這個 commit 的雜湊值為 08e7447af10f14ec4cd6bffc210fddfbae3aa64f</li></ul><h3 id=tag-vs-branch data-numberify>Tag v.s Branch<a class="anchor ms-1" href=#tag-vs-branch></a></h3><hr><p>當有新的commit 時， Tag 不會指向新的 commit ，而 Branch 會</p><h2 id=remote-vs-local data-numberify>Remote v.s Local<a class="anchor ms-1" href=#remote-vs-local></a></h2><p>當我們在執行 git clone 時，我們是將 Remote 的 .git folder 特定的 Branch 複製下來 (default master)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl>$  cat .git/config
+</span></span><span class=line><span class=ln> 2</span><span class=cl><span class=o>[</span>core<span class=o>]</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>	<span class=nv>repositoryformatversion</span> <span class=o>=</span> <span class=m>0</span>
+</span></span><span class=line><span class=ln> 4</span><span class=cl>	<span class=nv>filemode</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl>	<span class=nv>bare</span> <span class=o>=</span> <span class=nb>false</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>	<span class=nv>logallrefupdates</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>	<span class=nv>ignorecase</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>	<span class=nv>precomposeunicode</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=ln> 9</span><span class=cl><span class=o>[</span>remote <span class=s2>&#34;origin&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>	<span class=nv>url</span> <span class=o>=</span> git@github.com:allen-hsieh1992/blog.git
+</span></span><span class=line><span class=ln>11</span><span class=cl>	<span class=nv>fetch</span> <span class=o>=</span> +refs/heads/*:refs/remotes/origin/*
+</span></span><span class=line><span class=ln>12</span><span class=cl><span class=o>[</span>branch <span class=s2>&#34;master&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=ln>13</span><span class=cl>	<span class=nv>remote</span> <span class=o>=</span> origin
+</span></span><span class=line><span class=ln>14</span><span class=cl>	<span class=nv>merge</span> <span class=o>=</span> refs/heads/master
+</span></span><span class=line><span class=ln>15</span><span class=cl>
+</span></span><span class=line><span class=ln>16</span><span class=cl>$ tree .git/refs/remotes
+</span></span><span class=line><span class=ln>17</span><span class=cl>.git/refs/remotes
+</span></span><span class=line><span class=ln>18</span><span class=cl>└── origin
+</span></span><span class=line><span class=ln>19</span><span class=cl>    ├── HEAD
+</span></span><span class=line><span class=ln>20</span><span class=cl>    └── master
+</span></span></code></pre></div><p>我以我的 github 為例子</p><ul><li>line9: 我們可以看到，有一個 remote 就 origin 並且他的 url 在下面。</li><li>line16: 我們可以看到 refs 資料夾下面多了 remotes 的資料夾</li></ul><p>現在我們嘗試在local 加一些commit</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-Bash data-lang=Bash><span class=line><span class=ln> 1</span><span class=cl><span class=c1>## before commit</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl>$ git show-ref master
+</span></span><span class=line><span class=ln> 3</span><span class=cl>10275a905f41267b2b2a12f5cd3e3cbee984203a refs/heads/master
+</span></span><span class=line><span class=ln> 4</span><span class=cl>10275a905f41267b2b2a12f5cd3e3cbee984203a refs/remotes/origin/master
+</span></span><span class=line><span class=ln> 5</span><span class=cl>
+</span></span><span class=line><span class=ln> 6</span><span class=cl><span class=c1>## after commit</span>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>$ git show-ref master
+</span></span><span class=line><span class=ln> 8</span><span class=cl>1251ab4bdd68fdf8a3175719f47565b6c8af44d2 refs/heads/master
+</span></span><span class=line><span class=ln> 9</span><span class=cl>10275a905f41267b2b2a12f5cd3e3cbee984203a refs/remotes/origin/master
+</span></span><span class=line><span class=ln>10</span><span class=cl>
+</span></span><span class=line><span class=ln>11</span><span class=cl><span class=c1>## after push</span>
+</span></span><span class=line><span class=ln>12</span><span class=cl>$ git show-ref master
+</span></span><span class=line><span class=ln>13</span><span class=cl>1251ab4bdd68fdf8a3175719f47565b6c8af44d2 refs/heads/master
+</span></span><span class=line><span class=ln>14</span><span class=cl>1251ab4bdd68fdf8a3175719f47565b6c8af44d2 refs/remotes/origin/master
+</span></span></code></pre></div><ul><li>line2: line2 我們可以看到在 commit 之前 local & remote 的 master 都是同一個物件。</li><li>line7: 當我們 local commit 以後，可以看到 local 的物件已經更新了，但 remote 還是舊的。</li><li>line12</li></ul></div></div></div></article><section class="related-posts row card component"><div class=card-header><h2 class="card-title fs-4 my-2 text-surface">相關文章</h2></div><div class="card-body slide px-1"><div class="slide-inner row gx-0"><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="使用 Docker 在 Mac 上裝 Mysql Server" src=https://allenhsieh1992.com/images/docker.webp loading=lazy width=1326 height=611></picture>
+<a class=post-title href=/posts/container/create_mysql_server_by_docker/>使用 Docker 在 Mac 上裝 Mysql Server</a><div class="post-meta mb-0">January 28, 2022</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="你知道 Java 的四個引用嗎？" src=https://allenhsieh1992.com/images/java.webp loading=lazy width=1200 height=800></picture>
+<a class=post-title href=/posts/java/java-reference/>你知道 Java 的四個引用嗎？</a><div class="post-meta mb-0">January 27, 2022</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="Java Garbage Collection 基礎演算法" src=https://allenhsieh1992.com/images/java.webp loading=lazy width=1200 height=800></picture>
+<a class=post-title href=/posts/java/java-garbage-collection/>Java Garbage Collection 基礎演算法</a><div class="post-meta mb-0">January 26, 2022</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="DynamoDB Certification Note" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture>
+<a class=post-title href=/posts/aws/dynamodb-certification-note/>DynamoDB Certification Note</a><div class="post-meta mb-0">September 21, 2021</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="CloudTail Certification Note" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture>
+<a class=post-title href=/posts/aws/cloudtail-certification-note/>CloudTail Certification Note</a><div class="post-meta mb-0">September 20, 2021</div></div></div></div><button class=slide-control-left>
+<i class="fas fa-2x fa-chevron-circle-down" data-fa-transform=rotate-90></i>
+<span class=visually-hidden>Left</span></button>
+<button class=slide-control-right>
+<i class="fas fa-2x fa-chevron-circle-down" data-fa-transform=rotate-270></i>
+<span class=visually-hidden>Right</span></button></div></section><div class="card component row post-comments" id=post-comments><div class=card-header><h2 class="card-title my-2 fs-4 text-surface">評論</h2></div><div class=card-body><script src=https://utteranc.es/client.js repo=allen-hsieh1992/allen-hsieh1992.github.io issue-term=pathname label=comment theme=github-light crossorigin=anonymous async></script></div></div></div></div><aside class="col-xxl-4 sidebar d-flex"><div class="container d-flex flex-column"><div class="accordion profile"><div class="accordion-item card row text-center component"><div class="accordion-header card-header border-0" id=profile-header><a class="accordion-button d-lg-none mb-2 shadow-none p-0 bg-transparent text-surface" role=button data-bs-toggle=collapse href=#profile aria-expanded=true aria-controls=profile>Profile</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=profile aria-labelledby=profile-header><div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src=https://allenhsieh1992.com/images/icon.gif loading=lazy data-viewer-invisible width=154 height=153></picture></div><div class="col-12 profile-meta"><div class="profile-name fw-fold fs-lg">Allen Hsieh</div><div class=profile-bio>5xAWS Certified | Senior Backend Software Engineer</div><div class=profile-company><i class="fas fa-fw fa-building"></i>Secret Company</div><div class=profile-location><i class="fas fa-fw fa-map-marker-alt"></i>Taiwan</div></div></div></div></div><div class="accordion taxonomies-toggle"><div class="row card component accordion-item"><div class="accordion-header card-header border-0"><a class="accordion-button d-lg-none mb-1 shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#taxonomies-toggle aria-expanded=true aria-controls=taxonomies-toggle>Taxonomies</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=taxonomies-toggle><ul class="nav nav-pills nav-fill" role=tablist><li class=nav-item role=presentation><button class="nav-link active" id=taxonomyCategoriesTab data-bs-toggle=tab data-bs-target=#taxonomyCategories type=button role=tab aria-controls=taxonomyCategories aria-selected=true>
+分類</button></li><li class=nav-item role=presentation><button class=nav-link id=taxonomyTagsTab data-bs-toggle=tab data-bs-target=#taxonomyTags type=button role=tab aria-controls=taxonomyTags aria-selected=true>
+標籤</button></li><li class=nav-item role=presentation><button class=nav-link id=taxonomyArchivesTab data-bs-toggle=tab data-bs-target=#taxonomyArchives type=button role=tab aria-controls=taxonomyArchives aria-selected=true>
+歸檔</button></li></ul><div class="tab-content mt-3"><div class="tab-pane active" id=taxonomyCategories role=tabpanel aria-labelledby=taxonomyCategoriesTab tabindex=0><a href=/categories/aws/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=AWS>AWS</a>
+<a href=/categories/leetcode/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=LEETCODE>LEETCODE</a>
+<a href=/categories/life/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=LIFE>LIFE</a>
+<a href=/categories/java/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=JAVA>JAVA</a>
+<a href=/categories/spring/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=SPRING>SPRING</a>
+<a href=/categories/container/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=CONTAINER>CONTAINER</a>
+<a href=/categories/tools/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=TOOLS>TOOLS</a></div><div class=tab-pane id=taxonomyTags role=tabpanel aria-labelledby=taxonomyTagsTab tabindex=0><a href=/tags/leetcode/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=LEETCODE>LEETCODE</a>
+<a href=/tags/travel/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=TRAVEL>TRAVEL</a>
+<a href=/tags/javacore/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=JavaCore>JavaCore</a>
+<a href=/tags/cloudformation/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=CloudFormation>CloudFormation</a>
+<a href=/tags/lambda/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Lambda>Lambda</a>
+<a href=/tags/route53/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Route53>Route53</a>
+<a href=/tags/spring/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=SPRING>SPRING</a>
+<a href=/tags/beanstalk/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Beanstalk>Beanstalk</a>
+<a href=/tags/cloudtail/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=CloudTail>CloudTail</a>
+<a href=/tags/codebuild/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=CodeBuild>CodeBuild</a>
+<a href=https://allenhsieh1992.com/tags class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=全部>全部
+<span class="badge badge-sm text-secondary bg-white ms-1">26</span></a></div><div class=tab-pane id=taxonomyArchives role=tabpanel aria-labelledby=taxonomyArchivesTab tabindex=0><a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2023>2023 <span class="badge badge-sm text-secondary bg-white ms-1">3</span></a>
+<a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2022>2022 <span class="badge badge-sm text-secondary bg-white ms-1">10</span></a>
+<a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2021>2021 <span class="badge badge-sm text-secondary bg-white ms-1">20</span></a>
+<a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=0001>0001 <span class="badge badge-sm text-secondary bg-white ms-1">1</span></a></div></div></div></div></div><div class="accordion posts-toggle"><div class="row card component accordion-item"><div class="accordion-header card-header border-0"><a class="accordion-button d-lg-none mb-1 shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#posts-toggle aria-expanded=true aria-controls=posts-toggle>文章</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=posts-toggle><ul class="nav nav-pills nav-fill" role=tablist><li class=nav-item role=presentation><button class="nav-link active" id=recent-posts-tab data-bs-toggle=tab data-bs-target=#recent-posts type=button role=tab aria-controls=recent-posts aria-selected=true>
+最近文章</button></li></ul><div class="tab-content mt-3"><div class="tab-pane active" id=recent-posts role=tabpanel aria-labelledby=recent-posts-tab tabindex=0><ul class="post-list list-unstyled ms-1"><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2023_busan_day3/feature_hu3fa830de2064cdb201d569bfd0bfa7a2_418394_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=333 width=500><img class=img-fluid height=120 width=180 alt=feature.webp src=/posts/travel/2023_busan_day3/feature_hu3fa830de2064cdb201d569bfd0bfa7a2_418394_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day3/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2023_busan_day3/>2023 釜山六天五夜 Day3</a><div class="post-meta mt-2"><span class=post-date>April 2, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2023_busan_day2/feature_hu8ebb7537819971d5fffc63781e1a3a6f_333692_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=750 width=500><img class=img-fluid height=270 width=180 alt=feature.webp src=/posts/travel/2023_busan_day2/feature_hu8ebb7537819971d5fffc63781e1a3a6f_333692_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day2/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2023_busan_day2/>2023 釜山六天五夜 Day2</a><div class="post-meta mt-2"><span class=post-date>April 1, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2023_busan_day1/feature_hu62876d8a8221182f89323066ffd394ff_188490_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=333 width=500><img class=img-fluid height=120 width=180 alt=feature.webp src=/posts/travel/2023_busan_day1/feature_hu62876d8a8221182f89323066ffd394ff_188490_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day1/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2023_busan_day1/>2023 釜山六天五夜 Day1</a><div class="post-meta mt-2"><span class=post-date>March 31, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2022_kaohsiung_liuqiu_island_day3/feature_hu06c3fc70fa611124d49e20071a89ee2a_582238_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=333 width=500><img class=img-fluid height=120 width=180 alt=feature.webp src=/posts/travel/2022_kaohsiung_liuqiu_island_day3/feature_hu06c3fc70fa611124d49e20071a89ee2a_582238_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2022_kaohsiung_liuqiu_island_day3/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2022_kaohsiung_liuqiu_island_day3/>2022 高雄 小琉球 三天兩夜之 Day3</a><div class="post-meta mt-2"><span class=post-date>October 23, 2022</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2022_kaohsiung_liuqiu_island_day2/feature_hu26db14124b797375e13e490a88b8c727_171262_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=375 width=500><img class=img-fluid height=135 width=180 alt=feature.webp src=/posts/travel/2022_kaohsiung_liuqiu_island_day2/feature_hu26db14124b797375e13e490a88b8c727_171262_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2022_kaohsiung_liuqiu_island_day2/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2022_kaohsiung_liuqiu_island_day2/>2022 高雄 小琉球 三天兩夜之 Day2</a><div class="post-meta mt-2"><span class=post-date>October 22, 2022</span></div></div></div></li></ul></div></div></div></div></div><div class="accordion post-toc d-none d-lg-block"><div class="accordion-item row mb-4 card component" id=postTOC><div class="card-header accordion-header"><h2 class="card-title fs-4 my-2 text-surface d-none d-lg-block">目錄</h2><a class="accordion-button d-lg-none mb-1 collapsed shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#post-toc aria-expanded=false aria-controls=post-toc>目錄</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block" id=post-toc><nav id=TableOfContents><ul><li><a href=#git-databases>Git Databases</a></li><li><a href=#內容追蹤>內容追蹤</a><ul><li><a href=#hash-obejct>Hash-Obejct</a></li><li><a href=#commit>Commit</a></li><li><a href=#log>Log</a></li><li><a href=#cat-file>Cat-File</a></li><li><a href=#版本實現>版本實現</a></li></ul></li><li><a href=#分支實現>分支實現</a><ul><li><a href=#建立新的分支>建立新的分支</a></li><li><a href=#切換分支>切換分支</a></li><li><a href=#新分支-commit>新分支 Commit</a></li><li><a href=#舊分支-commit>舊分支 Commit</a></li><li><a href=#合併兩個分支>合併兩個分支</a></li></ul></li><li><a href=#rebase-原理>Rebase 原理</a><ul><li><a href=#merge-vs--rebase>Merge v.s. Rebase</a></li></ul></li><li><a href=#tag-原理>Tag 原理</a><ul><li><a href=#tag-vs-branch>Tag v.s Branch</a></li></ul></li><li><a href=#remote-vs-local>Remote v.s Local</a></li></ul></nav></div></div></div></div></aside></div></main><footer class="footer mt-auto py-3 text-center container"><div class="offcanvas offcanvas-bottom h-auto" tabindex=-1 id=offcanvasActionsPanel aria-labelledby=offcanvasActionsPanelLabel><div class=offcanvas-header><div class="offcanvas-title h5" id=offcanvasActionsPanelLabel><i class="fas fa-fw fa-th-large me-1"></i>
+操作</div><button type=button class="btn-close ms-auto" data-bs-dismiss=offcanvas data-bs-target=offcanvasActionsPanel aria-label=Close></button></div><div class="offcanvas-body mt-2"><div class="social-share mb-4 d-flex overflow-auto"><a class="btn-social-share d-flex flex-column align-items-center me-3" rel="noopener noreferrer" aria-label="Twitter Share Button" target=_blank href="https://twitter.com/intent/tweet?title=%e6%bc%94%e7%ae%97%e6%b3%95%20%5bJava%5d%20LeetCode%20%23205.%20Isomorphic%20Strings&url=https%3a%2f%2fallenhsieh1992.com%2fleetcode%2feasy%2f205_isomorphic_strings%2f"><i class="fab fa-2x fa-fw fa-twitter mb-2"></i> Twitter</a>
+<a class="btn-social-share d-flex flex-column align-items-center me-3" rel="noopener noreferrer" aria-label="Facebook Share Button" target=_blank href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fallenhsieh1992.com%2fleetcode%2feasy%2f205_isomorphic_strings%2f"><i class="fab fa-2x fa-fw fa-facebook-f mb-2"></i> Facebook</a></div><hr class=mb-4><div class="actions d-flex overflow-auto align-items-center"><a role=button class="action action-go-back d-flex flex-column align-items-center me-3" href="javascript: window.history.back();"><span class="action-icon mb-2"><i class="fas fa-2x fa-chevron-circle-down" data-fa-transform=rotate-90></i></span> 返回</a>
+<a role=button class="action action-reload-page d-flex flex-column align-items-center me-3"><span class="action-icon mb-2"><i class="fas fa-2x fa-redo-alt"></i></span> 刷新</a>
+<a role=button class="action action-copy-url d-flex flex-column align-items-center me-3"><span class="action-icon mb-2"><i class="fas fa-2x fa-link"></i></span> 複製連結</a></div></div></div><div class="row text-center"><div class="col-12 mt-2"><p class=mb-2>艾倫的開發心路歷程</p><p class="text-secondary mb-2"><small>艾倫的學習筆記</small></p><div class="copyright mb-2 text-secondary"><small>Copyright © 2021-2023 Allen Hsieh. All Rights Reserved.</small></div><nav class="social-links nav justify-content-center mb-2 mt-3"></nav></div><div class="col-12 col-lg-8 offset-0 offset-lg-1"></div></div></footer><script data-precache src=/assets/main/bundle.min.30bd23d472e8aa9b720b34764d1237a0f45d5177679e59f828a1317978b68aa2.js integrity="sha256-ML0j1HLoqptyCzR2TRI3oPRdUXdnnln4KKExeXi2iqI=" crossorigin=anonymous async></script><script data-precache src=/assets/icons/bundle.min.691458a56c2eef480bec8d31c967801a416b6445459ae901fe213e7870a0dd83.js integrity="sha256-aRRYpWwu70gL7I0xyWeAGkFrZEVFmukB/iE+eHCg3YM=" crossorigin=anonymous defer></script>
+<script data-precache src=/assets/viewer/bundle.min.0866ed96ba6267ca90d45399312388980c7bf8ddd8f980e8dc49ec37376b7b36.js integrity="sha256-CGbtlrpiZ8qQ1FOZMSOImAx7+N3Y+YDo3EnsNzdrezY=" crossorigin=anonymous defer></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-201290280-1","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script>
+<script>"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/service-worker.min.js").then(function(e){console.log("Successfully registered service worker",e)}).catch(function(e){console.warn("Error whilst registering service worker",e)})})</script></body></html>
