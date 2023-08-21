@@ -1,0 +1,1 @@
+(()=>{var o={fallback:"https://allenhsieh1992.com/",homes:{"zh-tw":"https://allenhsieh1992.com/"}};(()=>{let a=navigator.language||navigator.userLanguage;if(a in o.homes){window.location.href=o.homes[a];return}let n=a.split("-");for(let e in o.homes)if(e.indexOf(n[0])===0){window.location.href=o.homes[e];return}window.location.href=o.fallback})();})();
