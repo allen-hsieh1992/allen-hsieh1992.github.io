@@ -1,0 +1,453 @@
+<!doctype html><html class=position-relative itemscope itemtype=https://schema.org/WebPage lang=zh-tw data-bs-theme=dark data-palette=blue><head><script src=/assets/init/bundle.min.8f368cdebb6d999bc47f8451c7caa07f8babe013aaaf736020df6ce5c851cedd.js integrity="sha256-jzaM3rttmZvEf4RRx8qgf4ur4BOqr3NgIN9s5chRzt0=" crossorigin=anonymous></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>SAM Node Project Part1 初始化 - 艾倫的開發心路歷程</title><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_16x16_resize_box_3.png sizes=16x16 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_32x32_resize_box_3.png sizes=32x32 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_150x150_resize_box_3.png sizes=150x150 type=image/png><link rel=apple-touch-icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_180x180_resize_box_3.png sizes=180x180 type=image/png><link rel=icon href=/favicon_hubbf10436b41e9954d01974c62e0df673_759_192x192_resize_box_3.png sizes=192x192 type=image/png><link rel=mask-icon href=/safari-pinned-tab.svg color=#6f42c1><meta name=keywords content="艾倫,AWS,Allen,Note"><meta name=description content="之前有介紹過 Java 版的，但後來決定改用 Node 寫後面的系列，所以這邊改寫 Node"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://allenhsieh1992.com/images/aws.webp"><meta name=twitter:title content="SAM Node Project Part1 初始化"><meta name=twitter:description content="之前有介紹過 Java 版的，但後來決定改用 Node 寫後面的系列，所以這邊改寫 Node"><meta property="og:title" content="SAM Node Project Part1 初始化"><meta property="og:description" content="之前有介紹過 Java 版的，但後來決定改用 Node 寫後面的系列，所以這邊改寫 Node"><meta property="og:type" content="article"><meta property="og:url" content="https://allenhsieh1992.com/posts/aws/sam-init-node-project-part1/"><meta property="og:image" content="https://allenhsieh1992.com/images/aws.webp"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-09T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-09T00:00:00+00:00"><meta itemprop=name content="SAM Node Project Part1 初始化"><meta itemprop=description content="之前有介紹過 Java 版的，但後來決定改用 Node 寫後面的系列，所以這邊改寫 Node"><meta itemprop=datePublished content="2023-07-09T00:00:00+00:00"><meta itemprop=dateModified content="2023-07-09T00:00:00+00:00"><meta itemprop=wordCount content="3129"><meta itemprop=image content="https://allenhsieh1992.com/images/aws.webp"><meta itemprop=keywords content="LAMBDA,SAM,"><meta property="og:image:alt" content="SAM Node Project Part1 初始化"><meta name=twitter:image:alt content="SAM Node Project Part1 初始化"><link rel=manifest href=/manifest.json><script async src="https://www.googletagmanager.com/gtag/js?id=G-N4B4L4M6SX"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-N4B4L4M6SX",{anonymize_ip:!1})}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2699261588864109"></script>
+<link data-precache rel=stylesheet href="/assets/main/bundle.min.78242a84a2790620f9f1c2724769e6dbe4b3c9544eaaf71597610c9b8d2b6b10.css" integrity="sha256-eCQqhKJ5BiD58cJyR2nm2+SzyVROqvcVl2EMm40raxA=" crossorigin=anonymous><link data-precache rel=stylesheet href=/assets/viewer/bundle.min.6d0fc65b8b058ac563091dc5c36f61afba5dd705058680aa24f1d5a3bcf0064d.css integrity="sha256-bQ/GW4sFisVjCR3Fw29hr7pd1wUFhoCqJPHVo7zwBk0=" crossorigin=anonymous></head><body><header class="mb-4 sticky-top"><nav class="top-app-bar shadow navbar navbar-expand-xxl"><div class=container><a class="navbar-brand d-flex align-items-center flex-grow-1 flex-xxl-grow-0 justify-content-xxl-start ms-2 ms-xxl-0 mx-auto me-xxl-2" href=https://allenhsieh1992.com/><picture><img class=logo alt=Logo src=https://allenhsieh1992.com/images/logo.png loading=lazy width=136 height=70></picture>
+艾倫的開發心路歷程</a><div class="offcanvas-xxl offcanvas-end flex-grow-1" data-bs-scroll=true tabindex=-1 id=navbarMenus aria-labelledby=navbarMenusLabel><div class="offcanvas-header px-4 pb-0"><div class="offcanvas-title h5" id=navbarMenusLabel>艾倫的開發心路歷程</div><button type=button class="btn-close btn-close-white" data-bs-dismiss=offcanvas data-bs-target=#navbarMenus aria-label=Close></button></div><div class="offcanvas-body p-4 pt-0 p-xxl-0"><hr class=d-xxl-none><ul class="navbar-nav flex-row flex-wrap align-items-center me-auto"><li class="nav-item col-12 col-xxl-auto dropdown px-0"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownTech role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-chevron-circle-down"></i>技術</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=navbarDropdownTech data-bs-popper=none><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/aws><div class=dropdown-item-content><p class="dropdown-item-title mb-0">AWS</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/java><div class=dropdown-item-content><p class="dropdown-item-title mb-0">JAVA</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/container><div class=dropdown-item-content><p class="dropdown-item-title mb-0">CONTAINER</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/tools><div class=dropdown-item-content><p class="dropdown-item-title mb-0">TOOLS</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/leetcode><div class=dropdown-item-content><p class="dropdown-item-title mb-0">LEETCODE</p></div></a></li></ul></li><li class="nav-item col-12 col-xxl-auto dropdown px-0"><a href=# class="nav-link dropdown-toggle" id=navbarDropdownLife role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-chevron-circle-down"></i>生活</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby=navbarDropdownLife data-bs-popper=none><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/travel><div class=dropdown-item-content><p class="dropdown-item-title mb-0">旅遊</p></div></a></li><li><a class="dropdown-item d-flex align-items-center text-wrap text-xxl-nowrap" href=https://allenhsieh1992.com/posts/unboxing><div class=dropdown-item-content><p class="dropdown-item-title mb-0">開箱</p></div></a></li></ul></li><li class="nav-item col-6 col-xxl-auto"><a class="nav-link py-2 px-0 px-xxl-2" href=https://allenhsieh1992.com/archives/><i class="fas fa-fw fa-file-archive"></i>歸檔</a></li><li class="nav-item col-6 col-xxl-auto"><a class="nav-link py-2 px-0 px-xxl-2" href=https://allenhsieh1992.com/categories/><i class="fas fa-fw fa-folder"></i>分類</a></li></ul><hr class=d-xxl-none><form class="search-bar ms-auto my-auto" action=/search/ novalidate><div class="input-group input-group-sm align-items-center"><span class="btn btn-search disabled position-absolute left-0 border-0 px-1"><i class="fas fa-fw fa-search fa-lg"></i></span>
+<input class="my-1 form-control border-white rounded-5 search-input bg-body" name=q type=search placeholder=搜尋 aria-label=Search required>
+<span class="search-shortcut position-absolute end-0 top-0 me-2"><kbd class="bg-primary rounded shadow">/</kbd></span></div></form><hr class=d-xxl-none><ul class="navbar-nav flex-row flex-wrap align-items-center ms-md-auto"><li class="nav-item py-2 py-xxl-1 col-12 col-xxl-auto"><nav class="social-links nav justify-content-center flex-row"><a class="nav-link social-link col-6 col-xxl-auto p-1" target=_blank href=https://linkedin.com/in/chang-lin-hsieh title=領英 rel=me><i class="fa-fw fab fa-linkedin-in"></i>
+<span class="ms-1 d-xxl-none">Linkedin</span></a></nav></li><li class="nav-item py-2 py-xxl-1 col-12 col-xxl-auto"><div class="vr d-none d-xxl-flex h-100 mx-xxl-2 text-white"></div><hr class="d-xxl-none my-2"></li><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=fontSizeDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-font"></i>
+<span class=d-xxl-none>字體大小</span></a><ul class="font-size-dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby=fontSizeDropdown><li><button class="font-size-item dropdown-item" data-size=xs>
+特小號</button></li><li><button class="font-size-item dropdown-item" data-size=sm>
+小號</button></li><li><button class="font-size-item dropdown-item active" data-size=md>
+中等</button></li><li><button class="font-size-item dropdown-item" data-size=lg>
+大號</button></li><li><button class="font-size-item dropdown-item" data-size=xl>
+特大號</button></li></ul></li><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=paletteDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="fas fa-fw fa-palette"></i>
+<span class=d-xxl-none>配色</span></a><ul class="palette-dropdown-menu dropdown-menu dropdown-menu-end px-2 row g-2" aria-labelledby=paletteDropdown><li class="col-4 my-1"><a role=button id=palette-blue aria-label=藍色 class="btn btn-sm w-100 palette text-bg-blue" data-palette=blue></a></li><li class="col-4 my-1"><a role=button id=palette-blue-gray aria-label=藍灰色 class="btn btn-sm w-100 palette text-bg-blue-gray" data-palette=blue-gray></a></li><li class="col-4 my-1"><a role=button id=palette-brown aria-label=棕色 class="btn btn-sm w-100 palette text-bg-brown" data-palette=brown></a></li><li class="col-4 my-1"><a role=button id=palette-cyan aria-label=青色 class="btn btn-sm w-100 palette text-bg-cyan" data-palette=cyan></a></li><li class="col-4 my-1"><a role=button id=palette-green aria-label=綠色 class="btn btn-sm w-100 palette text-bg-green" data-palette=green></a></li><li class="col-4 my-1"><a role=button id=palette-indigo aria-label=靛青色 class="btn btn-sm w-100 palette text-bg-indigo" data-palette=indigo></a></li><li class="col-4 my-1"><a role=button id=palette-orange aria-label=橙色 class="btn btn-sm w-100 palette text-bg-orange" data-palette=orange></a></li><li class="col-4 my-1"><a role=button id=palette-pink aria-label=粉色 class="btn btn-sm w-100 palette text-bg-pink" data-palette=pink></a></li><li class="col-4 my-1"><a role=button id=palette-purple aria-label=紫色 class="btn btn-sm w-100 palette text-bg-purple" data-palette=purple></a></li><li class="col-4 my-1"><a role=button id=palette-red aria-label=紅色 class="btn btn-sm w-100 palette text-bg-red" data-palette=red></a></li><li class="col-4 my-1"><a role=button id=palette-teal aria-label=藍綠色 class="btn btn-sm w-100 palette text-bg-teal" data-palette=teal></a></li><li class="col-4 my-1"><a role=button id=palette-yellow aria-label=黃色 class="btn btn-sm w-100 palette text-bg-yellow" data-palette=yellow></a></li></ul></li><li class="nav-item dropdown col-6 col-xxl-auto"><a class="nav-link px-0 py-2 px-xxl-1" href=# id=modeDropdown role=button data-bs-toggle=dropdown aria-expanded=false><i class="mode-icon fas fa-fw fa-moon" id=modeIcon></i>
+<span class=d-xxl-none>模式</span></a><ul class="mode-dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby=modeDropdown><li class=mode-item data-color-mode=light data-icon=sun><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-sun"></i> 淺色</button></li><li class="mode-item active" data-color-mode=dark data-icon=moon><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-moon"></i> 深色</button></li><li class=mode-item data-color-mode=auto data-icon=adjust><button class=dropdown-item>
+<i class="mode-icon fas fa-fw fa-adjust"></i> 自動</button></li></ul></li></ul></div></div><div class=d-flex><button class="navbar-toggler order-5 border-0" type=button data-bs-toggle=offcanvas data-bs-target=#navbarMenus aria-controls=navbarMenus aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-ellipsis-h"></i></button></div></div></nav><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script></header><main class=container><div class="row content"><noscript><div class="alert alert-danger" role=alert>你的瀏覽器不支持 JavaScript。</div></noscript><div class=col-xxl-8><div class=container><nav class="row card component" aria-label=breadcrumb><div class="card-body pb-0"><ol class="hbs-breadcrumb breadcrumb flex-nowrap"><li class="breadcrumb-item text-surface"><a href=/>主頁</a></li><li class="breadcrumb-item text-surface"><a href=/posts/>文章</a></li><li class="breadcrumb-item text-surface"><a href=/posts/aws/>AWS</a></li><li class="breadcrumb-item active">SAM Node Project Part1 初始化</li></ol></div></nav><div class="post-panel-wrapper position-relative d-flex justify-content-center"><div class="d-flex flex-row justify-content-center rounded-5 border post-panel position-fixed px-3 py-1 surface shadow-1"><div class="action btn-group dropup"><button type=button class="btn btn-link p-0" data-bs-toggle=dropdown aria-expanded=false title=打賞>
+<i class="fas fa-fw fa-coffee"></i></button><ul class=dropdown-menu><li><a href=https://paypal.me/ChangLinH target=_blank rel="noopener noreferrer" role=button class="dropdown-item d-flex align-items-center" data-bs-theme-value=light><i class="fab fa-fw fa-paypal me-1"></i>Paypal</a></li></ul></div><a class="action action-toc d-none d-xxl-block" href=#postTOC role=button title="Table of contents"><i class="fas fa-fw fa-list-alt"></i></a>
+<a class="action action-toc d-block d-xxl-none" href=#post-toc-container role=button title="Table of contents"><i class="fas fa-fw fa-list-alt"></i></a>
+<a class="action action-copyright" href=#post-copyright role=button aria-label=Copyright title=Copyright><i class="fas fa-fw fa-copyright"></i></a>
+<a class="action action-post-comments" href=#post-comments role=button aria-label=Comments title=Comments><i class="fas fa-fw fa-comments"></i></a>
+<a id=sidebarToggler class="action action-sidebar-toggler d-none d-xxl-block" role=button title="Sidebar toggler"><i class="fas fa-fw fa-expand-alt" data-fa-transform=rotate-45></i></a></div></div><article class="row card component mb-4 post"><div class=card-header><h1 class="card-title post-title my-2">SAM Node Project Part1 初始化</h1></div><div class=card-body><div class="post-meta mb-3"><span class="post-date me-1 mb-1" title="創建於 2023-07-09 08:00:00 +0800 CST。">July 9, 2023</span><a href=/categories/aws/ class="btn btn-sm btn-secondary mb-1 me-2 py-0 pe-1 post-taxonomy post-taxonomy-sm post-category">
+<i class="fas fa-fw fa-folder me-1"></i>AWS</a><a href=/tags/lambda/ class="btn btn-sm btn-secondary mb-1 me-2 py-0 pe-1 post-taxonomy post-taxonomy-sm post-tag">Lambda</a><a href=/tags/sam/ class="btn btn-sm btn-secondary mb-1 me-2 py-0 pe-1 post-taxonomy post-taxonomy-sm post-tag">SAM</a></div><p class="lead mb-3 text-body-emphasis">之前有介紹過 Java 版的，但後來決定改用 Node 寫後面的系列，所以這邊改寫 Node</p><div class="mt-2 mb-3 d-block d-xxl-none"><h2 class="text-surface mb-3">目錄</h2><div id=post-toc-container></div><hr class=text-secondary></div><div class="post-content mb-3" data-bs-spy=scroll data-bs-target=#TableOfContents tabindex=0><div id=post-content-body><h2 id=sam-initialization data-numberify>SAM Initialization<a class="anchor ms-1" href=#sam-initialization></a></h2><p>這邊使用 <code>sam init</code> 來初始化專案。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln>  1</span><span class=cl>$ sam init
+</span></span><span class=line><span class=ln>  2</span><span class=cl>
+</span></span><span class=line><span class=ln>  3</span><span class=cl>You can preselect a particular runtime or package <span class=nb>type</span> when using the <span class=sb>`</span>sam init<span class=sb>`</span> experience.
+</span></span><span class=line><span class=ln>  4</span><span class=cl>Call <span class=sb>`</span>sam init --help<span class=sb>`</span> to learn more.
+</span></span><span class=line><span class=ln>  5</span><span class=cl>
+</span></span><span class=line><span class=ln>  6</span><span class=cl>Which template <span class=nb>source</span> would you like to use?
+</span></span><span class=line><span class=ln>  7</span><span class=cl>	<span class=m>1</span> - AWS Quick Start Templates
+</span></span><span class=line><span class=ln>  8</span><span class=cl>	<span class=m>2</span> - Custom Template Location
+</span></span><span class=line><span class=ln>  9</span><span class=cl>Choice: <span class=m>1</span>
+</span></span><span class=line><span class=ln> 10</span><span class=cl>
+</span></span><span class=line><span class=ln> 11</span><span class=cl>Choose an AWS Quick Start application template
+</span></span><span class=line><span class=ln> 12</span><span class=cl>	<span class=m>1</span> - Hello World Example
+</span></span><span class=line><span class=ln> 13</span><span class=cl>	<span class=m>2</span> - Data processing
+</span></span><span class=line><span class=ln> 14</span><span class=cl>	<span class=m>3</span> - Hello World Example with Powertools <span class=k>for</span> AWS Lambda
+</span></span><span class=line><span class=ln> 15</span><span class=cl>	<span class=m>4</span> - Multi-step workflow
+</span></span><span class=line><span class=ln> 16</span><span class=cl>	<span class=m>5</span> - Scheduled task
+</span></span><span class=line><span class=ln> 17</span><span class=cl>	<span class=m>6</span> - Standalone <span class=k>function</span>
+</span></span><span class=line><span class=ln> 18</span><span class=cl>	<span class=m>7</span> - Serverless API
+</span></span><span class=line><span class=ln> 19</span><span class=cl>	<span class=m>8</span> - Infrastructure event management
+</span></span><span class=line><span class=ln> 20</span><span class=cl>	<span class=m>9</span> - Lambda Response Streaming
+</span></span><span class=line><span class=ln> 21</span><span class=cl>	<span class=m>10</span> - Serverless Connector Hello World Example
+</span></span><span class=line><span class=ln> 22</span><span class=cl>	<span class=m>11</span> - Multi-step workflow with Connectors
+</span></span><span class=line><span class=ln> 23</span><span class=cl>	<span class=m>12</span> - GraphQLApi Hello World Example
+</span></span><span class=line><span class=ln> 24</span><span class=cl>	<span class=m>13</span> - Full Stack
+</span></span><span class=line><span class=ln> 25</span><span class=cl>	<span class=m>14</span> - Lambda EFS example
+</span></span><span class=line><span class=ln> 26</span><span class=cl>	<span class=m>15</span> - Hello World Example With Powertools <span class=k>for</span> AWS Lambda
+</span></span><span class=line><span class=ln> 27</span><span class=cl>	<span class=m>16</span> - DynamoDB Example
+</span></span><span class=line><span class=ln> 28</span><span class=cl>	<span class=m>17</span> - Machine Learning
+</span></span><span class=line><span class=ln> 29</span><span class=cl>Template: <span class=m>1</span>
+</span></span><span class=line><span class=ln> 30</span><span class=cl>
+</span></span><span class=line><span class=ln> 31</span><span class=cl><span class=c1># 目前官方預設最常用的語言開發事 Python ，所以要選擇 N 以後，才可以選其他語言</span>
+</span></span><span class=line><span class=ln> 32</span><span class=cl>Use the most popular runtime and package type? <span class=o>(</span>Python and zip<span class=o>)</span> <span class=o>[</span>y/N<span class=o>]</span>: N
+</span></span><span class=line><span class=ln> 33</span><span class=cl>
+</span></span><span class=line><span class=ln> 34</span><span class=cl>Which runtime would you like to use?
+</span></span><span class=line><span class=ln> 35</span><span class=cl>	<span class=m>1</span> - aot.dotnet7 <span class=o>(</span>provided.al2<span class=o>)</span>
+</span></span><span class=line><span class=ln> 36</span><span class=cl>	<span class=m>2</span> - dotnet8
+</span></span><span class=line><span class=ln> 37</span><span class=cl>	<span class=m>3</span> - dotnet6
+</span></span><span class=line><span class=ln> 38</span><span class=cl>	<span class=m>4</span> - go1.x
+</span></span><span class=line><span class=ln> 39</span><span class=cl>	<span class=m>5</span> - go <span class=o>(</span>provided.al2<span class=o>)</span>
+</span></span><span class=line><span class=ln> 40</span><span class=cl>	<span class=m>6</span> - go <span class=o>(</span>provided.al2023<span class=o>)</span>
+</span></span><span class=line><span class=ln> 41</span><span class=cl>	<span class=m>7</span> - graalvm.java11 <span class=o>(</span>provided.al2<span class=o>)</span>
+</span></span><span class=line><span class=ln> 42</span><span class=cl>	<span class=m>8</span> - graalvm.java17 <span class=o>(</span>provided.al2<span class=o>)</span>
+</span></span><span class=line><span class=ln> 43</span><span class=cl>	<span class=m>9</span> - java21
+</span></span><span class=line><span class=ln> 44</span><span class=cl>	<span class=m>10</span> - java17
+</span></span><span class=line><span class=ln> 45</span><span class=cl>	<span class=m>11</span> - java11
+</span></span><span class=line><span class=ln> 46</span><span class=cl>	<span class=m>12</span> - java8.al2
+</span></span><span class=line><span class=ln> 47</span><span class=cl>	<span class=m>13</span> - nodejs20.x
+</span></span><span class=line><span class=ln> 48</span><span class=cl>	<span class=m>14</span> - nodejs18.x
+</span></span><span class=line><span class=ln> 49</span><span class=cl>	<span class=m>15</span> - nodejs16.x
+</span></span><span class=line><span class=ln> 50</span><span class=cl>	<span class=m>16</span> - python3.9
+</span></span><span class=line><span class=ln> 51</span><span class=cl>	<span class=m>17</span> - python3.8
+</span></span><span class=line><span class=ln> 52</span><span class=cl>	<span class=m>18</span> - python3.12
+</span></span><span class=line><span class=ln> 53</span><span class=cl>	<span class=m>19</span> - python3.11
+</span></span><span class=line><span class=ln> 54</span><span class=cl>	<span class=m>20</span> - python3.10
+</span></span><span class=line><span class=ln> 55</span><span class=cl>	<span class=m>21</span> - ruby3.2
+</span></span><span class=line><span class=ln> 56</span><span class=cl>	<span class=m>22</span> - rust <span class=o>(</span>provided.al2<span class=o>)</span>
+</span></span><span class=line><span class=ln> 57</span><span class=cl>	<span class=m>23</span> - rust <span class=o>(</span>provided.al2023<span class=o>)</span>
+</span></span><span class=line><span class=ln> 58</span><span class=cl>Runtime: <span class=m>13</span>
+</span></span><span class=line><span class=ln> 59</span><span class=cl>
+</span></span><span class=line><span class=ln> 60</span><span class=cl>What package <span class=nb>type</span> would you like to use?
+</span></span><span class=line><span class=ln> 61</span><span class=cl>	<span class=m>1</span> - Zip
+</span></span><span class=line><span class=ln> 62</span><span class=cl>	<span class=m>2</span> - Image
+</span></span><span class=line><span class=ln> 63</span><span class=cl>Package type: <span class=m>1</span>
+</span></span><span class=line><span class=ln> 64</span><span class=cl>
+</span></span><span class=line><span class=ln> 65</span><span class=cl>Based on your selections, the only dependency manager available is npm.
+</span></span><span class=line><span class=ln> 66</span><span class=cl>We will proceed copying the template using npm.
+</span></span><span class=line><span class=ln> 67</span><span class=cl>
+</span></span><span class=line><span class=ln> 68</span><span class=cl>Select your starter template
+</span></span><span class=line><span class=ln> 69</span><span class=cl>	<span class=m>1</span> - Hello World Example
+</span></span><span class=line><span class=ln> 70</span><span class=cl>	<span class=m>2</span> - Hello World Example TypeScript
+</span></span><span class=line><span class=ln> 71</span><span class=cl>Template: <span class=m>1</span>
+</span></span><span class=line><span class=ln> 72</span><span class=cl>
+</span></span><span class=line><span class=ln> 73</span><span class=cl>Would you like to <span class=nb>enable</span> X-Ray tracing on the <span class=k>function</span><span class=o>(</span>s<span class=o>)</span> in your application?  <span class=o>[</span>y/N<span class=o>]</span>: y
+</span></span><span class=line><span class=ln> 74</span><span class=cl>X-Ray will incur an additional cost. View https://aws.amazon.com/xray/pricing/ <span class=k>for</span> more details
+</span></span><span class=line><span class=ln> 75</span><span class=cl>
+</span></span><span class=line><span class=ln> 76</span><span class=cl>Would you like to <span class=nb>enable</span> monitoring using CloudWatch Application Insights?
+</span></span><span class=line><span class=ln> 77</span><span class=cl>For more info, please view https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html <span class=o>[</span>y/N<span class=o>]</span>: N
+</span></span><span class=line><span class=ln> 78</span><span class=cl>
+</span></span><span class=line><span class=ln> 79</span><span class=cl>Would you like to <span class=nb>set</span> Structured Logging in JSON format on your Lambda functions?  <span class=o>[</span>y/N<span class=o>]</span>: y
+</span></span><span class=line><span class=ln> 80</span><span class=cl>Structured Logging in JSON format might incur an additional cost. View https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs.html#monitoring-cloudwatchlogs-pricing <span class=k>for</span> more details
+</span></span><span class=line><span class=ln> 81</span><span class=cl>
+</span></span><span class=line><span class=ln> 82</span><span class=cl>Project name <span class=o>[</span>sam-app<span class=o>]</span>:
+</span></span><span class=line><span class=ln> 83</span><span class=cl>
+</span></span><span class=line><span class=ln> 84</span><span class=cl>    -----------------------
+</span></span><span class=line><span class=ln> 85</span><span class=cl>    Generating application:
+</span></span><span class=line><span class=ln> 86</span><span class=cl>    -----------------------
+</span></span><span class=line><span class=ln> 87</span><span class=cl>    Name: sam-app
+</span></span><span class=line><span class=ln> 88</span><span class=cl>    Runtime: nodejs20.x
+</span></span><span class=line><span class=ln> 89</span><span class=cl>    Architectures: x86_64
+</span></span><span class=line><span class=ln> 90</span><span class=cl>    Dependency Manager: npm
+</span></span><span class=line><span class=ln> 91</span><span class=cl>    Application Template: hello-world
+</span></span><span class=line><span class=ln> 92</span><span class=cl>    Output Directory: .
+</span></span><span class=line><span class=ln> 93</span><span class=cl>    Configuration file: sam-app/samconfig.toml
+</span></span><span class=line><span class=ln> 94</span><span class=cl>
+</span></span><span class=line><span class=ln> 95</span><span class=cl>    Next steps can be found in the README file at sam-app/README.md
+</span></span><span class=line><span class=ln> 96</span><span class=cl>
+</span></span><span class=line><span class=ln> 97</span><span class=cl>
+</span></span><span class=line><span class=ln> 98</span><span class=cl>Commands you can use <span class=nv>next</span>
+</span></span><span class=line><span class=ln> 99</span><span class=cl><span class=o>=========================</span>
+</span></span><span class=line><span class=ln>100</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Create pipeline: <span class=nb>cd</span> sam-app <span class=o>&amp;&amp;</span> sam pipeline init --bootstrap
+</span></span><span class=line><span class=ln>101</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Validate SAM template: <span class=nb>cd</span> sam-app <span class=o>&amp;&amp;</span> sam validate
+</span></span><span class=line><span class=ln>102</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Test Function in the Cloud: <span class=nb>cd</span> sam-app <span class=o>&amp;&amp;</span> sam sync --stack-name <span class=o>{</span>stack-name<span class=o>}</span> --watch
+</span></span></code></pre></div><h2 id=檔案結構 data-numberify>檔案結構<a class="anchor ms-1" href=#檔案結構></a></h2><ul><li>event.json: 用來測試 Labmda 的</li><li>app.mjs: Lambda Function 原始碼</li><li>package.json: NPM 用來管理 Package 的檔案</li><li>test-handler: Lambda Unit Test</li><li>samconfig.toml: SAM CLI 的設定檔案</li><li>template.ymal: Infrastructure as code 架構的定義檔案</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln> 1</span><span class=cl>.
+</span></span><span class=line><span class=ln> 2</span><span class=cl>├── README.md
+</span></span><span class=line><span class=ln> 3</span><span class=cl>├── __init__.py
+</span></span><span class=line><span class=ln> 4</span><span class=cl>├── events
+</span></span><span class=line><span class=ln> 5</span><span class=cl>│   └── event.json
+</span></span><span class=line><span class=ln> 6</span><span class=cl>├── hello_world
+</span></span><span class=line><span class=ln> 7</span><span class=cl>│   ├── __init__.py
+</span></span><span class=line><span class=ln> 8</span><span class=cl>│   ├── app.py
+</span></span><span class=line><span class=ln> 9</span><span class=cl>│   └── requirements.txt
+</span></span><span class=line><span class=ln>10</span><span class=cl>├── samconfig.toml
+</span></span><span class=line><span class=ln>11</span><span class=cl>├── template.yaml
+</span></span><span class=line><span class=ln>12</span><span class=cl>└── tests
+</span></span><span class=line><span class=ln>13</span><span class=cl>    ├── __init__.py
+</span></span><span class=line><span class=ln>14</span><span class=cl>    ├── integration
+</span></span><span class=line><span class=ln>15</span><span class=cl>    │   ├── __init__.py
+</span></span><span class=line><span class=ln>16</span><span class=cl>    │   └── test_api_gateway.py
+</span></span><span class=line><span class=ln>17</span><span class=cl>    ├── requirements.txt
+</span></span><span class=line><span class=ln>18</span><span class=cl>    └── unit
+</span></span><span class=line><span class=ln>19</span><span class=cl>        ├── __init__.py
+</span></span><span class=line><span class=ln>20</span><span class=cl>        └── test_handler.py
+</span></span></code></pre></div><h2 id=template-yaml data-numberify>Template YAML<a class="anchor ms-1" href=#template-yaml></a></h2><ul><li>AWSTemplateFormatVersion: AWS CloudFormation 的 Version</li><li>Transform: 告訴 CloudFormation 這是 SAM 的格式 YAML</li><li>Global: 這邊是針對某些服務資源，共同設定，像 Function 的 <code>Tracing: Active</code> 就是對全部的 Lambda 開啟 X-Ray</li><li>Reousrce: 這邊就是建立 AWS 上的資源， SAM 跟 CloudFormation 的定義有差別，下面會附上簡易差別圖，詳細資訊可參考<a href=https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-generated-resources.html target=_blank rel="noopener noreferrer">官網<i class="fas fa-external-link-square-alt ms-1"></i></a><ul><li>Type 是 Function 就是我們實際的 Lambda Function<ul><li>CodeUri: 是 resource code 存放位置的路徑</li><li>Handler: 這邊是 <code>filename</code>.<code>functionName</code> 的格式</li></ul></li></ul></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=ln> 1</span><span class=cl><span class=nt>AWSTemplateFormatVersion</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;2010-09-09&#39;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 2</span><span class=cl><span class=w></span><span class=nt>Transform</span><span class=p>:</span><span class=w> </span><span class=l>AWS::Serverless-2016-10-31</span><span class=w>
+</span></span></span><span class=line><span class=ln> 3</span><span class=cl><span class=w></span><span class=nt>Description</span><span class=p>:</span><span class=w> </span><span class=p>&gt;</span><span class=sd>
+</span></span></span><span class=line><span class=ln> 4</span><span class=cl><span class=sd>  sam-app
+</span></span></span><span class=line><span class=ln> 5</span><span class=cl><span class=sd>  Sample SAM Template for sam-app</span><span class=w>  
+</span></span></span><span class=line><span class=ln> 6</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln> 7</span><span class=cl><span class=w></span><span class=nt>Globals</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln> 8</span><span class=cl><span class=w>  </span><span class=nt>Function</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln> 9</span><span class=cl><span class=w>    </span><span class=nt>Timeout</span><span class=p>:</span><span class=w> </span><span class=m>3</span><span class=w>
+</span></span></span><span class=line><span class=ln>10</span><span class=cl><span class=w>    </span><span class=nt>MemorySize</span><span class=p>:</span><span class=w> </span><span class=m>128</span><span class=w>
+</span></span></span><span class=line><span class=ln>11</span><span class=cl><span class=w>    </span><span class=nt>Tracing</span><span class=p>:</span><span class=w> </span><span class=l>Active</span><span class=w>
+</span></span></span><span class=line><span class=ln>12</span><span class=cl><span class=w>    </span><span class=nt>LoggingConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>13</span><span class=cl><span class=w>      </span><span class=nt>LogFormat</span><span class=p>:</span><span class=w> </span><span class=l>JSON</span><span class=w>
+</span></span></span><span class=line><span class=ln>14</span><span class=cl><span class=w>  </span><span class=nt>Api</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>15</span><span class=cl><span class=w>    </span><span class=nt>TracingEnabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=ln>16</span><span class=cl><span class=w></span><span class=nt>Resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>17</span><span class=cl><span class=w>  </span><span class=nt>HelloWorldFunction</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>18</span><span class=cl><span class=w>    </span><span class=nt>Type</span><span class=p>:</span><span class=w> </span><span class=l>AWS::Serverless::Function </span><span class=w>
+</span></span></span><span class=line><span class=ln>19</span><span class=cl><span class=w>    </span><span class=nt>Properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>20</span><span class=cl><span class=w>      </span><span class=nt>CodeUri</span><span class=p>:</span><span class=w> </span><span class=l>hello_world/</span><span class=w>
+</span></span></span><span class=line><span class=ln>21</span><span class=cl><span class=w>      </span><span class=nt>Handler</span><span class=p>:</span><span class=w> </span><span class=l>app.lambda_handler</span><span class=w>
+</span></span></span><span class=line><span class=ln>22</span><span class=cl><span class=w>      </span><span class=nt>Runtime</span><span class=p>:</span><span class=w> </span><span class=l>python3.9</span><span class=w>
+</span></span></span><span class=line><span class=ln>23</span><span class=cl><span class=w>      </span><span class=nt>Architectures</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>24</span><span class=cl><span class=w>      </span>- <span class=l>x86_64</span><span class=w>
+</span></span></span><span class=line><span class=ln>25</span><span class=cl><span class=w>      </span><span class=nt>Events</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>26</span><span class=cl><span class=w>        </span><span class=nt>HelloWorld</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>27</span><span class=cl><span class=w>          </span><span class=nt>Type</span><span class=p>:</span><span class=w> </span><span class=l>Api</span><span class=w>
+</span></span></span><span class=line><span class=ln>28</span><span class=cl><span class=w>          </span><span class=nt>Properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>29</span><span class=cl><span class=w>            </span><span class=nt>Path</span><span class=p>:</span><span class=w> </span><span class=l>/hello</span><span class=w>
+</span></span></span><span class=line><span class=ln>30</span><span class=cl><span class=w>            </span><span class=nt>Method</span><span class=p>:</span><span class=w> </span><span class=l>get</span><span class=w>
+</span></span></span><span class=line><span class=ln>31</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln>32</span><span class=cl><span class=w></span><span class=nt>Outputs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>33</span><span class=cl><span class=w>  </span><span class=nt>HelloWorldApi</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>34</span><span class=cl><span class=w>    </span><span class=nt>Description</span><span class=p>:</span><span class=w> </span><span class=l>API Gateway endpoint URL for Prod stage for Hello World function</span><span class=w>
+</span></span></span><span class=line><span class=ln>35</span><span class=cl><span class=w>    </span><span class=nt>Value</span><span class=p>:</span><span class=w> </span>!<span class=l>Sub &#34;https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/&#34;</span><span class=w>
+</span></span></span><span class=line><span class=ln>36</span><span class=cl><span class=w>  </span><span class=nt>HelloWorldFunction</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>37</span><span class=cl><span class=w>    </span><span class=nt>Description</span><span class=p>:</span><span class=w> </span><span class=l>Hello World Lambda Function ARN</span><span class=w>
+</span></span></span><span class=line><span class=ln>38</span><span class=cl><span class=w>    </span><span class=nt>Value</span><span class=p>:</span><span class=w> </span>!<span class=l>GetAtt HelloWorldFunction.Arn</span><span class=w>
+</span></span></span><span class=line><span class=ln>39</span><span class=cl><span class=w>  </span><span class=nt>HelloWorldFunctionIamRole</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=ln>40</span><span class=cl><span class=w>    </span><span class=nt>Description</span><span class=p>:</span><span class=w> </span><span class=l>Implicit IAM Role created for Hello World function</span><span class=w>
+</span></span></span><span class=line><span class=ln>41</span><span class=cl><span class=w>    </span><span class=nt>Value</span><span class=p>:</span><span class=w> </span>!<span class=l>GetAtt HelloWorldFunctionRole.Arn</span><span class=w>
+</span></span></span></code></pre></div><h3 id=cloudformation-vs-sam-resource data-numberify>CloudFormation vs SAM Resource<a class="anchor ms-1" href=#cloudformation-vs-sam-resource></a></h3><p><picture><img class="img-fluid mx-auto d-block" alt=cloudformation_vs_sam src=/posts/aws/sam-init-node-project-part1/cloudformation_vs_sam_hu6522cecfd841cbdcd9ae243f8ddc0da5_110290_1024x0_resize_box_3.png loading=lazy width=1024 height=560></picture></p><h3 id=驗證-template data-numberify>驗證 Template<a class="anchor ms-1" href=#驗證-template></a></h3><p>AWS Sam 提供了 <code>sam validate</code> 去驗證 template 是否有問題</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln>1</span><span class=cl>$ sam validate 
+</span></span><span class=line><span class=ln>2</span><span class=cl>
+</span></span><span class=line><span class=ln>3</span><span class=cl>/Users/allen/sam-app/template.yaml is a valid SAM Template
+</span></span></code></pre></div><p>如果我故意在 template 裡面寫沒有存在的 Type，會出現以下錯誤</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln>1</span><span class=cl>$ sam validate 
+</span></span><span class=line><span class=ln>2</span><span class=cl>
+</span></span><span class=line><span class=ln>3</span><span class=cl>E0001 Error transforming template: Resource with id <span class=o>[</span>HelloWorldFunction<span class=o>]</span> is invalid. Event with id <span class=o>[</span>HelloWorld<span class=o>]</span> is invalid. Resource dict has missing or invalid value <span class=k>for</span> key Type. Event Type is: Api1.
+</span></span><span class=line><span class=ln>4</span><span class=cl>/Users/allen/sam-app/template.yaml:1:1
+</span></span><span class=line><span class=ln>5</span><span class=cl>
+</span></span><span class=line><span class=ln>6</span><span class=cl>Error: Linting failed. At least one linting rule was matched to the provided template.
+</span></span></code></pre></div><h2 id=lambda-function data-numberify>Lambda Function<a class="anchor ms-1" href=#lambda-function></a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln> 1</span><span class=cl><span class=nb>export</span> const <span class=nv>lambdaHandler</span> <span class=o>=</span> async <span class=o>(</span>event, context<span class=o>)</span> <span class=o>=</span>&gt; <span class=o>{</span>
+</span></span><span class=line><span class=ln> 2</span><span class=cl>    const <span class=nv>response</span> <span class=o>=</span> <span class=o>{</span>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>      statusCode: 200,
+</span></span><span class=line><span class=ln> 4</span><span class=cl>      body: JSON.stringify<span class=o>({</span>
+</span></span><span class=line><span class=ln> 5</span><span class=cl>        message: <span class=s1>&#39;hello world&#39;</span>,
+</span></span><span class=line><span class=ln> 6</span><span class=cl>      <span class=o>})</span>
+</span></span><span class=line><span class=ln> 7</span><span class=cl>    <span class=o>}</span><span class=p>;</span>
+</span></span><span class=line><span class=ln> 8</span><span class=cl>
+</span></span><span class=line><span class=ln> 9</span><span class=cl>    <span class=k>return</span> response<span class=p>;</span>
+</span></span><span class=line><span class=ln>10</span><span class=cl>  <span class=o>}</span><span class=p>;</span>
+</span></span></code></pre></div><h2 id=build-package data-numberify>Build Package<a class="anchor ms-1" href=#build-package></a></h2><p>這邊使用 <code>sam build</code> 來建立 package</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln> 1</span><span class=cl>$ sam build
+</span></span><span class=line><span class=ln> 2</span><span class=cl>
+</span></span><span class=line><span class=ln> 3</span><span class=cl>Starting Build use cache
+</span></span><span class=line><span class=ln> 4</span><span class=cl>Manifest file is changed <span class=o>(</span>new hash: c0e83ff3ce1bd02a0c2a7c02974c24ec<span class=o>)</span> or dependency folder <span class=o>(</span>.aws-sam/deps/1d492548-0d35-49f3-af42-0252668aa785<span class=o>)</span> is missing <span class=k>for</span> <span class=o>(</span>HelloWorldFunction<span class=o>)</span>, downloading
+</span></span><span class=line><span class=ln> 5</span><span class=cl>dependencies and copying/building <span class=nb>source</span>
+</span></span><span class=line><span class=ln> 6</span><span class=cl>Building codeuri: /Users/allen/sam-app/hello-world runtime: nodejs20.x metadata: <span class=o>{}</span> architecture: x86_64 functions: HelloWorldFunction
+</span></span><span class=line><span class=ln> 7</span><span class=cl> Running NodejsNpmBuilder:NpmPack
+</span></span><span class=line><span class=ln> 8</span><span class=cl> Running NodejsNpmBuilder:CopyNpmrcAndLockfile
+</span></span><span class=line><span class=ln> 9</span><span class=cl> Running NodejsNpmBuilder:CopySource
+</span></span><span class=line><span class=ln>10</span><span class=cl> Running NodejsNpmBuilder:NpmInstall
+</span></span><span class=line><span class=ln>11</span><span class=cl> Running NodejsNpmBuilder:CleanUp
+</span></span><span class=line><span class=ln>12</span><span class=cl> Running NodejsNpmBuilder:CopyDependencies
+</span></span><span class=line><span class=ln>13</span><span class=cl> Running NodejsNpmBuilder:CleanUpNpmrc
+</span></span><span class=line><span class=ln>14</span><span class=cl> Running NodejsNpmBuilder:LockfileCleanUp
+</span></span><span class=line><span class=ln>15</span><span class=cl> Running NodejsNpmBuilder:LockfileCleanUp
+</span></span><span class=line><span class=ln>16</span><span class=cl>
+</span></span><span class=line><span class=ln>17</span><span class=cl>Build Succeeded
+</span></span><span class=line><span class=ln>18</span><span class=cl>
+</span></span><span class=line><span class=ln>19</span><span class=cl>Built Artifacts  : .aws-sam/build
+</span></span><span class=line><span class=ln>20</span><span class=cl>Built Template   : .aws-sam/build/template.yaml
+</span></span><span class=line><span class=ln>21</span><span class=cl>
+</span></span><span class=line><span class=ln>22</span><span class=cl>Commands you can use <span class=nv>next</span>
+</span></span><span class=line><span class=ln>23</span><span class=cl><span class=o>=========================</span>
+</span></span><span class=line><span class=ln>24</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Validate SAM template: sam validate
+</span></span><span class=line><span class=ln>25</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Invoke Function: sam <span class=nb>local</span> invoke
+</span></span><span class=line><span class=ln>26</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Test Function in the Cloud: sam sync --stack-name <span class=o>{{</span>stack-name<span class=o>}}</span> --watch
+</span></span><span class=line><span class=ln>27</span><span class=cl><span class=o>[</span>*<span class=o>]</span> Deploy: sam deploy --guided
+</span></span></code></pre></div><p>接著會在 local 產生 <code>.aws-sam/build</code> 資料夾。
+在資料夾中，可以看到 node_modules 的資料，我們定義在 Package.json 的 modules 都會下載到這</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=ln>  1</span><span class=cl>$ tree .aws-sam/build
+</span></span><span class=line><span class=ln>  2</span><span class=cl>
+</span></span><span class=line><span class=ln>  3</span><span class=cl>.aws-sam/build
+</span></span><span class=line><span class=ln>  4</span><span class=cl>├── HelloWorldFunction
+</span></span><span class=line><span class=ln>  5</span><span class=cl>│   ├── app.mjs
+</span></span><span class=line><span class=ln>  6</span><span class=cl>│   ├── node_modules
+</span></span><span class=line><span class=ln>  7</span><span class=cl>│   │   ├── asynckit
+</span></span><span class=line><span class=ln>  8</span><span class=cl>│   │   │   ├── LICENSE
+</span></span><span class=line><span class=ln>  9</span><span class=cl>│   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 10</span><span class=cl>│   │   │   ├── bench.js
+</span></span><span class=line><span class=ln> 11</span><span class=cl>│   │   │   ├── index.js
+</span></span><span class=line><span class=ln> 12</span><span class=cl>│   │   │   ├── lib
+</span></span><span class=line><span class=ln> 13</span><span class=cl>│   │   │   │   ├── abort.js
+</span></span><span class=line><span class=ln> 14</span><span class=cl>│   │   │   │   ├── async.js
+</span></span><span class=line><span class=ln> 15</span><span class=cl>│   │   │   │   ├── defer.js
+</span></span><span class=line><span class=ln> 16</span><span class=cl>│   │   │   │   ├── iterate.js
+</span></span><span class=line><span class=ln> 17</span><span class=cl>│   │   │   │   ├── readable_asynckit.js
+</span></span><span class=line><span class=ln> 18</span><span class=cl>│   │   │   │   ├── readable_parallel.js
+</span></span><span class=line><span class=ln> 19</span><span class=cl>│   │   │   │   ├── readable_serial.js
+</span></span><span class=line><span class=ln> 20</span><span class=cl>│   │   │   │   ├── readable_serial_ordered.js
+</span></span><span class=line><span class=ln> 21</span><span class=cl>│   │   │   │   ├── state.js
+</span></span><span class=line><span class=ln> 22</span><span class=cl>│   │   │   │   ├── streamify.js
+</span></span><span class=line><span class=ln> 23</span><span class=cl>│   │   │   │   └── terminator.js
+</span></span><span class=line><span class=ln> 24</span><span class=cl>│   │   │   ├── package.json
+</span></span><span class=line><span class=ln> 25</span><span class=cl>│   │   │   ├── parallel.js
+</span></span><span class=line><span class=ln> 26</span><span class=cl>│   │   │   ├── serial.js
+</span></span><span class=line><span class=ln> 27</span><span class=cl>│   │   │   ├── serialOrdered.js
+</span></span><span class=line><span class=ln> 28</span><span class=cl>│   │   │   └── stream.js
+</span></span><span class=line><span class=ln> 29</span><span class=cl>│   │   ├── axios
+</span></span><span class=line><span class=ln> 30</span><span class=cl>│   │   │   ├── CHANGELOG.md
+</span></span><span class=line><span class=ln> 31</span><span class=cl>│   │   │   ├── LICENSE
+</span></span><span class=line><span class=ln> 32</span><span class=cl>│   │   │   ├── MIGRATION_GUIDE.md
+</span></span><span class=line><span class=ln> 33</span><span class=cl>│   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 34</span><span class=cl>│   │   │   ├── SECURITY.md
+</span></span><span class=line><span class=ln> 35</span><span class=cl>│   │   │   ├── dist
+</span></span><span class=line><span class=ln> 36</span><span class=cl>│   │   │   │   ├── axios.js
+</span></span><span class=line><span class=ln> 37</span><span class=cl>│   │   │   │   ├── axios.js.map
+</span></span><span class=line><span class=ln> 38</span><span class=cl>│   │   │   │   ├── axios.min.js
+</span></span><span class=line><span class=ln> 39</span><span class=cl>│   │   │   │   ├── axios.min.js.map
+</span></span><span class=line><span class=ln> 40</span><span class=cl>│   │   │   │   ├── browser
+</span></span><span class=line><span class=ln> 41</span><span class=cl>│   │   │   │   │   ├── axios.cjs
+</span></span><span class=line><span class=ln> 42</span><span class=cl>│   │   │   │   │   └── axios.cjs.map
+</span></span><span class=line><span class=ln> 43</span><span class=cl>│   │   │   │   ├── esm
+</span></span><span class=line><span class=ln> 44</span><span class=cl>│   │   │   │   │   ├── axios.js
+</span></span><span class=line><span class=ln> 45</span><span class=cl>│   │   │   │   │   ├── axios.js.map
+</span></span><span class=line><span class=ln> 46</span><span class=cl>│   │   │   │   │   ├── axios.min.js
+</span></span><span class=line><span class=ln> 47</span><span class=cl>│   │   │   │   │   └── axios.min.js.map
+</span></span><span class=line><span class=ln> 48</span><span class=cl>│   │   │   │   └── node
+</span></span><span class=line><span class=ln> 49</span><span class=cl>│   │   │   │       ├── axios.cjs
+</span></span><span class=line><span class=ln> 50</span><span class=cl>│   │   │   │       └── axios.cjs.map
+</span></span><span class=line><span class=ln> 51</span><span class=cl>│   │   │   ├── index.d.cts
+</span></span><span class=line><span class=ln> 52</span><span class=cl>│   │   │   ├── index.d.ts
+</span></span><span class=line><span class=ln> 53</span><span class=cl>│   │   │   ├── index.js
+</span></span><span class=line><span class=ln> 54</span><span class=cl>│   │   │   ├── lib
+</span></span><span class=line><span class=ln> 55</span><span class=cl>│   │   │   │   ├── adapters
+</span></span><span class=line><span class=ln> 56</span><span class=cl>│   │   │   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 57</span><span class=cl>│   │   │   │   │   ├── adapters.js
+</span></span><span class=line><span class=ln> 58</span><span class=cl>│   │   │   │   │   ├── http.js
+</span></span><span class=line><span class=ln> 59</span><span class=cl>│   │   │   │   │   └── xhr.js
+</span></span><span class=line><span class=ln> 60</span><span class=cl>│   │   │   │   ├── axios.js
+</span></span><span class=line><span class=ln> 61</span><span class=cl>│   │   │   │   ├── cancel
+</span></span><span class=line><span class=ln> 62</span><span class=cl>│   │   │   │   │   ├── CancelToken.js
+</span></span><span class=line><span class=ln> 63</span><span class=cl>│   │   │   │   │   ├── CanceledError.js
+</span></span><span class=line><span class=ln> 64</span><span class=cl>│   │   │   │   │   └── isCancel.js
+</span></span><span class=line><span class=ln> 65</span><span class=cl>│   │   │   │   ├── core
+</span></span><span class=line><span class=ln> 66</span><span class=cl>│   │   │   │   │   ├── Axios.js
+</span></span><span class=line><span class=ln> 67</span><span class=cl>│   │   │   │   │   ├── AxiosError.js
+</span></span><span class=line><span class=ln> 68</span><span class=cl>│   │   │   │   │   ├── AxiosHeaders.js
+</span></span><span class=line><span class=ln> 69</span><span class=cl>│   │   │   │   │   ├── InterceptorManager.js
+</span></span><span class=line><span class=ln> 70</span><span class=cl>│   │   │   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 71</span><span class=cl>│   │   │   │   │   ├── buildFullPath.js
+</span></span><span class=line><span class=ln> 72</span><span class=cl>│   │   │   │   │   ├── dispatchRequest.js
+</span></span><span class=line><span class=ln> 73</span><span class=cl>│   │   │   │   │   ├── mergeConfig.js
+</span></span><span class=line><span class=ln> 74</span><span class=cl>│   │   │   │   │   ├── settle.js
+</span></span><span class=line><span class=ln> 75</span><span class=cl>│   │   │   │   │   └── transformData.js
+</span></span><span class=line><span class=ln> 76</span><span class=cl>│   │   │   │   ├── defaults
+</span></span><span class=line><span class=ln> 77</span><span class=cl>│   │   │   │   │   ├── index.js
+</span></span><span class=line><span class=ln> 78</span><span class=cl>│   │   │   │   │   └── transitional.js
+</span></span><span class=line><span class=ln> 79</span><span class=cl>│   │   │   │   ├── env
+</span></span><span class=line><span class=ln> 80</span><span class=cl>│   │   │   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 81</span><span class=cl>│   │   │   │   │   ├── classes
+</span></span><span class=line><span class=ln> 82</span><span class=cl>│   │   │   │   │   │   └── FormData.js
+</span></span><span class=line><span class=ln> 83</span><span class=cl>│   │   │   │   │   └── data.js
+</span></span><span class=line><span class=ln> 84</span><span class=cl>│   │   │   │   ├── helpers
+</span></span><span class=line><span class=ln> 85</span><span class=cl>│   │   │   │   │   ├── AxiosTransformStream.js
+</span></span><span class=line><span class=ln> 86</span><span class=cl>│   │   │   │   │   ├── AxiosURLSearchParams.js
+</span></span><span class=line><span class=ln> 87</span><span class=cl>│   │   │   │   │   ├── HttpStatusCode.js
+</span></span><span class=line><span class=ln> 88</span><span class=cl>│   │   │   │   │   ├── README.md
+</span></span><span class=line><span class=ln> 89</span><span class=cl>│   │   │   │   │   ├── ZlibHeaderTransformStream.js
+</span></span><span class=line><span class=ln> 90</span><span class=cl>│   │   │   │   │   ├── bind.js
+</span></span><span class=line><span class=ln> 91</span><span class=cl>│   │   │   │   │   ├── buildURL.js
+</span></span><span class=line><span class=ln> 92</span><span class=cl>│   │   │   │   │   ├── callbackify.js
+</span></span><span class=line><span class=ln> 93</span><span class=cl>│   │   │   │   │   ├── combineURLs.js
+</span></span><span class=line><span class=ln> 94</span><span class=cl>│   │   │   │   │   ├── cookies.js
+</span></span><span class=line><span class=ln> 95</span><span class=cl>│   │   │   │   │   ├── deprecatedMethod.js
+</span></span><span class=line><span class=ln> 96</span><span class=cl>│   │   │   │   │   ├── formDataToJSON.js
+</span></span><span class=line><span class=ln> 97</span><span class=cl>│   │   │   │   │   ├── formDataToStream.js
+</span></span><span class=line><span class=ln> 98</span><span class=cl>│   │   │   │   │   ├── fromDataURI.js
+</span></span><span class=line><span class=ln> 99</span><span class=cl>│   │   │   │   │   ├── isAbsoluteURL.js
+</span></span><span class=line><span class=ln>100</span><span class=cl>│   │   │   │   │   ├── isAxiosError.js
+</span></span><span class=line><span class=ln>101</span><span class=cl>│   │   │   │   │   ├── isURLSameOrigin.js
+</span></span><span class=line><span class=ln>102</span><span class=cl>│   │   │   │   │   ├── null.js
+</span></span><span class=line><span class=ln>103</span><span class=cl>│   │   │   │   │   ├── parseHeaders.js
+</span></span><span class=line><span class=ln>104</span><span class=cl>│   │   │   │   │   ├── parseProtocol.js
+</span></span><span class=line><span class=ln>105</span><span class=cl>│   │   │   │   │   ├── readBlob.js
+</span></span><span class=line><span class=ln>106</span><span class=cl>│   │   │   │   │   ├── speedometer.js
+</span></span><span class=line><span class=ln>107</span><span class=cl>│   │   │   │   │   ├── spread.js
+</span></span><span class=line><span class=ln>108</span><span class=cl>│   │   │   │   │   ├── throttle.js
+</span></span><span class=line><span class=ln>109</span><span class=cl>│   │   │   │   │   ├── toFormData.js
+</span></span><span class=line><span class=ln>110</span><span class=cl>│   │   │   │   │   ├── toURLEncodedForm.js
+</span></span><span class=line><span class=ln>111</span><span class=cl>│   │   │   │   │   └── validator.js
+</span></span><span class=line><span class=ln>112</span><span class=cl>│   │   │   │   ├── platform
+</span></span><span class=line><span class=ln>113</span><span class=cl>│   │   │   │   │   ├── browser
+</span></span><span class=line><span class=ln>114</span><span class=cl>│   │   │   │   │   │   ├── classes
+</span></span><span class=line><span class=ln>115</span><span class=cl>│   │   │   │   │   │   │   ├── Blob.js
+</span></span><span class=line><span class=ln>116</span><span class=cl>│   │   │   │   │   │   │   ├── FormData.js
+</span></span><span class=line><span class=ln>117</span><span class=cl>│   │   │   │   │   │   │   └── URLSearchParams.js
+</span></span><span class=line><span class=ln>118</span><span class=cl>│   │   │   │   │   │   └── index.js
+</span></span><span class=line><span class=ln>119</span><span class=cl>│   │   │   │   │   ├── common
+</span></span><span class=line><span class=ln>120</span><span class=cl>│   │   │   │   │   │   └── utils.js
+</span></span><span class=line><span class=ln>121</span><span class=cl>│   │   │   │   │   ├── index.js
+</span></span><span class=line><span class=ln>122</span><span class=cl>│   │   │   │   │   └── node
+</span></span><span class=line><span class=ln>123</span><span class=cl>│   │   │   │   │       ├── classes
+</span></span><span class=line><span class=ln>124</span><span class=cl>│   │   │   │   │       │   ├── FormData.js
+</span></span><span class=line><span class=ln>125</span><span class=cl>│   │   │   │   │       │   └── URLSearchParams.js
+</span></span><span class=line><span class=ln>126</span><span class=cl>│   │   │   │   │       └── index.js
+</span></span><span class=line><span class=ln>127</span><span class=cl>│   │   │   │   └── utils.js
+</span></span><span class=line><span class=ln>128</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>129</span><span class=cl>│   │   ├── combined-stream
+</span></span><span class=line><span class=ln>130</span><span class=cl>│   │   │   ├── License
+</span></span><span class=line><span class=ln>131</span><span class=cl>│   │   │   ├── Readme.md
+</span></span><span class=line><span class=ln>132</span><span class=cl>│   │   │   ├── lib
+</span></span><span class=line><span class=ln>133</span><span class=cl>│   │   │   │   └── combined_stream.js
+</span></span><span class=line><span class=ln>134</span><span class=cl>│   │   │   ├── package.json
+</span></span><span class=line><span class=ln>135</span><span class=cl>│   │   │   └── yarn.lock
+</span></span><span class=line><span class=ln>136</span><span class=cl>│   │   ├── delayed-stream
+</span></span><span class=line><span class=ln>137</span><span class=cl>│   │   │   ├── License
+</span></span><span class=line><span class=ln>138</span><span class=cl>│   │   │   ├── Makefile
+</span></span><span class=line><span class=ln>139</span><span class=cl>│   │   │   ├── Readme.md
+</span></span><span class=line><span class=ln>140</span><span class=cl>│   │   │   ├── lib
+</span></span><span class=line><span class=ln>141</span><span class=cl>│   │   │   │   └── delayed_stream.js
+</span></span><span class=line><span class=ln>142</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>143</span><span class=cl>│   │   ├── follow-redirects
+</span></span><span class=line><span class=ln>144</span><span class=cl>│   │   │   ├── LICENSE
+</span></span><span class=line><span class=ln>145</span><span class=cl>│   │   │   ├── README.md
+</span></span><span class=line><span class=ln>146</span><span class=cl>│   │   │   ├── debug.js
+</span></span><span class=line><span class=ln>147</span><span class=cl>│   │   │   ├── http.js
+</span></span><span class=line><span class=ln>148</span><span class=cl>│   │   │   ├── https.js
+</span></span><span class=line><span class=ln>149</span><span class=cl>│   │   │   ├── index.js
+</span></span><span class=line><span class=ln>150</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>151</span><span class=cl>│   │   ├── form-data
+</span></span><span class=line><span class=ln>152</span><span class=cl>│   │   │   ├── License
+</span></span><span class=line><span class=ln>153</span><span class=cl>│   │   │   ├── README.md.bak
+</span></span><span class=line><span class=ln>154</span><span class=cl>│   │   │   ├── Readme.md
+</span></span><span class=line><span class=ln>155</span><span class=cl>│   │   │   ├── index.d.ts
+</span></span><span class=line><span class=ln>156</span><span class=cl>│   │   │   ├── lib
+</span></span><span class=line><span class=ln>157</span><span class=cl>│   │   │   │   ├── browser.js
+</span></span><span class=line><span class=ln>158</span><span class=cl>│   │   │   │   ├── form_data.js
+</span></span><span class=line><span class=ln>159</span><span class=cl>│   │   │   │   └── populate.js
+</span></span><span class=line><span class=ln>160</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>161</span><span class=cl>│   │   ├── mime-db
+</span></span><span class=line><span class=ln>162</span><span class=cl>│   │   │   ├── HISTORY.md
+</span></span><span class=line><span class=ln>163</span><span class=cl>│   │   │   ├── LICENSE
+</span></span><span class=line><span class=ln>164</span><span class=cl>│   │   │   ├── README.md
+</span></span><span class=line><span class=ln>165</span><span class=cl>│   │   │   ├── db.json
+</span></span><span class=line><span class=ln>166</span><span class=cl>│   │   │   ├── index.js
+</span></span><span class=line><span class=ln>167</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>168</span><span class=cl>│   │   ├── mime-types
+</span></span><span class=line><span class=ln>169</span><span class=cl>│   │   │   ├── HISTORY.md
+</span></span><span class=line><span class=ln>170</span><span class=cl>│   │   │   ├── LICENSE
+</span></span><span class=line><span class=ln>171</span><span class=cl>│   │   │   ├── README.md
+</span></span><span class=line><span class=ln>172</span><span class=cl>│   │   │   ├── index.js
+</span></span><span class=line><span class=ln>173</span><span class=cl>│   │   │   └── package.json
+</span></span><span class=line><span class=ln>174</span><span class=cl>│   │   └── proxy-from-env
+</span></span><span class=line><span class=ln>175</span><span class=cl>│   │       ├── LICENSE
+</span></span><span class=line><span class=ln>176</span><span class=cl>│   │       ├── README.md
+</span></span><span class=line><span class=ln>177</span><span class=cl>│   │       ├── index.js
+</span></span><span class=line><span class=ln>178</span><span class=cl>│   │       ├── package.json
+</span></span><span class=line><span class=ln>179</span><span class=cl>│   │       └── test.js
+</span></span><span class=line><span class=ln>180</span><span class=cl>│   └── package.json
+</span></span><span class=line><span class=ln>181</span><span class=cl>└── template.yaml
+</span></span></code></pre></div></div></div></div><div class=card-footer><div class="post-navs d-flex justify-content-evenly"><div class="post-nav post-prev"><i class="fas fa-fw fa-chevron-down post-prev-icon me-1" data-fa-transform=rotate-90></i>
+<a href=/posts/aws/what-is-lambda/>什麼是 AWS Lambda</a></div></div></div></article><div class="post-copyright mb-3 row card component" id=post-copyright><div class=card-header><h2 class="card-title fs-4 my-2 text-surface">版權</h2></div><div class=card-body><a class="d-flex align-items-center flex-column" target=_blank rel="license noopener noreferrer" href=https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW><span><i class="fab fa-fw fa-2x fa-creative-commons"></i><i class="fab fa-fw fa-2x fa-creative-commons-by"></i><i class="fab fa-fw fa-2x fa-creative-commons-nc"></i><i class="fab fa-fw fa-2x fa-creative-commons-nd"></i></span>
+CC BY-NC-ND 4.0</a></div></div><section class="related-posts row card component"><div class=card-header><h2 class="card-title fs-4 my-2 text-surface">相關文章</h2></div><div class="card-body slide px-1"><div class="slide-inner row gx-0"><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="什麼是 AWS Lambda" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture>
+<a class=post-title href=/posts/aws/what-is-lambda/>什麼是 AWS Lambda</a><div class="post-meta mb-0">June 7, 2023</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="Build AWS Lambda Hello World Function By SAM" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture>
+<a class=post-title href=/posts/aws/build-aws-lambda-hello-world-function-by-sam/>Build AWS Lambda Hello World Function by SAM</a><div class="post-meta mb-0">May 3, 2023</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><img class=img-fluid alt="使用 AWS Cognito CLI 建立 User Pool" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture>
+<a class=post-title href=/posts/aws/create-cognito-user-pool-by-aws-cli/>使用 AWS Cognito CLI 建立 User Pool</a><div class="post-meta mb-0">April 11, 2023</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><source srcset=/posts/travel/2023_busan_day5/feature_hufd89d48379a3affc1274354adc56097c_221644_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=333 width=500><img class=img-fluid height=120 width=180 alt=feature.webp src=/posts/travel/2023_busan_day5/feature_hufd89d48379a3affc1274354adc56097c_221644_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day5/feature.webp loading=lazy></picture>
+<a class=post-title href=/posts/travel/2023_busan_day5/>2023 釜山六天五夜 Day5</a><div class="post-meta mb-0">April 4, 2023</div></div></div><div class="col-12 col-md-6 col-lg-4 me-2"><div class="post-card card card-body p-0 border-0 surface"><picture><source srcset=/posts/travel/2023_busan_day4/feature_hua33b7391889bce092ba07d6deb177769_192034_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=372 width=500><img class=img-fluid height=134 width=180 alt=feature.webp src=/posts/travel/2023_busan_day4/feature_hua33b7391889bce092ba07d6deb177769_192034_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day4/feature.webp loading=lazy></picture>
+<a class=post-title href=/posts/travel/2023_busan_day4/>2023 釜山六天五夜 Day4</a><div class="post-meta mb-0">April 3, 2023</div></div></div></div><button class=slide-control-left>
+<i class="fas fa-2x fa-chevron-circle-down" data-fa-transform=rotate-90></i>
+<span class=visually-hidden>Left</span></button>
+<button class=slide-control-right>
+<i class="fas fa-2x fa-chevron-circle-down" data-fa-transform=rotate-270></i>
+<span class=visually-hidden>Right</span></button></div></section><div class="card component row post-comments" id=post-comments><div class=card-header><h2 class="card-title my-2 fs-4 text-surface">評論</h2></div><div class=card-body><script src=https://utteranc.es/client.js repo=allen-hsieh1992/allen-hsieh1992.github.io issue-term=pathname label=comment theme=github-light crossorigin=anonymous async></script></div></div></div></div><aside class="col-xxl-4 sidebar d-flex"><div class="container d-flex flex-column"><div class="accordion profile"><div class="accordion-item card row text-center component"><div class="accordion-header card-header border-0" id=profile-header><a class="accordion-button d-lg-none mb-2 shadow-none p-0 bg-transparent text-surface" role=button data-bs-toggle=collapse href=#profile aria-expanded=true aria-controls=profile>Profile</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=profile aria-labelledby=profile-header><div class="col-12 d-flex align-items-center justify-content-center"><picture><img class="profile-avatar rounded-circle" alt="Allen Hsieh" src=https://allenhsieh1992.com/images/icon.gif loading=lazy data-viewer-invisible width=154 height=153></picture></div><div class="col-12 profile-meta"><div class="profile-name fw-fold fs-lg">Allen Hsieh</div><div class=profile-bio>AWS Community Builder | 7x AWS Certified | Senior Backend Software Engineer</div><div class=profile-company><i class="fas fa-fw fa-building"></i><a href=https://www.yahooinc.com/ target=_blank rel="noopener noreferrer">Yahoo Inc</a></div><div class=profile-location><i class="fas fa-fw fa-map-marker-alt"></i><a href=https://www.google.com/maps/search/Taiwan>Taiwan</a></div></div></div></div></div><div class="accordion taxonomies-toggle"><div class="row card component accordion-item"><div class="accordion-header card-header border-0"><a class="accordion-button d-lg-none mb-1 shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#taxonomies-toggle aria-expanded=true aria-controls=taxonomies-toggle>Taxonomies</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=taxonomies-toggle><ul class="nav nav-pills nav-fill" role=tablist><li class=nav-item role=presentation><button class="nav-link active" id=taxonomyCategoriesTab data-bs-toggle=tab data-bs-target=#taxonomyCategories type=button role=tab aria-controls=taxonomyCategories aria-selected=true>
+分類</button></li><li class=nav-item role=presentation><button class=nav-link id=taxonomyTagsTab data-bs-toggle=tab data-bs-target=#taxonomyTags type=button role=tab aria-controls=taxonomyTags aria-selected=true>
+標籤</button></li><li class=nav-item role=presentation><button class=nav-link id=taxonomyArchivesTab data-bs-toggle=tab data-bs-target=#taxonomyArchives type=button role=tab aria-controls=taxonomyArchives aria-selected=true>
+歸檔</button></li></ul><div class="tab-content mt-3"><div class="tab-pane active" id=taxonomyCategories role=tabpanel aria-labelledby=taxonomyCategoriesTab tabindex=0><a href=/categories/aws/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=AWS>AWS</a>
+<a href=/categories/leetcode/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=LEETCODE>LEETCODE</a>
+<a href=/categories/life/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=LIFE>LIFE</a>
+<a href=/categories/java/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=JAVA>JAVA</a>
+<a href=/categories/spring/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=SPRING>SPRING</a>
+<a href=/categories/container/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=CONTAINER>CONTAINER</a>
+<a href=/categories/tools/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-category me-2 mb-2" title=TOOLS>TOOLS</a></div><div class=tab-pane id=taxonomyTags role=tabpanel aria-labelledby=taxonomyTagsTab tabindex=0><a href=/tags/leetcode/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=LEETCODE>LEETCODE</a>
+<a href=/tags/travel/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=TRAVEL>TRAVEL</a>
+<a href=/tags/lambda/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Lambda>Lambda</a>
+<a href=/tags/javacore/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=JavaCore>JavaCore</a>
+<a href=/tags/sam/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=SAM>SAM</a>
+<a href=/tags/cloudformation/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=CloudFormation>CloudFormation</a>
+<a href=/tags/route53/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Route53>Route53</a>
+<a href=/tags/spring/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=SPRING>SPRING</a>
+<a href=/tags/beanstalk/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=Beanstalk>Beanstalk</a>
+<a href=/tags/cloudtail/ class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=CloudTail>CloudTail</a>
+<a href=https://allenhsieh1992.com/tags class="btn btn-sm btn-secondary post-taxonomy ps-3 post-tag me-2 mb-2" title=全部>全部
+<span class="badge badge-sm text-secondary bg-white ms-1">26</span></a></div><div class=tab-pane id=taxonomyArchives role=tabpanel aria-labelledby=taxonomyArchivesTab tabindex=0><a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2023>2023 <span class="badge badge-sm text-secondary bg-white ms-1">14</span></a>
+<a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2022>2022 <span class="badge badge-sm text-secondary bg-white ms-1">21</span></a>
+<a href class="btn btn-sm btn-secondary post-taxonomy ps-3 me-2 mb-2" title=2021>2021 <span class="badge badge-sm text-secondary bg-white ms-1">2</span></a></div></div></div></div></div><div class="accordion posts-toggle"><div class="row card component accordion-item"><div class="accordion-header card-header border-0"><a class="accordion-button d-lg-none mb-1 shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#posts-toggle aria-expanded=true aria-controls=posts-toggle>文章</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block show" id=posts-toggle><ul class="nav nav-pills nav-fill" role=tablist><li class=nav-item role=presentation><button class="nav-link active" id=recent-posts-tab data-bs-toggle=tab data-bs-target=#recent-posts type=button role=tab aria-controls=recent-posts aria-selected=true>
+最近文章</button></li></ul><div class="tab-content mt-3"><div class="tab-pane active" id=recent-posts role=tabpanel aria-labelledby=recent-posts-tab tabindex=0><ul class="post-list list-unstyled ms-1"><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><img class=img-fluid alt="SAM Node Project Part1 初始化" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/aws/sam-init-node-project-part1/>SAM Node Project Part1 初始化</a><div class="post-meta mt-2"><span class=post-date>July 9, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><img class=img-fluid alt="什麼是 AWS Lambda" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/aws/what-is-lambda/>什麼是 AWS Lambda</a><div class="post-meta mt-2"><span class=post-date>June 7, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><img class=img-fluid alt="Build AWS Lambda Hello World Function By SAM" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/aws/build-aws-lambda-hello-world-function-by-sam/>Build AWS Lambda Hello World Function by SAM</a><div class="post-meta mt-2"><span class=post-date>May 3, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><img class=img-fluid alt="使用 AWS Cognito CLI 建立 User Pool" src=https://allenhsieh1992.com/images/aws.webp loading=lazy width=425 height=213></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/aws/create-cognito-user-pool-by-aws-cli/>使用 AWS Cognito CLI 建立 User Pool</a><div class="post-meta mt-2"><span class=post-date>April 11, 2023</span></div></div></div></li><li class=mb-2><div class=d-flex><div class="flex-shrink-0 d-flex justify-content-center align-items-center" style=max-width:100px><picture><source srcset=/posts/travel/2023_busan_day5/feature_hufd89d48379a3affc1274354adc56097c_221644_500x0_resize_q75_h2_box_2.webp media="(max-width: 576px)" height=333 width=500><img class=img-fluid height=120 width=180 alt=feature.webp src=/posts/travel/2023_busan_day5/feature_hufd89d48379a3affc1274354adc56097c_221644_180x0_resize_q75_h2_box_2.webp data-src=/posts/travel/2023_busan_day5/feature.webp loading=lazy></picture></div><div class="flex-grow-1 d-flex flex-column h-auto justify-content-center ms-3"><a class=post-title href=/posts/travel/2023_busan_day5/>2023 釜山六天五夜 Day5</a><div class="post-meta mt-2"><span class=post-date>April 4, 2023</span></div></div></div></li></ul></div></div></div></div></div><div class="accordion post-toc d-none d-lg-block"><div class="accordion-item row mb-4 card component" id=postTOC><div class="card-header accordion-header"><h2 class="card-title fs-4 my-2 text-surface d-none d-lg-block">目錄</h2><a class="accordion-button d-lg-none mb-1 collapsed shadow-none p-0 bg-transparent" role=button data-bs-toggle=collapse href=#post-toc aria-expanded=false aria-controls=post-toc>目錄</a></div><div class="card-body collapse accordion-collapse accordion-body d-lg-block" id=post-toc><nav id=TableOfContents><ul><li><a href=#sam-initialization>SAM Initialization</a></li><li><a href=#檔案結構>檔案結構</a></li><li><a href=#template-yaml>Template YAML</a><ul><li><a href=#cloudformation-vs-sam-resource>CloudFormation vs SAM Resource</a></li><li><a href=#驗證-template>驗證 Template</a></li></ul></li><li><a href=#lambda-function>Lambda Function</a></li><li><a href=#build-package>Build Package</a></li></ul></nav></div></div></div></div></aside></div></main><footer class="footer mt-auto py-3 text-center container"><div class="row text-center"><div class="col-12 mt-2"><span id=busuanzi_container_site_pv><p class=mb-2>總瀏覽: <span id=busuanzi_value_site_pv></span>次</p></span><div class="copyright mb-2 text-secondary"><small>Copyright © 2021-2024 Allen Hsieh. All Rights Reserved.</small></div><nav class="social-links nav justify-content-center mb-2 mt-3"></nav></div><div class="col-12 col-lg-8 offset-0 offset-lg-1"></div></div></footer><script data-precache src=/assets/main/bundle.min.cb5662470b8c11aeca70d9d975f65f3a3adde55470efc9c090713a90cf6d4e9c.js integrity="sha256-y1ZiRwuMEa7KcNnZdfZfOjrd5VRw78nAkHE6kM9tTpw=" crossorigin=anonymous async></script><script data-precache src=/assets/icons/bundle.min.691458a56c2eef480bec8d31c967801a416b6445459ae901fe213e7870a0dd83.js integrity="sha256-aRRYpWwu70gL7I0xyWeAGkFrZEVFmukB/iE+eHCg3YM=" crossorigin=anonymous defer></script>
+<script data-precache src=/assets/viewer/bundle.min.0866ed96ba6267ca90d45399312388980c7bf8ddd8f980e8dc49ec37376b7b36.js integrity="sha256-CGbtlrpiZ8qQ1FOZMSOImAx7+N3Y+YDo3EnsNzdrezY=" crossorigin=anonymous defer></script>
+<script src=/js/sw-register.js defer></script></body></html>
